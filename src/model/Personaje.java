@@ -3,11 +3,11 @@ package model;
 abstract class Personaje {
 
 	String nombre;
-	int vidaMax;
-	int vida;
-	int defensa;
-	int fuerza;
-	int velocidad;
+	double vidaMax;
+	double vida;
+	double defensa;
+	double fuerza;
+	double velocidad;
 	
 	
 }
