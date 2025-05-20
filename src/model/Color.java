@@ -1,6 +1,6 @@
 package model;
 
-public class Colores {
+public class Color {
 	
 	public static final String RESET = "\033[0m"; // Text Reset
 
