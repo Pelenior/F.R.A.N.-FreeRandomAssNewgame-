@@ -14,6 +14,35 @@ public class Eventos {
 		int eventoAleatorio = random.nextInt(0, evento.length);
 		
 		//switch del evento
+		switch (evento) {
+		case "Bruja":
+			break;
+			
+		case "Maldición":
+			break;
+			
+		case "Trampa":
+			break;
+		
+		case "Juan":	
+			break;
+			
+		case "Perro":
+			break;
+		
+		case "Lamborgini":
+			break;
+		
+		case "Drogas":
+			break;
+			
+		case "Puzzle":
+			break;
+	
+		default:
+		}
+	
+		
 	}
 	//eventos
 	
