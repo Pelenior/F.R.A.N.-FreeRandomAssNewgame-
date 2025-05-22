@@ -11,6 +11,7 @@ public class Eventos {
 	public static void elegirEvento (Protagonista prota) {
 		Random random = new Random();
 		
+		
 		int eventoAleatorio = random.nextInt(0, evento.length);
 		
 		//switch del evento
