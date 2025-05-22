@@ -226,11 +226,11 @@ public class Juego {
 				
 				
 				switch(seleccionStr) {
-					case "Combate": 
+					case Color.RED_BRIGHT + "Combate" + Color.RESET: 
 						//Combate le pasa un prota y las informacion disponible para el combate
 						
 					break;
-					case "Evento Aleatorio", "Mercader":
+					case "Evento Aleatorio" + Color.RESET, Color.YELLOW + "Mercader" + Color.RESET:
 						evento.elegirEvento(prota);
 					break;
 				}
