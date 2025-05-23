@@ -58,9 +58,9 @@ abstract class Personaje {
 		this.idAscii = idAscii;
 	}
 	
-	public ArrayList<Ataque> getListaAtaque()
+	public void addListaAtaques(Ataque ataqueIn)
 	{
-		return listaAtaques;
+		listaAtaques.add(ataqueIn);
 	}
 	
 	protected void rellenarAtaques(Personaje personaje)
@@ -69,6 +69,30 @@ abstract class Personaje {
 		//Ejemplo
 //		Ataque ataque1 = new Ataque("Patada");
 //		personaje.getListaAtaque().add(ataque1);
+		switch(personaje.getNombre())
+		{
+			case "Steve":
+			{
+				personaje.addListaAtaques(new Ataque("Por si Espada"));
+				personaje.addListaAtaques(new Ataque("Arco"));
+				personaje.addListaAtaques(new Ataque("Ataque Crítico"));
+				break;
+			}
+			case "Alex":
+			{
+				personaje.addListaAtaques(new Ataque("Hacha"));
+				personaje.addListaAtaques(new Ataque("Poción de Fuerza"));
+				personaje.addListaAtaques(new Ataque("Maldición de Wither"));
+				break;
+			}
+			case "Chicken Little":
+			{
+				personaje.addListaAtaques(new Ataque("Tricotada"));
+				personaje.addListaAtaques(new Ataque("Ataque huevo"));
+				personaje.addListaAtaques(new Ataque("Llamada de pollos"));
+				break;
+			}
+		}
 	}
 	
 }

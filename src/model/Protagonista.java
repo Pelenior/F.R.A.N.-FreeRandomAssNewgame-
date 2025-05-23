@@ -2,7 +2,8 @@ package model;
 
 public class Protagonista extends Personaje {
 	
-	//constructor
+	int monedas = 0;
+	
 	public Protagonista(String nombre, double vidaMax, double defensa, double fuerza, double velocidad, int idAscii) {
 		this.nombre = nombre;
 		this.vidaMax = vidaMax;
@@ -13,6 +14,11 @@ public class Protagonista extends Personaje {
 		this.idAscii = idAscii;
 		
 		rellenarAtaques(this);
+	}
+	
+	public int getMonedas()
+	{
+		return monedas;
 	}
 	
 
