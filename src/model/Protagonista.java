@@ -3,13 +3,14 @@ package model;
 public class Protagonista extends Personaje {
 	
 	
-	public Protagonista(String nombre, double vidaMax, double vida, double defensa, double fuerza, double velocidad) {
+	public Protagonista(String nombre, double vidaMax, double defensa, double fuerza, double velocidad, int idAscii) {
 		this.nombre = nombre;
 		this.vidaMax = vidaMax;
-		this.vida = vida;
+		this.vida = vidaMax;
 		this.defensa = defensa;
 		this.fuerza = fuerza;
 		this.velocidad = velocidad;
+		this.idAscii = idAscii;
 	}
 	
 
