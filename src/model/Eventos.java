@@ -1369,7 +1369,7 @@ public class Eventos {
 				//// CASTIGO AL FALLAR ////
 				if(!PreguntasRespuestas[pregunta][1].equalsIgnoreCase(decision)) {
 					
-					System.out.println("\"Respuesta" + RED_BOLD +  " incorrecta "  + RESET + ", ahora decidire tu castigo\"-dice el ajolote");
+					System.out.println("\"Respuesta" + Color.RED_BOLD +  " incorrecta "  + Color.RESET + ", ahora decidire tu castigo\"-dice el ajolote");
 						
 					int castigoTrivial = random.nextInt(1, 5);
 					
@@ -1378,28 +1378,28 @@ public class Eventos {
 					switch(castigoTrivial) {
 						
 						case 1:
-							System.out.println("El ajolote te golpea quitandote" + RED_BOLD + " 10 de daño " + RESET);
+							System.out.println("El ajolote te golpea quitandote" + Color.RED_BOLD + " 10 de daño " + Color.RESET);
 								
 							finalArray[i][0] = "Vida";
 							finalArray[i][1] = "-5";
 						break;
 							
 						case 2:
-							System.out.println("El ajolote te roba " + RED_BOLD + monedas(nombrePersonaje, 10) + (nombrePersonaje.equals("Chicken Little") ? " semillas" : " esmeraldas") + RESET);
+							System.out.println("El ajolote te roba " + Color.RED_BOLD + monedas(nombrePersonaje, 10) + (nombrePersonaje.equals("Chicken Little") ? " semillas" : " esmeraldas") + Color.RESET);
 								
 							finalArray[i][0] = "Monedas";
 							finalArray[i][1] = "-10";
 						break;
 						
 						case 3:
-							System.out.println("Recibes la maldicion del" + BLACK_BOLD + " mal presagio " + RESET);
+							System.out.println("Recibes la maldicion del" + Color.BLACK_BOLD + " mal presagio " + Color.RESET);
 								
 							finalArray[i][0] = "Bad Omen";
 							finalArray[i][1] = "10";
 						break;
 							
 						case 4:
-							System.out.println("Tu armadura" + RED_BOLD + " pierde porder " + RESET);
+							System.out.println("Tu armadura" + Color.RED_BOLD + " pierde porder " + Color.RESET);
 								
 							finalArray[i][0] = "Defensa";
 							finalArray[i][1] = "-1";
@@ -1427,7 +1427,7 @@ public class Eventos {
 			//// DERROTA ////
 			if(aciertos < 3) {
 				if(aciertos > 0) {
-					System.out.println(RED_BRIGHT + "\"No has superado la prueba " + RESET + "viajero, puedes pasar aunque con un castigo\"-dijo aburrido \r\n");
+					System.out.println(Color.RED_BRIGHT + "\"No has superado la prueba " + Color.RESET + "viajero, puedes pasar aunque con un castigo\"-dijo aburrido \r\n");
 					System.out.println("Te sientes mas debil, pierdes 5 de vida maxima");
 					
 					finalArray[nextIndex][0] = "VidaMax";
