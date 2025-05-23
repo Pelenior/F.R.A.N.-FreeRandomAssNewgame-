@@ -8,6 +8,7 @@ abstract class Personaje {
 	double defensa;
 	double fuerza;
 	double velocidad;
+	int idAscii;
 	
 	public String getNombre() {
 		return nombre;
@@ -44,6 +45,13 @@ abstract class Personaje {
 	}
 	public void setVelocidad(double velocidad) {
 		this.velocidad = velocidad;
+	}
+	public int getIdAscii() {
+		return idAscii;
+	}
+
+	public void setIdAscii(int idAscii) {
+		this.idAscii = idAscii;
 	}
 	
 }
