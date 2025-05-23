@@ -2,7 +2,7 @@ package model;
 
 public class Protagonista extends Personaje {
 	
-	
+	//constructor
 	public Protagonista(String nombre, double vidaMax, double defensa, double fuerza, double velocidad, int idAscii) {
 		this.nombre = nombre;
 		this.vidaMax = vidaMax;

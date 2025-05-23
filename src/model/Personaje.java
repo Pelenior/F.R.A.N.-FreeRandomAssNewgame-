@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 abstract class Personaje {
-
+	//Atributos
 	String nombre;
 	double vidaMax;
 	double vida;
@@ -13,6 +13,7 @@ abstract class Personaje {
 	int idAscii;
 	ArrayList<Ataque> listaAtaques = new ArrayList<Ataque>();
 	
+	//getters y setters
 	public String getNombre() {
 		return nombre;
 	}

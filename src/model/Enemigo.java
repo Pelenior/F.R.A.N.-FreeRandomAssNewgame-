@@ -1,10 +1,12 @@
 package model;
 
 public class Enemigo extends Personaje {
+	//Atributos
 	boolean isRaid; 
 	boolean isBoss;
 	boolean isSteve;
 	
+	//Constructor
 	public Enemigo(String nombre, double vidaMax, double vida, double defensa, double fuerza, double velocidad, boolean isRaid, boolean isBoss, boolean isSteve) {
 		this.nombre = nombre;
 		this.vidaMax = vidaMax;
