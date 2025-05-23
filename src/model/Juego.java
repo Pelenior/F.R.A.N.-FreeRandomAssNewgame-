@@ -229,4 +229,14 @@ public class Juego {
 				}
 				
 	}
+	
+	public static int monedas(String nombrePersonaje, int numeroEsmeraldas)
+	{
+		int monedas = numeroEsmeraldas;
+		if(nombrePersonaje.equals("Chicken Little"))
+		{
+			monedas *= 5;// si eres Chicken Little, tienes 5 veces el número de semillas
+		}
+		return monedas;
+	}
 }

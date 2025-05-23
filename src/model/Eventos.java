@@ -19,7 +19,7 @@ public class Eventos {
 		//switch del evento
 		switch (eventoSeleccionado) {
 		case "Bruja":
-			eventoBruja(eventoSeleccionado, random, null);
+			eventoBruja(prota, random, null);
 			break;
 			
 		case "Maldición":
@@ -27,15 +27,15 @@ public class Eventos {
 			break;
 			
 		case "Trampa":
-			eventoTrampa(eventoSeleccionado, random, null, eventoAleatorio, eventoAleatorio, eventoAleatorio);
+			eventoTrampa(prota, random, null, eventoAleatorio, eventoAleatorio, eventoAleatorio);
 			break;
 		
 		case "Juan":
-			eventoJuan(eventoSeleccionado, random, null);
+			eventoJuan(prota, random, null);
 			break;
 			
 		case "Perro":
-			eventoPerro(eventoSeleccionado, random, null);
+			eventoPerro(prota, random, null);
 			break;
 		
 		case "Lamborgini":
@@ -43,11 +43,11 @@ public class Eventos {
 			break;
 		
 		case "Drogas":
-			eventoDrogas(eventoSeleccionado, null, eventoAleatorio, eventoAleatorio, eventoAleatorio, eventoAleatorio, eventoAleatorio, eventoAleatorio);
+			eventoDrogas(prota, null, eventoAleatorio, eventoAleatorio, eventoAleatorio, eventoAleatorio, eventoAleatorio, eventoAleatorio);
 			break;
 			
 		case "Puzzle":
-			eventoPuzzle(null, random, null, eventoSeleccionado);
+			eventoPuzzle(null, random, null, prota);
 			break;
 	
 		default:
@@ -227,7 +227,7 @@ public class Eventos {
 					System.out.println("¡Vaya suerte!");
 				}
 				
-				System.out.println("Dentro del cofre había un total de " + totalMonedasConseguidas + Color.YELLOW +
+				System.out.println("Dentro del cofre había un total de " + Juego.monedas(prota.getNombre(), totalMonedasConseguidas) + Color.YELLOW +
 						(prota.getNombre().equals("Chicken Little") ? " semillas" : " esmeraldas") + Color.RESET);
 				
 				if(totalMonedasConseguidas <= 5)
@@ -326,7 +326,7 @@ public class Eventos {
 				if(velocidadPersonaje >= 8) {
 					System.out.println("Rapidamente reaccionas al sonido de los atacantes y sales corriendo");
 				}
-				else if(velocidadPersonaje >= 5 && velocidadPersonaje < 8) {
+				else if(velocidadPersonaje >= 5) {
 					monedasPerdidas = random.nextInt(3,6);
 					if(numeroMonedas < monedasPerdidas) monedasPerdidas = numeroMonedas;
 					/*System.out.println("Bloqueas gran parte de sus ataques pero consiguen robarte " + Color.RED_BRIGHT + monedas(nombrePersonaje, monedasPerdidas) + Color.RESET + (nombrePersonaje.equals("Chicken Little") ? " semillas" : " esmeraldas"));*/
@@ -627,7 +627,7 @@ public class Eventos {
 					if(randomGenio >= 7) {
 						finalArray[0][0] = "Monedas";
 						finalArray[0][1] = "30";
-						System.out.println("\"¡Enhorabuena! Has obtenido 30" + Color.YELLOW + (prota.getNombre().equals("Chicken Little") ? " semillas" : " esmeraldas") + Color.RESET + ". ¡Tu tesoro crece y tu aventura continúa!\"-dijo entusiasmado");
+						System.out.println("\"¡Enhorabuena! Has obtenido " + Juego.monedas(prota.getNombre(), 30) + Color.YELLOW + (prota.getNombre().equals("Chicken Little") ? " semillas" : " esmeraldas") + Color.RESET + ". ¡Tu tesoro crece y tu aventura continúa!\"-dijo entusiasmado");
 						System.out.println("Gracias a " + Color.GREEN_BOLD_BRIGHT + "Gonzalo " + nombresGonzalo[numerin] + Color.RESET +  "ahora te sientes mas rico aunque tambien la gran pena de no poder ver mas a Niebla");
 						
 					} else System.out.println("\"Lamentablemente, no puedo conceder ese deseo en este momento. Sin embargo, siempre estaré aquí para ayudarte en lo que necesites. ¡Sigue adelante!\"-dijo alegre");
@@ -691,11 +691,11 @@ public class Eventos {
 			
 			while(salir == false && vidaPersonaje > 0)
 			{
-				System.out.println("Tienes " + Color.YELLOW + prota.getMonedas() + Color.RESET + " semillas");
+				System.out.println("Tienes " + Color.YELLOW + Juego.monedas(prota.getNombre(), prota.getMonedas()) + Color.RESET + " semillas");
 				System.out.println("¿Compras algo?");
 				System.out.println("");
-				System.out.println("   1.Comida sospechosa (" + prota.getMonedas() + ") \r\n" + "   2.Armadura de dudosa calidad (" + prota.getMonedas() + ") \r\n" + 
-								   "   3.Un motherfucking lamborgini (" + prota.getMonedas() + ") \r\n" + "   4.Protector para picos 3000 (" + prota.getMonedas() + ") \r\n" + "   5.Marcharte \r\n");
+				System.out.println("   1.Comida sospechosa (" + Juego.monedas(prota.getNombre(), 5) + ") \r\n" + "   2.Armadura de dudosa calidad (" + Juego.monedas(prota.getNombre(), 5) + ") \r\n" + 
+						   "   3.Un motherfucking lamborgini (" + Juego.monedas(prota.getNombre(), 50) + ") \r\n" + "   4.Protector para picos 3000 (" + Juego.monedas(prota.getNombre(), 5) + ") \r\n" + "   5.Marcharte \r\n");
 				
 				decision = sc.nextLine();
 				
@@ -705,8 +705,8 @@ public class Eventos {
 										" pero rapidamente te das cuenta de lo ridiculo que es eso y decides volver a elegir");
 					System.out.println("¿Compras algo?");
 					System.out.println("");
-					System.out.println("   1.Comida sospechosa (" + prota.getMonedas() + ") \r\n" + "   2.Armadura de dudosa calidad (" + prota.getMonedas() + ") \r\n" + 
-							   "   3.Un motherfucking lamborgini (" + prota.getMonedas() + ") \r\n" + "   4.Protector para picos 3000 (" + prota.getMonedas() + ") \r\n" + "   5.Marcharte \r\n");
+					System.out.println("   1.Comida sospechosa (" + Juego.monedas(prota.getNombre(), 5) + ") \r\n" + "   2.Armadura de dudosa calidad (" + Juego.monedas(prota.getNombre(), 5) + ") \r\n" + 
+							   "   3.Un motherfucking lamborgini (" + Juego.monedas(prota.getNombre(), 50) + ") \r\n" + "   4.Protector para picos 3000 (" + Juego.monedas(prota.getNombre(), 5) + ") \r\n" + "   5.Marcharte \r\n");
 					decision = sc.nextLine();
 				}
 				
@@ -897,22 +897,22 @@ public class Eventos {
 	                //Lamparas
 	                case 2: {
 	                        
-	                    finalEventoArray = puzzleLamparas(random, sc, prota.getNombre());
+	                    finalEventoArray = puzzleLamparas(random, sc, prota);
 	                    break;
 	                }
 	                //Adivinanza
 	                case 3: {
-	                    finalEventoArray = puzzleAdivinanza(random, sc);
+	                    finalEventoArray = puzzleAdivinanza(random, sc, prota);
 	                    break;
 	                }
 	                //Adivinanza
 	                case 4: {
-	                    finalEventoArray = puzzleTrivia(random, sc, prota.getNombre());
+	                    finalEventoArray = puzzleTrivia(random, sc, prota);
 	                    break;
 	                }
 	                //Opinión
 	                case 5: {
-	                    finalEventoArray = puzzleOpinion(random, sc, prota.getNombre());
+	                    finalEventoArray = puzzleOpinion(random, sc, prota);
 	                    break;
 	                }
 	                    
@@ -1107,7 +1107,7 @@ public class Eventos {
 				System.out.println("");
 				
 				System.out.println("Escuchas un sonido mecanico tras las lamaparas y en un abrir y cerrar de ojos la pared ante ti se abre revelando un enorme cofre");
-				System.out.println("Obtienes " + monedas(nombrePersonaje, 15) + (nombrePersonaje.equals("Chicken Little") ? " semillas " :  " esmeraldas "));
+				System.out.println("Obtienes " + Juego.monedas(prota.getNombre(), 15) + (prota.getNombre().equals("Chicken Little") ? " semillas " :  " esmeraldas "));
 				
 				finalArray[0][0] = "Monedas";
 				finalArray[0][1] = "15";
@@ -1126,7 +1126,7 @@ public class Eventos {
 			return finalArray;
 		}
 		
-		public static String[][] puzzleAdivinanza(Random random, Scanner sc){
+		public static String[][] puzzleAdivinanza(Random random, Scanner sc, Protagonista prota){
 			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			
 			String decision = "";
@@ -1217,7 +1217,7 @@ public class Eventos {
 				if(turnos == 0 && acierto != true) {
 					
 					System.out.println("\"La prueba no ha sido superda\"-dijo la voz");
-					System.out.println("\"Para por la puerta pasar, "  + Color.RED_BOLD +  "10 esmeraldas deberas pagar\"-dijo la puerta" + Color.RESET);
+					System.out.println("\"Para por la puerta pasar, "  + Color.RED_BOLD + Juego.monedas(prota.getNombre(), 10) + " esmeraldas deberas pagar\"-dijo la puerta" + Color.RESET);
 					System.out.println("");
 					
 					finalArray[0][0] = "Monedas";
@@ -1233,7 +1233,7 @@ public class Eventos {
 			return finalArray;
 		}
 		
-		public static String[][] puzzleTrivia(Random random, Scanner sc, String nombrePersonaje){
+		public static String[][] puzzleTrivia(Random random, Scanner sc, Protagonista prota){
 			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			
 			//// VARIABLES ////
@@ -1338,7 +1338,7 @@ public class Eventos {
 					switch(recompensaTrivial) {
 					
 						case 1:
-							/*System.out.println("Recibes " + Color.GREEN_BOLD + monedas(nombrePersonaje, 10) + (nombrePersonaje.equals("Chicken Little") ? " semillas " : " esmeraldas ") + Color.RESET + "del ajolote");*/
+							System.out.println("Recibes " + Color.GREEN_BOLD + Juego.monedas(prota.getNombre(), 10) + (prota.getNombre().equals("Chicken Little") ? " semillas " : " esmeraldas ") + Color.RESET + "del ajolote");
 							
 							finalArray[i][0] = "Monedas";
 							finalArray[i][1] = "10";
@@ -1385,7 +1385,7 @@ public class Eventos {
 						break;
 							
 						case 2:
-							/*System.out.println("El ajolote te roba " + Color.RED_BOLD + monedas(nombrePersonaje, 10) + (nombrePersonaje.equals("Chicken Little") ? " semillas" : " esmeraldas") + Color.RESET);*/
+							System.out.println("El ajolote te roba " + Color.RED_BOLD + Juego.monedas(prota.getNombre(), 10) + (prota.getNombre().equals("Chicken Little") ? " semillas" : " esmeraldas") + Color.RESET);
 								
 							finalArray[i][0] = "Monedas";
 							finalArray[i][1] = "-10";
@@ -1445,7 +1445,7 @@ public class Eventos {
 			return finalArray;
 		}
 		
-		public static String[][] puzzleOpinion(Random random, Scanner sc, String nombrePersonaje){
+		public static String[][] puzzleOpinion(Random random, Scanner sc, Protagonista prota){
 			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			
 			String decision;
@@ -1521,7 +1521,7 @@ public class Eventos {
 						if(decision.equalsIgnoreCase("Si") || decision.equalsIgnoreCase("1")) { 
 							System.err.println("OPINION NO VALIDA");
 							System.out.println(Color.RED_BOLD_BRIGHT + "Piensatelo mejor en tu próxima partida." +Color.RESET);
-							System.out.println(nombrePersonaje + " piensa- Partida...?");
+							System.out.println(prota.getNombre() + " piensa- Partida...?");
 							System.out.println("Pero antes de darse cuenta...");
 							decision = sc.nextLine();
 							throw new Error("Sorry!! 😥"); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:)    sorry not sorry    (:
