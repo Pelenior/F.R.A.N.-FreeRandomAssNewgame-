@@ -168,12 +168,12 @@ public class Juego {
 		System.out.println("Elige un camino");
 		
 		// Selección de Caminos
-				// Para seleccionar caminos, creamos una Lista de Strings en la que vamos añadiendo el nombre de un evento random
-				// Al mismo tiempo, tenemos una Lista de int en la que vamos añadiendo numeros 1, 2, 3..., la cual nos sirve para comprobar
-				// si la selección que mete el usuario por pantalla existe de verdad, y si existe, la podemos coger desde la primera Lista
-				int numeroCaminos = random.nextInt(2, 5);
-				int eventoRandom = 0;
-				int contadorOpciones = 1;
+				// Para seleccionar caminos, creamos una Lista tipo String que añade el nombre de un evento random
+				// Al mismo tiempo, hay una Lista int en la que hay números que sirve para comprobar
+				// si la elección del usuario existe, y si existe, la podemos coger desde la primera Lista
+				int numeroCaminos = random.nextInt(2, 5);//número random entre 2 y 4 caminos
+				int eventoRandom = 0;//el camino aleatorio
+				int contadorOpciones = 1;//contador
 				
 				List<String> listaOpcionesPosibles = new ArrayList<String>();
 				
@@ -181,13 +181,13 @@ public class Juego {
 				
 				while(numeroCaminos > 0)
 				{
-					eventoRandom = random.nextInt(listaCaminos.length);
+					eventoRandom = random.nextInt(listaCaminos.length);//aleatoriamente se elige un camino de la lista
 					// Lista con String del nombre del evento
-					caminosDisponibles.add(listaCaminos[eventoRandom]);
+					caminosDisponibles.add(listaCaminos[eventoRandom]);//lista de caminos
 					numeroCaminos--;
 					
 					// Lista con numeros desde 1 hasta x, según el número de eventos que haya
-					listaOpcionesPosibles.add(Integer.toString(contadorOpciones));
+					listaOpcionesPosibles.add(Integer.toString(contadorOpciones));//lista que enumera los caminos
 					contadorOpciones++;
 				}
 				
@@ -202,7 +202,7 @@ public class Juego {
 					// Imprimimos las opciones
 					for(int i = 0; i < caminosDisponibles.size(); i++)
 					{
-						System.out.println((i+1) + ". " + caminosDisponibles.get(i));
+						System.out.println((i+1) + ". " + caminosDisponibles.get(i));//imprime el camino
 					}
 					seleccionCamino = scanner.nextLine();
 					
@@ -222,10 +222,10 @@ public class Juego {
 				}
 				
 				// Guardamos el nombre de selección elegida en String
-				String seleccionStr = (String) caminosDisponibles.get(Integer.valueOf(seleccionCamino) - 1);
+				String seleccionStr = (String) caminosDisponibles.get(Integer.valueOf(seleccionCamino) - 1);//guarda camino
 				
 				
-				switch(seleccionStr) {
+				switch(seleccionStr) {//ir al camino (evento) elegido
 					case Color.RED_BRIGHT + "Combate" + Color.RESET: 
 						//Combate le pasa un prota y las informacion disponible para el combate
 						
