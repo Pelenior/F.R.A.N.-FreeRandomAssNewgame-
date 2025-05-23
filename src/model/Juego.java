@@ -29,7 +29,7 @@ public class Juego {
 				Scanner sc = new Scanner(System.in);
 				Random random = new Random();
 				
-				prota = new Protagonista();//protagonista elegido
+				//prota = new Protagonista();//protagonista elegido
 		//		
 		//		//Indica el ascii a imprimir
 		//		int ascii = 0;
