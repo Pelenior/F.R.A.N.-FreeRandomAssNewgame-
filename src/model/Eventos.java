@@ -227,8 +227,8 @@ public class Eventos {
 					System.out.println("¡Vaya suerte!");
 				}
 				
-				System.out.println("Dentro del cofre había un total de " + monedas(nombrePersonaje, totalMonedasConseguidas) + Color.YELLOW +
-						(nombrePersonaje.equals("Chicken Little") ? " semillas" : " esmeraldas") + Color.RESET);
+				/*System.out.println("Dentro del cofre había un total de " + monedas(nombrePersonaje, totalMonedasConseguidas) + Color.YELLOW +
+						(nombrePersonaje.equals("Chicken Little") ? " semillas" : " esmeraldas") + Color.RESET);*/
 				
 				if(totalMonedasConseguidas <= 5)
 				{
@@ -329,17 +329,17 @@ public class Eventos {
 				else if(velocidadPersonaje >= 5 && velocidadPersonaje < 8) {
 					monedasPerdidas = random.nextInt(3,6);
 					if(numeroMonedas < monedasPerdidas) monedasPerdidas = numeroMonedas;
-					System.out.println("Bloqueas gran parte de sus ataques pero consiguen robarte " + Color.RED_BRIGHT + monedas(nombrePersonaje, monedasPerdidas) + Color.RESET + (nombrePersonaje.equals("Chicken Little") ? " semillas" : " esmeraldas"));
+					/*System.out.println("Bloqueas gran parte de sus ataques pero consiguen robarte " + Color.RED_BRIGHT + monedas(nombrePersonaje, monedasPerdidas) + Color.RESET + (nombrePersonaje.equals("Chicken Little") ? " semillas" : " esmeraldas"));*/
 					}
 				else if(velocidadPersonaje < 5 && velocidadPersonaje >= 2) {
 					monedasPerdidas = random.nextInt(5,9);
 					if(numeroMonedas < monedasPerdidas) monedasPerdidas = numeroMonedas;
-					System.out.println("Esquivas parte de sus ataques pero consiguen robarte " + Color.RED_BRIGHT + monedas(nombrePersonaje, monedasPerdidas) + Color.RESET + (nombrePersonaje.equals("Chicken Little") ? " semillas" : " esmeraldas"));
+					/*System.out.println("Esquivas parte de sus ataques pero consiguen robarte " + Color.RED_BRIGHT + monedas(nombrePersonaje, monedasPerdidas) + Color.RESET + (nombrePersonaje.equals("Chicken Little") ? " semillas" : " esmeraldas"));*/
 					}
 				else {
 					monedasPerdidas = random.nextInt(8,11);
 					if(numeroMonedas < monedasPerdidas) monedasPerdidas = numeroMonedas;
-					System.out.println("Los asaltantes te pillan desprevenido llevandose una gran parte de tu tesoro, pierdes " + Color.RED_BRIGHT + monedas(nombrePersonaje, monedasPerdidas) + Color.RESET + (nombrePersonaje.equals("Chicken Little") ? " semillas" : " esmeraldas"));
+					/*System.out.println("Los asaltantes te pillan desprevenido llevandose una gran parte de tu tesoro, pierdes " + Color.RED_BRIGHT + monedas(nombrePersonaje, monedasPerdidas) + Color.RESET + (nombrePersonaje.equals("Chicken Little") ? " semillas" : " esmeraldas"));*/
 				}
 				
 				if(velocidadPersonaje >= 8)
@@ -691,11 +691,11 @@ public class Eventos {
 			
 			while(salir == false && vidaPersonaje > 0)
 			{
-				System.out.println("Tienes " + Color.YELLOW + monedas(nombrePersonaje, numeroMonedas) + Color.RESET + " semillas");
+				/*System.out.println("Tienes " + Color.YELLOW + monedas(nombrePersonaje, numeroMonedas) + Color.RESET + " semillas");
 				System.out.println("¿Compras algo?");
 				System.out.println("");
 				System.out.println("   1.Comida sospechosa (" + monedas(nombrePersonaje, 5) + ") \r\n" + "   2.Armadura de dudosa calidad (" + monedas(nombrePersonaje, 5) + ") \r\n" + 
-								   "   3.Un motherfucking lamborgini (" + monedas(nombrePersonaje, 50) + ") \r\n" + "   4.Protector para picos 3000 (" + monedas(nombrePersonaje, 5) + ") \r\n" + "   5.Marcharte \r\n");
+								   "   3.Un motherfucking lamborgini (" + monedas(nombrePersonaje, 50) + ") \r\n" + "   4.Protector para picos 3000 (" + monedas(nombrePersonaje, 5) + ") \r\n" + "   5.Marcharte \r\n");*/
 				
 				decision = sc.nextLine();
 				
@@ -705,8 +705,8 @@ public class Eventos {
 										" pero rapidamente te das cuenta de lo ridiculo que es eso y decides volver a elegir");
 					System.out.println("¿Compras algo?");
 					System.out.println("");
-					System.out.println("   1.Comida sospechosa (" + monedas(nombrePersonaje, 5) + ") \r\n" + "   2.Armadura de dudosa calidad (" + monedas(nombrePersonaje, 5) + ") \r\n" + 
-							   "   3.Un motherfucking lamborgini (" + monedas(nombrePersonaje, 50) + ") \r\n" + "   4.Protector para picos 3000 (" + monedas(nombrePersonaje, 5) + ") \r\n" + "   5.Marcharte \r\n");
+					/*System.out.println("   1.Comida sospechosa (" + monedas(nombrePersonaje, 5) + ") \r\n" + "   2.Armadura de dudosa calidad (" + monedas(nombrePersonaje, 5) + ") \r\n" + 
+							   "   3.Un motherfucking lamborgini (" + monedas(nombrePersonaje, 50) + ") \r\n" + "   4.Protector para picos 3000 (" + monedas(nombrePersonaje, 5) + ") \r\n" + "   5.Marcharte \r\n");*/
 					decision = sc.nextLine();
 				}
 				
@@ -1107,7 +1107,7 @@ public class Eventos {
 				System.out.println("");
 				
 				System.out.println("Escuchas un sonido mecanico tras las lamaparas y en un abrir y cerrar de ojos la pared ante ti se abre revelando un enorme cofre");
-				System.out.println("Obtienes " + monedas(nombrePersonaje, 15) + (nombrePersonaje.equals("Chicken Little") ? " semillas " :  " esmeraldas "));
+				/*System.out.println("Obtienes " + monedas(nombrePersonaje, 15) + (nombrePersonaje.equals("Chicken Little") ? " semillas " :  " esmeraldas "));*/
 				
 				finalArray[0][0] = "Monedas";
 				finalArray[0][1] = "15";
@@ -1338,7 +1338,7 @@ public class Eventos {
 					switch(recompensaTrivial) {
 					
 						case 1:
-							System.out.println("Recibes " + Color.GREEN_BOLD + monedas(nombrePersonaje, 10) + (nombrePersonaje.equals("Chicken Little") ? " semillas " : " esmeraldas ") + RESET + "del ajolote");
+							/*System.out.println("Recibes " + Color.GREEN_BOLD + monedas(nombrePersonaje, 10) + (nombrePersonaje.equals("Chicken Little") ? " semillas " : " esmeraldas ") + Color.RESET + "del ajolote");*/
 							
 							finalArray[i][0] = "Monedas";
 							finalArray[i][1] = "10";
@@ -1385,7 +1385,7 @@ public class Eventos {
 						break;
 							
 						case 2:
-							System.out.println("El ajolote te roba " + Color.RED_BOLD + monedas(nombrePersonaje, 10) + (nombrePersonaje.equals("Chicken Little") ? " semillas" : " esmeraldas") + Color.RESET);
+							/*System.out.println("El ajolote te roba " + Color.RED_BOLD + monedas(nombrePersonaje, 10) + (nombrePersonaje.equals("Chicken Little") ? " semillas" : " esmeraldas") + Color.RESET);*/
 								
 							finalArray[i][0] = "Monedas";
 							finalArray[i][1] = "-10";
