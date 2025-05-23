@@ -861,7 +861,7 @@ public class Eventos {
 				System.out.println(".......");
 				System.out.println("Consumes las " + Color.PURPLE + "setas" + Color.RESET + "......");
 				System.out.println("........");
-				System.out.println(Color.nombrePersonaje + " se siente.... " + "¡" + Color.PURPLE + "B" + Color.YELLOW + "I" + Color.GREEN_BRIGHT + "E" + Color.RED_BRIGHT + "N" + Color.RESET + "!");
+				System.out.println(nombrePersonaje + " se siente.... " + "¡" + Color.PURPLE + "B" + Color.YELLOW + "I" + Color.GREEN_BRIGHT + "E" + Color.RED_BRIGHT + "N" + Color.RESET + "!");
 				System.out.println("......");
 				System.out.println(Color.PURPLE + nombrePersonaje.toUpperCase()  + Color.GREEN_BRIGHT +  "SE SIENT" + Color.RED_BRIGHT +  "E MUCH" + Color.YELLOW + "ISIMO MAS" + Color.PURPLE +  "PO"  + Color.BLUE + "DEROSO" + Color.RESET);
 				System.out.println("¡Las estadisticas de " + nombrePersonaje.toUpperCase() + " se han multiplicado!");
@@ -920,7 +920,660 @@ public class Eventos {
 			return;
 		}
 
-	
-	
+		//Puzzle
+		public static String[][] puzzlePiedraPapelTijera(Random random, Scanner sc){
+			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
+			int victoria = 0;
+			int derrota = 0;
 
+			System.out.println("Un esqueleto de apariencia magica se presenta ante ti.");
+			System.out.println("El te reta a una partida de Piedra, Papel y Tijera.");
+			System.out.println("");
+			System.out.println("\"Escoge tu proximo movimiento\"-te dice con voz siniestra ");
+			System.out.println("");
+			
+			while(victoria < 3 && derrota < 3)
+			{
+				String decisionPlayer = "";
+				int decisionEnemigo = 1;
+				int intg;//intg es una varibale que combierte las String en int
+				
+				
+				System.out.println("    1.Piedra | 2.Papel | 3.Tijera ");
+				
+				decisionPlayer = sc.nextLine();
+				
+				while (!decisionPlayer.equals("1") && !decisionPlayer.equals("2") && !decisionPlayer.equals("3")) {
+
+					System.out.println("\"Ser de conocimiento escaso, introduce, 1, 2 o 3\"-dijo");
+					decisionPlayer = sc.nextLine();
+				}
+				
+				String[] ppt = {"¡Piedra!", "¡Papel!", "¡Tijera!"}; 
+				int decisionPlayerI = (intg = Integer.valueOf(decisionPlayer));
+				
+				decisionEnemigo = random.nextInt(1,4);
+				
+				
+				switch(decisionPlayerI - decisionEnemigo)//hemos descubierto que si restas las decisiones, siendo piedra 0, papel 1, y tijera 2, la respuesta numérica nos dice quien ha ganado
+				{
+				case 1, -2: //victoria
+					victoria++;
+					System.out.println("   " + (Color.GREEN + ppt[decisionPlayerI -1] + Color.RESET) + " |VS| " + (Color.RED +ppt[decisionEnemigo-1] + Color.RESET));
+					
+					String[] frases1 = {"\"Finalmente alguien divertido\"-dice sonriente", "\"Gran predicción\"-exclama el esqueleto", 
+							   "El esqueleto hace una voltereta en direccion trasera", "El esqueleto sonrie"};
+					System.out.println(frases1[random.nextInt(frases1.length)]);
+					System.out.println("");
+					if(victoria < 3 && derrota < 3) System.out.println("\"Elige otra vez\"-dice alegre");
+				break;
+				
+				case -1,2: //derrota
+					derrota++;
+					System.out.println("   " + (Color.GREEN + ppt[decisionPlayerI -1] + Color.RESET) + " |VS| " + (Color.RED +ppt[decisionEnemigo-1] + Color.RESET));
+				
+					String[] frases2 = {"\"Has demostrado tu deficiente inteligencia\"-dice el esqueleto decepcionado", "\"Vaya desagradecido\"-exclama el esqueleto", 
+							   "El esqueleto mueve la cabeza en señal de desaprobacion", "El esqueleto se queda inmovil"};
+					System.out.println(frases2[random.nextInt(frases2.length)]);
+					System.out.println("");
+					if(victoria < 3 && derrota < 3) System.out.println("\"Elige otra vez\"-dice entristecido");
+				break;
+				
+				case 0: //empate
+					System.out.println("   " + (Color.GREEN + ppt[decisionPlayerI -1] + Color.RESET) + " |VS| " + (Color.RED +ppt[decisionEnemigo-1] + Color.RESET));
+					
+					String[] frases3 = {"\"Curioso...un empate\"-dice el esqueleto mientras se rascaba la cabeza", "\"Empate, vaya sorpresa\"-exclama el esqueleto", 
+							   "El esqueleto te mira con sus ojos vacios", "El esqueleto se queda inmovil"};
+					System.out.println(frases3[random.nextInt(frases3.length)]);
+					System.out.println("");
+					if(victoria < 3 && derrota < 3) System.out.println("\"Elige otra vez\"-dice animado");
+				}
+				
+				System.out.println("    TU: " + Color.GREEN_BOLD + victoria + Color.RESET + " / " + Color.RED_BOLD + derrota + Color.RESET + " :ESQUELETO \r\n");
+				
+				if(victoria == 3) {
+					System.out.println("\"Te agradezco este agradable momento, puedes continuar\"-dice complacido");
+					System.out.println("");
+					finalArray[0][0] = "Suerte";
+					finalArray[0][1] = "3";
+					System.out.println("Te sientes afortunado... +3 de " + Color.YELLOW + "suerte" + Color.RESET + "!");
+				}
+				if(derrota == 3) {
+					System.out.println("\"Desaparece de mi vista, aburrido infeliz\"-dice claramente decepcionado");
+					System.out.println("");
+				}
+				
+			}
+			return finalArray;
+		}
+		
+		public static String[][] puzzleLamparas(Random random, Scanner sc, String nombrePersonaje){
+			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
+			
+			int intg = 0;
+			int aciertos = 0;
+			int turnos= 10;
+			
+			int comprobacionInicial = 0;
+			
+			String[] lampara = { "  ⬛⬛⬛⬛⬛  "
+					 ,"  ⬛⬛⬛⬛⬛  "
+					 ,"  ⬛⬛⬛⬛⬛  "
+					 ,"  ⬛⬛⬛⬛⬛  "};
+			
+			boolean[] encendido = new boolean[4];
+			String decision = "";
+			
+			for (int i = 0; i < encendido.length; i++) {
+				
+				encendido[i] = random.nextBoolean();
+			}
+			
+			for (int i = 0; i < encendido.length; i++) {
+				
+				if(encendido[i])
+				{
+					comprobacionInicial++;
+				}
+			}
+			
+			if(comprobacionInicial == 4)
+			{
+				encendido[random.nextInt(0, 4)] = false; //si estan todas encendidads, se apaga una
+			}
+			
+			System.out.println("Te encuentras una fila de 4 lamparas de redstone");
+			System.out.println("Te fijas que hay un boton debajo de cada lampara");
+			System.out.println("");
+			
+		while(aciertos < 4 && turnos != 0)
+		{
+			for (int i = 0; i < 4; i++) {// código para imprimir por pantalla, true = encendida, false = apagada
+				System.out.println((encendido[0] ? Color.YELLOW_BRIGHT + lampara[i] : lampara[i]) + Color.RESET + (encendido[1] ? Color.YELLOW_BRIGHT + lampara[i] : lampara[i]) + Color.RESET  + 
+						   (encendido[2] ? Color.YELLOW_BRIGHT + lampara[i] : lampara[i]) + Color.RESET  + (encendido[3] ? Color.YELLOW_BRIGHT + lampara[i] : lampara[i]) + Color.RESET );
+				
+			}
+			
+			if(aciertos < 4)
+			{
+				aciertos = 0;
+				
+				System.out.println("Cual boton eliges pulsar");
+				System.out.println("      1   2    3   4");
+				
+					decision = sc.nextLine();
+				
+					while (!decision.equals("1") && !decision.equals("2") && !decision.equals("3")&& !decision.equals("4")) {
+		
+						System.out.println("Tontamente decides presionar el boton " + decision + " pero resulta que no existe, intentalo otra vez.");
+						decision = sc.nextLine();
+					}
+					
+				intg = Integer.valueOf(decision);// de String a int
+				
+				//Modifica los valores de la lamapara seleccionada y las que se encuentran a la izquierda(-1) y la derecha(+1) y que se encuetrn entre 1-4
+				encendido[(intg - 1)] = encendido[(intg - 1)] ? false : true;
+//				if(encendido[(intg - 1)])                   //if (?) else (:)
+//				{
+//					encendido[(intg - 1)] = false;
+//				}
+//				else
+//				{
+//					encendido[(intg - 1)] = true;
+//				}
+				if(intg > 1) {
+					encendido[(intg - 1) - 1] = encendido[(intg - 1) - 1] ? false : true;
+				}
+				if(intg < 4) {
+					encendido[(intg - 1) + 1] = encendido[(intg - 1) + 1] ? false : true;
+				}	
+				
+				for (int i = 0; i < encendido.length; i++) {
+					if(encendido[i] == true) {
+						aciertos++;
+					}
+				}
+			}
+			
+			if(aciertos == 4) {
+				
+				System.out.println("\"¡Clank!  ¡Clank!\"");
+				System.out.println("");
+				for (int i = 0; i < 4; i++) {
+					System.out.println((encendido[0] ? Color.YELLOW_BRIGHT + lampara[i] : lampara[i]) + Color.RESET + (encendido[1] ? Color.YELLOW_BRIGHT + lampara[i] : lampara[i]) + Color.RESET  + 
+							   (encendido[2] ? Color.YELLOW_BRIGHT + lampara[i] : lampara[i]) + Color.RESET  + (encendido[3] ? Color.YELLOW_BRIGHT + lampara[i] : lampara[i]) + Color.RESET );
+					
+				}
+				System.out.println("");
+				
+				System.out.println("Escuchas un sonido mecanico tras las lamaparas y en un abrir y cerrar de ojos la pared ante ti se abre revelando un enorme cofre");
+				System.out.println("Obtienes " + monedas(nombrePersonaje, 15) + (nombrePersonaje.equals("Chicken Little") ? " semillas " :  " esmeraldas "));
+				
+				finalArray[0][0] = "Monedas";
+				finalArray[0][1] = "15";
+			
+			}
+			
+			if(turnos == 0 && aciertos != 4) {
+				System.out.println("Las luces se apagan repetinamente al acabarse tus turnos restantes.");
+				System.out.println("Entristecido te marchas con las manos vacias.");
+			}
+			
+			System.out.println("");
+			System.out.println("Guardas tu botin y continuas tu aventura felizmente");
+		}
+			
+			return finalArray;
+		}
+		
+		public static String[][] puzzleAdivinanza(Random random, Scanner sc){
+			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
+			
+			String decision = "";
+			
+			boolean acierto = false;
+			double decisionDouble = 0.0;
+			int turnos= 5;
+			
+			System.out.println("Una enorme puerta de hierro bloquea tu camino");
+			System.out.println("No parece tener forma de abrirla, ni pomo, ni botones, ni palancas");
+			System.out.println("¿Intentaras forzar la puerta?");
+			System.out.println("");
+			System.out.println("       1.Si    |    2.No");
+			
+			decision = sc.nextLine();
+			
+			while (!decision.equalsIgnoreCase("Si") && !decision.equalsIgnoreCase("No") && !decision.equalsIgnoreCase("1") && !decision.equalsIgnoreCase("2")) {
+
+				System.out.println("Con toda tu inteligencia tratas de decidirte y exclamas" + "¡" + decision + "!" + ", pero eso no resuelve nada...");
+				System.out.println("De nuevo, ¿Intentaras forzar la puerta? \n");
+				System.out.println("");
+				System.out.println("       1.Si    |    2.No");
+				decision = sc.nextLine();
+			}
+			
+			if(decision.equalsIgnoreCase("Si") || decision.equalsIgnoreCase("1")) {
+				System.out.println("Empujas la puerta con todas tus fuerzas pero no pasa nada. La intentas golpear hasta el agotamiento, pero tampoco pasa nada.");
+				System.out.println("Despues de tanto esfuerzo te das cuenta de que obviamente no vas a forzar una puerta enorme de hierro.");
+				System.out.println("Desesperado procedes a irte, pero un sonido llama tu atencion...");
+
+			}
+			if(decision.equalsIgnoreCase("No") || decision.equalsIgnoreCase("2")) {
+				System.out.println("Decides pensar otra obpcion pues es imposible forzar algo tan pesado");
+				System.out.println("Al rato un pequeño ruido interrumpe tu pensamiento");
+			}
+			
+			
+			System.out.println("¡Es un bloque musical!");
+			
+			while(acierto == false && turnos != 0)
+			{
+				turnos--;
+				
+				System.out.println("Por el bloque se comienza a escuchar una voz");
+				System.out.println("");
+				System.out.println("\"Para aquellos limitados por la puerta, dejadme haceros una oferta\"-dijo la voz de la caja");
+				System.out.println("");
+				System.out.println("\"Si entre el 0 y el 1 un numero real hallais, tal vez pasar podais\"-dijo la voz de la caja");
+				System.out.println("\"Restan " + Color.RED_BOLD + turnos + Color.RESET + " turnos, para dar tu respuesta\"-dijo la voz");
+				System.out.println("¿Que numero sera el que elijas? \n");
+				
+				if (sc.hasNextDouble()) {
+					
+					decisionDouble = sc.nextDouble();        
+		        } 
+				else {
+		        	// lee el resto de la línea como String
+		            String decisionString = sc.nextLine(); 
+		            System.out.println("Ser de inteligencia deficiente, tu respuesta " + decisionString + " no es suficiente.");
+		        }
+				
+				double numeroGracioso = random.nextDouble(0, 1);
+//				System.out.println(numeroGracioso);
+				if(decisionDouble == numeroGracioso)
+				{
+					acierto = true;
+					
+					System.out.println("La caja emite una pequeña musica");
+					System.out.println(Color.CYAN_BRIGHT + "¡FELICIDADES HAS ADIVINADO EL NUMERO DE LA SUERTE SUPREMA!-dice la voz" + Color.RESET);
+					System.out.println("A partir de ahora tendras todo lo que necesites");
+					
+					////// TODO Y esto te hace ganar basicamente y te saca del bucle del juego System.out.println("Vendo cocaína en la Calle Inventada numero 123"); /////////////////
+				}
+				
+				int resultadoReal = random.nextInt(0,2);
+				if(decisionDouble == resultadoReal)
+				{
+					acierto = true;
+					
+					System.out.println("\"Adivinaza adivinada, la puerta ya no esta sellada\"-dijo la voz");
+					System.out.println(Color.CYAN_BRIGHT + "¡CLing!¡Clang!" + Color.RESET);
+					System.out.println("La enorme puerta se abre ante ti, pasas aliviado de poder escapar finalmente.");
+					System.out.println("Esta experiencia expande tus conocimientos ganando " + Color.YELLOW_BRIGHT + "2 de velocidad" + Color.RESET);
+					
+					finalArray[0][0] = "Velocidad";
+					finalArray[0][1] = "2";
+				}
+				if(turnos == 0 && acierto != true) {
+					
+					System.out.println("\"La prueba no ha sido superda\"-dijo la voz");
+					System.out.println("\"Para por la puerta pasar, "  + Color.RED_BOLD +  "10 esmeraldas deberas pagar\"-dijo la puerta" + Color.RESET);
+					System.out.println("");
+					
+					finalArray[0][0] = "Monedas";
+					finalArray[0][1] = "-10";
+				}
+			}
+			
+			System.out.println("");
+			System.out.println("Atraviesas la puerta y continuas con tu aventura");
+			
+			sc.nextLine();
+			
+			return finalArray;
+		}
+		
+		public static String[][] puzzleTrivia(Random random, Scanner sc, String nombrePersonaje){
+			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
+			
+			//// VARIABLES ////
+			String decision;
+			int aciertos = 0;
+			int errores = 0;
+			int nextIndex = 0;
+					
+			//// INTRODUCCIÓN AL PUZZLE ////
+			System.out.println("En medio de tu camino una enorme criatura se planta ante ti.");
+			System.out.println("Es un ajolote, el mas grande que hayas visto nunca, el se queda sentado en una pose muy parecida a una esfinge \r\n");
+			System.out.println("\"Pequeña criatura, este camino esta prohibido, si aun asi deseas pasar nos tendremos que enfrentar\"-dijo la criatura con una voz relajada ");
+			System.out.println("");
+			System.out.println("¿Cual sera tu elección?");
+			System.out.println(" 1. Aceptar el desafio | 2. Atacar a la criatura");
+					
+			decision = sc.nextLine();
+			
+			//// COMPROBAR DECISIÓN ////
+			while (!decision.equalsIgnoreCase("1") && !decision.equalsIgnoreCase("2")) {
+							
+					System.out.println("Confundido por la dificultad de decidir 1,2 o 3, terminas gritando " + "¡" + decision + "!");
+					System.out.println("El ajolote te mira extrañado");
+					System.out.println("\"¿Has decidido ya?\"-dice con voz amenazante");
+					System.out.println(" 1. Aceptar el desafio | 2. Atacar a la criatura \r\n");
+					decision = sc.nextLine();
+			}
+			
+			//// REACCION A LAS DECISIÓN (NO SIRVE DE NADA PERO ME HACE GRACIA) ////
+			if(decision.equals("2")) {
+				
+				System.out.println("Te avalanzas contra el ajolote con todas tus fuerzas y le golpeas en toda la cara");
+				System.out.println("Este simplemente te mira decepcionado");
+				System.out.println("\"Bien ahora que has tomado tu decision deja que te explique las reglas del enfrentamiento\"-dijo con tono enfadado");
+			}
+			
+			System.out.println("\"De acuerdo, nos efretaremos en un combate de preguntas\"-dijo el ajolote animado \r\n");
+			System.out.println("\"Yo te hare un total de " + Color.YELLOW_BRIGHT + "5 preguntas " + Color.RESET + 
+							   "y si fallas alguna yo te quitare algo de mi eleccion, pero si aciertas tu recibiras algo de mi eleccion\"-explico la criatura \r\n");
+			System.out.println("\"Sin perder mas tiempo comienzo con la primera pregunta\"-dijo tras finalizar la explicacion");
+			System.out.println("");
+			
+			
+			
+			//// BUCLE DEL PUZZLE ////
+			for (int i = 0; i < 5; i++)
+			{
+				System.out.println(Color.PURPLE_BRIGHT + "                                                                                                    \r\n"
+						+ "                              ▓▓▓▓▓▓                             ▓▓▓▓▓                              \r\n"
+						+ "                              ▓▓▓▓▓▓                             ▓▓▓▓▓                              \r\n"
+						+ "               ▓▓▓▓▓          ▓▓▓▓▓▓▓▓▓▓▓                   ▓▓▓▓▓▓▓▓▓▓          ▓▓▓▓▓▓              \r\n"
+						+ "               ▓▓▓▓▓          ▓▓▓▓▓▓▓▓▓▓▓                   ▓▓▓▓▓▓▓▓▓▓          ▓▓▓▓▓▓              \r\n"
+						+ "               ▓▓▓▓▓▓▓▓▓▓          ▓▓▓▓▓▓▓▓▓▓▓         ▓▓▓▓▓▓▓▓▓▓          ▓▓▓▓▓▓▓▓▓▓▓              \r\n"
+						+ "               ▓▓▓▓▓▓▓▓▓▓          ▓▓▓▓▓▓▓▓▓▓▓         ▓▓▓▓▓▓▓▓▓▓          ▓▓▓▓▓▓▓▓▓▓▓              \r\n"
+						+ "                    ▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓▓▓▓▓▓▓▓▓                    \r\n"
+						+ "                    ▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓▓▓▓▓▓▓▓▓                    \r\n"
+						+ "                         ▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓▓▓▓                         \r\n"
+						+ "                         ▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓▓▓▓                         \r\n"
+						+ "                         ▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓▓▓▓                         \r\n"
+						+ "               ▓▓▓▓▓          " + Color.BLACK + "█████▒" + Color.PURPLE_BRIGHT + "░░░░░░░░░" + Color.BLACK + "▒▓▓▓▓▓▓▓▓▓" + Color.PURPLE_BRIGHT + "░░░░░░░░░░" + Color.BLACK + "▓████" + Color.PURPLE_BRIGHT + "          ▓▓▓▓▓▓              \r\n"
+						+ "               ▓▓▓▓▓          " + Color.BLACK + "█████▒" + Color.PURPLE_BRIGHT + "░░░░░░░░░" + Color.BLACK + "▒▓▓▓▓▓▓▓▓▓" + Color.PURPLE_BRIGHT + "░░░░░░░░░░" + Color.BLACK + "▓████" + Color.PURPLE_BRIGHT + "          ▓▓▓▓▓▓              \r\n"
+						+ "               ▓▓▓▓▓▓▓▓▓▓     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░     ▓▓▓▓▓▓▓▓▓▓▓              \r\n"
+						+ "               ▓▓▓▓▓▓▓▓▓▓     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░     ▓▓▓▓▓▓▓▓▓▓▓              \r\n"
+						+ "                    ▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓                   \r\n"
+						+ "                    ▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓                   \r\n"
+						+ "                                                                                                    \r\n" + Color.RESET);
+				
+				//// SELECCION DE PREGUNTAS ////
+				String[][] PreguntasRespuestas = { {"               ¿Cuantos turnos tardara un creeper en explotar, en una situacion normal?", "3"}, 
+													{"                   ¿Cuanta vida restaura una pocion, en situaciones normales?", "10"}, 
+													{"                Responde verdadero o falso, ¿las brujas son capaces de darte pocion de suerte?", "verdadero"},
+													{"                Responde verdadero o falso, ¿las brujas son capaces de darte un gato?", "falso"},
+													{"                   ¿Que efecto de estado provoca un asalto a una aldea?", "Mal presagio"},
+													{"                              ¿Que criatura posee tres cabezas?", "Wither"},
+													{"               ¿Cual es el maximo de enemigos por encuentro, en situaciones normales?", "5"},
+													{"                              ¿Cuanto ataque otorga la pocion de fuerza?", "4"}, 
+													{"               ¿Cuales son los tres numeros de la parte trasera de tu tarjeta bancaria?", "si"}};
+				
+				int pregunta = random.nextInt(PreguntasRespuestas.length);
+				System.out.println(Color.YELLOW_BRIGHT + PreguntasRespuestas[pregunta][0].toUpperCase() + Color.RESET + Color.CYAN);
+				
+				decision = sc.nextLine();
+				System.out.println(Color.RESET);
+				
+				
+				// Comprueba las decisiones que pueden dar error 
+				if(decision.equalsIgnoreCase("malpresagio") || decision.equalsIgnoreCase("BadOmen") || decision.equalsIgnoreCase("Bad Omen")) {
+					decision = "Mal presagio";
+				}
+				
+				if(pregunta == 8) {decision = "si";}
+				
+				//// RECOMPENSA AL GANAR ////
+				if(PreguntasRespuestas[pregunta][1].equalsIgnoreCase(decision))
+				{
+					System.out.println("\"Respuesta" + Color.GREEN_BOLD +  " correcta"  + Color.RESET + ", ahora decidire tu recompensa\"-dice el ajolote");
+					
+					int recompensaTrivial = random.nextInt(1, 5);
+					
+					aciertos++;
+			
+					switch(recompensaTrivial) {
+					
+						case 1:
+							System.out.println("Recibes " + Color.GREEN_BOLD + monedas(nombrePersonaje, 10) + (nombrePersonaje.equals("Chicken Little") ? " semillas " : " esmeraldas ") + RESET + "del ajolote");
+							
+							finalArray[i][0] = "Monedas";
+							finalArray[i][1] = "10";
+						break;
+						
+						case 2:
+							System.out.println("Recibes una" + Color.YELLOW_BOLD + " pocion de Vida " + Color.RESET + "del ajolote");
+							
+							finalArray[i][0] = "Pocion Vida";
+							finalArray[i][1] = "1";
+						break;
+						
+						case 3:
+							System.out.println("Recibes una" + Color.YELLOW_BOLD + " pocion de Fuerza " + Color.RESET + "del ajolote");
+							
+							finalArray[i][0] = "Pocion Fuerza";
+							finalArray[i][1] = "5";
+						break;
+						
+						case 4:
+							System.out.println("Recibes" + Color.BLUE_BOLD +" armadura" + Color.RESET);
+							
+							finalArray[i][0] = "Defensa";
+							finalArray[i][1] = "1";
+					}
+				}
+				
+				//// CASTIGO AL FALLAR ////
+				if(!PreguntasRespuestas[pregunta][1].equalsIgnoreCase(decision)) {
+					
+					System.out.println("\"Respuesta" + RED_BOLD +  " incorrecta "  + RESET + ", ahora decidire tu castigo\"-dice el ajolote");
+						
+					int castigoTrivial = random.nextInt(1, 5);
+					
+					errores++;
+						
+					switch(castigoTrivial) {
+						
+						case 1:
+							System.out.println("El ajolote te golpea quitandote" + RED_BOLD + " 10 de daño " + RESET);
+								
+							finalArray[i][0] = "Vida";
+							finalArray[i][1] = "-5";
+						break;
+							
+						case 2:
+							System.out.println("El ajolote te roba " + RED_BOLD + monedas(nombrePersonaje, 10) + (nombrePersonaje.equals("Chicken Little") ? " semillas" : " esmeraldas") + RESET);
+								
+							finalArray[i][0] = "Monedas";
+							finalArray[i][1] = "-10";
+						break;
+						
+						case 3:
+							System.out.println("Recibes la maldicion del" + BLACK_BOLD + " mal presagio " + RESET);
+								
+							finalArray[i][0] = "Bad Omen";
+							finalArray[i][1] = "10";
+						break;
+							
+						case 4:
+							System.out.println("Tu armadura" + RED_BOLD + " pierde porder " + RESET);
+								
+							finalArray[i][0] = "Defensa";
+							finalArray[i][1] = "-1";
+						}
+					}
+				
+				nextIndex = i;
+				System.out.println("");
+				
+				
+				
+			}
+			//// VICTORIA ////
+			if(aciertos >= 3) {
+				if(errores > 0) {System.out.println("\"Felicidades viajero has logrado pasar la prueba con " + errores + " errores\"-dijo alegre");}
+				if(errores == 0) {
+					System.out.println("\"Felicidades viajero has logrado pasar la prueba sin cometer ningun error como recompensa te dare parte de mi poder\"-dijo el ajolote entusiasmado \r\n");
+					System.out.println("Te sientes mas fuerte, tu vida maxima aumenta 10 puntos");
+					
+					finalArray[nextIndex][0] = "VidaMax";
+					finalArray[nextIndex][1] = "10";
+				}
+			}
+			
+			//// DERROTA ////
+			if(aciertos < 3) {
+				if(aciertos > 0) {
+					System.out.println(RED_BRIGHT + "\"No has superado la prueba " + RESET + "viajero, puedes pasar aunque con un castigo\"-dijo aburrido \r\n");
+					System.out.println("Te sientes mas debil, pierdes 5 de vida maxima");
+					
+					finalArray[nextIndex][0] = "VidaMax";
+					finalArray[nextIndex][1] = "-5";
+				}
+				if(aciertos == 0) {
+					System.out.println("\"Por lo que veo ni siquiera lo has intentado, vaya perdida de tiempo, continua con tu aventura desgraciado\"-dijo el ajolote completamente decepcionado \r\n");
+					System.out.println("Humillado sientes como parte de tu fuerza escapa de tu cuerpo, pierdes 10 de vida maxima");
+					
+					finalArray[nextIndex][0] = "VidaMax";
+					finalArray[nextIndex][1] = "-10";
+				}
+			}	
+			
+			return finalArray;
+		}
+		
+		public static String[][] puzzleOpinion(Random random, Scanner sc, String nombrePersonaje){
+			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
+			
+			String decision;
+			boolean opinionValida = false;
+			String[] opinion = {"0","1","2","3","4","5","6","7","8","9","10"};
+			boolean fin = false;
+			
+			System.out.println("En tu camino encuentras a un anciano sentado pensativo.");
+			System.out.println("Cuando se percata de tu presencia te saluda amablemente con la mano.");
+			System.out.println("\"Joven aventurero, permiteme hacerte una sencilla pregunta\"-dijo con voz calmada");
+			System.out.println("");
+			System.out.println("   1.Aceptar | 2.Rechazarle");
+			
+			decision = sc.nextLine();
+			
+			while (!decision.equalsIgnoreCase("Aceptar") && !decision.equalsIgnoreCase("Rechazarle") && !decision.equalsIgnoreCase("1") && !decision.equalsIgnoreCase("2")) {
+				
+				System.out.println("\"Puedes repetir joven, no he entendido tu respuesta\"-dijo extrañado");
+				decision = sc.nextLine();
+			}
+			
+			if(decision.equalsIgnoreCase("Aceptar") || decision.equalsIgnoreCase("1")) {
+				
+				System.out.println("\"De acuerdo joven, ahi va mi pregunta\"-dijo entusiasmado");
+				
+				while(fin == false) {
+					
+					System.out.println("");
+					System.out.println("\"¿Cual es la opinión que sostienes sobre este mundo en una escala del 0-10?\"-pregunto");
+					
+					while(opinionValida == false) {
+						
+						decision = sc.nextLine();
+						for (int i = 0; i < opinion.length; i++) {
+							if(opinion[i].equals(decision)) {
+								opinionValida = true;
+								i = 10;
+								}
+						}	
+						if(opinionValida == false) {
+							System.out.println("Joven tu respuesta " + decision + " no esta entre 0-10, responda otra vez.");
+						}
+						
+					}
+					
+					int opinionElegida = Integer.valueOf(decision);
+					
+					switch(opinionElegida) {
+					
+					case 0,1,2,3,4: {
+						opinionValida= false;
+						System.out.println("\"¿Estas seguro de tu opinion?\"-pregunto seriamente");
+						System.out.println("  1.Si | 2.No");
+						decision = sc.nextLine();
+							
+							while (!decision.equalsIgnoreCase("Si") && !decision.equalsIgnoreCase("No") && !decision.equalsIgnoreCase("1") && !decision.equalsIgnoreCase("2")) {
+									
+								System.out.println("\"Puedes repetir joven, no he entendido tu respuesta\"-dijo extrañado");
+								decision = sc.nextLine();
+							}
+							
+						if(decision.equalsIgnoreCase("Si") || decision.equalsIgnoreCase("1")) {
+							System.out.println("\"¿Seguro?, esta es tu " + Color.RED_BOLD_BRIGHT + "ultima advertencia" + Color.RESET + "\"-pregunto de nuevo");
+							System.out.println("  1.Si | 2.No");
+							decision = sc.nextLine();
+								
+							while (!decision.equalsIgnoreCase("Si") && !decision.equalsIgnoreCase("No") && !decision.equalsIgnoreCase("1") && !decision.equalsIgnoreCase("2")) {
+									
+								System.out.println("\"Puedes repetir joven, no he entendido tu respuesta\"-dijo extrañado");
+								decision = sc.nextLine();
+							}
+						}
+						if(decision.equalsIgnoreCase("Si") || decision.equalsIgnoreCase("1")) { 
+							System.err.println("OPINION NO VALIDA");
+							System.out.println(Color.RED_BOLD_BRIGHT + "Piensatelo mejor en tu próxima partida." +Color.RESET);
+							System.out.println(nombrePersonaje + " piensa- Partida...?");
+							System.out.println("Pero antes de darse cuenta...");
+							decision = sc.nextLine();
+							throw new Error("Sorry!! 😥"); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:)    sorry not sorry    (:
+						}
+						if(decision.equalsIgnoreCase("No") || decision.equalsIgnoreCase("2")) { 
+							System.out.println("\"Bien hecho, espero que hayas aprendido la leccion, ahora responde\"-dijo con una sonrisa burlona \r\n");
+						}
+						break;	
+					}
+					case 5: {
+						System.out.println("\"Ni bien ni mal ¿eh?, bueno es una opinion aceptable\"-dijo poco emocionado \r\n");
+						System.out.println("\"Suerte con tu aventura joven\"-dijo aburrido");
+						fin = true;
+						
+					}
+					case 6,7: {
+						System.out.println("\"Bueno no es un 10 pero me hace feliz que lo disfrutes\"-dijo sonriente \r\n");
+						System.out.println("\"Espero que tengas una gran suerte en tu aventura\"-dijo sonriente");
+						System.out.println("");
+						System.out.println("Te sientes complacido por estas palabras, tu suerte aumenta en 2 \r\n");
+						
+						finalArray[0][0] = "Suerte";
+						finalArray[0][1] = "2";
+						fin = true;
+						break;
+					}
+					case 8,9,10: {
+						System.out.println("\"¡Oh en serio! Me alegro de que los estes disfrutando\"-dijo alegre \r\n");
+						System.out.println("\"Una verdadera pena que tengas que partir, aunque te llevas mi bendicion para que sigas disfrutando de tu aventura");
+						System.out.println("");
+						System.out.println("Te sientes altamente compalacido por las palabras del anciano, tu suerte aumenta en 2 y tu vida maxima en 5 \r\n");
+						
+						finalArray[0][0] = "Suerte";
+						finalArray[0][1] = "2";
+						finalArray[1][0] = "VidaMax";
+						finalArray[1][1] = "5";
+						fin = true;
+					}
+				}
+				
+				if(opinionElegida > 5) { System.out.println("Continuas con tu aventura despues de este gratificante evento, dejando atras la roca del anciano"); }
+				if(opinionElegida == 5) { System.out.println("Continuas con tu aventura despues de este extraño evento, dejando atras la roca del anciano"); }
+					
+				}
+			}
+			
+			if(decision.equalsIgnoreCase("Rechazarle") || decision.equalsIgnoreCase("2")) {
+				System.out.println("Rechazas la oferta del anciano, quien se queda muy desilusionado, y decides continuar con tu camino");
+				System.out.println("Al rato ya has perdido de vista la roca del anciano");
+				
+				//// FINALIZA EL PUZZLE ////
+			}
+			return finalArray;
+}
 }
