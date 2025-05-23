@@ -11,6 +11,8 @@ public class Protagonista extends Personaje {
 		this.fuerza = fuerza;
 		this.velocidad = velocidad;
 		this.idAscii = idAscii;
+		
+		rellenarAtaques(this);
 	}
 	
 

@@ -15,6 +15,8 @@ public class Enemigo extends Personaje {
 		this.isRaid = isRaid;
 		this.isBoss = isBoss;
 		this.isSteve = isSteve;
+		
+		rellenarAtaques(this);
 	}
 	
 }

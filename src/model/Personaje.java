@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 abstract class Personaje {
 
 	String nombre;
@@ -9,6 +11,7 @@ abstract class Personaje {
 	double fuerza;
 	double velocidad;
 	int idAscii;
+	ArrayList<Ataque> listaAtaques = new ArrayList<Ataque>();
 	
 	public String getNombre() {
 		return nombre;
@@ -52,6 +55,19 @@ abstract class Personaje {
 
 	public void setIdAscii(int idAscii) {
 		this.idAscii = idAscii;
+	}
+	
+	public ArrayList<Ataque> getListaAtaque()
+	{
+		return listaAtaques;
+	}
+	
+	protected void rellenarAtaques(Personaje personaje)
+	{
+		//Switch para rellenar los ataques según el nombre
+		//Ejemplo
+//		Ataque ataque1 = new Ataque("Patada");
+//		personaje.getListaAtaque().add(ataque1);
 	}
 	
 }
