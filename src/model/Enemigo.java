@@ -12,6 +12,9 @@ public class Enemigo extends Personaje {
 		this.defensa = defensa;
 		this.fuerza = fuerza;
 		this.velocidad = velocidad;
+		this.isRaid = isRaid;
+		this.isBoss = isBoss;
+		this.isSteve = isSteve;
 	}
 	
 }
