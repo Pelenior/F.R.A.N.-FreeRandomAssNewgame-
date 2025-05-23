@@ -82,7 +82,6 @@ public class Juego {
 					case "1":
 						{
 							prota = new Protagonista("Steve", 20, 0, 1, 3, 2);//protagonista elegido- CAMBIARLO CUANDO HAYA DB
-							ASCII.printAscii(prota.getIdAscii());
 							//ESTO METERLO DENTRO DE UNA DB
 //							nombrePersonaje = "Steve";
 //							vidaMaxPersonaje = 20;
@@ -99,7 +98,6 @@ public class Juego {
 					case "2":
 						{
 							prota = new Protagonista("Alex", 30, 0, 0, 1, 3);//protagonista elegido- CAMBIARLO CUANDO HAYA DB
-							ASCII.printAscii(prota.getIdAscii());
 							//ESTO METERLO DENTRO DE UNA DB
 //							nombrePersonaje =  "Alex";
 //							vidaMaxPersonaje = 30;
@@ -114,8 +112,7 @@ public class Juego {
 						}
 					case "3":
 						{
-							prota = new Protagonista("Chicken Little", 15, 0, 0, 3.5, 4);//protagonista elegido- CAMBIARLO CUANDO HAYA DB
-							ASCII.printAscii(prota.getIdAscii());
+							prota = new Protagonista("Chicken Little", 15, 0, 0, 3.5, 4);//protagonista elegido- CAMBIARLO CUANDO HAYA DB			
 							//ESTO METERLO DENTRO DE UNA DB
 //							nombrePersonaje = "Chicken Little";
 //							vidaMaxPersonaje = 15;
@@ -190,7 +187,7 @@ public class Juego {
 				boolean seleccionCorrecta = false;
 				
 				String seleccionCamino = "";
-				
+			
 				while(!seleccionCorrecta)
 				{
 					System.out.println("A dónde irá " + nombrePersonaje + " ahora...");
