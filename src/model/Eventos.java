@@ -367,12 +367,14 @@ public class Eventos {
 			
 			String decision;
 			
-			          String[] encantamiento = {"Proteccion", "Afilado", "Espinas", "Fortuna", "Eficiencia", "Recarga rapida"};
+			String[] encantamiento = {"Proteccion", "Afilado", "Espinas", "Fortuna", "Eficiencia", "Recarga rapida"};
 			String[] encantamientoEncriptado = {"!¡∷𝙹ℸ ̣ ᒷᓵᓵ╎𝙹リ", "ᒷᓭ!¡╎リᔑᓭ", "ᔑ⎓╎ꖎᔑ↸𝙹", "ᒷ⎓╎ᓵ╎ᒷリᓵ╎ᔑ", "∷ᒷᓵᔑ∷⊣ᔑ  ∷ᔑ!¡╎↸ᔑ", "⎓𝙹∷ℸ ̣ ⚍リᔑ"};
 			String[] nivel = {"I","II","III","IV","V",""};
-			int[] costeVidaArray = new int[4];
+			int[] costeVidaArray = new int[4];//array con 4 espacios(0 a 3), uno por cada encantamiento generado aleatoriamente.
 			
 			String[][] encantamientosNivelesSeleccionados = new String[4][2];
+			/*La matriz tiene 4 filas: los 4 encantamientos diferentes que se mostrarán al jugador.
+			 * Cada fila tiene 2 columnas: El nombre del encantamiento. El nivel del encantamiento*/
 			
 			System.out.println("En tu camino te encuentras un campamento muy extraño.");
 			System.out.println("Esta conformado por una gran tienda de campaña azul y un puesto de venta con lo que parece ser una mesa de encantamientos.");
@@ -425,6 +427,8 @@ public class Eventos {
 					
 					int costeVida = 0;
 					costeVida = (nivelRandom+1) * 3; // coste de vida según el nivel
+					//Se suma 1 porque los niveles comienzan desde 0 (nivel I).
+					//Multiplica por 3 para obtener el coste total.
 					
 					if(nivelRandom == 5)
 					{
@@ -436,12 +440,12 @@ public class Eventos {
 					}else System.out.println( "     " + (i + 1)  + "." + Color.CYAN_UNDERLINED + Color.CYAN_BOLD_BRIGHT + encantamientoEncriptado[encantamientoRandom] + " " + nivel[nivelRandom] + Color.RESET + "-> -" + costeVida +  " de vida maxima"  + "\r\n");
 					
 					String[] guardarEncantamiento = new String[2];
-				
-					guardarEncantamiento[0] = encantamiento[encantamientoRandom];// guarda en una array los encantamientos, niveles y coste de vida
+					//array con dos elementos: Nombre y Nivel del encantamiento
+					guardarEncantamiento[0] = encantamiento[encantamientoRandom];//guarda los encantamientos, niveles y coste de vida
 					guardarEncantamiento[1] = nivel[nivelRandom];
 					
 					costeVidaArray[i] = costeVida;
-					encantamientosNivelesSeleccionados[i] = guardarEncantamiento;// guarda en una matriz los arrays de distintos encantamientos, y niveles
+					encantamientosNivelesSeleccionados[i] = guardarEncantamiento;//guarda en una matriz los arrays de distintos encantamientos, y niveles
 				}
 				
 				decision = sc.nextLine();
