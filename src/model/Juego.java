@@ -9,8 +9,8 @@ public class Juego {
 	//Atributos
 	private static Juego instanciaJuego;//singelton, garantiza que tan solo exista un (objeto) juego 
 	private static Protagonista prota;//protagonista elegido (vacío)
-	private Combate combate;//clase combate, que recibre el nombre de combate
-	private Eventos evento;//clase eventos, que recibre el nombre de evento
+	private Combate combate;//clase combate, recibre nombre de combate
+	private Eventos evento;//clase eventos,  recibre nombre de evento
 	
 	private Juego() {//permite que se pueda usar en esta clase
 		combate = new Combate();
@@ -195,7 +195,7 @@ public class Juego {
 					// Imprimimos las opciones
 					for(int i = 0; i < caminosDisponibles.size(); i++)
 					{
-						System.out.println((i+1) + ". " + caminosDisponibles.get(i));//imprime el camino
+						System.out.println((i+1) + ". " + caminosDisponibles.get(i));//imprime el camino seleccionado
 					}
 					seleccionCamino = scanner.nextLine();
 					
@@ -218,7 +218,7 @@ public class Juego {
 				String seleccionStr = (String) caminosDisponibles.get(Integer.valueOf(seleccionCamino) - 1);//guarda camino
 				
 				
-				switch(seleccionStr) {//ir al camino (evento) elegido
+				switch(seleccionStr) {//ir al camino (evento) elegido, que puede ser o
 					case Color.RED_BRIGHT + "Combate" + Color.RESET: 
 						//Combate le pasa un prota y las informacion disponible para el combate
 						

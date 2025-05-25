@@ -12,7 +12,6 @@ public class Eventos {
 	public static void elegirEvento (Protagonista prota) {
 		Random random = new Random();
 		
-		
 		int eventoAleatorio = random.nextInt(0, evento.length);
 		String eventoSeleccionado = evento[eventoAleatorio];
 		
@@ -370,7 +369,7 @@ public class Eventos {
 			String[] encantamiento = {"Proteccion", "Afilado", "Espinas", "Fortuna", "Eficiencia", "Recarga rapida"};
 			String[] encantamientoEncriptado = {"!¡∷𝙹ℸ ̣ ᒷᓵᓵ╎𝙹リ", "ᒷᓭ!¡╎リᔑᓭ", "ᔑ⎓╎ꖎᔑ↸𝙹", "ᒷ⎓╎ᓵ╎ᒷリᓵ╎ᔑ", "∷ᒷᓵᔑ∷⊣ᔑ  ∷ᔑ!¡╎↸ᔑ", "⎓𝙹∷ℸ ̣ ⚍リᔑ"};
 			String[] nivel = {"I","II","III","IV","V",""};
-			int[] costeVidaArray = new int[4];//array con 4 espacios(0 a 3), uno por cada encantamiento generado aleatoriamente.
+			int[] costeVidaArray = new int[4];//4 espacios(0 a 3), uno por cada encantamiento generado aleatoriamente.
 			
 			String[][] encantamientosNivelesSeleccionados = new String[4][2];
 			/*La matriz tiene 4 filas: los 4 encantamientos diferentes que se mostrarán al jugador.
@@ -1030,7 +1029,7 @@ public class Eventos {
 			
 			for (int i = 0; i < encendido.length; i++) {
 				
-				encendido[i] = random.nextBoolean();
+				encendido[i] = random.nextBoolean();//Las lámparas se encienden o apagan al azar.
 			}
 			
 			for (int i = 0; i < encendido.length; i++) {
@@ -1052,7 +1051,7 @@ public class Eventos {
 			
 		while(aciertos < 4 && turnos != 0)
 		{
-			for (int i = 0; i < 4; i++) {// código para imprimir por pantalla, true = encendida, false = apagada
+			for (int i = 0; i < 4; i++) {//imprime  el estado visual de las lámparas, true = encendida, false = apagada
 				System.out.println((encendido[0] ? Color.YELLOW_BRIGHT + lampara[i] : lampara[i]) + Color.RESET + (encendido[1] ? Color.YELLOW_BRIGHT + lampara[i] : lampara[i]) + Color.RESET  + 
 						   (encendido[2] ? Color.YELLOW_BRIGHT + lampara[i] : lampara[i]) + Color.RESET  + (encendido[3] ? Color.YELLOW_BRIGHT + lampara[i] : lampara[i]) + Color.RESET );
 				
@@ -1075,7 +1074,8 @@ public class Eventos {
 					
 				intg = Integer.valueOf(decision);// de String a int
 				
-				//Modifica los valores de la lamapara seleccionada y las que se encuentran a la izquierda(-1) y la derecha(+1) y que se encuetrn entre 1-4
+				/*Cambia el estado de la lámpara seleccionada y las que se encuentran a la izquierda(-1) y la derecha(+1).
+				 *  y que se encuetrn entre 1-4. Si el jugador pulsa "2", se alteran las lámparas 1, 2 y 3.*/
 				encendido[(intg - 1)] = encendido[(intg - 1)] ? false : true;
 //				if(encendido[(intg - 1)])                   //if (?) else (:)
 //				{
@@ -1091,7 +1091,7 @@ public class Eventos {
 				if(intg < 4) {
 					encendido[(intg - 1) + 1] = encendido[(intg - 1) + 1] ? false : true;
 				}	
-				
+				//Cuenta cuántas lámparas están encendidas después de cada jugada.
 				for (int i = 0; i < encendido.length; i++) {
 					if(encendido[i] == true) {
 						aciertos++;
@@ -1205,7 +1205,8 @@ public class Eventos {
 					////// TODO Y esto te hace ganar basicamente y te saca del bucle del juego System.out.println("Vendo cocaína en la Calle Inventada numero 123"); /////////////////
 				}
 				
-				int resultadoReal = random.nextInt(0,2);
+				int resultadoReal = random.nextInt(0,2);/*Ttambién puede ganar si su número es exactamente 0 o 1, porque 
+				nextInt(0, 2) genera 0 o 1).*/
 				if(decisionDouble == resultadoReal)
 				{
 					acierto = true;
