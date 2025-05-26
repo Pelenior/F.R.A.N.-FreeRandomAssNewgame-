@@ -547,7 +547,7 @@ public class Eventos {
 				decision = sc.nextLine();
 			}
 			
-			if(decision.equalsIgnoreCase("1") || decision.equalsIgnoreCase("Si"))
+			if (decision.equalsIgnoreCase("1") || decision.equalsIgnoreCase("Si"))
 			{
 				System.out.println("De repente, emerge un espiritu azul brillante de la urna");
 				System.out.println("\"Soy el magnifico e inigualabe " + Color.GREEN_BOLD_BRIGHT +  "Gonzalo " + nombresGonzalo[numerin] + Color.RESET + ". Por despertarme te concedo 1 deseo\"-explicó agradecido");
@@ -558,7 +558,13 @@ public class Eventos {
 				System.out.println("Tras la explicacion te das cuenta de una cosa, con este deseo puedes ¡revivir a Niebla! ");
 				System.out.println("Aunque tal vez podrias desear mas poder para completar tu venganza");
 				System.out.println("");
+				
+				if(prota.getNombre().equals("Steve")) {
 				System.out.println("  1.Revivir a Niebla | 2.Mas poder | 3.Dinero ilimitado | 4.Ser invencible");
+				}
+				else {
+					System.out.println("  1.Mas poder | 2.Dinero ilimitado | 3.Ser invencible");
+				}
 				System.out.println("");
 				
 				decision = sc.nextLine();
@@ -568,10 +574,17 @@ public class Eventos {
 					System.out.println("Decidido exclamas " + "\"" + decision + "\"");
 					System.out.println("\"No he entendido tu deseo, ¿Puedes repetirlo?\"");
 					System.out.println("");
+					
+					if (prota.getNombre().equals("Steve")) {
 					System.out.println(" 1.Revivir a Niebla | 2.Mas poder | 3.Dinero ilimitado | 4.Ser invencible");
+					}
+					else {
+						System.out.println("  1.Mas poder | 2.Dinero ilimitado | 3.Ser invencible");
+					}
 					decision = sc.nextLine();
 				}
 				
+				if (prota.getNombre().equals("Steve")) {
 				switch(decision) {
 				
 				case "1": {
@@ -652,6 +665,58 @@ public class Eventos {
 					break;
 				}
 			}
+				} else {
+					switch(decision) {
+				case "1": { 
+					
+					randomGenio = random.nextInt(0,11); // niebla siempre es verdadero, y las otras 3 opciones son random
+					
+					numerin = random.nextInt(nombresGonzalo.length);
+					
+					if(randomGenio >= 6) {
+						System.out.println("\"¡Felicidades! Has obtenido 3 puntos de fuerza. ¡Sigue así, tu progreso es impresionante!\"-dijo entusiasmado");
+						System.out.println("Gracias a " + Color.GREEN_BOLD_BRIGHT + "Gonzalo " + nombresGonzalo[numerin] + Color.RESET +  "ahora te sientes mas poderoso aunque tambien la gran pena de no poder ver mas a Niebla");
+						
+						finalArray[0][0] = "Fuerza";
+						finalArray[0][1] = "3";
+						
+					} else System.out.println("\"Lamentablemente, no puedo conceder ese deseo en este momento. Sin embargo, siempre estaré aquí para ayudarte en lo que necesites. ¡Sigue adelante!\"-dijo alegre");
+					break;
+				}
+				
+				case "2": { 
+					
+					randomGenio = random.nextInt(0,11);
+					
+					numerin = random.nextInt(nombresGonzalo.length);
+					
+					if(randomGenio >= 7) {
+						finalArray[0][0] = "Monedas";
+						finalArray[0][1] = "30";
+						System.out.println("\"¡Enhorabuena! Has obtenido " + Juego.monedas(prota.getNombre(), 30) + Color.YELLOW + (prota.getNombre().equals("Chicken Little") ? " semillas" : " esmeraldas") + Color.RESET + ". ¡Tu tesoro crece y tu aventura continúa!\"-dijo entusiasmado");
+						System.out.println("Gracias a " + Color.GREEN_BOLD_BRIGHT + "Gonzalo " + nombresGonzalo[numerin] + Color.RESET +  "ahora te sientes mas rico aunque tambien la gran pena de no poder ver mas a Niebla");
+						
+					} else System.out.println("\"Lamentablemente, no puedo conceder ese deseo en este momento. Sin embargo, siempre estaré aquí para ayudarte en lo que necesites. ¡Sigue adelante!\"-dijo alegre");
+					break;
+				}
+				
+				case "3": { 
+					
+					randomGenio = random.nextInt(0,11);
+					
+					numerin = random.nextInt(nombresGonzalo.length);
+					
+					if(randomGenio >= 8) {
+						finalArray[0][0] = "VidaMax";
+						finalArray[0][1] = "10";
+						System.out.println("\"¡Excelente! Has obtenido 10 puntos de vida máxima. ¡Tu fuerza y resistencia aumentan! ¡Sigue avanzando con más energía!\"-dijo entusiasmado");
+						System.out.println("Gracias a " + Color.GREEN_BOLD_BRIGHT + "Gonzalo " + nombresGonzalo[numerin] + Color.RESET +  "ahora te sientes mas resisitente, aunque tambien la gran pena de no poder ver mas a Niebla");
+						
+					} else System.out.println("\"Lamentablemente, no puedo conceder ese deseo en este momento. Sin embargo, siempre estaré aquí para ayudarte en lo que necesites. ¡Sigue adelante!\"-dijo alegre");
+					break;
+				}
+					
+				}
 				
 				numerin = random.nextInt(nombresGonzalo.length);
 				
@@ -663,6 +728,7 @@ public class Eventos {
 				
 				System.out.println(Color.GREEN_BOLD_BRIGHT + "Gonzalo " + nombresGonzalo[numerin] + Color.RESET + " se esfuma ante ti");
 				
+			}
 			}
 			
 			else
