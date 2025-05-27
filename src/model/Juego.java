@@ -9,8 +9,8 @@ public class Juego {
 	//Atributos
 	private static Juego instanciaJuego;//singelton, garantiza que tan solo exista un (objeto) juego 
 	private static Protagonista prota;//protagonista elegido (vacío)
-	private Combate combate;//clase combate, recibre nombre de combate
-	private Eventos evento;//clase eventos,  recibre nombre de evento
+	private Combate combate;//clase combate, que recibe el nombre de combate
+	private Eventos evento;//clase eventos, que recibe el nombre de evento
 	
 	private Juego() {//permite que se pueda usar en esta clase
 		combate = new Combate();
@@ -220,7 +220,14 @@ public class Juego {
 				
 				switch(seleccionStr) {//ir al camino (evento) elegido, que puede ser o
 					case Color.RED_BRIGHT + "Combate" + Color.RESET: 
-						//Combate le pasa un prota y las informacion disponible para el combate
+						if(combate.combate(prota, "Normal"))
+						{
+							
+						}
+						else
+						{
+							
+						}
 						
 					break;
 					case "Evento Aleatorio" + Color.RESET, Color.YELLOW + "Mercader" + Color.RESET:
