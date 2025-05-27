@@ -25,7 +25,7 @@ public class Juego {
     }
 	
 	//inicio juego
-	public static void contrasena(Scanner sc) {
+	public void contrasena(Scanner sc) {
 		String password = "jugones";
 		String contrasena = "";
 		
@@ -81,7 +81,7 @@ public class Juego {
 					{
 					case "1":
 						{
-							prota = new Protagonista("Steve", 20, 0, 1, 3, 2);//protagonista elegido- CAMBIARLO CUANDO HAYA DB
+							prota = new Protagonista("Steve", 20, 0, 1, 3, 2, 0);//protagonista elegido- CAMBIARLO CUANDO HAYA DB
 							//ESTO METERLO DENTRO DE UNA DB
 //							nombrePersonaje = "Steve";
 //							vidaMaxPersonaje = 20;
@@ -97,7 +97,7 @@ public class Juego {
 						}
 					case "2":
 						{
-							prota = new Protagonista("Alex", 30, 0, 0, 1, 3);//protagonista elegido- CAMBIARLO CUANDO HAYA DB
+							prota = new Protagonista("Alex", 30, 0, 0, 1, 3, 0);//protagonista elegido- CAMBIARLO CUANDO HAYA DB
 							//ESTO METERLO DENTRO DE UNA DB
 //							nombrePersonaje =  "Alex";
 //							vidaMaxPersonaje = 30;
@@ -112,7 +112,7 @@ public class Juego {
 						}
 					case "3":
 						{
-							prota = new Protagonista("Chicken Little", 15, 0, 0, 3.5, 4);//protagonista elegido- CAMBIARLO CUANDO HAYA DB			
+							prota = new Protagonista("Chicken Little", 15, 0, 0, 3.5, 4, 0);//protagonista elegido- CAMBIARLO CUANDO HAYA DB			
 							//ESTO METERLO DENTRO DE UNA DB
 //							nombrePersonaje = "Chicken Little";
 //							vidaMaxPersonaje = 15;
