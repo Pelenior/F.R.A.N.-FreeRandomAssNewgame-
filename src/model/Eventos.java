@@ -59,10 +59,10 @@ public class Eventos {
 		// Métodos individuales para cada evento
 		private static void eventoBruja(Protagonista prota, Random random, Scanner sc) {
 			String decision;
-			String efecto = "";
-			String cantidad = "";
-			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
-			
+//			String efecto = "";
+//			String cantidad = "";
+//			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
+//			
 			String[] pocionesBruja = {Color.GREEN + "Vida" + Color.RESET, Color.PURPLE + "Suerte" + Color.RESET, Color.YELLOW + 
 					"Ataque" + Color.RESET, Color.RED_BOLD + "Daño" + Color.RESET, Color.BLUE_BOLD + "Lentitud" + Color.RESET, 
 					Color.BLACK_BOLD + "Debilidad" + Color.RESET};
@@ -106,44 +106,50 @@ public class Eventos {
 				
 					case 0: {
 						System.out.println("Te sientes refortalecido, recuperas 5 de vida");
-						efecto = "Vida";
-						cantidad = "5";
+//						efecto = "Vida";
+//						cantidad = "5";
+						prota.setVida(prota.getVida()+5);
 					break;
 					}
 					case 1: {
 						System.out.println("Te sientes muy afortunado, ganas 3 de suerte");
-						efecto = "Suerte";
-						cantidad = "3";
+//						efecto = "Suerte";
+//						cantidad = "3";
+						prota.setSuerte(prota.getSuerte()+3);
 					break;
 					}
 					case 2: {
 						System.out.println("Te sientes fortalecido, ganas 3 de ataque");
-						efecto = "Fuerza";
-						cantidad = "3";
+//						efecto = "Fuerza";
+//						cantidad = "3";
+						prota.setFuerza(prota.getFuerza()+3);
 					break;
 					}
 					case 3: {
 						System.out.println("Sientes un pinchazo repentino, pierdes 3 de vida máxima");
-						efecto = "VidaMax";
-						cantidad = "-3";
+//						efecto = "VidaMax";
+//						cantidad = "-3";
+						prota.setVidaMax(prota.getVidaMax()-3);
 					break;
 					}
 					case 4: {
 						System.out.println("Te sientes muy pesado, pierdes 3 de velocidad");
-						efecto = "Velocidad";
-						cantidad = "-3";
+//						efecto = "Velocidad";
+//						cantidad = "-3";
+						prota.setVelocidad(prota.getVelocidad()-3);
 					break;
 					}
 					case 5: {
 						System.out.println("Te sientes debilitado, pierdes 2 de ataque");
-						efecto = "Fuerza";
-						cantidad = "-2";
+//						efecto = "Fuerza";
+//						cantidad = "-2";
+						prota.setFuerza(prota.getFuerza()-2);
 					break;
 					}
 				}
 				
-				finalArray[0][0] = efecto;
-				finalArray[0][1] = cantidad;
+//				finalArray[0][0] = efecto;
+//				finalArray[0][1] = cantidad;
 				
 				System.out.println("");
 				System.out.println("La bruja se rie al verte tomar la pocion y se marcha lentamente");
@@ -210,9 +216,10 @@ public class Eventos {
 				
 				if(suerteEvento < 8) 
 				{
-					finalArray[0][0] = "Monedas";
-					totalMonedasConseguidas = random.nextInt(1, 15);
-					finalArray[0][1] = Integer.toString(totalMonedasConseguidas);//de int a String
+					prota.setMonedas(random.nextInt(1,15));
+//					finalArray[0][0] = "Monedas";
+//					totalMonedasConseguidas = random.nextInt(1, 15);
+//					finalArray[0][1] = Integer.toString(totalMonedasConseguidas);//de int a String
 				}
 				else
 				{
