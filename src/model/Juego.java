@@ -7,17 +7,17 @@ import java.util.Scanner;
 
 public class Juego {
 	//Atributos
-	private static Juego instanciaJuego;//singelton, garantiza que tan solo exista un (objeto) juego 
-	private static Protagonista prota;//protagonista elegido (vacío)
+	private Juego instanciaJuego;//singelton, garantiza que tan solo exista un (objeto) juego 
+	private Protagonista prota;//protagonista elegido (vacío)
 	private Combate combate;//clase combate, que recibe el nombre de combate
 	private Eventos evento;//clase eventos, que recibe el nombre de evento
 	
-	private Juego() {//permite que se pueda usar en esta clase
+	public Juego() {//permite que se pueda usar en esta clase
 		combate = new Combate();
 		evento = new Eventos();
 	}
 	
-	public static Juego getInstanciaJuego() {
+	public Juego getInstanciaJuego() {
         if (instanciaJuego == null) {//si no se ha creado el juego, se crea
         	instanciaJuego = new Juego();
         }
@@ -39,7 +39,7 @@ public class Juego {
 		System.out.println(Color.GREEN_BRIGHT + "CONTRASEÑA ACEPTADA \n" + Color.RESET);
 	}
 	
-	public static void elegirPersonaje() {
+	public void elegirPersonaje() {
 		
 				Scanner sc = new Scanner(System.in);
 				Random random = new Random();
@@ -222,11 +222,11 @@ public class Juego {
 					case Color.RED_BRIGHT + "Combate" + Color.RESET: 
 						if(combate.combate(prota, "Normal"))
 						{
-							
+							//si ganas el combate
 						}
 						else
 						{
-							
+							//si pierdes el combate
 						}
 						
 					break;
