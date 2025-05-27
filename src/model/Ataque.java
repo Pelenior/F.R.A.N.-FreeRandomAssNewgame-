@@ -14,10 +14,10 @@ public class Ataque {
 		return nombre;
 	}
 	
-	public double atacar(Personaje personaje, Ataque ataque)
+	public double atacar()
 	{
 		double danoFinal = 0;
-		switch(ataque.getNombre())
+		switch(nombre)
 		{
 			case "Por si Espada":
 			{
