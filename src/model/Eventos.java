@@ -212,20 +212,22 @@ public class Eventos {
 				System.out.println("Abres el cofre...");
 				
 				suerteEvento = random.nextInt(1, 11);
-				suerteEvento += suertePersonaje / 2;
+				suerteEvento += prota.getSuerte() / 2;
 				
 				if(suerteEvento < 8) 
 				{
-					prota.setMonedas(random.nextInt(1,15));
+					totalMonedasConseguidas = random.nextInt(1, 15);
+					prota.setMonedas(totalMonedasConseguidas);
+//					prota.setMonedas(random.nextInt(1,15));
 //					finalArray[0][0] = "Monedas";
-//					totalMonedasConseguidas = random.nextInt(1, 15);
 //					finalArray[0][1] = Integer.toString(totalMonedasConseguidas);//de int a String
 				}
 				else
 				{
-					finalArray[0][0] = "Monedas";
 					totalMonedasConseguidas = random.nextInt(20, 35);
-					finalArray[0][1] = Integer.toString(totalMonedasConseguidas);
+					prota.setMonedas(totalMonedasConseguidas);
+//					finalArray[0][0] = "Monedas";
+//					finalArray[0][1] = Integer.toString(totalMonedasConseguidas);
 				}
 				
 				if(totalMonedasConseguidas > 25)
