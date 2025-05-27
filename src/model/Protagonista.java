@@ -2,8 +2,9 @@ package model;
 
 public class Protagonista extends Personaje {
 	
-	int suerte=0;
-	int monedas = 0;
+	private int suerte=0;
+	private int monedas = 0;
+	private boolean badOmen=false;
 	//constructor
 	public Protagonista(String nombre, double vidaMax, double defensa, double fuerza, double velocidad, int idAscii, int suerte) {
 		this.nombre = nombre;
@@ -32,6 +33,14 @@ public class Protagonista extends Personaje {
 
 	public void setSuerte(int suerte) {
 		this.suerte = suerte;
+	}
+
+	public boolean getBadOmen() {
+		return badOmen;
+	}
+
+	public void setBadOmen(boolean badOmen) {
+		this.badOmen = badOmen;
 	}
 	
 	
