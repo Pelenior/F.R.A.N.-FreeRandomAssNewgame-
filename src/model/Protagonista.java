@@ -15,7 +15,7 @@ public class Protagonista extends Personaje {
 		this.idAscii = idAscii;
 		this.suerte = suerte;
 		
-		rellenarAtaques(this);
+		ataqueController.rellenarAtaques(this);
 	}
 	
 	public int getMonedas()
