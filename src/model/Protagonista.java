@@ -2,9 +2,10 @@ package model;
 
 public class Protagonista extends Personaje {
 	
+	int suerte=0;
 	int monedas = 0;
 	//constructor
-	public Protagonista(String nombre, double vidaMax, double defensa, double fuerza, double velocidad, int idAscii) {
+	public Protagonista(String nombre, double vidaMax, double defensa, double fuerza, double velocidad, int idAscii, int suerte) {
 		this.nombre = nombre;
 		this.vidaMax = vidaMax;
 		this.vida = vidaMax;
@@ -12,6 +13,7 @@ public class Protagonista extends Personaje {
 		this.fuerza = fuerza;
 		this.velocidad = velocidad;
 		this.idAscii = idAscii;
+		this.suerte = suerte;
 		
 		rellenarAtaques(this);
 	}
@@ -20,6 +22,18 @@ public class Protagonista extends Personaje {
 	{
 		return monedas;
 	}
+	public void setMonedas(int monedas) {
+		this.monedas = monedas;
+	}
+
+	public int getSuerte() {
+		return suerte;
+	}
+
+	public void setSuerte(int suerte) {
+		this.suerte = suerte;
+	}
+	
 	
 
 }
