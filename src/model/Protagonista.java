@@ -4,7 +4,10 @@ public class Protagonista extends Personaje {
 	
 	private int suerte=0;
 	private int monedas = 0;
-	private boolean badOmen=false;
+	private boolean badOmen = false;
+	private boolean haHuido = false;
+	private int karma = 0;
+	
 	//constructor
 	public Protagonista(String nombre, double vidaMax, double defensa, double fuerza, double velocidad, int idAscii, int suerte) {
 		this.nombre = nombre;
@@ -41,6 +44,26 @@ public class Protagonista extends Personaje {
 
 	public void setBadOmen(boolean badOmen) {
 		this.badOmen = badOmen;
+	}
+	
+	public boolean getHaHuido()
+	{
+		return haHuido;
+	}
+	
+	public void setHaHuido(boolean haHuido)
+	{
+		this.haHuido = haHuido;
+	}
+	
+	public int getKarma()
+	{
+		return karma;
+	}
+	
+	public void setKarma(int karma)
+	{
+		this.karma = karma;
 	}
 	
 	

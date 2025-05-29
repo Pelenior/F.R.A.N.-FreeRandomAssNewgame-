@@ -12,9 +12,14 @@ public class Juego {
 	private Combate combate;//clase combate, que recibe el nombre de combate
 	private Eventos evento;//clase eventos, que recibe el nombre de evento
 	
+	private Random random;
+	private Scanner sc;
+	
 	public Juego() {//permite que se pueda usar en esta clase
 		combate = new Combate();
 		evento = new Eventos();
+		sc = new Scanner(System.in);
+		random = new Random();
 	}
 	
 	public static Juego getInstanciaJuego() {
@@ -26,8 +31,6 @@ public class Juego {
 	
 	public void comenzar()
 	{
-		Scanner sc = new Scanner(System.in);
-		Random random = new Random();
 		contrasena(sc);
 		elegirPersonaje(sc, random);
 		
@@ -228,7 +231,7 @@ public class Juego {
 				
 				switch(seleccionStr) {//ir al camino (evento) elegido, que puede ser o
 					case Color.RED_BRIGHT + "Combate" + Color.RESET: 
-						if(combate.combate(prota, "Normal"))
+						if(combate.combate(sc, random, prota, "Normal"))
 						{
 							//si ganas el combate
 						}
