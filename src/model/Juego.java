@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Juego {
 	//Atributos
-	private Juego instanciaJuego;//singelton, garantiza que tan solo exista un (objeto) juego 
+	private static Juego instanciaJuego;//singelton, garantiza que tan solo exista un (objeto) juego 
 	private Protagonista prota;//protagonista elegido (vacío)
 	private Combate combate;//clase combate, que recibe el nombre de combate
 	private Eventos evento;//clase eventos, que recibe el nombre de evento
@@ -17,17 +17,35 @@ public class Juego {
 		evento = new Eventos();
 	}
 	
-	public Juego getInstanciaJuego() {
+	public static Juego getInstanciaJuego() {
         if (instanciaJuego == null) {//si no se ha creado el juego, se crea
         	instanciaJuego = new Juego();
         }
         return instanciaJuego;//si ya está creado
     }
 	
+	public void comenzar()
+	{
+		Scanner sc = new Scanner(System.in);
+		Random random = new Random();
+		contrasena(sc);
+		elegirPersonaje(sc, random);
+		
+		//bucle del juego
+		while(true)
+		{
+			seleccionCaminos(random, sc);
+		}
+	}
+	
 	//inicio juego
 	public void contrasena(Scanner sc) {
 		String password = "jugones";
 		String contrasena = "";
+		
+		ASCII.printAscii(0);
+		
+		System.out.println("Un juego creado por: Pelayo Santos, Aitana Herranz y Diego Baudot");
 		
 		// mientras la contraseña no sea la correcta, seguirá preguntando
 		do
@@ -39,17 +57,7 @@ public class Juego {
 		System.out.println(Color.GREEN_BRIGHT + "CONTRASEÑA ACEPTADA \n" + Color.RESET);
 	}
 	
-	public void elegirPersonaje() {
-		
-				Scanner sc = new Scanner(System.in);
-				Random random = new Random();
-				
-				//Indica el ascii a imprimir
-				ASCII.printAscii(0);
-				
-				System.out.println("Un juego creado por: Pelayo Santos, Aitana Herranz y Diego Baudot");
-				
-				contrasena(sc);
+	private void elegirPersonaje(Scanner sc, Random random) {
 				
 				System.out.println(Color.WHITE_BOLD_BRIGHT + "¡BIENVENIDO AL MUNDO DE MINECRAFT!\n");	
 				System.out.println("¡PARA EMPEZAR ELIJE EL PERSONAJE QUE MAS TE GUSTE!\n");
@@ -154,7 +162,7 @@ public class Juego {
 		
 	}
 
-	public void seleccionCaminos(Random random, Scanner scanner, String nombrePersonaje) {
+	public void seleccionCaminos(Random random, Scanner scanner) {
 		
 		String[] listaCaminos = {Color.RED_BRIGHT + "Combate" + Color.RESET, Color.CYAN + "Evento Aleatorio" + Color.RESET, Color.YELLOW + "Mercader" + Color.RESET};
 		
@@ -174,7 +182,7 @@ public class Juego {
 				
 				while(numeroCaminos > 0)
 				{
-					eventoRandom = random.nextInt(listaCaminos.length);//aleatoriamente se elige un camino de la lista
+					eventoRandom = random.nextInt(0, listaCaminos.length);//aleatoriamente se elige un camino de la lista
 					// Lista con String del nombre del evento
 					caminosDisponibles.add(listaCaminos[eventoRandom]);//lista de caminos
 					numeroCaminos--;
@@ -190,7 +198,7 @@ public class Juego {
 			
 				while(!seleccionCorrecta)
 				{
-					System.out.println("A dónde irá " + nombrePersonaje + " ahora...");
+					System.out.println("A dónde irá " + prota.getNombre() + " ahora...");
 					
 					// Imprimimos las opciones
 					for(int i = 0; i < caminosDisponibles.size(); i++)
@@ -209,7 +217,7 @@ public class Juego {
 					}
 					if(!seleccionCorrecta)
 					{
-						System.out.println(nombrePersonaje + " no parece muy decidido...");
+						System.out.println(prota.getNombre() + " no parece muy decidido...");
 						System.out.println("(Escoge con números)\r\n");
 					}
 				}
