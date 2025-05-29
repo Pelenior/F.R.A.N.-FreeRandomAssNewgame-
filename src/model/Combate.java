@@ -250,6 +250,7 @@ public class Combate {
 					prota.setKarma(prota.getKarma() / 2);
 					System.out.println(prota.getNombre() + " ahora tiene " + Color.RED_BRIGHT +  prota.getKarma() + Color.CYAN + " karma" + Color.RESET);
 				}
+				imprimirStats(prota, enemigo);
 			}
 		}
 		
