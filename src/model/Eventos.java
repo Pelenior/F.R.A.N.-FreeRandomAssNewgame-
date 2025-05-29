@@ -1272,7 +1272,6 @@ public class Eventos {
 					decisionDouble = sc.nextDouble();        
 		        } 
 				else {
-		        	// lee el resto de la línea como String
 		            String decisionString = sc.nextLine(); 
 		            System.out.println("Ser de inteligencia deficiente, tu respuesta " + decisionString + " no es suficiente.");
 		        }
