@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 abstract class Personaje {
 	//Atributos
-	String nombre;
-	double vidaMax;
-	double vida;
-	double defensa;
-	double fuerza;
-	double velocidad;
-	int idAscii;
+	protected String nombre;
+	protected double vidaMax;
+	protected double vida;
+	protected double defensa;
+	protected double fuerza;
+	protected double velocidad;
+	protected int idAscii;
 	AtaqueController ataqueController = new AtaqueController();
 	
 	//getters y setters

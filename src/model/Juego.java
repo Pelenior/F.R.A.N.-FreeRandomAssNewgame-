@@ -231,7 +231,7 @@ public class Juego {
 				
 				switch(seleccionStr) {//ir al camino (evento) elegido, que puede ser o
 					case Color.RED_BRIGHT + "Combate" + Color.RESET: 
-						if(combate.combate(sc, random, prota, "Normal"))
+						if(combate.combate(sc, random, prota, "Normal", random.nextBoolean()))
 						{
 							//si ganas el combate
 						}

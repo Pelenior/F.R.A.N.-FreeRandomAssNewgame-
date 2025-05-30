@@ -180,9 +180,12 @@ public class Combate {
 	}
 	
 	//devuelve false si el protagonista pierde
-	public boolean combate(Scanner sc, Random random, Protagonista prota, String tipoCombate)
+	public boolean combate(Scanner sc, Random random, Protagonista prota, String tipoCombate, boolean enemigoEmpiezaPrimero)
 	{
 		//Variables que permanecen entre encuentros con enemigos
+		DecimalFormat dfOneDecimal = new DecimalFormat("0.0");
+		DecimalFormat dfZeroDecimal = new DecimalFormat("0");
+		
 		int numeroEnemigosTotal = 0;
 		int numeroEnemigos = 0;
 		int turnos = 0;
@@ -251,6 +254,26 @@ public class Combate {
 					System.out.println(prota.getNombre() + " ahora tiene " + Color.RED_BRIGHT +  prota.getKarma() + Color.CYAN + " karma" + Color.RESET);
 				}
 				imprimirStats(prota, enemigo);
+				
+				System.out.println(prota.getNombre() + " tiene " + (prota.getVida() > prota.getVidaMax() / 2 ? Color.GREEN_BRIGHT : (prota.getVida() > prota.getVidaMax() / 4 ? Color.YELLOW : Color.RED_BRIGHT)) + dfOneDecimal.format(prota.getVida()) + Color.RESET + "/" + Color.GREEN_BRIGHT + dfZeroDecimal.format(prota.getVidaMax()) + Color.RESET + " puntos de vida\r\n");
+				
+				if(enemigo.getNombre().equals("Sans") || enemigo.getNombre().equals("Steve"))
+				{
+					System.out.println(enemigo.getNombre() + " tiene " + (enemigo.getVida() > enemigo.getVidaMax() / 2 ? Color.GREEN_BRIGHT : (enemigo.getVida() > enemigo.getVidaMax() / 4 ? Color.YELLOW : Color.RED_BRIGHT)) + dfOneDecimal.format(enemigo.getVida()) + Color.RESET + "/" + Color.GREEN_BRIGHT + dfZeroDecimal.format(enemigo.getVidaMax()) + Color.RESET + " puntos de vida");
+				}
+				else
+				{
+					System.out.println("El " + enemigo.getNombre() + " enemigo tiene " + (enemigo.getVida() > enemigo.getVidaMax() / 2 ? Color.GREEN_BRIGHT : (enemigo.getVida() > enemigo.getVidaMax() / 4 ? Color.YELLOW : Color.RED_BRIGHT)) + dfOneDecimal.format(enemigo.getVida()) + Color.RESET + "/" + Color.GREEN_BRIGHT + dfZeroDecimal.format(enemigo.getVidaMax()) + Color.RESET + " puntos de vida");
+				}
+				
+				if(enemigoEmpiezaPrimero)
+				{
+					System.out.println(Color.RED_BRIGHT + "El " + Color.RESET + enemigo.getNombre() + Color.RED_BRIGHT + " da el primer paso" + Color.RESET + "!");
+				}
+				if(!enemigoEmpiezaPrimero)
+				{
+					
+				}
 			}
 		}
 		
