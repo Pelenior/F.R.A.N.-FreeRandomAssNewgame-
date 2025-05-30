@@ -93,7 +93,7 @@ public class AtaqueController {
 			}
 			case "Dragón":
 			{
-				listaAtaques.add(new Ataque("Mega mordisco"));
+				listaAtaques.add(new Ataque("Mordisco"));
 				listaAtaques.add(new Ataque("Aliento de Dragón"));
 				listaAtaques.add(new Ataque("Enderman"));
 				break;
@@ -115,7 +115,7 @@ public class AtaqueController {
 		}
 	}
 	
-	public void seleccionarAtaqueProta(Protagonista prota)
+	public void seleccionarAtaqueProta(Protagonista prota, Personaje target)
 	{
 		Scanner sc = new Scanner(System.in);
 		String seleccion = "";
@@ -137,10 +137,10 @@ public class AtaqueController {
 		}
 		while(seleccion.equals(""));
 		
-		listaAtaques.get(Integer.valueOf(seleccion)).atacar();
+		listaAtaques.get(Integer.valueOf(seleccion)).atacar(prota, target);
 	}
 	
-	public void seleccionarAtaqueEnemigo(Enemigo enemigo)
+	public void seleccionarAtaqueEnemigo(Enemigo enemigo, Personaje target)
 	{
 		Random rd = new Random();
 		
@@ -148,7 +148,7 @@ public class AtaqueController {
 		
 		ataqueRandom = rd.nextInt(0, listaAtaques.size());
 		
-		listaAtaques.get(ataqueRandom).atacar();
+		listaAtaques.get(ataqueRandom).atacar(enemigo, target);
 		
 	}
 }

@@ -76,5 +76,12 @@ public class Protagonista extends Personaje {
 	public void setListaObjetos(ArrayList<Objeto> listaObjetos) {
 		this.listaObjetos = listaObjetos;
 	}
+
+	@Override
+	public void atacar(Personaje target)
+	{
+		ataqueController.seleccionarAtaqueProta(this, target);
+		
+	}
 	
 }

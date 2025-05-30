@@ -16,9 +16,10 @@ public class Ataque {
 		return nombre;
 	}
 	
-	public double atacar()
+	public void atacar(Personaje user, Personaje target)
 	{
 		double danoFinal = 0;
+		danoFinal += user.getFuerza();
 		switch(nombre)
 		{
 		
@@ -355,7 +356,6 @@ public class Ataque {
 		}
 		}
 		//etc
-		return danoFinal;
 	}
 	
 }

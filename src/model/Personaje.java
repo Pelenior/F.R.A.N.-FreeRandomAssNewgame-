@@ -58,5 +58,7 @@ abstract class Personaje {
 		this.idAscii = idAscii;
 	}
 	
+	public abstract void atacar(Personaje target);
+	
 	
 }

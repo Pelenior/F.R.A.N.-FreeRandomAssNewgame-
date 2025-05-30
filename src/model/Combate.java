@@ -272,7 +272,18 @@ public class Combate {
 				}
 				if(!enemigoEmpiezaPrimero)
 				{
-					
+					System.out.println("==============================================================================================");
+					//ataque del protagonista
+					prota.atacar(enemigo);
+				}
+				if(enemigoEmpiezaPrimero)
+					enemigoEmpiezaPrimero = false;
+				
+				//ataque del enemigo
+				System.out.println("==============================================================================================");
+				if(enemigo.getVida() > 0 && prota.getVida() > 0 && !prota.getHaHuido())
+				{
+					enemigo.atacar(prota);
 				}
 			}
 		}

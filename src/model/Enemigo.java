@@ -14,4 +14,10 @@ public class Enemigo extends Personaje {
 		ataqueController.rellenarAtaques(this);
 	}
 	
+	@Override
+	public void atacar(Personaje target)
+	{
+		ataqueController.seleccionarAtaqueEnemigo(this, target);
+	}
+	
 }
