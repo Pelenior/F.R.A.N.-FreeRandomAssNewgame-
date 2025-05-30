@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Protagonista extends Personaje {
 	
 	private int suerte=0;
@@ -7,6 +9,7 @@ public class Protagonista extends Personaje {
 	private boolean badOmen = false;
 	private boolean haHuido = false;
 	private int karma = 0;
+	private ArrayList<Objeto> listaObjetos;
 	
 	//constructor
 	public Protagonista(String nombre, double vidaMax, double defensa, double fuerza, double velocidad, int idAscii, int suerte) {
@@ -65,7 +68,13 @@ public class Protagonista extends Personaje {
 	{
 		this.karma = karma;
 	}
-	
-	
 
+	public ArrayList<Objeto> getListaObjetos() {
+		return listaObjetos;
+	}
+
+	public void setListaObjetos(ArrayList<Objeto> listaObjetos) {
+		this.listaObjetos = listaObjetos;
+	}
+	
 }
