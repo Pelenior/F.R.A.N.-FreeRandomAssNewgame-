@@ -1,15 +1,17 @@
 package model;
 
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Eventos {
 	
-	private static String [] evento = {"Bruja", "Maldición", "Trampa", "Juan", "Perro", "Lamborgini", "Drogas", "Puzzle"};
+	private static String [] evento = {"Bruja", "Maldición", "Trampa", "Juan", "Perro", "Lamborgini", "Drogas", "Objetos tienda",
+			"Mercader", "Puzzle"};
 	
 	//función selecionar eventos
 	//poner metodo público, que escoje un evento aleatorio y llama la función de ese evento
-	public static void elegirEvento (Protagonista prota) {
+	public void elegirEvento (Protagonista prota) {
 		Random random = new Random();
 		
 		int eventoAleatorio = random.nextInt(0, evento.length);
@@ -45,6 +47,14 @@ public class Eventos {
 			eventoDrogas(prota, null);
 			break;
 			
+		case "Objetos tienda":
+			eventoDescripcionObjetosTienda();
+			break;
+			
+		case "Mercader":
+			eventoMercader(prota, null, random, null);
+			break;
+			
 		case "Puzzle":
 			eventoPuzzle(null, random, null, prota);
 			break;
@@ -57,7 +67,7 @@ public class Eventos {
 	}
 		//eventos
 		// Métodos individuales para cada evento
-		private static void eventoBruja(Protagonista prota, Random random, Scanner sc) {
+		private void eventoBruja(Protagonista prota, Random random, Scanner sc) {
 			String decision;
 //			String efecto = "";
 //			String cantidad = "";
@@ -166,7 +176,7 @@ public class Eventos {
 			return;
 		}
 
-		private static void eventoMaldicion(Protagonista prota, Random random, Scanner sc) {
+		private void eventoMaldicion(Protagonista prota, Random random, Scanner sc) {
 //			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			String decision = "";
 			double suerteEvento = 0;
@@ -273,7 +283,7 @@ public class Eventos {
 			return;
 		}
 
-		private static void eventoTrampa(Protagonista prota, Random random, Scanner sc, double velocidadPersonaje, double defensaPersonaje, int numeroMonedas) {
+		private void eventoTrampa(Protagonista prota, Random random, Scanner sc, double velocidadPersonaje, double defensaPersonaje, int numeroMonedas) {
 //			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			
 			boolean trampa = random.nextBoolean();
@@ -372,7 +382,7 @@ public class Eventos {
 			return;
 		}
 
-		private static void eventoJuan(Protagonista prota, Random random, Scanner sc) {
+		private void eventoJuan(Protagonista prota, Random random, Scanner sc) {
 			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			
 			String decision;
@@ -524,7 +534,7 @@ public class Eventos {
 			return;
 		}
 
-		private static void eventoPerro(Protagonista prota, Random random, Scanner sc) {
+		private void eventoPerro(Protagonista prota, Random random, Scanner sc) {
 			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};	
 			String decision;
 			String[] nombresGonzalo = {"Puertas Torres","Pablo Tomate","Pérez Torres", "Paredes Téllez", "Pascual Toledo", "Prieto Tapia", "Ponce Trujillo",
@@ -756,7 +766,7 @@ public class Eventos {
 			return;
 		}
 
-		private static void eventoLamborgini(Protagonista prota, Random random, Scanner sc) {
+		private void eventoLamborgini(Protagonista prota, Random random, Scanner sc) {
 			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			
 			String decision;
@@ -917,7 +927,7 @@ public class Eventos {
 			return;
 		}
 
-		private static void eventoDrogas(Protagonista prota, Scanner sc) {
+		private void eventoDrogas(Protagonista prota, Scanner sc) {
 			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			
 			String decision = "";
@@ -966,7 +976,299 @@ public class Eventos {
 			return;
 		}
 
-		private static void eventoPuzzle(String[][] finalEventoArray, Random random, Scanner sc, Protagonista prota) {
+		private void eventoDescripcionObjetosTienda(){
+			System.out.println("Poción de vida = Te cura 10 puntos. Una ganga, ¿verdad? Y es barato, cómpralo, je, je.\r\n");
+
+	        System.out.println("Poción de fuerza = Cuando estés en pelea, tus golpes aumentan un 4 de daño."
+	                			+ " Solo se puede usar cada 5 encuentros. Oye, no me mires a así, ¡yo no escribí las reglas!\r\n");
+
+	        System.out.println("Kit de cuero = Aumenta tu defensa a 1. Te protege poco, ¿por qué crees que es tan barato?"
+	                			+ "Piensa que es la versión humilde de los ´kit´.\r\n");
+
+	        System.out.println("Kit de hierro = Aumenta tu defensa a 2. Te protege más que el de cuero, ¡considera comprarlo! Je, je, je\r\n");
+
+	        System.out.println("Kit de diamante = Aumenta tu defensa a 3. Es considerable y te hará ver ¡d-i-v-i-n-o!\r\n");
+
+	        System.out.println("Kit de netherita = Aumenta tu defensa a 4. Es la mejor armadura, ¡te invito a comprarla! Je, je, je\r\n");
+
+	        System.out.println("Tótem de inmortalidad = Cura el 50% de tu vida y te revive si mueres en combate. ¡Un artefacto muy útil!"
+	                			+ "No te vendría mal comprarlo, ¿Verdad\r\n");
+
+	        System.out.println("Ender Pearl = Huyes del combate. Perfecto si estás a 1 de vida, no tienes pociones para curarte, "
+	                			+ "ni tampoco el Tótem de inmortalidad, aunque te recomiendo comprar todo *giño**giño*\r\n");
+		}
+
+		private int eventoMercader(Protagonista prota, Scanner sc, Random random, List objetosTienda){
+			boolean puedeLigar = false;
+			if(prota.getFuerza()>=5)
+			{
+				puedeLigar = true;
+			}
+			boolean generoAldeano = random.nextBoolean(); // false == chico, true == chica
+			
+	        System.out.println("*Entras a la tienda.*");
+
+	        System.out.println("*suena DELTARUNE OST - Rouxls Kaard Shop Hip Shop*");
+
+	        if(generoAldeano)
+	        {
+	        	System.out.println("*Una aldeana te recibe.*\r\n");
+	        }
+	        else
+	        {
+	        	System.out.println("*Un aldeano te recibe.*\r\n");
+	        }
+	        
+	        // Mensaje de bienvenida.
+	        System.out.println("¡Bienvenido, cliente! Compra todo lo que quieras. Gasta todas tus" + (prota.equals("Chicken Little") ? " semillas " :  " esmeraldas ") + "si quieres, je, je.\r\n");
+	        
+	        // Definición de los productos disponibles en la tienda.
+	        String nombreArmadura = "";
+	        int costeArmadura = 0;
+	        
+	        // Descripción de los productos.
+	        System.out.println("¿Quieres una descripción de todos mis objetos? —Dijo " + (generoAldeano ? "la aldeana" : "el aldeano"));
+	        System.out.println("1 = Sí, 2 = No");
+	        
+	        String respuesta = sc.nextLine();
+	        if(respuesta.equals("1") || respuesta.equalsIgnoreCase("si"))
+	        {
+	        	System.out.println("Aquí tienes una descripción de todos mis objetos —Dijo " + (generoAldeano ? "la aldeana" : " el aldeano"));
+	        	eventoDescripcionObjetosTienda();
+	        }
+	        else
+	        {
+	        	System.out.println("Genial, vamos a comprar... —Dijo " + (generoAldeano ? "la aldeana" : " el aldeano"));
+	        }
+	        
+	        String opcionesTienda = ""; // Variable para almacenar la opción de compra seleccionada.
+	        int comprasRestantes = 3; // máximo de compras por tienda
+
+
+	        while (!opcionesTienda.equals("6") && comprasRestantes > 0)
+	        {
+	        	switch((int) objetosTienda.get(2))
+	            {
+	            	case 0:
+	            	{
+	            		nombreArmadura = "Armadura de Cuero";
+	            		costeArmadura = 2;
+	            		break;
+	            	}
+	            	case 1:
+	            	{
+	            		nombreArmadura = "Armadura de Hierro";
+	            		costeArmadura = 4;
+	            		break;
+	            	}
+	            	case 2:
+	            	{
+	            		nombreArmadura = "Armadura de Diamante";
+	            		costeArmadura = 8;
+	            		break;
+	            	}
+	            	case 3:
+	            	{
+	            		nombreArmadura = "Armadura de Netherite";
+	            		costeArmadura = 16;
+	            		break;
+	            	}
+	            	default:
+	            	{
+	            		nombreArmadura = prota.getNombre() + " ya posee todas las armaduras";
+	            		costeArmadura = 9999;
+	            		break;
+	            	}
+	            }
+	        	
+	        	String tiendaEsmeraldas[] = {"Poción de vida ("+ Juego.monedas(prota.getNombre(), 5) + ")", "Poción de fuerza ("+ Juego.monedas(prota.getNombre(), 7) + ")",
+	            		nombreArmadura + " (" + Juego.monedas(prota.getNombre(), costeArmadura) + ")", "Tótem de inmortalidad ("+ Juego.monedas(prota.getNombre(), 30) + ")", 
+	            		"Ender Pearl ("+ Juego.monedas(prota.getNombre(), 20) + ")"}; // Opciones y contenido
+	        	
+	        	for (int i = 0; i < tiendaEsmeraldas.length; i++)
+	    		{
+	    			System.out.println((i + 1) + " = " + tiendaEsmeraldas[i]);
+	    		}
+	        	System.out.println("6 = Salir");
+	        	
+	        	if(prota.equals("Alex") && generoAldeano)
+	        	{
+	        		System.out.println("7 = Ligar...");
+	        	}
+	        	System.out.println("");
+	        	
+	        	System.out.println("Tienes " + Color.YELLOW_BRIGHT + prota.getMonedas() + (prota.equals("Chicken Little") ? " semillas " :  " esmeraldas ") + Color.RESET +  "y puedes comprar " + comprasRestantes +" objetos más\r\n");
+	        	
+	        	opcionesTienda = sc.nextLine(); // Leer la opción seleccionada por el jugador.
+
+	            String objetoComprado = ""; // Variable que almacena el objeto comprado.
+	            int costeObjeto = 0;
+	            
+	            switch(opcionesTienda)
+	            {
+	            	case "1":
+	            	{
+	            		objetoComprado = "Pocion de vida";
+	            		costeObjeto = 5;
+	            		break;
+	            	}
+	            	case "2":
+	            	{
+	            		objetoComprado = "Pocion de fuerza";
+	            		costeObjeto = 7;
+	            		break;
+	            	}
+	            	case "3":
+	            	{
+	            		objetoComprado = "Armadura";
+	            		costeObjeto = costeArmadura;
+	            		break;
+	            	}
+	            	case "4":
+	            	{
+	            		objetoComprado = "Totem de inmortalidad";
+	            		costeObjeto = 30;
+	            		break;
+	            	}
+	            	case "5":
+	            	{
+	            		objetoComprado = "Ender pearl";
+	            		costeObjeto = 20;
+	            		break;
+	            	}
+	            	case "7":
+	            	{
+	            		if(prota.equals("Alex") && generoAldeano)
+	            		{
+	            			System.out.println(prota.getNombre() + " decide ligar con la aldeana...");
+	            			System.out.println("La aldeana parece interesada...");
+	            			if(!puedeLigar)
+	            			{
+	            				System.out.println("Pero acaba rechazando a " + prota.getNombre() + ", ya que no parece que tiene suficiente " + Color.CYAN + "fuerza" + Color.RESET + "...");
+	            			}
+	            			else
+	            			{
+	            				System.out.println("La aldeana liga con " + prota.getNombre() + " también!");
+	            				objetosTienda.set(5, true);
+	            			}
+	            		}
+	            		break;
+	            	}
+	            	default:
+	            	{
+	            		if(!opcionesTienda.equals("6"))
+	            		{
+	            			if(!(opcionesTienda.equals("7") && generoAldeano && prota.equals("Alex")))
+	            			{
+	            				System.out.println("Opción no válida. Elige una opción del 1 al 6.");
+	            			}
+	            		}
+	            	}
+	            }
+	            
+	            if(!opcionesTienda.equals("6"))
+	            {
+	            	if(prota.getMonedas() >= Juego.monedas(prota.getNombre(), costeObjeto) && comprasRestantes > 0)
+	        		{
+	        			prota.setMonedas(prota.getMonedas()-costeObjeto);
+	        			switch(objetoComprado)
+	        			{
+	        				case "Pocion de vida":
+	        				{
+	        					objetosTienda.set(0, (int) objetosTienda.get(0) + 1);
+	        					System.out.println(prota.getNombre() + " ahora tiene " + (int) objetosTienda.get(0) + " pociones de vida.");
+	        					break;
+	        				}
+	        				case "Pocion de fuerza":
+	        				{
+	        					objetosTienda.set(1, (int) objetosTienda.get(1) + 5);
+	        					System.out.println(prota.getNombre() + " ahora tiene fuerza extra durante los próximos " + (int) objetosTienda.get(1) + " turnos.");
+	        					break;
+	        				}
+	        				case "Armadura":
+	        				{
+	        					objetosTienda.set(2, (int) objetosTienda.get(2) + 1);
+	        					int numeroArmadura = (int) objetosTienda.get(2);
+	        					switch(numeroArmadura)
+	        					{
+	        						case 1:
+	        						{
+	        							System.out.println(prota.getNombre() + " ahora tiene una armadura de cuero.");
+	        							break;
+	        						}
+	        						case 2:
+	        						{
+	        							System.out.println(prota.getNombre() + " ahora tiene una armadura de hierro.");
+	        							break;
+	        						}
+	        						case 3:
+	        						{
+	        							System.out.println(prota.getNombre() + " ahora tiene una armadura de diamante.");
+	        							break;
+	        						}
+	        						case 4:
+	        						{
+	        							System.out.println(prota.getNombre() + " ahora tiene una armadura de netherite.");
+	        							break;
+	        						}
+	        						default:
+	        						{
+	        							System.out.println("Error en la selección de armadura");
+	        						}
+	        					}
+	        					break;
+	        				}
+	        				case "Totem de inmortalidad":
+	        				{
+	        					objetosTienda.set(3, (int) objetosTienda.get(3) + 1);
+	        					System.out.println(prota.getNombre() + " ahora tiene " + (int) objetosTienda.get(3) + " tótems de inmortalidad.");
+	        					break;
+	        				}
+	        				case "Ender pearl":
+	        				{
+	        					objetosTienda.set(4, (int) objetosTienda.get(4) + 1);
+	        					System.out.println(prota.getNombre() + " ahora tiene " + (int) objetosTienda.get(4) + " ender pearls.");
+	        					break;
+	        				}
+	        			}
+	        			if(opcionesTienda.equals("1") || opcionesTienda.equals("2") ||opcionesTienda.equals("3") ||opcionesTienda.equals("4") ||opcionesTienda.equals("5"))
+	        			{
+	        				System.out.println("Gracias por su compra!\r\n");
+	        				comprasRestantes--;
+	        			}
+	        		}
+	        		else
+	        		{
+	        			if(comprasRestantes <= 0)
+	        			{
+	        				System.out.println("Ya has comprado todas mis pertenencias! —Le dijo " + (generoAldeano ? "la aldeana" : " el aldeano") + " a " + prota.getNombre());
+	        			}
+	        			else
+	        			{
+	        				System.out.println("No tienes suficiente dinero, ponte a chambear —Le dijo furiosamente " + (generoAldeano ? "la aldeana" : "el aldeano") + " a " + prota.getNombre());
+	        			}
+	        		}
+	            }
+	        }
+	        if(comprasRestantes == 0) {
+	        	System.out.println("\"Has completado tu cupo de compras diario, vuelve otro dia por mas\"-dijo amablemante " + (generoAldeano ? "la aldeana" : "el aldeano"));
+	        	
+	        	}
+	        if((boolean) objetosTienda.get(5))
+	        {
+	        	System.out.println("Espera un momento! -Dice la aldeana");
+	        	System.out.println(prota.getNombre() + " se da la vuelta...");
+	        }
+	        else
+	        {
+	        	System.out.println("Hasta pronto!\r\n");
+	        	System.out.println("Con esto te marchas con ganas de volver para poder probar los otros objetos de la tienda");
+	        }
+			
+			return prota.getMonedas();
+		}
+		
+		private void eventoPuzzle(String[][] finalEventoArray, Random random, Scanner sc, Protagonista prota) {
 			String[] puzzlesDisponibles = {"PPT", "Luces", "Adivina", "Trivia", "Opinion"};
 	        
 	        int puzzleAleatorio = random.nextInt(1, 6);
@@ -1006,7 +1308,7 @@ public class Eventos {
 		}
 
 		//Puzzle
-		public static String[][] puzzlePiedraPapelTijera(Protagonista prota, Random random, Scanner sc){
+		public String[][] puzzlePiedraPapelTijera(Protagonista prota, Random random, Scanner sc){
 			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			int victoria = 0;
 			int derrota = 0;
@@ -1094,7 +1396,7 @@ public class Eventos {
 			return finalArray;
 		}
 		
-		public static String[][] puzzleLamparas(Random random, Scanner sc, Protagonista prota){
+		public String[][] puzzleLamparas(Random random, Scanner sc, Protagonista prota){
 			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			
 			int intg = 0;
@@ -1215,7 +1517,7 @@ public class Eventos {
 			return finalArray;
 		}
 		
-		public static String[][] puzzleAdivinanza(Random random, Scanner sc, Protagonista prota){
+		public String[][] puzzleAdivinanza(Random random, Scanner sc, Protagonista prota){
 			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			
 			String decision = "";
@@ -1324,7 +1626,7 @@ public class Eventos {
 			return finalArray;
 		}
 		
-		public static String[][] puzzleTrivia(Random random, Scanner sc, Protagonista prota){
+		public String[][] puzzleTrivia(Random random, Scanner sc, Protagonista prota){
 			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			
 			//// VARIABLES ////
@@ -1545,7 +1847,7 @@ public class Eventos {
 			return finalArray;
 		}
 		
-		public static String[][] puzzleOpinion(Random random, Scanner sc, Protagonista prota){
+		public String[][] puzzleOpinion(Random random, Scanner sc, Protagonista prota){
 			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			
 			String decision;
@@ -1679,4 +1981,5 @@ public class Eventos {
 			}
 			return finalArray;
 }
+		
 }

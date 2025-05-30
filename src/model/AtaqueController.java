@@ -93,7 +93,7 @@ public class AtaqueController {
 			}
 			case "Dragón":
 			{
-				listaAtaques.add(new Ataque("Mordisco"));
+				listaAtaques.add(new Ataque("Mega mordisco"));
 				listaAtaques.add(new Ataque("Aliento de Dragón"));
 				listaAtaques.add(new Ataque("Enderman"));
 				break;
