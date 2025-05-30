@@ -65,7 +65,8 @@ public class Eventos {
 
 		
 	}
-		//eventos
+		
+	//eventos
 		// Métodos individuales para cada evento
 		private void eventoBruja(Protagonista prota, Random random, Scanner sc) {
 			String decision;
@@ -1007,7 +1008,6 @@ public class Eventos {
 			boolean generoAldeano = random.nextBoolean(); // false == chico, true == chica
 			
 	        System.out.println("*Entras a la tienda.*");
-
 	        System.out.println("*suena DELTARUNE OST - Rouxls Kaard Shop Hip Shop*");
 
 	        if(generoAldeano)
@@ -1020,7 +1020,7 @@ public class Eventos {
 	        }
 	        
 	        // Mensaje de bienvenida.
-	        System.out.println("¡Bienvenido, cliente! Compra todo lo que quieras. Gasta todas tus" + (prota.equals("Chicken Little") ? " semillas " :  " esmeraldas ") + "si quieres, je, je.\r\n");
+	        System.out.println("¡Bienvenido, cliente! Compra todo lo que quieras. Gasta todas tus" + (prota.getNombre().equals("Chicken Little") ? " semillas " :  " esmeraldas ") + "si quieres, je, je.\r\n");
 	        
 	        // Definición de los productos disponibles en la tienda.
 	        String nombreArmadura = "";
@@ -1091,13 +1091,13 @@ public class Eventos {
 	    		}
 	        	System.out.println("6 = Salir");
 	        	
-	        	if(prota.equals("Alex") && generoAldeano)
+	        	if(prota.getNombre().equals("Alex") && generoAldeano)
 	        	{
 	        		System.out.println("7 = Ligar...");
 	        	}
 	        	System.out.println("");
 	        	
-	        	System.out.println("Tienes " + Color.YELLOW_BRIGHT + prota.getMonedas() + (prota.equals("Chicken Little") ? " semillas " :  " esmeraldas ") + Color.RESET +  "y puedes comprar " + comprasRestantes +" objetos más\r\n");
+	        	System.out.println("Tienes " + Color.YELLOW_BRIGHT + prota.getMonedas() + (prota.getNombre().equals("Chicken Little") ? " semillas " :  " esmeraldas ") + Color.RESET +  "y puedes comprar " + comprasRestantes +" objetos más\r\n");
 	        	
 	        	opcionesTienda = sc.nextLine(); // Leer la opción seleccionada por el jugador.
 
@@ -1138,7 +1138,7 @@ public class Eventos {
 	            	}
 	            	case "7":
 	            	{
-	            		if(prota.equals("Alex") && generoAldeano)
+	            		if(prota.getNombre().equals("Alex") && generoAldeano)
 	            		{
 	            			System.out.println(prota.getNombre() + " decide ligar con la aldeana...");
 	            			System.out.println("La aldeana parece interesada...");
@@ -1158,7 +1158,7 @@ public class Eventos {
 	            	{
 	            		if(!opcionesTienda.equals("6"))
 	            		{
-	            			if(!(opcionesTienda.equals("7") && generoAldeano && prota.equals("Alex")))
+	            			if(!(opcionesTienda.equals("7") && generoAldeano && prota.getNombre().equals("Alex")))
 	            			{
 	            				System.out.println("Opción no válida. Elige una opción del 1 al 6.");
 	            			}
