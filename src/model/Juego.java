@@ -13,6 +13,7 @@ public class Juego {
 	private Eventos evento;//clase eventos, que recibe el nombre de evento
 	
 	private Random random;
+	private int numeroSalas=0;
 	private Scanner sc;
 	
 	public Juego() {//permite que se pueda usar en esta clase
@@ -38,6 +39,7 @@ public class Juego {
 		while(true)
 		{
 			seleccionCaminos(random, sc);
+			numeroSalas+=1;
 		}
 	}
 	
@@ -246,6 +248,175 @@ public class Juego {
 					break;
 				}
 				
+				//mensaje
+				if(numeroSalas == 4)
+				{
+					switch(prota.getNombre())
+					{
+						case "Steve":
+						{
+							System.out.println(prota.getNombre() + " está avanzando por el bosque, donde encuentra su antigua casa");
+							System.out.println("Es una casa hecha por tierra, tiene marcas de llamas y quemaduras y está casi derrumbada");
+							System.err.println("Aquí es donde vivió " + prota.getNombre() + ", antes de el trágico evento que provocó la ira de Steve contra el Dragón...\r\n");
+							break;
+						}
+						case "Alex":
+						{
+							System.out.println(prota.getNombre() + " se encuentra con el pueblo donde creció");
+							System.out.println("Antes, Alex era una niña tranquila que no quería hacer daño a nadie");
+							System.out.println("Su clan, sin embargo, no estaba de acuerdo con esto, y la tuvieron que maldecir para que se vuelva agresiva");
+							System.out.println("Enfadada, " + nombrePersonaje + " sigue su camino sin mirar atrás\r\n");
+							break;
+						}
+						case "Chicken Little":
+						{
+							System.out.println(nombrePersonaje + " se sienta y contempla su viaje");
+							System.out.println("El fin de " + nombrePersonaje + " es terminar con el KFC, ya que le llevan persiguiendo mucho tiempo");
+							System.out.println("¿Pero por qué?");
+							System.out.println("¿Solo querrán un pollo de buena calidad...?");
+							System.out.println(nombrePersonaje + " se levanta y continua con su aventura\r\n");
+							break;
+						}
+					}
+					System.out.println();
+				}
+				else if(numeroSalas == 9)
+				{
+					switch(nombrePersonaje)
+					{
+						case "Steve":
+						{
+							if(niebla)
+							{
+								System.out.println(nombrePersonaje + " está andando con Niebla a su lado, pensando en la suerte que tiene de poder revivirlo");
+								System.out.println("Resulta que el Dragón fue el que provocó la pérdida de Niebla!");
+								System.out.println(nombrePersonaje + " se agarra a su espada y continua su aventura\r\n");
+							}
+							else
+							{
+								System.out.println(nombrePersonaje + " está pensando en Niebla, su perro fallecido");
+								System.out.println(nombrePersonaje + " recuerda la noche en la que lo perdió como si fuera ayer...");
+								System.out.println("Resulta que el Dragón escupió su fuego morado contra la casa de " + nombrePersonaje + ", lo que provocó la muerte de Niebla");
+								System.out.println(nombrePersonaje + " se agarra a su espada y continua su aventura\r\n");
+							}
+							break;
+						}
+						case "Alex":
+						{
+							System.out.println(nombrePersonaje + " está caminando por un pantano, donde se encuentra con una casa de brujas");
+							System.out.println(nombrePersonaje + " recuerda cuando fue maldita, resulta que la maldición la hace agresiva y la convierte en una Bruja lentamente");
+							System.out.println("La única forma que tiene de salvarse es llenando su sed de sangre con sus víctimas... verdad?\r\n");
+							break;
+						}
+						case "Chicken Little":
+						{
+							System.out.println(nombrePersonaje + " mira a uno de sus pollitos que salió de uno de sus ataques huevo");
+							System.out.println(nombrePersonaje + " lo sube a sus brazos y lo acaricia...");
+							System.out.println("\"Pronto acabará el imperio del KFC...\"-Dice Chicken Little");
+							System.out.println("Resulta que " + nombrePersonaje + " es perseguido por el KFC ya que tiene la habilidad de crear pollos infinitos...");
+							System.out.println("Pero " + nombrePersonaje + " tiene planes diferentes...");
+							System.out.println(nombrePersonaje + " pretende crear su propio imperio de pollos!");
+							System.out.println(nombrePersonaje + " deja en el suelo a su pollito y continua su camino\r\n");
+							break;
+						}
+					}
+				}
+				else if(numeroSalas > 14)
+				{
+					System.out.println("La historia de " + nombrePersonaje + " está llegando a su fin...");
+					System.out.println("El siguiente evento para " + nombrePersonaje + " será un combate contra...");
+					switch(nombrePersonaje)
+					{
+						case "Steve":
+						{
+							System.out.println("¡EL ENDER DRAGON!");
+							break;
+						}
+						case "Alex":
+						{
+							System.out.println("¡SANS!");
+							break;
+						}
+						case "Chicken Little":
+						{
+							System.out.println("¡EL CORONEL SANDERS!");
+							break;
+						}
+					}
+					
+					System.out.println("");
+					if(nombrePersonaje.equals("Chicken Little") && hasLambo)
+					{
+						String decision = "";
+						
+						System.out.println(nombrePersonaje + " se acuerda de su " + PURPLE + "Lambo" + RESET + ", y se da cuenta de que podría huir de todo esto...");
+						System.out.println("¿Qué hará " + nombrePersonaje + "?");
+						System.out.println("1. Luchar | 2. Huir");
+						decision = sc.nextLine();
+						while(!decision.equals("1") && !decision.equals("2"))
+						{
+							System.out.println(decision + " no es una opción ahora mismo");
+							System.out.println("1. Luchar | 2. Huir");
+							decision = sc.nextLine();
+						}
+						
+						if(decision.equals("2"))
+						{
+							finalLamboChickenLittle = true;
+							gameOver = true;
+						}
+						else
+						{
+							System.out.println("No, has venido hasta aquí para pelear\r\n");
+						}
+					}
+					
+					if(nombrePersonaje.equals("Steve") && !haMatado)
+					{
+						finalHuirSteve = true;
+						gameOver = true;
+					}
+					else if(!gameOver)
+					{
+						isBoss = true;
+						enemigoEmpiezaPrimero = false;
+						vidaPersonaje = combate(sc, random, nombrePersonaje, vidaMaxPersonaje, vidaPersonaje, defensaPersonaje + (int) objetosTienda.get(2), velocidadPersonaje, espinasPersonaje, recargaRapidaPersonaje, niebla, numeroMonedas, isBoss, isRaid, isSteve, fuerzaPersonaje, finalCombate, objetosTienda, enemigoEmpiezaPrimero);
+						if(vidaPersonaje > 0)
+						{
+							switch(nombrePersonaje)
+							{
+								case "Steve":
+								{
+									if(niebla)
+									{
+										finalKillDragonPerroSteve = true;
+									}
+									else
+									{
+										finalKillDragonSteve = true;
+									}
+									break;
+								}
+								case "Alex":
+								{
+									if(haHuidoAlgunaVez)
+									{
+										finalKillSansNoGenocideAlex = true;
+									}
+									else
+									{
+										finalKillSansGenocideAlex = true;
+									}
+								}
+								case "Chicken Little":
+								{
+									finalKillCoronel = true;
+								}
+							}
+						}
+						gameOver = true;
+					}
+				}
 	}
 	
 	public static int monedas(String nombrePersonaje, int numeroEsmeraldas)
@@ -257,4 +428,7 @@ public class Juego {
 		}
 		return monedas;
 	}
+	//
+	
+	//¿finales?
 }
