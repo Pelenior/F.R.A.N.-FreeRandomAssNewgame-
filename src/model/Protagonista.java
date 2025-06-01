@@ -84,4 +84,17 @@ public class Protagonista extends Personaje {
 		
 	}
 	
+	//GAME OVER
+	public void gameOver() 
+	{
+		if(getVida()<0) {
+			vida=0;
+		}
+		
+		if(getVida()==0) {
+			boolean gameOver = true;
+		}
+	
+	}
+	
 }
