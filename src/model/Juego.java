@@ -402,7 +402,7 @@ public class Juego {
 						}
 						else
 						{
-							System.out.println("No, has venido hasta aquí para pelear\r\n");
+							System.out.println("No, has venido hasta aquí para huir\r\n");
 						}
 					}
 					
@@ -416,7 +416,7 @@ public class Juego {
 						isBoss = true;
 						enemigoEmpiezaPrimero = false;
 						
-						prota.setVida(combate(sc, random, prota.getNombre(), prota.getVidaMax(), prota.getVida(), prota.getDefensa(), Objeto.class, prota.getVelocidad(), espinasPersonaje, recargaRapidaPersonaje, niebla, prota.getMonedas(), isBoss, isRaid, isSteve, prota.getFuerza(), finalCombate, Objeto.class, enemigoEmpiezaPrimero));
+//						prota.setVida(combate(sc, random, prota.getNombre(), prota.getVidaMax(), prota.getVida(), prota.getDefensa(), Objeto.class, prota.getVelocidad(), espinasPersonaje, recargaRapidaPersonaje, niebla, prota.getMonedas(), isBoss, isRaid, isSteve, prota.getFuerza(), finalCombate, Objeto.class, enemigoEmpiezaPrimero));
 						//vidaPersonaje = combate(sc, random, nombrePersonaje, vidaMaxPersonaje, vidaPersonaje, defensaPersonaje + (int) objetosTienda.get(2), velocidadPersonaje, espinasPersonaje, recargaRapidaPersonaje, niebla, numeroMonedas, isBoss, isRaid, isSteve, fuerzaPersonaje, finalCombate, objetosTienda, enemigoEmpiezaPrimero);
 						
 						if(prota.getVida() > 0)

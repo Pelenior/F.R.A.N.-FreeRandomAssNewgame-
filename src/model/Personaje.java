@@ -11,7 +11,15 @@ abstract class Personaje {
 	protected double fuerza;
 	protected double velocidad;
 	protected int idAscii;
+
 	AtaqueController ataqueController = new AtaqueController();
+	
+	private boolean flechaRecargada = false;
+	private boolean recargaRapida = false;
+	private int cooldownMaldicionWither = 0;
+	private int danoExtra = 0;
+	private int pollos = 0;
+	private boolean escudoPollo = false;
 	
 	//getters y setters
 	public String getNombre() {
@@ -56,6 +64,60 @@ abstract class Personaje {
 
 	public void setIdAscii(int idAscii) {
 		this.idAscii = idAscii;
+	}
+	
+	public boolean getFlechaRecargada()
+	{
+		return flechaRecargada;
+	}
+	public void setFlechaRecargada(boolean flechaRecargada)
+	{
+		this.flechaRecargada = flechaRecargada;
+	}
+	
+	public boolean getRecargaRapida()
+	{
+		return recargaRapida;
+	}
+	public void setRecargaRapida(boolean recargaRapida)
+	{
+		this.recargaRapida = recargaRapida;
+	}
+	
+	public int getCooldownMaldicionWither()
+	{
+		return cooldownMaldicionWither;
+	}
+	public void setCooldownMaldicionWither(int cooldownMaldicionWither)
+	{
+		this.cooldownMaldicionWither = cooldownMaldicionWither;
+	}
+	
+	public int getDanoExtra()
+	{
+		return danoExtra;
+	}
+	public void setDanoExtra(int danoExtra)
+	{
+		this.danoExtra = danoExtra;
+	}
+	
+	public int getPollos()
+	{
+		return pollos;
+	}
+	public void setPollos(int pollos)
+	{
+		this.pollos = pollos;
+	}
+	
+	public boolean isEscudoPollo()
+	{
+		return escudoPollo;
+	}
+	public void setEscudoPollo(boolean escudoPollo)
+	{
+		this.escudoPollo = escudoPollo;
 	}
 	
 	public abstract void atacar(Personaje target);

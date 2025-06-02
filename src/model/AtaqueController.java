@@ -137,7 +137,7 @@ public class AtaqueController {
 		}
 		while(seleccion.equals(""));
 		
-		listaAtaques.get(Integer.valueOf(seleccion)).atacar(prota, target);
+		listaAtaques.get(Integer.valueOf(seleccion) - 1).atacar(prota, target);
 	}
 	
 	public void seleccionarAtaqueEnemigo(Enemigo enemigo, Personaje target)

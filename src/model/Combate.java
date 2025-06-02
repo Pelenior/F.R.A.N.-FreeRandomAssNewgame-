@@ -189,7 +189,6 @@ public class Combate {
 		int numeroEnemigosTotal = 0;
 		int numeroEnemigos = 0;
 		int turnos = 0;
-		ArrayList<Enemigo> listaEnemigos = new ArrayList<Enemigo>();
 		
 		if(tipoCombate.equals("Boss") || tipoCombate.equals("Steve"))
 		{
@@ -284,6 +283,11 @@ public class Combate {
 				if(enemigo.getVida() > 0 && prota.getVida() > 0 && !prota.getHaHuido())
 				{
 					enemigo.atacar(prota);
+				}
+				
+				if(prota.getCooldownMaldicionWither() > 0)
+				{
+					prota.setCooldownMaldicionWither(prota.getCooldownMaldicionWither() - 1);
 				}
 			}
 		}
