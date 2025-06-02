@@ -234,181 +234,253 @@ public class Ataque {
 			}
 			
 			case "Flecha":
-				boolean flechaRecargada=false;
 			{
-				if(!flechaRecargada)
+				if(!user.getFlechaRecargada())
 				{
-					danoFinal = -1; // -1 == Recargar flecha
+					System.out.println("El " + user.getNombre() + Color.CYAN + " recarga una flecha" + Color.RESET);
+					user.setFlechaRecargada(true);
 				}
 				else
 				{
-					danoFinal = 4; // 4 == Disparar flecha
+					danoFinal = 4;
+					System.out.println("El " + user.getNombre() + " dispara con su arco a " + target.getNombre() + "!");
+					user.setFlechaRecargada(false);
 					haceDano = true;
 				}
 				break;
 			}
 		
-			case "Esquele-Ton":
-			{
-				danoFinal=3;
-				haceDano = true;
-				break;
-			}
+//			case "Esquele-Ton":
+//			{
+//				danoFinal=3;
+//				haceDano = true;
+//				break;
+//			}
 			
 			case "Tss":
 			{
-				danoFinal=0;
-				System.out.println("El creeper parpadea\r\n" + Color.GREEN_BRIGHT + "Tss" + Color.RESET);
+				System.out.println("El " + user.getNombre() + " parpadea\r\n" + Color.GREEN_BRIGHT + "Tss" + Color.RESET);
 				break;
 			}
 			
 			case "Tss Tss":
 			{
-				danoFinal=0;
-				System.out.println("El creeper parpadea 2 veces\r\n" + Color.YELLOW + "Tss Tss" + Color.RESET);
+				System.out.println("El " + user.getNombre() + " parpadea 2 veces\r\n" + Color.YELLOW + "Tss Tss" + Color.RESET);
 				break;
 			}
 			
 			case "Explosión":
 			{
 				danoFinal=10;
-				System.out.println(Color.CYAN + "El creeper se queda callado..." + Color.RESET + "\r\n" + Color.RED_BRIGHT + "BOOOOM!!!!!" + Color.RESET);
+				System.out.println(Color.CYAN + "El " + user.getNombre() + " se queda callado..." + Color.RESET + "\r\n" + Color.RED_BRIGHT + "BOOOOM!!!!!" + Color.RESET);
 				haceDano = true;
 				break;
 			}
 			
 			case "Espada":
 			{
-				danoFinal=3;
+				danoFinal = 3;
+				System.out.println("El " + user.getNombre() + " le pega un espadazo a " + target.getNombre());
 				haceDano = true;
 				break;
 			}
 			
 			case "Ballesta":
 			{
-				flechaRecargada = false;
-				if(!flechaRecargada)
+				if(!user.getFlechaRecargada())
 				{
-				danoFinal = -1; // -1 == Recargar flecha
+					user.setFlechaRecargada(true);
 				}
 				else
 				{
-				danoFinal = 7; // 4 == Disparar flecha
-				haceDano = true;
+					danoFinal = 7;
+					user.setFlechaRecargada(false);
+					haceDano = true;
 				}
 				break;
 			}
 			case "Hachazo":
 			{
-				danoFinal=4;
+				danoFinal = 4;
+				System.out.println("El " + user.getNombre() + " le pega un hachazo a " + target.getNombre());
 				haceDano = true;
 				break;
 			}
 			case "Carga":
-				boolean cargaPreparada=false;
 			{
-				if(!cargaPreparada)
+				if(!user.getFlechaRecargada())
 				{
-					danoFinal = 0; // 0 == Carga
+					System.out.println("El " + user.getNombre() + Color.CYAN + "se prepara para cargar" + Color.RESET + " contra " + target.getNombre() + "...");
+					user.setFlechaRecargada(true);
 				}
 				else
 				{
-					danoFinal = 7; // 7 == Usar carga
+					danoFinal = 7;
+					System.out.println("El " + user.getNombre() + " carga contra " + target.getNombre() + "!");
+					user.setFlechaRecargada(false);
+					user.setCargaPreparada(true);
 					haceDano = true;
 				}
 				break;
 			}
 			case "Carga Crítica":
-				boolean cargaCriticaPreparada=false;
 			{
-				if(!cargaCriticaPreparada)
+				if(!user.getCargaRecargada())
 				{
-					danoFinal = -1; // -1 == Carga crítica
+					System.out.println("El " + user.getNombre() + Color.CYAN + "se prepara para cargar fuertemente" + Color.RESET + " contra " + user.getNombre() + "...");
+					user.setCargaRecargada(true);
 				}
 				else
 				{
-					danoFinal = 14; // 14 == Usar carga crítica
+					danoFinal = 14;
+					System.out.println("El " + user.getNombre() + Color.RED_BRIGHT + "carga con toda su fuerza" + Color.RESET + " contra " + target.getNombre() + "!");
+					user.setCargaRecargada(false);
 					haceDano = true;
 				}
 				break;
 			}
 			case "Invocación":
 			{
-				danoFinal=0;
+				System.out.println("El " + user.getNombre() + Color.CYAN + "invoca a un pequeño aliado" + Color.RESET + "...");
+				user.setNumVex(user.getNumVex() + 1);
 				break;
 			}
 			case "Cocodrilos":
 			{
-				danoFinal=4;
+				danoFinal = 4;
+				System.out.println("El " + user.getNombre() + " invoca a cocodrilos que aparecen debajo de los pies de " + target.getNombre() + "!");
 				haceDano = true;
 				break;
 			}
 			case "Tótem de inmortalidad":
 			{
-				danoFinal=-1;
+				System.out.println("El " + user.getNombre() + Color.CYAN + "prepara un " + Color.PURPLE_BRIGHT + "tótem de inmortalidad" + Color.RESET + "...");
+				user.setHasTotem(true);
 				break;
 			}
 			case "Cabezazo":
 			{
-				danoFinal=5;
+				danoFinal = 5;
+				System.out.println("El " + user.getNombre() + " le pega un cabezazo a " + target.getNombre());
 				haceDano = true;
+				break;
+			}
+			case "Mega Carga":
+			{
+				danoFinal = 12;
+				if(!user.getFlechaRecargada())
+				{
+					System.out.println("El " + user.getNombre() + Color.CYAN + "se prepara para cargar" + Color.RESET + " contra " + target.getNombre() + "...");
+					user.setFlechaRecargada(true);
+				}
+				else
+				{
+					danoFinal = 12;
+					System.out.println("El " + user.getNombre() + " carga contra " + target.getNombre() + "!");
+					user.setFlechaRecargada(false);
+					user.setCargaPreparada(true);
+					haceDano = true;
+				}
 				break;
 			}
 			case "Desesperación":
 			{
-				danoFinal=-1;
+				System.out.println("El " + user.getNombre() + Color.RED_BRIGHT + "entra en desesperación" + Color.RESET + " y se come al Pillager que estaba montado encima!");
+				user.setHaUsadoDesesperation(true);
+				user.setPillagerActivo(false);
+				user.setVida(user.getVida() + 15);
 				break;
 			}
 			case "Mega mordisco":
 			{
-				danoFinal=7;
+				danoFinal = 7;
+				System.out.println("El " + user.getNombre() + " le pega un Mordisco a " + target.getNombre());
 				haceDano = true;
 				break;
 			}
 			case "Aliento de Dragón":
 			{
-				danoFinal=5;
+				danoFinal = 5;
+				System.out.println("El " + user.getNombre() + " suelta su aliento sobre " + target.getNombre());
+				target.setTurnosAlientoDragon(1);
 				haceDano = true;
 				break;
 			}
 			case "Enderman":
 			{
-				danoFinal=12;
+				System.out.println("El " + user.getNombre() + " llama a sus " + Color.PURPLE_BRIGHT + "enderman" + Color.RESET);
+				target.setTurnosEnderman(2);
 				break;
 			}
 			case "Hueso":
 			{
-				danoFinal=1;
+				danoFinal = 1;
+				System.out.println(user.getNombre() + " usa sus huesos contra " + target.getNombre());
+				target.setKarma(target.getKarma() + 1);
 				haceDano = true;
 				break;
 			}
 			case "Gaster Blaster":
 			{
-				danoFinal=2;
+				danoFinal = 2;
+				System.out.println("Un " + Color.PURPLE_BRIGHT + "Gaster Blaster" + Color.RESET + " ataca a " + target.getNombre());
+				target.setKarma(target.getKarma() + 2);
 				haceDano = true;
 				break;
 			}
 			case "Sans Dance":
 			{
-				danoFinal=5;
-				haceDano = true;
+				System.out.println(user.getNombre() + " se prepara para su " + Color.RED_BRIGHT + "ataque más poderoso" + Color.RESET + "...\r\n");
+				Random random = new Random();
+				for(int i = 0; i < 3; i++)
+				{
+					if(random.nextInt(2) == 0)
+					{
+						danoFinal += 3;
+						System.out.println(user.getNombre() + " usa sus huesos contra " + target.getNombre());
+						target.setKarma(target.getKarma() + 1);
+					}
+					else
+					{
+						danoFinal += 4;
+						System.out.println("Un " + Color.PURPLE_BRIGHT + "Gaster Blaster" + Color.RESET + " ataca a " + target.getNombre());
+						target.setKarma(target.getKarma() + 2);
+					}
+				}
+				System.out.println("\r\nEl " + Color.CYAN + "karma" + Color.RESET + " de " + target.getNombre() + " ahora es " + Color.RED_BRIGHT + target.getKarma() + Color.RESET + "!\r\n");
 				break;
 			}
 			case "Pollo":
 			{
-				danoFinal=6;
+				danoFinal = 6;
+				System.out.println("El " + user.getNombre() + " intenta freir a " + target.getNombre());
+				if(target.getVelocidad() > -5)
+				{
+					System.out.println("El ataque " + Color.RED_BRIGHT + "le baja la velocidad a " + Color.RESET + target.getNombre());
+					target.setVelocidad(target.getVelocidad() - 3);
+					if(target.getVelocidad() < -5)
+					{
+						target.setVelocidad(-5);
+					}
+					System.out.println(target.getNombre() + " ahora tiene " + Color.CYAN + target.getVelocidad() + Color.RESET + " puntos de velocidad");
+				}
 				haceDano = true;
 				break;
 			}
 			case "Despilfarro":
 			{
-				danoFinal=10;
-				haceDano = true;
+				System.out.println("El " + user.getNombre() + Color.YELLOW + " usa el dinero" + Color.RESET + " de " + target.getNombre() + " en su contra!");
+				danoFinal = Juego.monedas(target.getNombre(), target.getMonedas())/5;
+				if(target.getMonedas() > 0)
+				{
+					haceDano = true;
+				}
 				break;
 			}
 			case "Pectorales":
 			{
-				danoFinal=10;
+				System.out.println("El " + user.getNombre() + Color.CYAN + " prepara sus pectorales" + Color.RESET + " contra el ataque de " + target.getNombre());
+				user.setTurnosPectoralesCoronel(1);
 				break;
 			}
 		}

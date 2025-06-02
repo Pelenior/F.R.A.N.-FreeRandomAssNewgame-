@@ -5,10 +5,8 @@ import java.util.ArrayList;
 public class Protagonista extends Personaje {
 	
 	private int suerte=0;
-	private int monedas = 0;
 	private boolean badOmen = false;
 	private boolean haHuido = false;
-	private int karma = 0;
 	private ArrayList<Objeto> listaObjetos;
 	
 	//constructor
@@ -23,14 +21,6 @@ public class Protagonista extends Personaje {
 		this.suerte = suerte;
 		
 		ataqueController.rellenarAtaques(this);
-	}
-	
-	public int getMonedas()
-	{
-		return monedas;
-	}
-	public void setMonedas(int monedas) {
-		this.monedas = monedas;
 	}
 
 	public int getSuerte() {
@@ -57,16 +47,6 @@ public class Protagonista extends Personaje {
 	public void setHaHuido(boolean haHuido)
 	{
 		this.haHuido = haHuido;
-	}
-	
-	public int getKarma()
-	{
-		return karma;
-	}
-	
-	public void setKarma(int karma)
-	{
-		this.karma = karma;
 	}
 
 	public ArrayList<Objeto> getListaObjetos() {
