@@ -176,7 +176,7 @@ public class Combate {
 		}
 		
 		enemigo = new Enemigo(nombreEnemigos[seleccionRandom], vidaMaxEnemigos[seleccionRandom],
-							  defensaEnemigos[seleccionRandom], velocidadEnemigos[seleccionRandom], 0);
+							  defensaEnemigos[seleccionRandom], velocidadEnemigos[seleccionRandom], 0, 0);
 	}
 	
 	//devuelve false si el protagonista pierde
