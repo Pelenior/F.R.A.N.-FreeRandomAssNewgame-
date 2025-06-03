@@ -60,8 +60,8 @@ public class Protagonista extends Personaje {
 		return listaObjetos;
 	}
 
-	public void setListaObjetos(ArrayList<Objeto> listaObjetos) {
-		this.listaObjetos = listaObjetos;
+	public void addListaObjetos(Objeto objeto){
+		listaObjetos.add(objeto);
 	}
 	
 	public void insertProta(String nombre, Double vidaMax, Double defensa, Double fuerza, Double velocidad, Integer idAscii, Boolean karma) throws SQLException{
@@ -99,4 +99,37 @@ public class Protagonista extends Personaje {
 	
 	}
 	
+	public int recorrerListaObjetos(String nombreObjeto) {
+		int numeroTotalObjetos=0;
+		
+		for (int i=0; i<listaObjetos.size(); i++) {
+			if(listaObjetos.get(i).getNombre().equals(nombreObjeto)) {
+				numeroTotalObjetos++;
+			}
+		}
+		
+		return numeroTotalObjetos;
+		
+	}
+	
+	public String comprobarArmadura() {
+	String armadura="";
+	
+	for (int i=0; i<listaObjetos.size(); i++) {
+		if(listaObjetos.get(i).getArmadura()) {
+			armadura=listaObjetos.get(i).getNombre();
+		}
+	}
+		return armadura;
+	}
+	
+	public void eliminarObjeto(String nombreObjetoEliminar) {
+//		listaObjetos.removeIf(objeto -> objeto.getNombre().equals(nombreObjetoEliminar));
+		for (int i=0; i<listaObjetos.size(); i++) {
+			if(listaObjetos.get(i).getNombre().equals(nombreObjetoEliminar)) {
+				listaObjetos.remove(i);
+			}
+		}
+		
+	}
 }

@@ -53,7 +53,7 @@ public class Eventos {
 			break;
 			
 		case "Mercader":
-			eventoMercader(prota, sc, random, null);
+			eventoMercader(prota, sc, random);
 			break;
 			
 		case "Puzzle":
@@ -1000,8 +1000,9 @@ public class Eventos {
 	                			+ "ni tampoco el Tótem de inmortalidad, aunque te recomiendo comprar todo *giño**giño*\r\n");
 		}
 
-		private int eventoMercader(Protagonista prota, Scanner sc, Random random, List objetosTienda){
+		private int eventoMercader(Protagonista prota, Scanner sc, Random random){
 			boolean puedeLigar = false;
+			
 			if(prota.getFuerza()>=5)
 			{
 				puedeLigar = true;
@@ -1048,27 +1049,27 @@ public class Eventos {
 
 	        while (!opcionesTienda.equals("6") && comprasRestantes > 0)
 	        {
-	        	switch((int) objetosTienda.get(2))
+	        	switch(prota.comprobarArmadura())
 	            {
-	            	case 0:
+	            	case "":
 	            	{
 	            		nombreArmadura = "Armadura de Cuero";
 	            		costeArmadura = 2;
 	            		break;
 	            	}
-	            	case 1:
+	            	case "Armadura de Cuero":
 	            	{
 	            		nombreArmadura = "Armadura de Hierro";
 	            		costeArmadura = 4;
 	            		break;
 	            	}
-	            	case 2:
+	            	case "Armadura de Hierro":
 	            	{
 	            		nombreArmadura = "Armadura de Diamante";
 	            		costeArmadura = 8;
 	            		break;
 	            	}
-	            	case 3:
+	            	case "Armadura de Diamante":
 	            	{
 	            		nombreArmadura = "Armadura de Netherite";
 	            		costeArmadura = 16;
@@ -1150,7 +1151,7 @@ public class Eventos {
 	            			else
 	            			{
 	            				System.out.println("La aldeana liga con " + prota.getNombre() + " también!");
-	            				objetosTienda.set(5, true);
+//	            				objetosTienda.set(5, true);
 	            			}
 	            		}
 	            		break;
@@ -1169,46 +1170,61 @@ public class Eventos {
 	            
 	            if(!opcionesTienda.equals("6"))
 	            {
-	            	if(prota.getMonedas() >= Juego.monedas(prota.getNombre(), costeObjeto) && comprasRestantes > 0)
+	            	if(prota.getMonedas() >= costeObjeto && comprasRestantes > 0)
 	        		{
 	        			prota.setMonedas(prota.getMonedas()-costeObjeto);
 	        			switch(objetoComprado)
 	        			{
 	        				case "Pocion de vida":
 	        				{
-	        					objetosTienda.set(0, (int) objetosTienda.get(0) + 1);
-	        					System.out.println(prota.getNombre() + " ahora tiene " + (int) objetosTienda.get(0) + " pociones de vida.");
+	        					Objeto objeto = new Objeto("Pocion de vida");
+	        					prota.addListaObjetos(objeto);
+//								objetosTienda.set(0, (int) objetosTienda.get(0) + 1);
+	        					System.out.println(prota.getNombre() + " ahora tiene " + prota.recorrerListaObjetos("Pocion de vida") + " pociones de vida.");
 	        					break;
 	        				}
 	        				case "Pocion de fuerza":
 	        				{
-	        					objetosTienda.set(1, (int) objetosTienda.get(1) + 5);
-	        					System.out.println(prota.getNombre() + " ahora tiene fuerza extra durante los próximos " + (int) objetosTienda.get(1) + " turnos.");
+	        					Objeto objeto = new Objeto("Pocion de fuerza");
+	        					prota.addListaObjetos(objeto);
+//	        					objetosTienda.set(1, (int) objetosTienda.get(1) + 5);
+	        					System.out.println(prota.getNombre() + " ahora tiene " + prota.recorrerListaObjetos("Pocion de fuerza") + " pociones de fuerza.");
 	        					break;
 	        				}
 	        				case "Armadura":
 	        				{
-	        					objetosTienda.set(2, (int) objetosTienda.get(2) + 1);
-	        					int numeroArmadura = (int) objetosTienda.get(2);
-	        					switch(numeroArmadura)
+//	        					objetosTienda.set(2, (int) objetosTienda.get(2) + 1);
+	        					
+	        					switch(prota.comprobarArmadura())
 	        					{
-	        						case 1:
+	        						case "":
 	        						{
+	        							Objeto objeto = new Objeto("Armadura de cuero");
+	    	        					prota.addListaObjetos(objeto);
 	        							System.out.println(prota.getNombre() + " ahora tiene una armadura de cuero.");
 	        							break;
 	        						}
-	        						case 2:
+	        						case "Armadura de cuero":
 	        						{
+	        							Objeto objeto = new Objeto("Armadura de hierro");
+	    	        					prota.addListaObjetos(objeto);
+	    	        					prota.eliminarObjeto("Armadura de cuero");
 	        							System.out.println(prota.getNombre() + " ahora tiene una armadura de hierro.");
 	        							break;
 	        						}
-	        						case 3:
+	        						case "Armadura de hierro":
 	        						{
+	        							Objeto objeto = new Objeto("Armadura de diamante");
+	    	        					prota.addListaObjetos(objeto);
+	    	        					prota.eliminarObjeto("Armadura de hierro");
 	        							System.out.println(prota.getNombre() + " ahora tiene una armadura de diamante.");
 	        							break;
 	        						}
-	        						case 4:
+	        						case "Armadura de diamante":
 	        						{
+	        							Objeto objeto = new Objeto("Armadura de netherite");
+	    	        					prota.addListaObjetos(objeto);
+	    	        					prota.eliminarObjeto("Armadura de diamante");
 	        							System.out.println(prota.getNombre() + " ahora tiene una armadura de netherite.");
 	        							break;
 	        						}
@@ -1221,14 +1237,18 @@ public class Eventos {
 	        				}
 	        				case "Totem de inmortalidad":
 	        				{
-	        					objetosTienda.set(3, (int) objetosTienda.get(3) + 1);
-	        					System.out.println(prota.getNombre() + " ahora tiene " + (int) objetosTienda.get(3) + " tótems de inmortalidad.");
+	        					Objeto objeto = new Objeto("Totem de inmortalidad");
+	        					prota.addListaObjetos(objeto);
+//	        					objetosTienda.set(3, (int) objetosTienda.get(3) + 1);
+	        					System.out.println(prota.getNombre() + " ahora tiene " + prota.recorrerListaObjetos("Totem de inmortalidad") + " totemes de inmortalidad.");
 	        					break;
 	        				}
 	        				case "Ender pearl":
 	        				{
-	        					objetosTienda.set(4, (int) objetosTienda.get(4) + 1);
-	        					System.out.println(prota.getNombre() + " ahora tiene " + (int) objetosTienda.get(4) + " ender pearls.");
+	        					Objeto objeto = new Objeto("Ender pearl");
+	        					prota.addListaObjetos(objeto);
+//	        					objetosTienda.set(4, (int) objetosTienda.get(4) + 1);
+	        					System.out.println(prota.getNombre() + " ahora tiene " + prota.recorrerListaObjetos("Ender pearl") + " ender pearls.");
 	        					break;
 	        				}
 	        			}
@@ -1255,16 +1275,16 @@ public class Eventos {
 	        	System.out.println("\"Has completado tu cupo de compras diario, vuelve otro dia por mas\"-dijo amablemante " + (generoAldeano ? "la aldeana" : "el aldeano"));
 	        	
 	        	}
-	        if((boolean) objetosTienda.get(5))
-	        {
-	        	System.out.println("Espera un momento! -Dice la aldeana");
-	        	System.out.println(prota.getNombre() + " se da la vuelta...");
-	        }
-	        else
-	        {
-	        	System.out.println("Hasta pronto!\r\n");
-	        	System.out.println("Con esto te marchas con ganas de volver para poder probar los otros objetos de la tienda");
-	        }
+//	        if((boolean) objetosTienda.get(5))
+//	        {
+//	        	System.out.println("Espera un momento! -Dice la aldeana");
+//	        	System.out.println(prota.getNombre() + " se da la vuelta...");
+//	        }
+//	        else
+//	        {
+//	        	System.out.println("Hasta pronto!\r\n");
+//	        	System.out.println("Con esto te marchas con ganas de volver para poder probar los otros objetos de la tienda");
+//	        }
 			
 			return prota.getMonedas();
 		}
