@@ -54,7 +54,6 @@ public class AtaqueController {
 			{
 				listaAtaques.add(new Ataque("Puñetazo"));
 				listaAtaques.add(new Ataque("Flecha"));
-//				listaAtaques.add(new Ataque("Esquele-Ton"));
 				break;
 			}
 			case "Creeper":
@@ -68,6 +67,7 @@ public class AtaqueController {
 			{
 				listaAtaques.add(new Ataque("Espada"));
 				listaAtaques.add(new Ataque("Ballesta"));
+				listaAtaques.add(new Ataque("Saquear"));
 				break;
 			}
 			case "Vindicador":

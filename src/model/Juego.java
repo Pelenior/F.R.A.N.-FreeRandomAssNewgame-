@@ -72,11 +72,7 @@ public class Juego {
 		elegirPersonaje(sc, random);
 		
 		//bucle del juego
-		while(true)
-		{
-			seleccionCaminos(random, sc);
-			numeroSalas+=1;
-		}
+		bucleJuego();
 	}
 	
 	//inicio juego
@@ -180,8 +176,6 @@ public class Juego {
 						}
 					}
 				
-		//		double vidaPersonaje = vidaMaxPersonaje;
-				
 				System.out.println(Color.RESET + "Has escogido a...\r\n");
 				System.out.println("                    " + Color.YELLOW_BOLD_BRIGHT + prota.getNombre().toUpperCase() + "\r\n" + Color.RESET);// toUpperCase vuelve el String todo a Mayúsculas
 				
@@ -203,7 +197,16 @@ public class Juego {
 		
 	}
 
-	public void seleccionCaminos(Random random, Scanner scanner) {
+	private void bucleJuego()
+	{
+		while(true)
+		{
+			seleccionCaminos(random, sc);
+			numeroSalas+=1;
+		}
+	}
+	
+	private void seleccionCaminos(Random random, Scanner scanner) {
 		
 		String[] listaCaminos = {Color.RED_BRIGHT + "Combate" + Color.RESET, Color.CYAN + "Evento Aleatorio" + Color.RESET, Color.YELLOW + "Mercader" + Color.RESET};
 		
@@ -267,8 +270,9 @@ public class Juego {
 				String seleccionStr = (String) caminosDisponibles.get(Integer.valueOf(seleccionCamino) - 1);//guarda camino
 				
 				
-				switch(seleccionStr) {//ir al camino (evento) elegido, que puede ser o
-					case Color.RED_BRIGHT + "Combate" + Color.RESET: 
+				switch(seleccionStr) {//ir al camino (evento) elegido
+					case Color.RED_BRIGHT + "Combate" + Color.RESET:
+					{
 						if(combate.combate(sc, random, prota, "Normal", random.nextBoolean()))
 						{
 							//si ganas el combate
@@ -277,11 +281,17 @@ public class Juego {
 						{
 							//si pierdes el combate
 						}
-						
-					break;
-					case "Evento Aleatorio" + Color.RESET, Color.YELLOW + "Mercader" + Color.RESET:
+						break;
+					}
+					case "Evento Aleatorio" + Color.RESET:
+					{
 						evento.elegirEvento(prota);
-					break;
+						break;
+					}
+					case Color.YELLOW + "Mercader" + Color.RESET:
+					{
+						break;
+					}
 				}
 				
 				//mensaje
@@ -367,46 +377,45 @@ public class Juego {
 						case "Steve":
 						{
 							System.out.println("¡EL ENDER DRAGON!");
+							if(combate.combate(sc, random, prota, "Normal", random.nextBoolean()))
+							{
+								//si ganas el combate
+							}
+							else
+							{
+								//si pierdes el combate
+							}
 							break;
 						}
 						case "Alex":
 						{
 							System.out.println("¡SANS!");
+							if(combate.combate(sc, random, prota, "Normal", random.nextBoolean()))
+							{
+								//si ganas el combate
+							}
+							else
+							{
+								//si pierdes el combate
+							}
 							break;
 						}
 						case "Chicken Little":
 						{
 							System.out.println("¡EL CORONEL SANDERS!");
+							if(combate.combate(sc, random, prota, "Normal", random.nextBoolean()))
+							{
+								//si ganas el combate
+							}
+							else
+							{
+								//si pierdes el combate
+							}
 							break;
 						}
 					}
 					
 					System.out.println("");
-					if(prota.getNombre().equals("Chicken Little") && hasLambo)
-					{
-						String decision = "";
-						
-						System.out.println(prota.getNombre() + " se acuerda de su " + Color.PURPLE + "Lambo" + Color.RESET + ", y se da cuenta de que podría huir de todo esto...");
-						System.out.println("¿Qué hará " + prota.getNombre() + "?");
-						System.out.println("1. Luchar | 2. Huir");
-						decision = sc.nextLine();
-						while(!decision.equals("1") && !decision.equals("2"))
-						{
-							System.out.println(decision + " no es una opción ahora mismo");
-							System.out.println("1. Luchar | 2. Huir");
-							decision = sc.nextLine();
-						}
-						
-						if(decision.equals("2"))
-						{
-							finalLamboChickenLittle = true;
-							gameOver = true;
-						}
-						else
-						{
-							System.out.println("No, has venido hasta aquí para huir\r\n");
-						}
-					}
 					
 					if(prota.getNombre().equals("Steve") && !haMatado)
 					{

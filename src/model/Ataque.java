@@ -294,6 +294,11 @@ public class Ataque {
 				break;
 			}
 			
+			case "":
+			{
+				
+			}
+			
 			case "Espada":
 			{
 				danoFinal = 3;
