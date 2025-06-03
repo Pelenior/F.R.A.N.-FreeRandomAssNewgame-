@@ -1,8 +1,11 @@
 package model;
 
+import java.sql.*;
+import dao.*;
 import java.util.ArrayList;
 
-abstract class Personaje {
+
+ 	abstract class Personaje {
 	//Atributos
 	protected String nombre;
 	protected double vidaMax;
@@ -32,6 +35,8 @@ abstract class Personaje {
 	private int turnosEnderman = 0;
 	private int karma = 0;
 	private int turnosPectoralesCoronel = 0;
+	private int cargasCreeper = 0;
+	
 	
 	//getters y setters
 	public String getNombre()
@@ -229,6 +234,41 @@ abstract class Personaje {
 	{
 		this.turnosPectoralesCoronel = turnosPectoralesCoronel;
 	}
+	
+    public int getCargasCreeper()
+    {
+        return cargasCreeper;
+    }
+    public void setCargasCreeper(int cargasCreeper)
+    {
+        this.cargasCreeper = cargasCreeper;
+    }
+	
+	public void selectALLPersonajes() throws SQLException{
+		DaoPersonajes DaoPersonajes = new DaoPersonajes();
+		DaoPersonajes.selectALLPersonajes();
+	}
+	
+	public void selectALLProta() throws SQLException{
+		DaoPersonajes DaoPersonajes = new DaoPersonajes();
+		DaoPersonajes.selectALLProta();
+	}
+	
+	public void selectALLEnemigo() throws SQLException{
+		DaoPersonajes DaoPersonajes = new DaoPersonajes();
+		DaoPersonajes.selectALLEnemigo();
+	}
+	
+	public void selectThis() throws SQLException{
+		DaoPersonajes DaoPersonajes = new DaoPersonajes();
+		DaoPersonajes.selectThis(this.getNombre());
+	}
+
+	public void deletePersonaje(String nombre) throws SQLException {
+	    DaoPersonajes daoPersonajes = new DaoPersonajes();
+	    daoPersonajes.deletePersonaje(nombre);
+	}
+	
 	
 	public abstract void atacar(Personaje target);
 	

@@ -1,6 +1,9 @@
 package model;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import dao.DaoPersonajes;
 
 public class Protagonista extends Personaje {
 	
@@ -55,6 +58,16 @@ public class Protagonista extends Personaje {
 
 	public void setListaObjetos(ArrayList<Objeto> listaObjetos) {
 		this.listaObjetos = listaObjetos;
+	}
+	
+	public void insertProta(String nombre, Double vidaMax, Double defensa, Double fuerza, Double velocidad, Integer idAscii, Boolean karma) throws SQLException{
+		DaoPersonajes DaoPersonajes = new DaoPersonajes();
+		DaoPersonajes.insertProta( nombre,  vidaMax,  defensa,  fuerza,  velocidad,  idAscii,  karma);
+	}
+	
+	public void updateProta(String nombre, Double vidaMax, Double defensa, Double fuerza, Double velocidad, Integer idAscii, Boolean karma) throws SQLException{
+		DaoPersonajes DaoPersonajes = new DaoPersonajes();
+		DaoPersonajes.updateProta( nombre,  vidaMax,  defensa,  fuerza,  velocidad,  idAscii,  karma);
 	}
 
 	@Override

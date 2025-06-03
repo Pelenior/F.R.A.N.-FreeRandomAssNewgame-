@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import dao.*;
+
 public class Juego {
 	//Atributos
 	private static Juego instanciaJuego;//singelton, garantiza que tan solo exista un (objeto) juego 
