@@ -11,8 +11,9 @@ public class Eventos {
 	
 	//función selecionar eventos
 	//poner metodo público, que escoje un evento aleatorio y llama la función de ese evento
-	public void elegirEvento (Protagonista prota) {
+	 public void elegirEvento (Protagonista prota) {
 		Random random = new Random();
+		Scanner sc = new Scanner(System.in);
 		
 		int eventoAleatorio = random.nextInt(0, evento.length);
 		String eventoSeleccionado = evento[eventoAleatorio];
@@ -20,31 +21,31 @@ public class Eventos {
 		//switch del evento
 		switch (eventoSeleccionado) {
 		case "Bruja":
-			eventoBruja(prota, random, null);
+			eventoBruja(prota, random, sc);
 			break;
 			
 		case "Maldición":
-			eventoMaldicion(prota, random, null);
+			eventoMaldicion(prota, random, sc);
 			break;
 			
 		case "Trampa":
-			eventoTrampa(prota, random, null, eventoAleatorio, eventoAleatorio, eventoAleatorio);
+			eventoTrampa(prota, random, sc);
 			break;
 		
 		case "Juan":
-			eventoJuan(prota, random, null);
+			eventoJuan(prota, random, sc);
 			break;
 			
 		case "Perro":
-			eventoPerro(prota, random, null);
+			eventoPerro(prota, random, sc);
 			break;
 		
 		case "Lamborgini":
-			eventoLamborgini(prota, random, null);
+			eventoLamborgini(prota, random, sc);
 			break;
 		
 		case "Drogas":
-			eventoDrogas(prota, null);
+			eventoDrogas(prota, sc);
 			break;
 			
 		case "Objetos tienda":
@@ -52,11 +53,11 @@ public class Eventos {
 			break;
 			
 		case "Mercader":
-			eventoMercader(prota, null, random, null);
+			eventoMercader(prota, sc, random, null);
 			break;
 			
 		case "Puzzle":
-			eventoPuzzle(null, random, null, prota);
+			eventoPuzzle(random, sc, prota);
 			break;
 	
 		default:
@@ -284,7 +285,7 @@ public class Eventos {
 			return;
 		}
 
-		private void eventoTrampa(Protagonista prota, Random random, Scanner sc, double velocidadPersonaje, double defensaPersonaje, int numeroMonedas) {
+		private void eventoTrampa(Protagonista prota, Random random, Scanner sc) {
 //			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			
 			boolean trampa = random.nextBoolean();
@@ -1268,7 +1269,7 @@ public class Eventos {
 			return prota.getMonedas();
 		}
 		
-		private void eventoPuzzle(String[][] finalEventoArray, Random random, Scanner sc, Protagonista prota) {
+		private void eventoPuzzle(Random random, Scanner sc, Protagonista prota) {
 			String[] puzzlesDisponibles = {"PPT", "Luces", "Adivina", "Trivia", "Opinion"};
 	        
 	        int puzzleAleatorio = random.nextInt(1, 6);
@@ -1278,37 +1279,36 @@ public class Eventos {
 	                
 	                //Piedra, Papel y Tigera
 	                case 1: {
-	                    finalEventoArray = puzzlePiedraPapelTijera(prota, random, sc);
+	                    puzzlePiedraPapelTijera(prota, random, sc);
 	                    break;
 	                }
 	                //Lamparas
 	                case 2: {
 	                        
-	                    finalEventoArray = puzzleLamparas(random, sc, prota);
+	                    puzzleLamparas(random, sc, prota);
 	                    break;
 	                }
 	                //Adivinanza
 	                case 3: {
-	                    finalEventoArray = puzzleAdivinanza(random, sc, prota);
+	                    puzzleAdivinanza(random, sc, prota);
 	                    break;
 	                }
 	                //Adivinanza
 	                case 4: {
-	                    finalEventoArray = puzzleTrivia(random, sc, prota);
+	                    puzzleTrivia(random, sc, prota);
 	                    break;
 	                }
 	                //Opinión
 	                case 5: {
-	                    finalEventoArray = puzzleOpinion(random, sc, prota);
+	                    puzzleOpinion(random, sc, prota);
 	                    break;
 	                }
 	                    
 	            }
-			return;
 		}
 
 		//Puzzle
-		public String[][] puzzlePiedraPapelTijera(Protagonista prota, Random random, Scanner sc){
+		public void puzzlePiedraPapelTijera(Protagonista prota, Random random, Scanner sc){
 			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			int victoria = 0;
 			int derrota = 0;
@@ -1393,10 +1393,9 @@ public class Eventos {
 				}
 				
 			}
-			return finalArray;
 		}
 		
-		public String[][] puzzleLamparas(Random random, Scanner sc, Protagonista prota){
+		public void puzzleLamparas(Random random, Scanner sc, Protagonista prota){
 			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			
 			int intg = 0;
@@ -1514,10 +1513,9 @@ public class Eventos {
 			System.out.println("Guardas tu botin y continuas tu aventura felizmente");
 		}
 			
-			return finalArray;
 		}
 		
-		public String[][] puzzleAdivinanza(Random random, Scanner sc, Protagonista prota){
+		public void puzzleAdivinanza(Random random, Scanner sc, Protagonista prota){
 			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			
 			String decision = "";
@@ -1623,10 +1621,9 @@ public class Eventos {
 			
 			sc.nextLine();
 			
-			return finalArray;
 		}
 		
-		public String[][] puzzleTrivia(Random random, Scanner sc, Protagonista prota){
+		public void puzzleTrivia(Random random, Scanner sc, Protagonista prota){
 			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			
 			//// VARIABLES ////
@@ -1844,10 +1841,9 @@ public class Eventos {
 				}
 			}	
 			
-			return finalArray;
 		}
 		
-		public String[][] puzzleOpinion(Random random, Scanner sc, Protagonista prota){
+		public void puzzleOpinion(Random random, Scanner sc, Protagonista prota){
 			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			
 			String decision;
@@ -1979,7 +1975,6 @@ public class Eventos {
 				
 				//// FINALIZA EL PUZZLE ////
 			}
-			return finalArray;
 }
 		
 }
