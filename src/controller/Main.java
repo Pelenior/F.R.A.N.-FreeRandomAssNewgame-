@@ -12,7 +12,11 @@ public class Main {
 		Juego juego = new Juego();
 		DaoPersonajes DaoPersonajes = new DaoPersonajes();
 		
-		DaoPersonajes.selectALLProta();
+		try {
+			DaoPersonajes.selectALLProta();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 //		juego.comenzar();
 		
 		

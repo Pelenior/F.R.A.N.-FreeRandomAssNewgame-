@@ -7,7 +7,7 @@ public class DbConnection {
 
 	public static Connection instance = null;
 	
-	public static final String JDBC_BDD_URL = "jdbc:mysql://localhost:3306/tiendajuegos";
+	public static final String JDBC_BDD_URL = "jdbc:mysql://localhost:3306/mincra";
 	
 	public static Connection getConnection() throws SQLException{
 		

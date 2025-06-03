@@ -6,10 +6,19 @@ import model.*;
 public class DaoPersonajes {
 	
 	private Connection conn = null;
+	private static DaoPersonajes instance = null;
 	
 	public DaoPersonajes() throws SQLException {
 		
 		conn = DbConnection.getConnection();
+	}
+	
+	public static DaoPersonajes getInstance() throws SQLException{
+		
+		if(instance == null) {
+			instance = new DaoPersonajes();
+		}
+		return instance;
 	}
 	
 	public void insertProta(String nombre, Double vidaMax, Double defensa, Double fuerza, Double velocidad, Integer idAscii, Boolean karma) throws SQLException {
