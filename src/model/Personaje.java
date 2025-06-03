@@ -2,7 +2,6 @@ package model;
 
 import java.sql.*;
 import dao.*;
-import java.util.ArrayList;
 
 
  	abstract class Personaje {
@@ -20,8 +19,9 @@ import java.util.ArrayList;
 	
 	private boolean flechaRecargada = false;
 	private boolean cargaPreparada = false;
-
 	private boolean cargaRecargada = false;
+	private boolean cargaCriticaPreparada = false;
+	private boolean cargaCriticaRecargada = false;
 	private boolean recargaRapida = false;
 	private int cooldownMaldicionWither = 0;
 	private int danoExtra = 0;
@@ -36,7 +36,8 @@ import java.util.ArrayList;
 	private int karma = 0;
 	private int turnosPectoralesCoronel = 0;
 	private int cargasCreeper = 0;
-	
+	private boolean totemUsado = false;
+	private int stamina = 0;
 	
 	//getters y setters
 	public String getNombre()
@@ -243,6 +244,39 @@ import java.util.ArrayList;
     {
         this.cargasCreeper = cargasCreeper;
     }
+    
+    public boolean getCargaCriticaPreparada()
+	{
+		return cargaCriticaPreparada;
+	}
+	public void setCargaCriticaPreparada(boolean cargaCriticaPreparada)
+	{
+		this.cargaCriticaPreparada = cargaCriticaPreparada;
+	}
+	public boolean getCargaCriticaRecargada()
+	{
+		return cargaCriticaRecargada;
+	}
+	public void setCargaCriticaRecargada(boolean cargaCriticaRecargada)
+	{
+		this.cargaCriticaRecargada = cargaCriticaRecargada;
+	}
+	public boolean getTotemUsado()
+	{
+		return totemUsado;
+	}
+	public void setTotemUsado(boolean totemUsado)
+	{
+		this.totemUsado = totemUsado;
+	}
+	public int getStamina()
+	{
+		return stamina;
+	}
+	public void setStamina(int stamina)
+	{
+		this.stamina = stamina;
+	}
 	
 	public void selectALLPersonajes() throws SQLException{
 		DaoPersonajes DaoPersonajes = new DaoPersonajes();

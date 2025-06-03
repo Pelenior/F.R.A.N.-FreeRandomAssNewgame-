@@ -137,9 +137,9 @@ public class Combate {
 				}
 			}
 		}
-		else if(tipoCombate.equals("Steve"))
+		else if(tipoCombate.equals("Steve Corrupto"))
 		{
-			nombreEnemigos = new String[]    {"Steve"};
+			nombreEnemigos = new String[]    {"Steve Corrupto"};
 			vidaMaxEnemigos =   new double[] {30.0};
 			defensaEnemigos =   new double[] {5};
 			velocidadEnemigos = new double[] {5};
@@ -183,6 +183,7 @@ public class Combate {
 	public boolean combate(Scanner sc, Random random, Protagonista prota, String tipoCombate, boolean enemigoEmpiezaPrimero)
 	{
 		//Variables que permanecen entre encuentros con enemigos
+		
 		DecimalFormat dfOneDecimal = new DecimalFormat("0.0");
 		DecimalFormat dfZeroDecimal = new DecimalFormat("0");
 		
@@ -202,13 +203,10 @@ public class Combate {
 		
 		System.out.println(prota.getNombre() + " se encuentra con " + Color.RED_BRIGHT + numeroEnemigos + " enemigos" + Color.RESET + "!");
 		
-		while(numeroEnemigos != 0)
+		while(numeroEnemigos != 0 && prota.getVida() > 0 && !prota.getHaHuido())
 		{
 			//variables que NO permanecen entre encuentros con enemigos
-			turnos++;
 			seleccionEnemigo(random, prota, tipoCombate, numeroEnemigos);
-			
-			System.out.println("Turno " + turnos);
 			
 			if(prota.getVida() > 0)
 			{
@@ -241,6 +239,8 @@ public class Combate {
 			
 			while(prota.getVida() > 0 && enemigo.getVida() > 0 && !prota.getHaHuido())
 			{
+				turnos++;
+				System.out.println("Turno " + turnos);
 				if(prota.getKarma() > 0)
 				{
 					prota.setVida(prota.getVida() - (prota.getKarma() / 2));
@@ -289,7 +289,14 @@ public class Combate {
 				{
 					prota.setCooldownMaldicionWither(prota.getCooldownMaldicionWither() - 1);
 				}
+				if(enemigo.getTurnosPectoralesCoronel() > 0)
+					enemigo.setTurnosPectoralesCoronel(enemigo.getTurnosPectoralesCoronel() - 1);
+				if(prota.getTurnosAlientoDragon() > 0)
+					prota.setTurnosAlientoDragon(prota.getTurnosAlientoDragon() - 1);
+				if(prota.getTurnosEnderman() > 0)
+					prota.setTurnosEnderman(prota.getTurnosEnderman() - 1);
 			}
+			numeroEnemigos--;
 		}
 		
 		return true;

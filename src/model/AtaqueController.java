@@ -54,7 +54,7 @@ public class AtaqueController {
 			{
 				listaAtaques.add(new Ataque("Puñetazo"));
 				listaAtaques.add(new Ataque("Flecha"));
-				listaAtaques.add(new Ataque("Esquele-Ton"));
+//				listaAtaques.add(new Ataque("Esquele-Ton"));
 				break;
 			}
 			case "Creeper":
@@ -112,6 +112,13 @@ public class AtaqueController {
 				listaAtaques.add(new Ataque("Pectorales"));
 				break;
 			}
+			case "Steve Corrupto":
+			{
+				listaAtaques.add(new Ataque("Espadazo Corrupto"));
+				listaAtaques.add(new Ataque("Flecha Corrupta"));
+				listaAtaques.add(new Ataque("Ataque Crítico Corrupto"));
+				break;
+			}
 		}
 	}
 	
@@ -143,10 +150,96 @@ public class AtaqueController {
 	public void seleccionarAtaqueEnemigo(Enemigo enemigo, Personaje target)
 	{
 		Random rd = new Random();
-		
 		int ataqueRandom = 0;
 		
-		ataqueRandom = rd.nextInt(0, listaAtaques.size());
+		if(enemigo.getNombre().equals("Creeper"))
+		{
+			ataqueRandom = enemigo.getCargasCreeper();
+			ataqueRandom = rd.nextInt(0, listaAtaques.size());
+		}
+		else if(enemigo.getNombre().equals("Vindicator"))
+		{
+			if(enemigo.getCargaPreparada())
+			{
+				ataqueRandom = rd.nextInt(0, listaAtaques.size());
+			}
+			else
+			{
+				ataqueRandom = rd.nextInt(0, listaAtaques.size() - 1);
+			}
+			
+			if(enemigo.getCargaRecargada())
+			{
+				ataqueRandom = 1;
+			}
+			else if(enemigo.getCargaCriticaRecargada())
+			{
+				ataqueRandom = 2;
+			}
+		}
+		else if(enemigo.getNombre().equals("Evoker"))
+		{
+			if(enemigo.getTotemUsado())
+			{
+				ataqueRandom = rd.nextInt(0, listaAtaques.size() - 1);
+			}
+			else
+			{
+				ataqueRandom = rd.nextInt(0, listaAtaques.size());
+			}
+		}
+		else if(enemigo.getNombre().equals("Devastator"))
+		{
+			if(enemigo.getVida() <= enemigo.getVidaMax() / 3 && !enemigo.getHaUsadoDesesperation())
+			{
+				ataqueRandom = rd.nextInt(0, listaAtaques.size());
+			}
+			else
+			{
+				ataqueRandom = rd.nextInt(0, listaAtaques.size() - 1);
+			}
+			if(enemigo.getCargaPreparada())
+			{
+				ataqueRandom = 1;
+			}
+		}
+		else if(enemigo.getNombre().equals("Dragón"))
+		{
+			if(enemigo.getVida() < enemigo.getVidaMax()/2 && enemigo.getTurnosEnderman() == 0)
+			{
+				ataqueRandom = rd.nextInt(0, listaAtaques.size());
+			}
+			else
+			{
+				ataqueRandom = rd.nextInt(0, listaAtaques.size() - 1);
+			}
+		}
+		else if(enemigo.getNombre().equals("Sans"))
+		{
+			if(enemigo.getStamina() <= 5)
+			{
+				ataqueRandom = rd.nextInt(0, listaAtaques.size());
+			}
+			else
+			{
+				ataqueRandom = rd.nextInt(0, listaAtaques.size() - 1);
+			}
+		}
+		else if(enemigo.getNombre().equals("Coronel"))
+		{
+			if(enemigo.getTurnosPectoralesCoronel() == 0)
+			{
+				ataqueRandom = rd.nextInt(0, listaAtaques.size());
+			}
+			else
+			{
+				ataqueRandom = rd.nextInt(0, listaAtaques.size() - 1);
+			}
+		}
+		else
+		{
+			ataqueRandom = rd.nextInt(0, listaAtaques.size());
+		}
 		
 		listaAtaques.get(ataqueRandom).atacar(enemigo, target);
 		

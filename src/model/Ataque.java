@@ -1,5 +1,6 @@
 package model;
 
+import java.text.DecimalFormat;
 import java.util.Random;
 
 public class Ataque {
@@ -20,14 +21,29 @@ public class Ataque {
 	{
 		double danoFinal = 0;
 		boolean haceDano = false;
+		double randomGolpe = 0;
+		Random random = new Random();
+		DecimalFormat dfOneDecimal = new DecimalFormat("0.0");
+		DecimalFormat dfZeroDecimal = new DecimalFormat("0");
 		danoFinal += user.getFuerza();
 		switch(nombre)
 		{
-			
+			case "Cura":
+			{
+				System.out.println(user.getNombre() + " trata de curarse...");
+				//TODO cura
+				break;
+			}
+			case "Huir":
+			{
+				System.out.println(user.getNombre() + " trata de huir!");
+				//TODO huir
+				break;
+			}
 			case "Por si Espada":
 			{
 				danoFinal = 4;
-				System.out.println("Steve blande su espada contra el enemigo");
+				System.out.println(user.getNombre() + " blande su espada contra el enemigo");
 				haceDano = true;
 				break;
 			}
@@ -38,7 +54,7 @@ public class Ataque {
 				if(user.getRecargaRapida())
 				{
 					danoFinal = 7; // recarga rápida ataca siempre con la flecha
-					System.out.println("Steve no necesita recargar una flecha gracias a su Recarga Rápida!");
+					System.out.println(user.getNombre() + " no necesita recargar una flecha gracias a su Recarga Rápida!");
 				}
 				else
 				{
@@ -62,7 +78,6 @@ public class Ataque {
 			case "Ataque Crítico":
 			{
 				// Selección random del ataque Crítico
-				Random random = new Random();
 				int criticoRandom = random.nextInt(1, 11);
 				switch(criticoRandom)
 				{
@@ -137,7 +152,7 @@ public class Ataque {
 				danoFinal = (int) (target.getVida() * 0.3);
 				System.out.println(user.getNombre() + " maldice al enemigo con una " + Color.BLACK + "flor de wither" + Color.RESET);
 				haceDano = true;
-				user.setCooldownMaldicionWither(3);
+				user.setCooldownMaldicionWither(3);// turnos de espera para usar el ataque
 				break;
 			}
 				
@@ -192,7 +207,6 @@ public class Ataque {
 			
 			case "Infección":
 			{
-				Random random = new Random();
 				System.out.println("El " + user.getNombre() + " infecta a " + target.nombre + "...");
 				int randomInfeccion = random.nextInt(1, 11);
 				// Selección random de Infección
@@ -260,12 +274,14 @@ public class Ataque {
 			case "Tss":
 			{
 				System.out.println("El " + user.getNombre() + " parpadea\r\n" + Color.GREEN_BRIGHT + "Tss" + Color.RESET);
+				user.setCargasCreeper(user.getCargasCreeper() + 1);
 				break;
 			}
 			
 			case "Tss Tss":
 			{
 				System.out.println("El " + user.getNombre() + " parpadea 2 veces\r\n" + Color.YELLOW + "Tss Tss" + Color.RESET);
+				user.setCargasCreeper(user.getCargasCreeper() + 1);
 				break;
 			}
 			
@@ -274,6 +290,7 @@ public class Ataque {
 				danoFinal=10;
 				System.out.println(Color.CYAN + "El " + user.getNombre() + " se queda callado..." + Color.RESET + "\r\n" + Color.RED_BRIGHT + "BOOOOM!!!!!" + Color.RESET);
 				haceDano = true;
+				user.setVida(0);
 				break;
 			}
 			
@@ -308,33 +325,33 @@ public class Ataque {
 			}
 			case "Carga":
 			{
-				if(!user.getFlechaRecargada())
+				if(!user.getCargaPreparada())
 				{
 					System.out.println("El " + user.getNombre() + Color.CYAN + "se prepara para cargar" + Color.RESET + " contra " + target.getNombre() + "...");
-					user.setFlechaRecargada(true);
+					user.setCargaPreparada(true);
 				}
 				else
 				{
 					danoFinal = 7;
 					System.out.println("El " + user.getNombre() + " carga contra " + target.getNombre() + "!");
-					user.setFlechaRecargada(false);
-					user.setCargaPreparada(true);
+					user.setCargaPreparada(false);
+					user.setCargaCriticaPreparada(true);
 					haceDano = true;
 				}
 				break;
 			}
 			case "Carga Crítica":
 			{
-				if(!user.getCargaRecargada())
+				if(!user.getCargaCriticaRecargada())
 				{
 					System.out.println("El " + user.getNombre() + Color.CYAN + "se prepara para cargar fuertemente" + Color.RESET + " contra " + user.getNombre() + "...");
-					user.setCargaRecargada(true);
+					user.setCargaCriticaRecargada(true);
 				}
 				else
 				{
 					danoFinal = 14;
 					System.out.println("El " + user.getNombre() + Color.RED_BRIGHT + "carga con toda su fuerza" + Color.RESET + " contra " + target.getNombre() + "!");
-					user.setCargaRecargada(false);
+					user.setCargaCriticaRecargada(false);
 					haceDano = true;
 				}
 				break;
@@ -368,17 +385,16 @@ public class Ataque {
 			case "Mega Carga":
 			{
 				danoFinal = 12;
-				if(!user.getFlechaRecargada())
+				if(!user.getCargaRecargada())
 				{
 					System.out.println("El " + user.getNombre() + Color.CYAN + "se prepara para cargar" + Color.RESET + " contra " + target.getNombre() + "...");
-					user.setFlechaRecargada(true);
+					user.setCargaRecargada(true);
 				}
 				else
 				{
 					danoFinal = 12;
 					System.out.println("El " + user.getNombre() + " carga contra " + target.getNombre() + "!");
-					user.setFlechaRecargada(false);
-					user.setCargaPreparada(true);
+					user.setCargaRecargada(false);
 					haceDano = true;
 				}
 				break;
@@ -431,10 +447,9 @@ public class Ataque {
 			case "Sans Dance":
 			{
 				System.out.println(user.getNombre() + " se prepara para su " + Color.RED_BRIGHT + "ataque más poderoso" + Color.RESET + "...\r\n");
-				Random random = new Random();
-				for(int i = 0; i < 3; i++)
+				for(int i = 0; i < 3; i++)// hace 3 ataques aleatorios
 				{
-					if(random.nextInt(2) == 0)
+					if(random.nextInt(2) == 0) // si sale 0 hace un ataque, si sale 1 hace otro
 					{
 						danoFinal += 3;
 						System.out.println(user.getNombre() + " usa sus huesos contra " + target.getNombre());
@@ -483,16 +498,164 @@ public class Ataque {
 				user.setTurnosPectoralesCoronel(1);
 				break;
 			}
+			case "Espadazo Corrupto":
+			{
+				System.out.println(user.getNombre() + " le pega un espadazo sin rencores a " + target.getNombre());
+				danoFinal = 5;
+				break;
+			}
+			case "Flecha Corrupta":
+			{
+				if(!user.getFlechaRecargada())
+				{
+					System.out.println("Steve " + Color.CYAN + "recarga una flecha" + Color.RESET + "...");
+					user.setFlechaRecargada(true);
+				}
+				else
+				{
+					System.out.println("Steve dispara con su arco!");
+					danoFinal = 10;
+					user.setFlechaRecargada(false);
+				}
+				break;
+			}
+			case "Golpe Crítico Corrupto":
+			{
+				// Selección random del ataque Crítico
+				int criticoRandom = random.nextInt(1, 11);
+				switch(criticoRandom)
+				{
+				case 1, 5:
+					{
+						danoFinal = 1;
+						System.out.println(user.getNombre() + " ataca con su espada y le da en el " + Color.GREEN_BRIGHT + "brazo" + Color.RESET + " a " + target.getNombre());
+						break;
+					}
+				case 2, 6:
+					{
+						danoFinal = 2;
+						System.out.println(user.getNombre() + " ataca con su espada y le da en la " + Color.YELLOW + "pierna" + Color.RESET + " a " + target.getNombre());
+						break;
+					}
+				case 3, 7:
+					{
+						danoFinal = 3;
+						System.out.println(user.getNombre() + " ataca con su espada y le da en el " + Color.YELLOW + "estómago" + Color.RESET + " a " + target.getNombre());
+						
+						break;
+					}
+				case 4, 8:
+					{
+						danoFinal = 4;
+						System.out.println(user.getNombre() + " ataca con su espada y le da en el " + Color.RED_BRIGHT + "pecho" + Color.RESET + " a " + target.getNombre());
+						break;
+					}
+				case 9:
+					{
+						danoFinal = 0;
+						System.out.println(user.getNombre() + " se tropieza y se cae!");
+						break;
+					}
+				case 10:
+					{
+						danoFinal = 15;
+						System.out.println(user.getNombre() + " maneja su espada con total gracia y " + Color.BLACK + "la clava en el cráneo de" + Color.RESET + target.getNombre() + "!");
+						break;
+					}
+				default:
+					{
+						System.out.println("Error en la selección de random del Ataque Crítico de Steve Enemigo");
+					}
+				}
+				break;
+			}
+			default:
+			{
+				System.out.println(Color.RED_BRIGHT + "ERROR EN LA SELEECCION DE ATAQUES DE " + user.getNombre() + Color.RESET);
+			}
 		}
 		
 		if(danoFinal > 0 && haceDano)
 		{
-			if(target.getDefensa() > 0)
-			{
-				danoFinal -= (danoFinal * (target.getDefensa() / 2)) / 10; // cálculo de defensa
-			}
 			
-			System.out.println(user.getNombre() + " hace " + danoFinal + " puntos de daño a " + target.getNombre() + "!");
+			randomGolpe = random.nextInt(1, 11);
+			
+			randomGolpe += user.getVelocidad() / 2;
+			
+			if(randomGolpe >= 5)
+			{
+				if(target.getNombre().equals("Sans") || target.getNombre().equals("Steve Corrupto") || target.getNombre().equals("Steve") || target.getNombre().equals("Alex") || target.getNombre().equals("Chicken Little"))
+				{
+					System.out.println("El ataque de " + user.getNombre() + Color.RED_BRIGHT + " impacta totalmente contra " + Color.RESET + target.getNombre());
+				}
+				else
+				{
+					System.out.println("El ataque de " + user.getNombre() + Color.RED_BRIGHT + " impacta totalmente contra el " + Color.RESET + target.getNombre());
+				}
+			}
+			else if(randomGolpe >=2 && randomGolpe <= 4)
+			{
+				if(target.getNombre().equals("Sans") || target.getNombre().equals("Steve Corrupto") || target.getNombre().equals("Steve") || target.getNombre().equals("Alex") || target.getNombre().equals("Chicken Little"))
+				{
+					System.out.println("El ataque de " + user.getNombre() + Color.YELLOW + " impacta parcialmente contra " + Color.RESET + target.getNombre());
+				}
+				else
+				{
+					System.out.println("El ataque de " + user.getNombre() + Color.YELLOW + " impacta parcialmente contra el " + Color.RESET + target.getNombre());
+					danoFinal -= danoFinal/2;//impactar parcialmente
+				}
+			}
+			else
+			{
+				if(target.getNombre().equals("Sans") || target.getNombre().equals("Steve Corrupto") || target.getNombre().equals("Steve") || target.getNombre().equals("Alex") || target.getNombre().equals("Chicken Little"))
+				{
+					System.out.println("El ataque de " + user.getNombre() + Color.CYAN + " es esquivado por " + Color.RESET + target.getNombre() + "!");
+				}
+				else
+				{
+					System.out.println("El ataque de " + user.getNombre() + Color.CYAN + " es esquivado por el " + Color.RESET + target.getNombre() + "!");
+					danoFinal = 0;//esquivar ataque
+				}
+			}
+			if(danoFinal > 0 && target.getTurnosPectoralesCoronel() > 0)
+			{
+				System.out.println("\r\nEl " + target.getNombre() + " se protege con sus pectorales!");
+				System.out.println("El " + target.getNombre() + " reflecta todo el daño!");
+				user.setVida(user.getVida() - danoFinal);
+				System.out.println(user.getNombre() + " ahora tiene " + (user.getVida() > user.getVidaMax() / 2 ? Color.GREEN_BRIGHT : (user.getVida() > user.getVidaMax() / 4 ? Color.YELLOW : Color.RED_BRIGHT)) + dfOneDecimal.format(user.getVida()) + Color.RESET + "/" + Color.GREEN_BRIGHT + dfZeroDecimal.format(user.getVidaMax()) + Color.RESET + " puntos de vida.");
+			}
+			else
+			{
+				if(danoFinal > 0 && randomGolpe != 1)
+				{
+					if(target.getDefensa() > 0)
+					{
+						danoFinal -= (danoFinal * (target.getDefensa() / 2)) / 10; // cálculo de defensa
+					}
+					target.setVida(target.getVida() - danoFinal);
+					if(target.getNombre().equals("Sans") || target.getNombre().equals("Steve Corrupto") || target.getNombre().equals("Steve") || target.getNombre().equals("Alex") || target.getNombre().equals("Chicken Little"))
+					{
+						System.out.println(user.getNombre() + " hace " + Color.RED_BRIGHT + danoFinal + Color.RESET + " puntos de daño a " + target.getNombre() + "."
+								+ " Ahora le quedan " + (target.getVida() > target.getVidaMax() / 2 ? Color.GREEN_BRIGHT : (target.getVida() > target.getVidaMax() / 4 ? Color.YELLOW : Color.RED_BRIGHT)) + dfOneDecimal.format(target.getVida()) + Color.RESET + "/" + Color.GREEN_BRIGHT + dfZeroDecimal.format(target.getVidaMax()) + Color.RESET + " puntos de vida.");
+					}
+					else
+					{
+						System.out.println(user.getNombre() + " hace " + Color.RED_BRIGHT + danoFinal + Color.RESET + " puntos de daño al "
+										+ target.getNombre() + ". Ahora le quedan " + (target.getVida() > target.getVidaMax() / 2 ? Color.GREEN_BRIGHT : (target.getVida() > target.getVidaMax() / 4 ? Color.YELLOW : Color.RED_BRIGHT)) + dfOneDecimal.format(target.getVida()) + Color.RESET + "/" + Color.GREEN_BRIGHT + dfZeroDecimal.format(target.getVidaMax()) + Color.RESET + " puntos de vida.");
+					}
+				}
+				else
+				{
+					if(target.getNombre().equals("Sans") || target.getNombre().equals("SteveCorrupto") || target.getNombre().equals("Steve") || target.getNombre().equals("Alex") || target.getNombre().equals("Chicken Little"))
+					{
+						System.out.println(target.getNombre() + " " + Color.RED_BRIGHT + "no recibe daño este turno...\n" + Color.RESET);
+					}
+					else
+					{
+						System.out.println("El " + target.getNombre() + Color.RED_BRIGHT + " no recibe daño este turno...\n" + Color.RESET);
+					}
+				}
+			}
 			if(user.getDanoExtra() > 0)
 			{
 				user.setDanoExtra(0);
