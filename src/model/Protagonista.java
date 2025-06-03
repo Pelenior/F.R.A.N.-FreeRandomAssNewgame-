@@ -25,6 +25,10 @@ public class Protagonista extends Personaje {
 		
 		ataqueController.rellenarAtaques(this);
 	}
+	
+	public Protagonista() {
+		
+	}
 
 	public int getSuerte() {
 		return suerte;
@@ -63,6 +67,11 @@ public class Protagonista extends Personaje {
 	public void insertProta(String nombre, Double vidaMax, Double defensa, Double fuerza, Double velocidad, Integer idAscii, Boolean karma) throws SQLException{
 		DaoPersonajes DaoPersonajes = new DaoPersonajes();
 		DaoPersonajes.insertProta( nombre,  vidaMax,  defensa,  fuerza,  velocidad,  idAscii,  karma);
+	}
+	
+	public Protagonista getDataProta() throws SQLException{
+		DaoPersonajes DaoPersonajes = new DaoPersonajes();
+		return DaoPersonajes.getDataProta(this.nombre);
 	}
 	
 	public void updateProta(String nombre, Double vidaMax, Double defensa, Double fuerza, Double velocidad, Integer idAscii, Boolean karma) throws SQLException{

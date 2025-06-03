@@ -11,14 +11,16 @@ public class Main {
 		    
 		Juego juego = new Juego();
 		DaoPersonajes DaoPersonajes = new DaoPersonajes();
+		Protagonista prota = new Protagonista("Chicken Little", 20, 0, 1, 3, 2, 0);
+		Enemigo enemigo = new Enemigo("Zombie", 20, 0, 1, 3, 2);
 		
 		try {
-			DaoPersonajes.selectALLProta();
+			System.out.println(prota.getDataProta().getVidaMax());
+			System.out.println(enemigo.getDataEnemigo().getVidaMax());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 //		juego.comenzar();
-		
 		
 	}
 

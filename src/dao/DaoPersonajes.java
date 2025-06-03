@@ -7,6 +7,8 @@ public class DaoPersonajes {
 	
 	private Connection conn = null;
 	private static DaoPersonajes instance = null;
+	private Protagonista dataProta = new Protagonista();
+	private Enemigo dataEnemigo = new Enemigo();
 	
 	public DaoPersonajes() throws SQLException {
 		
@@ -277,5 +279,59 @@ public class DaoPersonajes {
 
 	    statement.close();
 	}
+	
+	public Protagonista getDataProta(String nombre) throws SQLException {
+	    String query = "SELECT * FROM personajes WHERE nombre = ? AND tipo = 'protagonista'";
+
+	    PreparedStatement statement = conn.prepareStatement(query);
+	    statement.setString(1, nombre);
+
+	    ResultSet rs = statement.executeQuery();
+
+	    if (rs.next()) {
+	        dataProta.setNombre(nombre);
+	        dataProta.setVidaMax(rs.getDouble("vidaMax"));
+	        dataProta.setDefensa(rs.getDouble("defensa"));
+	        dataProta.setFuerza(rs.getDouble("fuerza"));
+	        dataProta.setVelocidad(rs.getDouble("velocidad"));
+	        dataProta.setIdAscii(rs.getInt("idAscii"));
+	        
+	    } else {
+	        System.out.println("No se encontró el protagonista: " + nombre);
+	        return null;
+	    }
+
+	    rs.close();
+	    statement.close();
+	    return dataProta;
+	}
+	public Enemigo getDataEnemigo(String nombre) throws SQLException {
+	    String query = "SELECT * FROM personajes WHERE nombre = ? AND tipo = 'enemigo'";
+
+	    PreparedStatement statement = conn.prepareStatement(query);
+	    statement.setString(1, nombre);
+
+	    ResultSet rs = statement.executeQuery();
+
+	    if (rs.next()) {
+	        dataEnemigo.setNombre(nombre);
+	        dataEnemigo.setVidaMax(rs.getDouble("vidaMax"));
+	        dataEnemigo.setDefensa(rs.getDouble("defensa"));
+	        dataEnemigo.setFuerza(rs.getDouble("fuerza"));
+	        dataEnemigo.setVelocidad(rs.getDouble("velocidad"));
+	        dataEnemigo.setIdAscii(rs.getInt("idAscii"));
+	        
+	    } else {
+	        System.out.println("No se encontró el enemigo: " + nombre);
+	        return null;
+	    }
+
+	    rs.close();
+	    statement.close();
+	    return dataEnemigo;
+	}
+
+
+
 
 }
