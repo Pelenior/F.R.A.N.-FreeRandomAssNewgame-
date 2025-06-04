@@ -110,7 +110,9 @@ public class Combate {
 		ArrayList<String> nombreEnemigos = new ArrayList<String>();
 		ArrayList<Object> vidaMaxEnemigos = new ArrayList<Object>();
 		ArrayList<Object> defensaEnemigos = new ArrayList<Object>();
+		ArrayList<Object> fuerzaEnemigos = new ArrayList<Object>();
 		ArrayList<Object> velocidadEnemigos = new ArrayList<Object>();
+		ArrayList<Object> asciiEnemigos = new ArrayList<Object>();
 		
 		DaoPersonajes daoPersonajes = new DaoPersonajes();
 		
@@ -177,11 +179,19 @@ public class Combate {
 			}
 			for(ArrayList<Object> i : listaNombresEnemigosBoss)
 			{
-				defensaEnemigos.add(i.get(1));
+				defensaEnemigos.add(i.get(2));
 			}
 			for(ArrayList<Object> i : listaNombresEnemigosBoss)
 			{
-				velocidadEnemigos.add(i.get(1));
+				fuerzaEnemigos.add(i.get(3));
+			}
+			for(ArrayList<Object> i : listaNombresEnemigosBoss)
+			{
+				velocidadEnemigos.add(i.get(4));
+			}
+			for(ArrayList<Object> i : listaNombresEnemigosBoss)
+			{
+				asciiEnemigos.add(i.get(5));
 			}
 			switch(prota.getNombre())
 			{
@@ -214,11 +224,19 @@ public class Combate {
 			}
 			for(ArrayList<Object> i : listaNombresEnemigosSteve)
 			{
-				defensaEnemigos.add(i.get(1));
+				defensaEnemigos.add(i.get(2));
 			}
 			for(ArrayList<Object> i : listaNombresEnemigosSteve)
 			{
-				velocidadEnemigos.add(i.get(1));
+				fuerzaEnemigos.add(i.get(3));
+			}
+			for(ArrayList<Object> i : listaNombresEnemigosSteve)
+			{
+				velocidadEnemigos.add(i.get(4));
+			}
+			for(ArrayList<Object> i : listaNombresEnemigosSteve)
+			{
+				asciiEnemigos.add(i.get(5));
 			}
 			
 			seleccionRandom = 0;
@@ -235,11 +253,19 @@ public class Combate {
 			}
 			for(ArrayList<Object> i : listaNombresEnemigosRaid)
 			{
-				defensaEnemigos.add(i.get(1));
+				defensaEnemigos.add(i.get(2));
 			}
 			for(ArrayList<Object> i : listaNombresEnemigosRaid)
 			{
-				velocidadEnemigos.add(i.get(1));
+				fuerzaEnemigos.add(i.get(3));
+			}
+			for(ArrayList<Object> i : listaNombresEnemigosRaid)
+			{
+				velocidadEnemigos.add(i.get(4));
+			}
+			for(ArrayList<Object> i : listaNombresEnemigosRaid)
+			{
+				asciiEnemigos.add(i.get(5));
 			}
 			
 			seleccionRandom = random.nextInt(0, nombreEnemigos.size());
@@ -256,11 +282,19 @@ public class Combate {
 			}
 			for(ArrayList<Object> i : listaNombresEnemigosRaidBoss)
 			{
-				defensaEnemigos.add(i.get(1));
+				defensaEnemigos.add(i.get(2));
 			}
 			for(ArrayList<Object> i : listaNombresEnemigosRaidBoss)
 			{
-				velocidadEnemigos.add(i.get(1));
+				fuerzaEnemigos.add(i.get(3));
+			}
+			for(ArrayList<Object> i : listaNombresEnemigosRaidBoss)
+			{
+				velocidadEnemigos.add(i.get(4));
+			}
+			for(ArrayList<Object> i : listaNombresEnemigosRaidBoss)
+			{
+				asciiEnemigos.add(i.get(5));
 			}
 			
 			seleccionRandom = 0;
@@ -278,18 +312,27 @@ public class Combate {
 			}
 			for(ArrayList<Object> i : listaNombresEnemigosNormal)
 			{
-				defensaEnemigos.add(i.get(1));
+				defensaEnemigos.add(i.get(2));
 			}
 			for(ArrayList<Object> i : listaNombresEnemigosNormal)
 			{
-				velocidadEnemigos.add(i.get(1));
+				fuerzaEnemigos.add(i.get(3));
+			}
+			for(ArrayList<Object> i : listaNombresEnemigosNormal)
+			{
+				velocidadEnemigos.add(i.get(4));
+			}
+			for(ArrayList<Object> i : listaNombresEnemigosNormal)
+			{
+				asciiEnemigos.add(i.get(5));
 			}
 			
 			seleccionRandom = random.nextInt(0, nombreEnemigos.size());
 		}
 		seleccionRandom = 0;
 		enemigo = new Enemigo(nombreEnemigos.get(seleccionRandom), (double) vidaMaxEnemigos.get(seleccionRandom),
-							  (double) defensaEnemigos.get(seleccionRandom), (double) velocidadEnemigos.get(seleccionRandom), 0, 0);
+							  (double) defensaEnemigos.get(seleccionRandom), (double) velocidadEnemigos.get(seleccionRandom),
+							  (double) fuerzaEnemigos.get(seleccionRandom), 0);
 	}
 	
 	//devuelve false si el protagonista pierde
