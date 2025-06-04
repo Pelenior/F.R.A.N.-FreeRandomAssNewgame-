@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.*;
 import model.*;
+import java.util.ArrayList;
 
 public class DaoPersonajes {
 	
@@ -77,13 +78,13 @@ public class DaoPersonajes {
 		statement.close();
 	}
 
-	public void selectALLEnemigo() throws SQLException {
+	public ArrayList<ArrayList<Object>> selectALLEnemigo() throws SQLException {
 	    String selectAllData = "SELECT * FROM enemigos";
 
+	    ArrayList<ArrayList<Object>> listaFinal = new ArrayList<ArrayList<Object>>();
+	    
 	    Statement statementSelect = conn.createStatement();
 	    ResultSet resultData = statementSelect.executeQuery(selectAllData);
-
-	    int countData = 0;
 
 	    while (resultData.next()) {
 	        String nombre = resultData.getString("nombre");
@@ -95,24 +96,27 @@ public class DaoPersonajes {
 	        boolean isRaid = resultData.getBoolean("isRaid");
 	        boolean isBoss = resultData.getBoolean("isBoss");
 	        boolean isSteve = resultData.getBoolean("isSteve");
-
-	        countData++;
-
-	        System.out.println("Enemigo " + countData + "\n"
-	                + "Nombre: " + nombre + "\n"
-	                + "Vida Max: " + vidaMax + "\n"
-	                + "Defensa: " + defensa + "\n"
-	                + "Fuerza: " + fuerza + "\n"
-	                + "Velocidad: " + velocidad + "\n"
-	                + "idAscii: " + idAscii + "\n"
-	                + "Es Raid: " + isRaid + "\n"
-	                + "Es Boss: " + isBoss + "\n"
-	                + "Es Steve: " + isSteve + "\n"
-	                + "----------------------------");
+	        
+	        ArrayList<Object> inTheMiddle = new ArrayList<Object>();
+	        
+	        inTheMiddle.add(nombre);
+	        inTheMiddle.add(vidaMax);
+	        inTheMiddle.add(defensa);
+	        inTheMiddle.add(fuerza);
+	        inTheMiddle.add(velocidad);
+	        inTheMiddle.add(idAscii);
+	        inTheMiddle.add(isRaid);
+	        inTheMiddle.add(isBoss);
+	        inTheMiddle.add(isSteve);
+	        
+	        listaFinal.add(inTheMiddle);
 	    }
 
 	    statementSelect.close();
+	    
+	    return listaFinal;
 	}
+	
 	
 	public void selectALLPersonajes() throws SQLException {
 	    String selectAllData = "SELECT * FROM protagonistas";

@@ -5,6 +5,7 @@ import java.util.Random;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.sql.*;
+import dao.*;
 
 public class Combate {
 	
@@ -106,16 +107,67 @@ public class Combate {
 	
 	private void seleccionEnemigo(Random random, Protagonista prota, String tipoCombate, int numeroEnemigos) throws SQLException
 	{
-		String[] nombreEnemigos;
+		ArrayList<String> nombreEnemigos;
 		double[] vidaMaxEnemigos;
 		double[] defensaEnemigos;
 		double[] velocidadEnemigos;
+		
+		DaoPersonajes daoPersonajes = new DaoPersonajes();
+		
+		ArrayList<ArrayList<Object>> listaEnemigos;
+		ArrayList<String> listaNombresEnemigosBoss = new ArrayList<String>();
+		ArrayList<String> listaNombresEnemigosSteve = new ArrayList<String>();
+		ArrayList<String> listaNombresEnemigosRaid = new ArrayList<String>();
+		ArrayList<String> listaNombresEnemigosRaidBoss = new ArrayList<String>();
+		ArrayList<String> listaNombresEnemigosNormal = new ArrayList<String>();
+		
+		listaEnemigos = daoPersonajes.selectALLEnemigo();
+		
+		for(ArrayList<Object> i : listaEnemigos)
+		{
+			if((boolean) i.get(7) && !(boolean)i.get(6))
+			{
+				listaNombresEnemigosBoss.add((String) i.get(0));
+			}
+		}
+		
+		for(ArrayList<Object> i : listaEnemigos)
+		{
+			if((boolean)i.get(8))
+			{
+				listaNombresEnemigosSteve.add((String) i.get(0));
+			}
+		}
+		
+		for(ArrayList<Object> i : listaEnemigos)
+		{
+			if((boolean)i.get(6) && !(boolean)i.get(7))
+			{
+				listaNombresEnemigosRaid.add((String) i.get(0));
+			}
+		}
+		
+		for(ArrayList<Object> i : listaEnemigos)
+		{
+			if((boolean)i.get(6) && (boolean)i.get(7))
+			{
+				listaNombresEnemigosRaidBoss.add((String) i.get(0));
+			}
+		}
+		
+		for(ArrayList<Object> i : listaEnemigos)
+		{
+			if(!(boolean)i.get(6) && !(boolean)i.get(7) && !(boolean)i.get(8))
+			{
+				listaNombresEnemigosNormal.add((String) i.get(0));
+			}
+		}
 		
 		int seleccionRandom = 0;
 		
 		if(tipoCombate.equals("Boss"))
 		{
-			nombreEnemigos = new String[]     {"Dragon", "Sans", "Coronel Sanders"};
+			nombreEnemigos = listaNombresEnemigosBoss;
 			vidaMaxEnemigos = new double[]    {50.0,     1.0,    50.0};
 			defensaEnemigos = new double[]    {5,        0,      5};
 			velocidadEnemigos = new double[]  {5,        10,     5};
@@ -138,9 +190,9 @@ public class Combate {
 				}
 			}
 		}
-		else if(tipoCombate.equals("Steve Corrupto"))
+		else if(tipoCombate.equals("EvilSteve"))
 		{
-			nombreEnemigos = new String[]    {"Steve Corrupto"};
+			nombreEnemigos = listaNombresEnemigosSteve;
 			vidaMaxEnemigos =   new double[] {30.0};
 			defensaEnemigos =   new double[] {5};
 			velocidadEnemigos = new double[] {5};
@@ -149,16 +201,16 @@ public class Combate {
 		}
 		else if(tipoCombate.equals("Raid") && numeroEnemigos > 1)
 		{
-			nombreEnemigos =    new String[] {"Pillager", "Vindicator", "Evoker"};
+			nombreEnemigos =    listaNombresEnemigosRaid;
 			vidaMaxEnemigos =   new double[] {20.0,        20.0,         15.0};
 			defensaEnemigos =   new double[] {1,           2,            0};
 			velocidadEnemigos = new double[] {3,           3,            4};
 			
-			seleccionRandom = random.nextInt(0, nombreEnemigos.length);
+			seleccionRandom = random.nextInt(0, nombreEnemigos.size());
 		}
 		else if(tipoCombate.equals("Raid") && numeroEnemigos == 1)
 		{
-			nombreEnemigos = new String[]    {"Devastator"};
+			nombreEnemigos = listaNombresEnemigosRaidBoss;
 			vidaMaxEnemigos = new double[]   {30};
 			defensaEnemigos = new double[]   {4};
 			velocidadEnemigos = new double[] {2};
@@ -168,15 +220,15 @@ public class Combate {
 		}
 		else
 		{
-			nombreEnemigos =    new String[] {"Zombie", "Esqueleto", "Creeper"};
+			nombreEnemigos =    listaNombresEnemigosNormal;
 			vidaMaxEnemigos =   new double[] {20.0,     15.0,        15.0};
 			defensaEnemigos =   new double[] {1,        0,           0};
 			velocidadEnemigos = new double[] {1,        2,           5};
 			
-			seleccionRandom = random.nextInt(0, nombreEnemigos.length);
+			seleccionRandom = random.nextInt(0, nombreEnemigos.size());
 		}
-		
-		enemigo = new Enemigo(nombreEnemigos[seleccionRandom], vidaMaxEnemigos[seleccionRandom],
+		seleccionRandom = 0;
+		enemigo = new Enemigo(nombreEnemigos.get(seleccionRandom), vidaMaxEnemigos[seleccionRandom],
 							  defensaEnemigos[seleccionRandom], velocidadEnemigos[seleccionRandom], 0, 0);
 	}
 	

@@ -57,7 +57,6 @@ public class AtaqueController {
 		if(enemigo.getNombre().equals("Creeper"))
 		{
 			ataqueRandom = enemigo.getCargasCreeper();
-			ataqueRandom = rd.nextInt(0, listaAtaques.size());
 		}
 		else if(enemigo.getNombre().equals("Vindicator"))
 		{
