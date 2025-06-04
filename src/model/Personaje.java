@@ -293,6 +293,11 @@ import dao.*;
 		DaoPersonajes.selectALLEnemigo();
 	}
 	
+	public void selectAllAtaques() throws SQLException{
+		DaoAtaques DaoAtaques = new DaoAtaques();
+		DaoAtaques.selectAllAtaques(this.nombre);
+	}
+	
 	public void selectThis() throws SQLException{
 		DaoPersonajes DaoPersonajes = new DaoPersonajes();
 		DaoPersonajes.selectThis(this.getNombre());
