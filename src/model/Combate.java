@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.Random;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.sql.*;
 
 public class Combate {
 	
@@ -103,7 +104,7 @@ public class Combate {
 
 	}
 	
-	private void seleccionEnemigo(Random random, Protagonista prota, String tipoCombate, int numeroEnemigos)
+	private void seleccionEnemigo(Random random, Protagonista prota, String tipoCombate, int numeroEnemigos) throws SQLException
 	{
 		String[] nombreEnemigos;
 		double[] vidaMaxEnemigos;
@@ -180,7 +181,7 @@ public class Combate {
 	}
 	
 	//devuelve false si el protagonista pierde
-	public boolean combate(Scanner sc, Random random, Protagonista prota, String tipoCombate, boolean enemigoEmpiezaPrimero)
+	public boolean combate(Scanner sc, Random random, Protagonista prota, String tipoCombate, boolean enemigoEmpiezaPrimero) throws SQLException
 	{
 		//Variables que permanecen entre encuentros con enemigos
 		

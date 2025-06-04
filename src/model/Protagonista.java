@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 import dao.DaoPersonajes;
@@ -13,7 +13,7 @@ public class Protagonista extends Personaje {
 	private ArrayList<Objeto> listaObjetos;
 	
 	//constructor
-	public Protagonista(String nombre, double vidaMax, double defensa, double fuerza, double velocidad, int idAscii, int suerte) {
+	public Protagonista(String nombre, double vidaMax, double defensa, double fuerza, double velocidad, int idAscii, int suerte) throws SQLException {
 		this.nombre = nombre;
 		this.vidaMax = vidaMax;
 		this.vida = vidaMax;

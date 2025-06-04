@@ -1,13 +1,13 @@
 package model;
 
-import java.sql.SQLException;
+import java.sql.*;
 
 import dao.DaoPersonajes;
 
 public class Enemigo extends Personaje {
 	
 	//Constructor
-	public Enemigo(String nombre, double vidaMax, double defensa, double velocidad, double fuerza, int idAscii) {
+	public Enemigo(String nombre, double vidaMax, double defensa, double velocidad, double fuerza, int idAscii) throws SQLException {
 		this.nombre = nombre;
 		this.vidaMax = vidaMax;
 		vida = vidaMax;

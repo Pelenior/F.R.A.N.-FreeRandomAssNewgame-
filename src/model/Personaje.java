@@ -2,6 +2,7 @@ package model;
 
 import java.sql.*;
 import dao.*;
+import java.util.ArrayList;
 
 
  	abstract class Personaje {
@@ -293,9 +294,9 @@ import dao.*;
 		DaoPersonajes.selectALLEnemigo();
 	}
 	
-	public void selectAllAtaques() throws SQLException{
+	public ArrayList<String> selectAllAtaques() throws SQLException{
 		DaoAtaques DaoAtaques = new DaoAtaques();
-		DaoAtaques.selectAllAtaques(this.nombre);
+		return DaoAtaques.selectAllAtaques(this.nombre);
 	}
 	
 	public void selectThis() throws SQLException{

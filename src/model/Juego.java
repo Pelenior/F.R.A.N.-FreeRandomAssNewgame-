@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.sql.*;
 
 import dao.*;
 
@@ -66,7 +67,7 @@ public class Juego {
         return instanciaJuego;//si ya está creado
     }
 	
-	public void comenzar()
+	public void comenzar() throws SQLException
 	{
 		contrasena(sc);
 		elegirPersonaje(sc, random);
@@ -94,7 +95,7 @@ public class Juego {
 		System.out.println(Color.GREEN_BRIGHT + "CONTRASEÑA ACEPTADA \n" + Color.RESET);
 	}
 	
-	private void elegirPersonaje(Scanner sc, Random random) {
+	private void elegirPersonaje(Scanner sc, Random random) throws SQLException {
 				
 				System.out.println(Color.WHITE_BOLD_BRIGHT + "¡BIENVENIDO AL MUNDO DE MINECRAFT!\n");	
 				System.out.println("¡PARA EMPEZAR ELIJE EL PERSONAJE QUE MAS TE GUSTE!\n");
@@ -197,7 +198,7 @@ public class Juego {
 		
 	}
 
-	private void bucleJuego()
+	private void bucleJuego() throws SQLException
 	{
 		while(true)
 		{
@@ -206,7 +207,7 @@ public class Juego {
 		}
 	}
 	
-	private void seleccionCaminos(Random random, Scanner scanner) {
+	private void seleccionCaminos(Random random, Scanner scanner) throws SQLException {
 		
 		String[] listaCaminos = {Color.RED_BRIGHT + "Combate" + Color.RESET, Color.CYAN + "Evento Aleatorio" + Color.RESET, Color.YELLOW + "Mercader" + Color.RESET};
 		
