@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2025 a las 13:56:59
+-- Tiempo de generación: 04-06-2025 a las 12:27:37
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -27,7 +27,6 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `ataques`
 --
 
-DROP TABLE IF EXISTS `ataques`;
 CREATE TABLE `ataques` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
@@ -90,7 +89,6 @@ INSERT INTO `ataques` (`id`, `nombre`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `enemigos`
 --
 
-DROP TABLE IF EXISTS `enemigos`;
 CREATE TABLE `enemigos` (
   `nombre` varchar(50) NOT NULL,
   `vidaMax` double DEFAULT NULL,
@@ -126,7 +124,6 @@ INSERT INTO `enemigos` (`nombre`, `vidaMax`, `defensa`, `fuerza`, `velocidad`, `
 -- Estructura de tabla para la tabla `jugador`
 --
 
-DROP TABLE IF EXISTS `jugador`;
 CREATE TABLE `jugador` (
   `nombre` varchar(50) NOT NULL,
   `contraseña` varchar(24) NOT NULL,
@@ -150,7 +147,6 @@ INSERT INTO `jugador` (`nombre`, `contraseña`, `idAscii`) VALUES
 -- Estructura de tabla para la tabla `personajes`
 --
 
-DROP TABLE IF EXISTS `personajes`;
 CREATE TABLE `personajes` (
   `nombre` varchar(50) NOT NULL,
   `tipo` enum('protagonista','enemigo') NOT NULL,
@@ -191,7 +187,6 @@ INSERT INTO `personajes` (`nombre`, `tipo`, `vidaMax`, `defensa`, `fuerza`, `vel
 -- Estructura de tabla para la tabla `protagonistas`
 --
 
-DROP TABLE IF EXISTS `protagonistas`;
 CREATE TABLE `protagonistas` (
   `nombre` varchar(50) NOT NULL,
   `vidaMax` double DEFAULT NULL,
@@ -217,7 +212,6 @@ INSERT INTO `protagonistas` (`nombre`, `vidaMax`, `defensa`, `fuerza`, `velocida
 -- Estructura de tabla para la tabla `relacion_ataques`
 --
 
-DROP TABLE IF EXISTS `relacion_ataques`;
 CREATE TABLE `relacion_ataques` (
   `personaje_nombre` varchar(50) NOT NULL,
   `ataque_id` int(11) NOT NULL,
