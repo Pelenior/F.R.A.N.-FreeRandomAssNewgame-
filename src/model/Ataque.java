@@ -303,12 +303,13 @@ public class Ataque {
 				break;
 			}
 		
-//			case "Esquele-Ton":
-//			{
-//				danoFinal=3;
-//				haceDano = true;
-//				break;
-//			}
+			case "Esquele-Ton":
+			{
+				danoFinal = 3;
+				System.out.println("El " + user.getNombre() + " comienza a bailar spooky scary skeletons");
+				haceDano = true;
+				break;
+			}
 			
 			case "Tss":
 			{
@@ -358,6 +359,11 @@ public class Ataque {
 					user.setFlechaRecargada(false);
 					haceDano = true;
 				}
+				break;
+			}
+			case "Saqueo":
+			{
+				System.out.println("El " + user.getNombre() + " le roba " + Juego.monedas(target.getNombre(), 2) + (target.getNombre().equals("Chicken Little") ? " semillas " :  " esmeraldas ") + "a " + target.getNombre());
 				break;
 			}
 			case "Hachazo":
@@ -429,7 +435,6 @@ public class Ataque {
 			}
 			case "Mega Carga":
 			{
-				danoFinal = 12 + user.getFuerza();
 				if(!user.getCargaRecargada())
 				{
 					System.out.println("El " + user.getNombre() + Color.CYAN + "se prepara para cargar" + Color.RESET + " contra " + target.getNombre() + "...");
@@ -510,6 +515,7 @@ public class Ataque {
 					}
 				}
 				System.out.println("\r\nEl " + Color.CYAN + "karma" + Color.RESET + " de " + target.getNombre() + " ahora es " + Color.RED_BRIGHT + target.getKarma() + Color.RESET + "!\r\n");
+				haceDano = true;
 				break;
 			}
 			case "Pollo":
@@ -549,6 +555,7 @@ public class Ataque {
 			{
 				System.out.println(user.getNombre() + " le pega un espadazo sin rencores a " + target.getNombre());
 				danoFinal = 5 + user.getFuerza();
+				haceDano = true;
 				break;
 			}
 			case "Flecha Corrupta":
@@ -563,10 +570,11 @@ public class Ataque {
 					System.out.println("Steve dispara con su arco!");
 					danoFinal = 10 + user.getFuerza();
 					user.setFlechaRecargada(false);
+					haceDano = true;
 				}
 				break;
 			}
-			case "Golpe Crítico Corrupto":
+			case "Ataque Crítico Corrupto":
 			{
 				// Selección random del ataque Crítico
 				int criticoRandom = random.nextInt(1, 11);
@@ -576,25 +584,28 @@ public class Ataque {
 					{
 						danoFinal = 1 + user.getFuerza();
 						System.out.println(user.getNombre() + " ataca con su espada y le da en el " + Color.GREEN_BRIGHT + "brazo" + Color.RESET + " a " + target.getNombre());
+						haceDano = true;
 						break;
 					}
 				case 2, 6:
 					{
 						danoFinal = 2 + user.getFuerza();
 						System.out.println(user.getNombre() + " ataca con su espada y le da en la " + Color.YELLOW + "pierna" + Color.RESET + " a " + target.getNombre());
+						haceDano = true;
 						break;
 					}
 				case 3, 7:
 					{
 						danoFinal = 3 + user.getFuerza();
 						System.out.println(user.getNombre() + " ataca con su espada y le da en el " + Color.YELLOW + "estómago" + Color.RESET + " a " + target.getNombre());
-						
+						haceDano = true;
 						break;
 					}
 				case 4, 8:
 					{
 						danoFinal = 4 + user.getFuerza();
 						System.out.println(user.getNombre() + " ataca con su espada y le da en el " + Color.RED_BRIGHT + "pecho" + Color.RESET + " a " + target.getNombre());
+						haceDano = true;
 						break;
 					}
 				case 9:
@@ -606,6 +617,7 @@ public class Ataque {
 					{
 						danoFinal = 15 + user.getFuerza();
 						System.out.println(user.getNombre() + " maneja su espada con total gracia y " + Color.BLACK + "la clava en el cráneo de" + Color.RESET + target.getNombre() + "!");
+						haceDano = true;
 						break;
 					}
 				default:

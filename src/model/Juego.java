@@ -19,7 +19,7 @@ public class Juego {
 	private int numeroSalas = 0;
 	private Scanner sc;
 	
-	private static boolean gameOver = false;
+	public static boolean gameOver = false;
 	
 	private static boolean hasLambo = false;
 	private boolean haHuidoAlgunaVez = false;
@@ -408,8 +408,9 @@ public class Juego {
 				System.out.println(prota.getNombre() + " consigue " + monedas(prota.getNombre(), prota.getNumEnemigos() * 3) + (prota.getNombre().equals("Chicken Little") ? " semillas " : " esmeraldas ") + "tras el combate\r\n");
 			}
 		}
+		prota.setHaHuido(false);
 	}
-	
+
 	private void bucleJuego() throws SQLException
 	{
 		while(!gameOver)
