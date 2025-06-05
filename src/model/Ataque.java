@@ -417,6 +417,7 @@ public class Ataque {
 			{
 				System.out.println("El " + user.getNombre() + Color.CYAN + "prepara un " + Color.PURPLE_BRIGHT + "tótem de inmortalidad" + Color.RESET + "...");
 				user.setHasTotem(true);
+				user.setTotemUsado(true);
 				break;
 			}
 			case "Cabezazo":
@@ -463,6 +464,7 @@ public class Ataque {
 				danoFinal = 5 + user.getFuerza();
 				System.out.println("El " + user.getNombre() + " suelta su aliento sobre " + target.getNombre());
 				target.setTurnosAlientoDragon(1);
+				target.setAlientoDragonActivo(true);
 				haceDano = true;
 				break;
 			}
@@ -470,6 +472,7 @@ public class Ataque {
 			{
 				System.out.println("El " + user.getNombre() + " llama a sus " + Color.PURPLE_BRIGHT + "enderman" + Color.RESET);
 				target.setTurnosEnderman(2);
+				target.setEndermanActivo(true);
 				break;
 			}
 			case "Hueso":
@@ -618,9 +621,8 @@ public class Ataque {
 			}
 		}
 		
-		if(danoFinal > 0 && haceDano)
+		if(danoFinal > 0 && haceDano && target.getStamina() == 0)
 		{
-			
 			randomGolpe = random.nextInt(1, 11);
 			
 			randomGolpe += user.getVelocidad() / 2;
@@ -671,6 +673,11 @@ public class Ataque {
 			{
 				if(danoFinal > 0 && randomGolpe != 1)
 				{
+					if(user.getDanoExtra() > 0)
+					{
+						danoFinal += user.getDanoExtra();
+						user.setDanoExtra(0);
+					}
 					if(target.getDefensa() > 0)
 					{
 						danoFinal -= (danoFinal * (target.getDefensa() / 2)) / 10; // cálculo de defensa
@@ -699,10 +706,10 @@ public class Ataque {
 					}
 				}
 			}
-			if(user.getDanoExtra() > 0)
-			{
-				user.setDanoExtra(0);
-			}
+		}
+		else if(target.getNombre().equals("Sans"))
+		{
+			System.out.println(target.getNombre() + " esquiva el ataque!");
 		}
 		
 	}

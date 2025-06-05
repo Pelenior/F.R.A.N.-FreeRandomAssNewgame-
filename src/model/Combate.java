@@ -346,6 +346,10 @@ public class Combate {
 		
 		int numeroEnemigos = 0;
 		int turnos = 0;
+		int danoVex = 0;
+		int danoAliento = 0;
+		int danoEnderman = 0;
+		int danoNiebla = 0;
 		
 		if(tipoCombate.equals("Boss") || tipoCombate.equals("Steve"))
 		{
@@ -386,12 +390,16 @@ public class Combate {
 			{
 				System.out.println("A " + prota.getNombre() + " no le afecta la maldición aquí... ");
 				System.out.println(prota.getNombre() + Color.CYAN + " ahora se puede curar" + Color.RESET + "!");
+				enemigo.setStamina(15);
 			}
-			
 			else if(enemigo.getNombre().equals("Dragon"))
 			{
 				System.out.println("El Dragón vuela por el end, " + Color.RED_BRIGHT + "es más difícil acertar tus ataques contra él" + Color.RESET);
 				prota.setVelocidad(prota.getVelocidad() - 3);
+			}
+			else if(enemigo.getNombre().equals("Ravager"))
+			{
+				enemigo.setPillagerActivo(true);
 			}
 			
 			while(prota.getVida() > 0 && enemigo.getVida() > 0 && !prota.getHaHuido())
@@ -431,6 +439,17 @@ public class Combate {
 					System.out.println("==============================================================================================");
 					//ataque del protagonista
 					prota.atacar(enemigo);
+					if(prota.getNiebla())
+					{
+						System.out.println("Niebla ataca al enemigo contigo!");
+						danoNiebla = 3;
+						if(enemigo.getDefensa() > 0)
+						{
+							danoNiebla -= (danoNiebla * (enemigo.getDefensa() / 2)) / 10;
+						}
+						System.out.println("Niebla hace " + danoNiebla + " puntos de daño al " + enemigo.getNombre());
+						enemigo.setVida(enemigo.getVida() - danoNiebla);
+					}
 				}
 				if(enemigoEmpiezaPrimero)
 					enemigoEmpiezaPrimero = false;
@@ -441,17 +460,60 @@ public class Combate {
 				{
 					enemigo.atacar(prota);
 				}
-				
 				if(prota.getCooldownMaldicionWither() > 0)
 				{
 					prota.setCooldownMaldicionWither(prota.getCooldownMaldicionWither() - 1);
 				}
 				if(enemigo.getTurnosPectoralesCoronel() > 0)
+				{
 					enemigo.setTurnosPectoralesCoronel(enemigo.getTurnosPectoralesCoronel() - 1);
+				}
 				if(prota.getTurnosAlientoDragon() > 0)
+				{
 					prota.setTurnosAlientoDragon(prota.getTurnosAlientoDragon() - 1);
-				if(prota.getTurnosEnderman() > 0)
+				}
+				if(prota.getTurnosEnderman() == 0 && prota.getAlientoDragonActivo())
+				{
+					danoEnderman = 12;
+					danoEnderman -= (danoEnderman * (prota.getDefensa() / 2)) / 10;
+					System.out.println("Los " + Color.PURPLE_BRIGHT + "enderman" + Color.RED_BRIGHT + " atacan a " + Color.RESET + prota.getNombre() + "!");
+					prota.setVida(prota.getVida() - danoEnderman);
+					danoEnderman = 0;
+					prota.setEndermanActivo(false);
+				}
+				else if(prota.getTurnosEnderman() > 0)
+				{
 					prota.setTurnosEnderman(prota.getTurnosEnderman() - 1);
+				}
+				
+				if(enemigo.getNumVex() > 0)
+				{
+					System.out.println("Los " + enemigo.getNumVex() + Color.RED_BRIGHT + " Vex" + Color.RESET + " atacan a " + prota.getNombre() + "!");
+					danoVex = enemigo.getNumVex() * 2;
+					if(prota.getDefensa() > 0)
+					{
+						danoVex -= (danoVex * (prota.getDefensa() / 2)) / 10; // defensa
+					}
+					prota.setVida(prota.getVida() - danoVex);
+					System.out.println("Los " + Color.RED_BRIGHT + "Vex" + Color.RESET + " hacen un total de " + Color.RED_BRIGHT + danoVex + Color.RESET + " puntos de daño a " + prota.getNombre());
+				}
+				if(prota.getTurnosAlientoDragon() == 0 && prota.getAlientoDragonActivo())
+				{
+					danoAliento = 5;
+					danoAliento -= (danoAliento * (prota.getDefensa() / 2)) / 10;
+					System.out.println("El " + Color.PURPLE_BRIGHT + "aliento de dragón" + Color.RESET + " sigue afectando a " + prota.getNombre());
+					prota.setVida(prota.getVida() - danoAliento);
+					danoAliento = 0;
+					prota.setAlientoDragonActivo(false);
+				}
+				else if(prota.getTurnosAlientoDragon() > 0 && prota.getAlientoDragonActivo())
+				{
+					prota.setTurnosAlientoDragon(prota.getTurnosAlientoDragon() - 1);
+				}
+				if(enemigo.getStamina() > 0)
+				{
+					enemigo.setStamina(enemigo.getStamina() - 1);
+				}
 			}
 			numeroEnemigos--;
 		}

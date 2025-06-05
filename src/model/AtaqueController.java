@@ -90,14 +90,7 @@ public class AtaqueController {
 		}
 		else if(enemigo.getNombre().equals("Evoker"))
 		{
-			if(enemigo.getTotemUsado())
-			{
-				ataqueRandom = rd.nextInt(0, listaAtaques.size() - 1);
-			}
-			else
-			{
-				ataqueRandom = rd.nextInt(0, listaAtaques.size());
-			}
+			enemigo.getAtaqueController().eliminarAtaque("Tótem de inmortalidad");
 		}
 		else if(enemigo.getNombre().equals("Devastator"))
 		{

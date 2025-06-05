@@ -32,14 +32,16 @@ import java.util.ArrayList;
 	private boolean escudoPollo = false;
 	private int numVex = 0;
 	private boolean hasTotem = false;
+	private boolean totemUsado = false;
 	private boolean haUsadoDesesperation = false;
 	private boolean pillagerActivo = false;
 	private int turnosAlientoDragon = 0;
+	private boolean alientoDragonActivo = false;
 	private int turnosEnderman = 0;
+	private boolean endermanActivo = false;
 	private int karma = 0;
 	private int turnosPectoralesCoronel = 0;
 	private int cargasCreeper = 0;
-	private boolean totemUsado = false;
 	private int stamina = 0;
 	private boolean niebla = true;
 	
@@ -321,6 +323,22 @@ import java.util.ArrayList;
 	public void setRepetirAtaque(boolean repetirAtaque)
 	{
 		this.repetirAtaque = repetirAtaque;
+	}
+	public boolean getAlientoDragonActivo()
+	{
+		return alientoDragonActivo;
+	}
+	public void setAlientoDragonActivo(boolean alientoDragonActivo)
+	{
+		this.alientoDragonActivo = alientoDragonActivo;
+	}
+	public boolean getEndermanActivo()
+	{
+		return endermanActivo;
+	}
+	public void setEndermanActivo(boolean endermanActivo)
+	{
+		this.endermanActivo = endermanActivo;
 	}
 	
 	public void selectALLPersonajes() throws SQLException{
