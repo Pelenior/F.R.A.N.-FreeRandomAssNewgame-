@@ -197,17 +197,17 @@ public class Combate {
 			{
 				case "Steve":
 				{
-					seleccionRandom = 0;
+					seleccionRandom = 1;
 					break;
 				}
 				case "Alex":
 				{
-					seleccionRandom = 1;
+					seleccionRandom = 2;
 					break;
 				}
 				case "Chicken Little":
 				{
-					seleccionRandom = 2;
+					seleccionRandom = 0;
 					break;
 				}
 			}
@@ -329,7 +329,6 @@ public class Combate {
 			
 			seleccionRandom = random.nextInt(0, nombreEnemigos.size());
 		}
-		seleccionRandom = 0;
 		enemigo = new Enemigo(nombreEnemigos.get(seleccionRandom), (double) vidaMaxEnemigos.get(seleccionRandom),
 							  (double) defensaEnemigos.get(seleccionRandom), (double) velocidadEnemigos.get(seleccionRandom),
 							  (double) fuerzaEnemigos.get(seleccionRandom), 0);
@@ -343,19 +342,19 @@ public class Combate {
 		DecimalFormat dfOneDecimal = new DecimalFormat("0.0");
 		DecimalFormat dfZeroDecimal = new DecimalFormat("0");
 		
-		int numeroEnemigosTotal = 0;
 		int numeroEnemigos = 0;
 		int turnos = 0;
 		
 		if(tipoCombate.equals("Boss") || tipoCombate.equals("Steve"))
 		{
-			numeroEnemigosTotal = 1;
+			numeroEnemigos = 1;
 		}
 		else
 		{
-			numeroEnemigosTotal = random.nextInt(3, 6);
+			numeroEnemigos = random.nextInt(3, 6);
 		}
-		numeroEnemigos = numeroEnemigosTotal;
+		
+		prota.setNumEnemigos(numeroEnemigos);
 		
 		System.out.println(prota.getNombre() + " se encuentra con " + Color.RED_BRIGHT + numeroEnemigos + " enemigos" + Color.RESET + "!");
 		
@@ -454,8 +453,14 @@ public class Combate {
 			}
 			numeroEnemigos--;
 		}
-		
-		return true;
+		if(prota.getVida() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 }

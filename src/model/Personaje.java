@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 	AtaqueController ataqueController = new AtaqueController();
 	
+	// COMBATE
 	private boolean flechaRecargada = false;
 	private boolean cargaPreparada = false;
 	private boolean cargaRecargada = false;
@@ -39,6 +40,13 @@ import java.util.ArrayList;
 	private int cargasCreeper = 0;
 	private boolean totemUsado = false;
 	private int stamina = 0;
+	private boolean niebla = true;
+	
+	//FINAL DE COMBATE
+	private boolean haHuido = false;
+	private boolean haHuidoAlgunaVez = false;
+	private int numEnemigos = 0;
+	private boolean haMatado = false;
 	
 	//getters y setters
 	public String getNombre()
@@ -86,14 +94,13 @@ import java.util.ArrayList;
 	{
 		this.monedas = monedas;
 	}
-	public int getIdAscii() {
+	public int getIdAscii()
+	{
 		return idAscii;
 	}
-
 	public void setIdAscii(int idAscii) {
 		this.idAscii = idAscii;
 	}
-	
 	public boolean getFlechaRecargada()
 	{
 		return flechaRecargada;
@@ -102,7 +109,6 @@ import java.util.ArrayList;
 	{
 		this.flechaRecargada = flechaRecargada;
 	}
-	
 	public boolean getRecargaRapida()
 	{
 		return recargaRapida;
@@ -111,7 +117,6 @@ import java.util.ArrayList;
 	{
 		this.recargaRapida = recargaRapida;
 	}
-	
 	public int getCooldownMaldicionWither()
 	{
 		return cooldownMaldicionWither;
@@ -120,7 +125,6 @@ import java.util.ArrayList;
 	{
 		this.cooldownMaldicionWither = cooldownMaldicionWither;
 	}
-	
 	public int getDanoExtra()
 	{
 		return danoExtra;
@@ -129,7 +133,6 @@ import java.util.ArrayList;
 	{
 		this.danoExtra = danoExtra;
 	}
-	
 	public int getPollos()
 	{
 		return pollos;
@@ -138,7 +141,6 @@ import java.util.ArrayList;
 	{
 		this.pollos = pollos;
 	}
-	
 	public boolean isEscudoPollo()
 	{
 		return escudoPollo;
@@ -147,7 +149,6 @@ import java.util.ArrayList;
 	{
 		this.escudoPollo = escudoPollo;
 	}
-	
 	public boolean getCargaPreparada()
 	{
 		return cargaPreparada;
@@ -164,7 +165,6 @@ import java.util.ArrayList;
 	{
 		this.cargaRecargada = cargaRecargada;
 	}
-	
 	public int getNumVex()
 	{
 		return numVex;
@@ -173,7 +173,6 @@ import java.util.ArrayList;
 	{
 		this.numVex = numVex;
 	}
-	
 	public boolean getHasTotem()
 	{
 		return hasTotem;
@@ -182,7 +181,6 @@ import java.util.ArrayList;
 	{
 		this.hasTotem = hasTotem;
 	}
-	
 	public boolean getHaUsadoDesesperation()
 	{
 		return haUsadoDesesperation;
@@ -199,7 +197,6 @@ import java.util.ArrayList;
 	{
 		this.pillagerActivo = pillagerActivo;
 	}
-	
 	public int getTurnosAlientoDragon()
 	{
 		return turnosAlientoDragon;
@@ -208,7 +205,6 @@ import java.util.ArrayList;
 	{
 		this.turnosAlientoDragon = turnosAlientoDragon;
 	}
-	
 	public int getTurnosEnderman()
 	{
 		return turnosEnderman;
@@ -217,17 +213,14 @@ import java.util.ArrayList;
 	{
 		this.turnosEnderman = turnosEnderman;
 	}
-	
 	public int getKarma()
 	{
 		return karma;
 	}
-	
 	public void setKarma(int karma)
 	{
 		this.karma = karma;
 	}
-	
 	public int getTurnosPectoralesCoronel()
 	{
 		return turnosPectoralesCoronel;
@@ -236,7 +229,6 @@ import java.util.ArrayList;
 	{
 		this.turnosPectoralesCoronel = turnosPectoralesCoronel;
 	}
-	
     public int getCargasCreeper()
     {
         return cargasCreeper;
@@ -245,7 +237,6 @@ import java.util.ArrayList;
     {
         this.cargasCreeper = cargasCreeper;
     }
-    
     public boolean getCargaCriticaPreparada()
 	{
 		return cargaCriticaPreparada;
@@ -277,6 +268,46 @@ import java.util.ArrayList;
 	public void setStamina(int stamina)
 	{
 		this.stamina = stamina;
+	}
+	public boolean getNiebla()
+	{
+		return niebla;
+	}
+	public void setNiebla(boolean niebla)
+	{
+		this.niebla = niebla;
+	}
+	public boolean getHaHuido()
+	{
+		return haHuido;
+	}
+	public void setHaHuido(boolean haHuido)
+	{
+		this.haHuido = haHuido;
+	}
+	public boolean getHaHuidoAlgunaVez()
+	{
+		return haHuidoAlgunaVez;
+	}
+	public void setHaHuidoAlgunaVez(boolean haHuidoAlgunaVez)
+	{
+		this.haHuidoAlgunaVez = haHuidoAlgunaVez;
+	}
+	public int getNumEnemigos()
+	{
+		return numEnemigos;
+	}
+	public void setNumEnemigos(int numEnemigos)
+	{
+		this.numEnemigos = numEnemigos;
+	}
+	public boolean getHaMatado()
+	{
+		return haMatado;
+	}
+	public void setHaMatado(boolean haMatado)
+	{
+		this.haMatado = haMatado;
 	}
 	
 	public void selectALLPersonajes() throws SQLException{

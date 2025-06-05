@@ -20,38 +20,30 @@ public class Juego {
 	private Scanner sc;
 	
 	private double espinasPersonaje = 0;
-	private boolean recargaRapidaPersonaje = false;
-	private boolean niebla = false;
-	private boolean isRaid =false;
-	private boolean gameOver = false;
+	private static boolean gameOver = false;
 
 	private boolean isBoss = false;
 	private boolean isSteve = false;
 	private boolean finalCombate=false;
 	
-	private boolean enemigoEmpiezaPrimero = false;
-	
-	private int numeroEnemigos = 0;
-	private boolean haHuido = false;
-	private boolean hasLambo = false;
-	private boolean haMatado = false;
+	private static boolean hasLambo = false;
 	private boolean haHuidoAlgunaVez = false;
 	
 	// FINALES
-	private boolean finalKillDragonSteve = false;
-	private boolean finalKillDragonPerroSteve = false;
-	private boolean finalHuirPerroSteve = false;
-	private boolean finalHuirSteve = false;
+	private static boolean finalKillDragonSteve = false;
+	private static boolean finalKillDragonPerroSteve = false;
+	private static boolean finalHuirPerroSteve = false;
+	private static boolean finalHuirSteve = false;
 	
-	private boolean finalKillSansNoGenocideAlex = false;
-	private boolean finalKillSansGenocideAlex = false;
-	private boolean finalLigarAlex = false;
-	private boolean finalMascotaAlex = false;
+	private static boolean finalKillSansNoGenocideAlex = false;
+	private static boolean finalKillSansGenocideAlex = false;
+	private static boolean finalLigarAlex = false;
+	private static boolean finalMascotaAlex = false;
 	
-	private boolean finalDrogasChickenLittle = false;
-	private boolean finalBitcoinChickenLittle = false;
-	private boolean finalLamboChickenLittle = false;
-	private boolean finalKillCoronel = false;
+	private static boolean finalDrogasChickenLittle = false;
+	private static boolean finalBitcoinChickenLittle = false;
+	private static boolean finalLamboChickenLittle = false;
+	private static boolean finalKillCoronel = false;
 	
 	public Juego() {//permite que se pueda usar en esta clase
 		combate = new Combate();
@@ -127,7 +119,7 @@ public class Juego {
 					{
 					case "1":
 						{
-							prota = new Protagonista("Steve", 20, 0, 1, 3, 2, 0);//protagonista elegido- CAMBIARLO CUANDO HAYA DB
+							prota = new Protagonista("Steve", 20, 0, 100, 3, 2, 0);//protagonista elegido- CAMBIARLO CUANDO HAYA DB
 							//ESTO METERLO DENTRO DE UNA DB
 //							nombrePersonaje = "Steve";
 //							vidaMaxPersonaje = 20;
@@ -197,14 +189,249 @@ public class Juego {
 		
 		
 	}
+	
+	private void lore()
+	{
+		//mensaje
+		if(numeroSalas == 4)
+		{
+			switch(prota.getNombre())
+			{
+				case "Steve":
+				{
+					System.out.println(prota.getNombre() + " está avanzando por el bosque, donde encuentra su antigua casa");
+					System.out.println("Es una casa hecha por tierra, tiene marcas de llamas y quemaduras y está casi derrumbada");
+					System.err.println("Aquí es donde vivió " + prota.getNombre() + ", antes de el trágico evento que provocó la ira de Steve contra el Dragón...\r\n");
+					break;
+				}
+				case "Alex":
+				{
+					System.out.println(prota.getNombre() + " se encuentra con el pueblo donde creció");
+					System.out.println("Antes, Alex era una niña tranquila que no quería hacer daño a nadie");
+					System.out.println("Su clan, sin embargo, no estaba de acuerdo con esto, y la tuvieron que maldecir para que se vuelva agresiva");
+					System.out.println("Enfadada, " + prota.getNombre() + " sigue su camino sin mirar atrás\r\n");
+					break;
+				}
+				case "Chicken Little":
+				{
+					System.out.println(prota.getNombre() + " se sienta y contempla su viaje");
+					System.out.println("El fin de " + prota.getNombre() + " es terminar con el KFC, ya que le llevan persiguiendo mucho tiempo");
+					System.out.println("¿Pero por qué?");
+					System.out.println("¿Solo querrán un pollo de buena calidad...?");
+					System.out.println(prota.getNombre() + " se levanta y continua con su aventura\r\n");
+					break;
+				}
+			}
+			System.out.println();
+		}
+		else if(numeroSalas == 9)
+		{
+			switch(prota.getNombre())
+			{
+				case "Steve":
+				{
+					
+					if(prota.getNiebla())
+					{
+						System.out.println(prota.getNombre() + " está andando con Niebla a su lado, pensando en la suerte que tiene de poder revivirlo");
+						System.out.println("Resulta que el Dragón fue el que provocó la pérdida de Niebla!");
+						System.out.println(prota.getNombre() + " se agarra a su espada y continua su aventura\r\n");
+					}
+					else
+					{
+						System.out.println(prota.getNombre() + " está pensando en Niebla, su perro fallecido");
+						System.out.println(prota.getNombre() + " recuerda la noche en la que lo perdió como si fuera ayer...");
+						System.out.println("Resulta que el Dragón escupió su fuego morado contra la casa de " + prota.getNombre() + ", lo que provocó la muerte de Niebla");
+						System.out.println(prota.getNombre() + " se agarra a su espada y continua su aventura\r\n");
+					}
+					break;
+				}
+				case "Alex":
+				{
+					System.out.println(prota.getNombre() + " está caminando por un pantano, donde se encuentra con una casa de brujas");
+					System.out.println(prota.getNombre() + " recuerda cuando fue maldita, resulta que la maldición la hace agresiva y la convierte en una Bruja lentamente");
+					System.out.println("La única forma que tiene de salvarse es llenando su sed de sangre con sus víctimas... verdad?\r\n");
+					break;
+				}
+				case "Chicken Little":
+				{
+					System.out.println(prota.getNombre() + " mira a uno de sus pollitos que salió de uno de sus ataques huevo");
+					System.out.println(prota.getNombre() + " lo sube a sus brazos y lo acaricia...");
+					System.out.println("\"Pronto acabará el imperio del KFC...\"-Dice Chicken Little");
+					System.out.println("Resulta que " + prota.getNombre() + " es perseguido por el KFC ya que tiene la habilidad de crear pollos infinitos...");
+					System.out.println("Pero " + prota.getNombre() + " tiene planes diferentes...");
+					System.out.println(prota.getNombre() + " pretende crear su propio imperio de pollos!");
+					System.out.println(prota.getNombre() + " deja en el suelo a su pollito y continua su camino\r\n");
+					break;
+				}
+			}
+		}
+	}
 
+	private void bossBattle() throws SQLException
+	{
+		System.out.println("La historia de " + prota.getNombre() + " está llegando a su fin...");
+		System.out.println("El siguiente evento para " + prota.getNombre() + " será un combate contra...");
+		switch(prota.getNombre())
+		{
+			case "Steve":
+			{
+				System.out.println("¡EL ENDER DRAGON!");
+				break;
+			}
+			case "Alex":
+			{
+				System.out.println("¡SANS!");
+				break;
+			}
+			case "Chicken Little":
+			{
+				System.out.println("¡EL CORONEL SANDERS!");
+				break;
+			}
+		}
+		
+		System.out.println("");
+		if(prota.getNombre().equals("Chicken Little") && hasLambo)
+		{
+			String decision = "";
+			
+			System.out.println(prota.getNombre() + " se acuerda de su " + Color.PURPLE + "Lambo" + Color.RESET + ", y se da cuenta de que podría huir de todo esto...");
+			System.out.println("¿Qué hará " + prota.getNombre() + "?");
+			System.out.println("1. Luchar | 2. Huir");
+			decision = sc.nextLine();
+			while(!decision.equals("1") && !decision.equals("2"))
+			{
+				System.out.println(decision + " no es una opción ahora mismo");
+				System.out.println("1. Luchar | 2. Huir");
+				decision = sc.nextLine();
+			}
+			
+			if(decision.equals("2"))
+			{
+				finalLamboChickenLittle = true;
+				gameOver = true;
+			}
+			else
+			{
+				System.out.println("No, has venido hasta aquí para pelear\r\n");
+			}
+		}
+		
+		if(prota.getNombre().equals("Steve") && !prota.getHaMatado())
+		{
+			finalHuirSteve = true;
+			gameOver = true;
+		}
+		else if(!gameOver)
+		{
+			isBoss = true;
+			if(combate.combate(sc, random, prota, "Boss", false))
+			{
+				calculoFinCombate();
+			}
+			else
+			{
+				gameOver = true;
+			}
+			if(prota.getVida() > 0)
+			{
+				switch(prota.getNombre())
+				{
+					case "Steve":
+					{
+						if(prota.getNiebla())
+						{
+							finalKillDragonPerroSteve = true;
+						}
+						else
+						{
+							finalKillDragonSteve = true;
+						}
+						break;
+					}
+					case "Alex":
+					{
+						if(haHuidoAlgunaVez)
+						{
+							finalKillSansNoGenocideAlex = true;
+						}
+						else
+						{
+							finalKillSansGenocideAlex = true;
+						}
+					}
+					case "Chicken Little":
+					{
+						finalKillCoronel = true;
+					}
+				}
+			}
+			gameOver = true;
+		}
+	}
+	
+	private void calculoFinCombate()
+	{
+		if(!prota.getHaHuido() && prota.getVida() > 0)
+		{
+			prota.setHaMatado(true);
+			int randomVidaAtaque = random.nextInt(1, 11);
+			if(randomVidaAtaque <= 4)
+			{
+				prota.setVidaMax(prota.getVidaMax() + prota.getNumEnemigos());
+				prota.setVida(prota.getVida() + prota.getNumEnemigos());
+				System.out.println(prota.getNombre() + " consigue " + prota.getNumEnemigos() + " puntos de vida máxima tras el combate!\r\n");
+			}
+			else if(randomVidaAtaque > 4 && randomVidaAtaque <= 8)
+			{
+				prota.setFuerza(prota.getFuerza() + (double) (prota.getNumEnemigos()) / 2);
+				System.out.println(prota.getNombre() + " consigue " + (double) (prota.getNumEnemigos()) / 2 + " puntos de fuerza tras el combate!\r\n");
+			}
+			else
+			{
+				prota.setVidaMax(prota.getVidaMax() + prota.getNumEnemigos() / 2);
+				prota.setVida(prota.getVida() + prota.getNumEnemigos() / 2);
+				prota.setFuerza(prota.getFuerza() + (double) (prota.getNumEnemigos()) / 4);
+				System.out.println(prota.getNombre() + " consigue " + (double) (prota.getNumEnemigos()) / 2 + " puntos de vida máxima y " + (double) (prota.getNumEnemigos()) / 4 + " puntos de fuerza tras el combate! Qué suerte!\r\n");
+			}
+			
+			int randomMonedas = random.nextInt(1, 11);
+			randomMonedas += prota.getSuerte() /2;
+			if(randomMonedas <= 2)
+			{
+				System.out.println(prota.getNombre() + Color.RED_BRIGHT + " no ha encontrado" + Color.RESET + " ninguna " + Color.YELLOW + (prota.getNombre().equals("Chicken Little") ? " semilla " : " esmeralda ") + Color.RESET + "tras el combate\r\n");
+			}
+			else if(randomMonedas > 2 && randomMonedas <= 8)
+			{
+				prota.setMonedas(prota.getMonedas() + prota.getNumEnemigos());
+				System.out.println(prota.getNombre() + " consigue " + monedas(prota.getNombre(), prota.getNumEnemigos()) + (prota.getNombre().equals("Chicken Little") ? " semillas " : " esmeraldas ") + "tras el combate\r\n");
+			}
+			else
+			{
+				System.out.println("¡" + Color.RED_BRIGHT + "S" + Color.YELLOW_BRIGHT + "U" + Color.GREEN_BRIGHT + "E" + Color.BLUE_BRIGHT + "R" + Color.PURPLE_BRIGHT + "T" + Color.CYAN_BRIGHT + "E" + Color.RESET + "!");
+				prota.setMonedas(prota.getMonedas() + prota.getNumEnemigos() * 3);
+				System.out.println(prota.getNombre() + " consigue " + monedas(prota.getNombre(), prota.getNumEnemigos() * 3) + (prota.getNombre().equals("Chicken Little") ? " semillas " : " esmeraldas ") + "tras el combate\r\n");
+			}
+		}
+	}
+	
 	private void bucleJuego() throws SQLException
 	{
-		while(true)
+		while(!gameOver)
 		{
-			seleccionCaminos(random, sc);
+			lore();
+			if(numeroSalas == 14)
+			{
+				bossBattle();
+			}
+			else
+			{
+				seleccionCaminos(random, sc);
+			}
 			numeroSalas+=1;
 		}
+		finales();
 	}
 	
 	private void seleccionCaminos(Random random, Scanner scanner) throws SQLException {
@@ -214,259 +441,86 @@ public class Juego {
 		System.out.println("Elige un camino");
 		
 		// Selección de Caminos
-				// Para seleccionar caminos, creamos una Lista tipo String que añade el nombre de un evento random
-				// Al mismo tiempo, hay una Lista int en la que hay números que sirve para comprobar
-				// si la elección del usuario existe, y si existe, la podemos coger desde la primera Lista
-				int numeroCaminos = random.nextInt(2, 5);//número random entre 2 y 4 caminos
-				int eventoRandom = 0;//el camino aleatorio
-				int contadorOpciones = 1;//contador
-				
-				List<String> listaOpcionesPosibles = new ArrayList<String>();
-				
-				List<String> caminosDisponibles = new ArrayList<String>();
-				
-				while(numeroCaminos > 0)
-				{
-					eventoRandom = random.nextInt(0, listaCaminos.length);//aleatoriamente se elige un camino de la lista
-					// Lista con String del nombre del evento
-					caminosDisponibles.add(listaCaminos[eventoRandom]);//lista de caminos
-					numeroCaminos--;
-					
-					// Lista con numeros desde 1 hasta x, según el número de eventos que haya
-					listaOpcionesPosibles.add(Integer.toString(contadorOpciones));//lista que enumera los caminos
-					contadorOpciones++;
-				}
-				
-				boolean seleccionCorrecta = false;
-				
-				String seleccionCamino = "";
+		// Para seleccionar caminos, creamos una Lista tipo String que añade el nombre de un evento random
+		// Al mismo tiempo, hay una Lista int en la que hay números que sirve para comprobar
+		// si la elección del usuario existe, y si existe, la podemos coger desde la primera Lista
+		int numeroCaminos = random.nextInt(2, 5);//número random entre 2 y 4 caminos
+		int eventoRandom = 0;//el camino aleatorio
+		int contadorOpciones = 1;//contador
+		
+		List<String> listaOpcionesPosibles = new ArrayList<String>();
+		
+		List<String> caminosDisponibles = new ArrayList<String>();
+		
+		while(numeroCaminos > 0)
+		{
+			eventoRandom = random.nextInt(0, listaCaminos.length);//aleatoriamente se elige un camino de la lista
+			// Lista con String del nombre del evento
+			caminosDisponibles.add(listaCaminos[eventoRandom]);//lista de caminos
+			numeroCaminos--;
 			
-				while(!seleccionCorrecta)
+			// Lista con numeros desde 1 hasta x, según el número de eventos que haya
+			listaOpcionesPosibles.add(Integer.toString(contadorOpciones));//lista que enumera los caminos
+			contadorOpciones++;
+		}
+		
+		boolean seleccionCorrecta = false;
+		
+		String seleccionCamino = "";
+	
+		while(!seleccionCorrecta)
+		{
+			System.out.println("A dónde irá " + prota.getNombre() + " ahora...");
+			
+			// Imprimimos las opciones
+			for(int i = 0; i < caminosDisponibles.size(); i++)
+			{
+				System.out.println((i+1) + ". " + caminosDisponibles.get(i));//imprime el camino seleccionado
+			}
+			seleccionCamino = scanner.nextLine();
+			
+			// Comprobamos si el número ingresado por pantalla está en la Lista de números disponibles
+			for(Object opcion : listaOpcionesPosibles)
+			{
+				if(seleccionCamino.equals(opcion))
 				{
-					System.out.println("A dónde irá " + prota.getNombre() + " ahora...");
-					
-					// Imprimimos las opciones
-					for(int i = 0; i < caminosDisponibles.size(); i++)
-					{
-						System.out.println((i+1) + ". " + caminosDisponibles.get(i));//imprime el camino seleccionado
-					}
-					seleccionCamino = scanner.nextLine();
-					
-					// Comprobamos si el número ingresado por pantalla está en la Lista de números disponibles
-					for(Object opcion : listaOpcionesPosibles)
-					{
-						if(seleccionCamino.equals(opcion))
-						{
-							seleccionCorrecta = true;
-						}
-					}
-					if(!seleccionCorrecta)
-					{
-						System.out.println(prota.getNombre() + " no parece muy decidido...");
-						System.out.println("(Escoge con números)\r\n");
-					}
+					seleccionCorrecta = true;
 				}
-				
-				// Guardamos el nombre de selección elegida en String
-				String seleccionStr = (String) caminosDisponibles.get(Integer.valueOf(seleccionCamino) - 1);//guarda camino
-				
-				
-				switch(seleccionStr) {//ir al camino (evento) elegido
-					case Color.RED_BRIGHT + "Combate" + Color.RESET:
-					{
-						if(combate.combate(sc, random, prota, "Normal", random.nextBoolean()))
-						{
-							//si ganas el combate
-						}
-						else
-						{
-							//si pierdes el combate
-						}
-						break;
-					}
-					case "Evento Aleatorio" + Color.RESET:
-					{
-						evento.elegirEvento(prota);
-						break;
-					}
-					case Color.YELLOW + "Mercader" + Color.RESET:
-					{
-						break;
-					}
-				}
-				
-				//mensaje
-				if(numeroSalas == 4)
+			}
+			if(!seleccionCorrecta)
+			{
+				System.out.println(prota.getNombre() + " no parece muy decidido...");
+				System.out.println("(Escoge con números)\r\n");
+			}
+		}
+		
+		// Guardamos el nombre de selección elegida en String
+		String seleccionStr = (String) caminosDisponibles.get(Integer.valueOf(seleccionCamino) - 1);//guarda camino
+		
+		
+		switch(seleccionStr) {//ir al camino (evento) elegido
+			case Color.RED_BRIGHT + "Combate" + Color.RESET:
+			{
+				if(combate.combate(sc, random, prota, "Normal", random.nextBoolean()))
 				{
-					switch(prota.getNombre())
-					{
-						case "Steve":
-						{
-							System.out.println(prota.getNombre() + " está avanzando por el bosque, donde encuentra su antigua casa");
-							System.out.println("Es una casa hecha por tierra, tiene marcas de llamas y quemaduras y está casi derrumbada");
-							System.err.println("Aquí es donde vivió " + prota.getNombre() + ", antes de el trágico evento que provocó la ira de Steve contra el Dragón...\r\n");
-							break;
-						}
-						case "Alex":
-						{
-							System.out.println(prota.getNombre() + " se encuentra con el pueblo donde creció");
-							System.out.println("Antes, Alex era una niña tranquila que no quería hacer daño a nadie");
-							System.out.println("Su clan, sin embargo, no estaba de acuerdo con esto, y la tuvieron que maldecir para que se vuelva agresiva");
-							System.out.println("Enfadada, " + prota.getNombre() + " sigue su camino sin mirar atrás\r\n");
-							break;
-						}
-						case "Chicken Little":
-						{
-							System.out.println(prota.getNombre() + " se sienta y contempla su viaje");
-							System.out.println("El fin de " + prota.getNombre() + " es terminar con el KFC, ya que le llevan persiguiendo mucho tiempo");
-							System.out.println("¿Pero por qué?");
-							System.out.println("¿Solo querrán un pollo de buena calidad...?");
-							System.out.println(prota.getNombre() + " se levanta y continua con su aventura\r\n");
-							break;
-						}
-					}
-					System.out.println();
+					calculoFinCombate();
 				}
-				else if(numeroSalas == 9)
+				else
 				{
-					switch(prota.getNombre())
-					{
-						case "Steve":
-						{
-							
-							if(niebla)
-							{
-								System.out.println(prota.getNombre() + " está andando con Niebla a su lado, pensando en la suerte que tiene de poder revivirlo");
-								System.out.println("Resulta que el Dragón fue el que provocó la pérdida de Niebla!");
-								System.out.println(prota.getNombre() + " se agarra a su espada y continua su aventura\r\n");
-							}
-							else
-							{
-								System.out.println(prota.getNombre() + " está pensando en Niebla, su perro fallecido");
-								System.out.println(prota.getNombre() + " recuerda la noche en la que lo perdió como si fuera ayer...");
-								System.out.println("Resulta que el Dragón escupió su fuego morado contra la casa de " + prota.getNombre() + ", lo que provocó la muerte de Niebla");
-								System.out.println(prota.getNombre() + " se agarra a su espada y continua su aventura\r\n");
-							}
-							break;
-						}
-						case "Alex":
-						{
-							System.out.println(prota.getNombre() + " está caminando por un pantano, donde se encuentra con una casa de brujas");
-							System.out.println(prota.getNombre() + " recuerda cuando fue maldita, resulta que la maldición la hace agresiva y la convierte en una Bruja lentamente");
-							System.out.println("La única forma que tiene de salvarse es llenando su sed de sangre con sus víctimas... verdad?\r\n");
-							break;
-						}
-						case "Chicken Little":
-						{
-							System.out.println(prota.getNombre() + " mira a uno de sus pollitos que salió de uno de sus ataques huevo");
-							System.out.println(prota.getNombre() + " lo sube a sus brazos y lo acaricia...");
-							System.out.println("\"Pronto acabará el imperio del KFC...\"-Dice Chicken Little");
-							System.out.println("Resulta que " + prota.getNombre() + " es perseguido por el KFC ya que tiene la habilidad de crear pollos infinitos...");
-							System.out.println("Pero " + prota.getNombre() + " tiene planes diferentes...");
-							System.out.println(prota.getNombre() + " pretende crear su propio imperio de pollos!");
-							System.out.println(prota.getNombre() + " deja en el suelo a su pollito y continua su camino\r\n");
-							break;
-						}
-					}
+					gameOver = true;
 				}
-				else if(numeroSalas > 14)
-				{
-					System.out.println("La historia de " + prota.getNombre() + " está llegando a su fin...");
-					System.out.println("El siguiente evento para " + prota.getNombre() + " será un combate contra...");
-					switch(prota.getNombre())
-					{
-						case "Steve":
-						{
-							System.out.println("¡EL ENDER DRAGON!");
-							if(combate.combate(sc, random, prota, "Normal", random.nextBoolean()))
-							{
-								//si ganas el combate
-							}
-							else
-							{
-								//si pierdes el combate
-							}
-							break;
-						}
-						case "Alex":
-						{
-							System.out.println("¡SANS!");
-							if(combate.combate(sc, random, prota, "Normal", random.nextBoolean()))
-							{
-								//si ganas el combate
-							}
-							else
-							{
-								//si pierdes el combate
-							}
-							break;
-						}
-						case "Chicken Little":
-						{
-							System.out.println("¡EL CORONEL SANDERS!");
-							if(combate.combate(sc, random, prota, "Normal", random.nextBoolean()))
-							{
-								//si ganas el combate
-							}
-							else
-							{
-								//si pierdes el combate
-							}
-							break;
-						}
-					}
-					
-					System.out.println("");
-					
-					if(prota.getNombre().equals("Steve") && !haMatado)
-					{
-						finalHuirSteve = true;
-						gameOver = true;
-					}
-					else if(!gameOver)
-					{
-						isBoss = true;
-						enemigoEmpiezaPrimero = false;
-						
-//						prota.setVida(combate(sc, random, prota.getNombre(), prota.getVidaMax(), prota.getVida(), prota.getDefensa(), Objeto.class, prota.getVelocidad(), espinasPersonaje, recargaRapidaPersonaje, niebla, prota.getMonedas(), isBoss, isRaid, isSteve, prota.getFuerza(), finalCombate, Objeto.class, enemigoEmpiezaPrimero));
-						//vidaPersonaje = combate(sc, random, nombrePersonaje, vidaMaxPersonaje, vidaPersonaje, defensaPersonaje + (int) objetosTienda.get(2), velocidadPersonaje, espinasPersonaje, recargaRapidaPersonaje, niebla, numeroMonedas, isBoss, isRaid, isSteve, fuerzaPersonaje, finalCombate, objetosTienda, enemigoEmpiezaPrimero);
-						
-						if(prota.getVida() > 0)
-						{
-							switch(prota.getNombre())
-							{
-								case "Steve":
-								{
-									if(niebla)
-									{
-										finalKillDragonPerroSteve = true;
-									}
-									else
-									{
-										finalKillDragonSteve = true;
-									}
-									break;
-								}
-								case "Alex":
-								{
-									if(haHuidoAlgunaVez)
-									{
-										finalKillSansNoGenocideAlex = true;
-									}
-									else
-									{
-										finalKillSansGenocideAlex = true;
-									}
-								}
-								case "Chicken Little":
-								{
-									finalKillCoronel = true;
-								}
-							}
-						}
-						gameOver = true;
-					}
-				}
+				break;
+			}
+			case "Evento Aleatorio" + Color.RESET:
+			{
+				evento.elegirEvento(prota);
+				break;
+			}
+			case Color.YELLOW + "Mercader" + Color.RESET:
+			{
+				break;
+			}
+		}
 	}
 	
 	public static int monedas(String nombrePersonaje, int numeroEsmeraldas)
@@ -488,7 +542,7 @@ public class Juego {
 				case "Steve":
 				{
 					System.out.println("Aquí acaba la historia de " + prota.getNombre() + "...");
-					if(!niebla)
+					if(!prota.getNiebla())
 					{
 						System.out.println("Nunca consiguió vengar a Niebla...");
 					}
