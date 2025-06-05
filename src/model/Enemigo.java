@@ -24,18 +24,18 @@ public class Enemigo extends Personaje {
 	}
 	
 	public void insertEnemigo(String nombre, Double vidaMax, Double defensa, Double fuerza, Double velocidad, Integer idAscii,Boolean isRaid, Boolean isBoss, Boolean isSteve) throws SQLException{
-		DaoPersonajes DaoPersonajes = new DaoPersonajes();
-		DaoPersonajes.insertEnemigo( nombre,  vidaMax,  defensa,  fuerza,  velocidad,  idAscii, isRaid,  isBoss,  isSteve);
+		DaoPersonajes daoPersonajes = new DaoPersonajes();
+		daoPersonajes.insertEnemigo( nombre,  vidaMax,  defensa,  fuerza,  velocidad,  idAscii, isRaid,  isBoss,  isSteve);
 	}
 	
 	public Enemigo getDataEnemigo() throws SQLException{
-		DaoPersonajes DaoPersonajes = new DaoPersonajes();
-		return DaoPersonajes.getDataEnemigo(this.nombre);
+		DaoPersonajes daoPersonajes = new DaoPersonajes();
+		return daoPersonajes.getDataEnemigo(this.nombre);
 	}
 	
 	public void updateEnemigo(String nombre, Double vidaMax, Double defensa, Double fuerza, Double velocidad, Integer idAscii,Boolean isRaid, Boolean isBoss, Boolean isSteve) throws SQLException{
-		DaoPersonajes DaoPersonajes = new DaoPersonajes();
-		DaoPersonajes.updateEnemigo( nombre,  vidaMax,  defensa,  fuerza,  velocidad,  idAscii, isRaid,  isBoss,  isSteve);
+		DaoPersonajes daoPersonajes = new DaoPersonajes();
+		daoPersonajes.updateEnemigo( nombre,  vidaMax,  defensa,  fuerza,  velocidad,  idAscii, isRaid,  isBoss,  isSteve);
 	}
 	
 	@Override

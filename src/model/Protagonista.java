@@ -65,18 +65,18 @@ public class Protagonista extends Personaje {
 	}
 	
 	public void insertProta(String nombre, Double vidaMax, Double defensa, Double fuerza, Double velocidad, Integer idAscii, Boolean karma) throws SQLException{
-		DaoPersonajes DaoPersonajes = new DaoPersonajes();
-		DaoPersonajes.insertProta( nombre,  vidaMax,  defensa,  fuerza,  velocidad,  idAscii,  karma);
+		DaoPersonajes daoPersonajes = new DaoPersonajes();
+		daoPersonajes.insertProta( nombre,  vidaMax,  defensa,  fuerza,  velocidad,  idAscii,  karma);
 	}
 	
 	public Protagonista getDataProta() throws SQLException{
-		DaoPersonajes DaoPersonajes = new DaoPersonajes();
-		return DaoPersonajes.getDataProta(this.nombre);
+		DaoPersonajes daoPersonajes = new DaoPersonajes();
+		return daoPersonajes.getDataProta(this.nombre);
 	}
 	
 	public void updateProta(String nombre, Double vidaMax, Double defensa, Double fuerza, Double velocidad, Integer idAscii, Boolean karma) throws SQLException{
-		DaoPersonajes DaoPersonajes = new DaoPersonajes();
-		DaoPersonajes.updateProta( nombre,  vidaMax,  defensa,  fuerza,  velocidad,  idAscii,  karma);
+		DaoPersonajes daoPersonajes = new DaoPersonajes();
+		daoPersonajes.updateProta( nombre,  vidaMax,  defensa,  fuerza,  velocidad,  idAscii,  karma);
 	}
 
 	@Override

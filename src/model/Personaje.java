@@ -342,28 +342,28 @@ import java.util.ArrayList;
 	}
 	
 	public void selectALLPersonajes() throws SQLException{
-		DaoPersonajes DaoPersonajes = new DaoPersonajes();
-		DaoPersonajes.selectALLPersonajes();
+		DaoPersonajes daoPersonajes = new DaoPersonajes();
+		daoPersonajes.selectALLPersonajes();
 	}
 	
 	public void selectALLProta() throws SQLException{
-		DaoPersonajes DaoPersonajes = new DaoPersonajes();
-		DaoPersonajes.selectALLProta();
+		DaoPersonajes daoPersonajes = new DaoPersonajes();
+		daoPersonajes.selectALLProta();
 	}
 	
 	public void selectALLEnemigo() throws SQLException{
-		DaoPersonajes DaoPersonajes = new DaoPersonajes();
-		DaoPersonajes.selectALLEnemigo();
+		DaoPersonajes daoPersonajes = new DaoPersonajes();
+		daoPersonajes.selectALLEnemigo();
 	}
 	
 	public ArrayList<String> selectAllAtaques() throws SQLException{
-		DaoAtaques DaoAtaques = new DaoAtaques();
-		return DaoAtaques.selectAllAtaques(this.nombre);
+		DaoAtaques daoAtaques = new DaoAtaques();
+		return daoAtaques.selectAllAtaques(this.nombre);
 	}
 	
 	public void selectThis() throws SQLException{
-		DaoPersonajes DaoPersonajes = new DaoPersonajes();
-		DaoPersonajes.selectThis(this.getNombre());
+		DaoPersonajes daoPersonajes = new DaoPersonajes();
+		daoPersonajes.selectThis(this.getNombre());
 	}
 
 	public void deletePersonaje(String nombre) throws SQLException {

@@ -9,6 +9,9 @@ import dao.*;
 
 public class Combate {
 	
+	String bioma = "";
+	String weather = "";
+	
 	private Enemigo enemigo;
 	
 	public static void imprimirStats(Protagonista prota, Enemigo enemigo)
@@ -336,10 +339,17 @@ public class Combate {
 							  (double) fuerzaEnemigos.get(seleccionRandom), 0);
 	}
 	
+	private void penalizaciones()
+	{
+		
+	}
+	
 	//devuelve false si el protagonista pierde
 	public boolean combate(Scanner sc, Random random, Protagonista prota, String tipoCombate, boolean enemigoEmpiezaPrimero) throws SQLException
 	{
 		//Variables que permanecen entre encuentros con enemigos
+		
+		
 		
 		DecimalFormat dfOneDecimal = new DecimalFormat("0.0");
 		DecimalFormat dfZeroDecimal = new DecimalFormat("0");
