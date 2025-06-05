@@ -16,15 +16,10 @@ public class Juego {
 	private Eventos evento;//clase eventos, que recibe el nombre de evento
 	
 	private Random random;
-	private int numeroSalas=0;
+	private int numeroSalas = 0;
 	private Scanner sc;
 	
-	private double espinasPersonaje = 0;
 	private static boolean gameOver = false;
-
-	private boolean isBoss = false;
-	private boolean isSteve = false;
-	private boolean finalCombate=false;
 	
 	private static boolean hasLambo = false;
 	private boolean haHuidoAlgunaVez = false;
@@ -135,7 +130,7 @@ public class Juego {
 						}
 					case "2":
 						{
-							prota = new Protagonista("Alex", 30, 0, 100, 1, 3, 0);//protagonista elegido- CAMBIARLO CUANDO HAYA DB
+							prota = new Protagonista("Alex", 30, 0, 0, 1, 3, 0);//protagonista elegido- CAMBIARLO CUANDO HAYA DB
 							//ESTO METERLO DENTRO DE UNA DB
 //							nombrePersonaje =  "Alex";
 //							vidaMaxPersonaje = 30;
@@ -325,7 +320,6 @@ public class Juego {
 		}
 		else if(!gameOver)
 		{
-			isBoss = true;
 			if(combate.combate(sc, random, prota, "Boss", false))
 			{
 				calculoFinCombate();
@@ -437,6 +431,7 @@ public class Juego {
 	private void seleccionCaminos(Random random, Scanner scanner) throws SQLException {
 		
 		String[] listaCaminos = {Color.RED_BRIGHT + "Combate" + Color.RESET, Color.CYAN + "Evento Aleatorio" + Color.RESET, Color.YELLOW + "Mercader" + Color.RESET};
+		String[] listaCaminosAburrida = {"Combate", "Evento Aleatorio", "Mercader"};
 		
 		System.out.println("Elige un camino");
 		
@@ -452,11 +447,14 @@ public class Juego {
 		
 		List<String> caminosDisponibles = new ArrayList<String>();
 		
+		List<String> caminosDisponiblesAburridos = new ArrayList<String>();
+		
 		while(numeroCaminos > 0)
 		{
 			eventoRandom = random.nextInt(0, listaCaminos.length);//aleatoriamente se elige un camino de la lista
 			// Lista con String del nombre del evento
 			caminosDisponibles.add(listaCaminos[eventoRandom]);//lista de caminos
+			caminosDisponiblesAburridos.add(listaCaminosAburrida[eventoRandom]);//lista sin colores
 			numeroCaminos--;
 			
 			// Lista con numeros desde 1 hasta x, según el número de eventos que haya
@@ -495,11 +493,11 @@ public class Juego {
 		}
 		
 		// Guardamos el nombre de selección elegida en String
-		String seleccionStr = (String) caminosDisponibles.get(Integer.valueOf(seleccionCamino) - 1);//guarda camino
+		String seleccionStr = (String) caminosDisponiblesAburridos.get(Integer.valueOf(seleccionCamino) - 1);//guarda camino
 		
 		
 		switch(seleccionStr) {//ir al camino (evento) elegido
-			case Color.RED_BRIGHT + "Combate" + Color.RESET:
+			case "Combate":
 			{
 				if(combate.combate(sc, random, prota, "Normal", random.nextBoolean()))
 				{
@@ -511,13 +509,14 @@ public class Juego {
 				}
 				break;
 			}
-			case "Evento Aleatorio" + Color.RESET:
+			case "Evento Aleatorio":
 			{
 				evento.elegirEvento(prota);
 				break;
 			}
-			case Color.YELLOW + "Mercader" + Color.RESET:
+			case "Mercader":
 			{
+				evento.eventoMercader(prota, scanner, random);
 				break;
 			}
 		}

@@ -1000,7 +1000,7 @@ public class Eventos {
 	                			+ "ni tampoco el Tótem de inmortalidad, aunque te recomiendo comprar todo *giño**giño*\r\n");
 		}
 
-		private int eventoMercader(Protagonista prota, Scanner sc, Random random){
+		public void eventoMercader(Protagonista prota, Scanner sc, Random random){
 			boolean puedeLigar = false;
 			
 			if(prota.getFuerza()>=5)
@@ -1154,16 +1154,17 @@ public class Eventos {
 //	            				objetosTienda.set(5, true);
 	            			}
 	            		}
+	            		else
+	            		{
+	            			System.out.println("Opción no válida. Elige una opción del 1 al 6.");
+	            		}
 	            		break;
 	            	}
 	            	default:
 	            	{
 	            		if(!opcionesTienda.equals("6"))
 	            		{
-	            			if(!(opcionesTienda.equals("7") && generoAldeano && prota.getNombre().equals("Alex")))
-	            			{
-	            				System.out.println("Opción no válida. Elige una opción del 1 al 6.");
-	            			}
+	            			System.out.println("Opción no válida. Elige una opción del 1 al 6.");
 	            		}
 	            	}
 	            }
@@ -1179,7 +1180,6 @@ public class Eventos {
 	        				{
 	        					Objeto objeto = new Objeto("Pocion de vida");
 	        					prota.addListaObjetos(objeto);
-//								objetosTienda.set(0, (int) objetosTienda.get(0) + 1);
 	        					System.out.println(prota.getNombre() + " ahora tiene " + prota.recorrerListaObjetos("Pocion de vida") + " pociones de vida.");
 	        					break;
 	        				}
@@ -1187,14 +1187,11 @@ public class Eventos {
 	        				{
 	        					Objeto objeto = new Objeto("Pocion de fuerza");
 	        					prota.addListaObjetos(objeto);
-//	        					objetosTienda.set(1, (int) objetosTienda.get(1) + 5);
 	        					System.out.println(prota.getNombre() + " ahora tiene " + prota.recorrerListaObjetos("Pocion de fuerza") + " pociones de fuerza.");
 	        					break;
 	        				}
 	        				case "Armadura":
 	        				{
-//	        					objetosTienda.set(2, (int) objetosTienda.get(2) + 1);
-	        					
 	        					switch(prota.comprobarArmadura())
 	        					{
 	        						case "":
@@ -1285,8 +1282,6 @@ public class Eventos {
 //	        	System.out.println("Hasta pronto!\r\n");
 //	        	System.out.println("Con esto te marchas con ganas de volver para poder probar los otros objetos de la tienda");
 //	        }
-			
-			return prota.getMonedas();
 		}
 		
 		private void eventoPuzzle(Random random, Scanner sc, Protagonista prota) {

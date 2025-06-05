@@ -49,7 +49,7 @@ public class Ataque {
 //				}
 				if(randomHuir >= 8)
 				{
-					System.out.println(user.getNombre() + Color.GREEN_BRIGHT + " consigue huir de los enemigos" + Color.RESET + "\r\n" + "!");
+					System.out.println(user.getNombre() + Color.GREEN_BRIGHT + " consigue huir de los enemigos" + Color.RESET + "!\r\n");
 					user.setHaHuido(true);
 				}
 				else
