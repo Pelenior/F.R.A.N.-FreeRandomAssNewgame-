@@ -98,8 +98,8 @@ public class Combate {
 			dfVelocidadPersonaje = new DecimalFormat("0.0");
 		}
 		System.out.println("Vida actual: " + (prota.getVida() > prota.getVidaMax() / 2 ? Color.GREEN_BRIGHT : (prota.getVida() > prota.getVidaMax() / 4 ?Color.YELLOW : Color.RED_BRIGHT)) + dfVidaPersonaje.format(prota.getVida()) + Color.RESET + "/" + Color.GREEN_BRIGHT + dfVidaMaxPersonaje.format(prota.getVidaMax()) + Color.RESET + "                        Vida actual: " + (enemigo.getVida() > enemigo.getVidaMax() / 2 ? Color.GREEN_BRIGHT : (enemigo.getVida() > enemigo.getVidaMax() / 4 ? Color.YELLOW : Color.RED_BRIGHT)) + dfVidaEnemigo.format(enemigo.getVida()) + Color.RESET + "/" + Color.GREEN_BRIGHT + dfVidaMaxEnemigo.format(enemigo.getVidaMax()) + Color.RESET);
-		System.out.println("Defensa:     " + dfDefensaPersonaje.format(prota.getDefensa()) + "                            Defensa:     " + dfDefensaEnemigo.format(enemigo.getDefensa()));
-		System.out.println("Fuerza:      " + Color.RED_BRIGHT + dfFuerzaPersonaje.format(prota.getFuerza()) + Color.RESET + "                            Fuerza:      " + Color.RED_BRIGHT + dfFuerzaEnemigo.format(enemigo.getFuerza()) + Color.RESET);
+		System.out.println("Defensa:     " + dfDefensaPersonaje.format(prota.getDefensa() - prota.getPenalizacionDefensa()) + "                            Defensa:     " + dfDefensaEnemigo.format(enemigo.getDefensa()));
+		System.out.println("Fuerza:      " + Color.RED_BRIGHT + dfFuerzaPersonaje.format(prota.getFuerza() - prota.getPenalizacionAtaque()) + Color.RESET + "                            Fuerza:      " + Color.RED_BRIGHT + dfFuerzaEnemigo.format(enemigo.getFuerza()) + Color.RESET);
 		System.out.println("Velocidad:   " + Color.CYAN + dfVelocidadPersonaje.format(prota.getVelocidad()) + Color.RESET + "                            Velocidad:   " + Color.CYAN + dfVelocidadEnemigo.format(enemigo.getVelocidad()) + Color.RESET);
 		System.out.println("==============================================================================================");
 	}

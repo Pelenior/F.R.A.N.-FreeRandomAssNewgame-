@@ -45,7 +45,7 @@ import java.util.ArrayList;
 	private int turnosPectoralesCoronel = 0;
 	private int cargasCreeper = 0;
 	private int stamina = 0;
-	private boolean niebla = true;
+	private boolean niebla = false;
 	
 	//FINAL DE COMBATE
 	private boolean haHuido = false;
