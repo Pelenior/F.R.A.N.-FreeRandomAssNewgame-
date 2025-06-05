@@ -1,22 +1,39 @@
 package model;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Eventos {
 	
-	private static String [] evento = {"Bruja", "Maldición", "Trampa", "Juan", "Perro", "Lamborgini", "Drogas", "Objetos tienda",
-			"Mercader", "Puzzle"};
+	private String [] evento = {"Bruja", "Maldición", "Trampa", "Juan", "Puzzle"};
+	private ArrayList<String> eventosLista = new ArrayList<String>();
 	
 	//función selecionar eventos
 	//poner metodo público, que escoje un evento aleatorio y llama la función de ese evento
 	 public void elegirEvento (Protagonista prota) {
+		for (String eventoString : evento) {
+			eventosLista.add(eventoString);
+		}
+		
+		switch(prota.getNombre()) {
+		case "Steve":
+			eventosLista.add("Perro");
+			break;
+		case "Alex":
+			eventosLista.add("Pelea Steve");
+			break;
+		case "Pollo":
+			eventosLista.add("Lamborgini");
+			eventosLista.add("Drogas");
+			break;
+		}
+		
 		Random random = new Random();
 		Scanner sc = new Scanner(System.in);
 		
 		int eventoAleatorio = random.nextInt(0, evento.length);
-		String eventoSeleccionado = evento[eventoAleatorio];
+		String eventoSeleccionado = eventosLista.get(eventoAleatorio);
 		
 		//switch del evento
 		switch (eventoSeleccionado) {
@@ -46,14 +63,6 @@ public class Eventos {
 		
 		case "Drogas":
 			eventoDrogas(prota, sc);
-			break;
-			
-		case "Objetos tienda":
-			eventoDescripcionObjetosTienda();
-			break;
-			
-		case "Mercader":
-			eventoMercader(prota, sc, random);
 			break;
 			
 		case "Puzzle":
@@ -582,12 +591,8 @@ public class Eventos {
 				System.out.println("Aunque tal vez podrias desear mas poder para completar tu venganza");
 				System.out.println("");
 				
-				if(prota.getNombre().equals("Steve")) {
-				System.out.println("  1.Revivir a Niebla | 2.Mas poder | 3.Dinero ilimitado | 4.Ser invencible");
-				}
-				else {
-					System.out.println("  1.Mas poder | 2.Dinero ilimitado | 3.Ser invencible");
-				}
+				System.out.println("  1.Revivir a Niebla | 2.Mas poder | 3.Dinero ilimitado | 4.Ser invencible");				
+				
 				System.out.println("");
 				
 				decision = sc.nextLine();
@@ -598,16 +603,13 @@ public class Eventos {
 					System.out.println("\"No he entendido tu deseo, ¿Puedes repetirlo?\"");
 					System.out.println("");
 					
-					if (prota.getNombre().equals("Steve")) {
 					System.out.println(" 1.Revivir a Niebla | 2.Mas poder | 3.Dinero ilimitado | 4.Ser invencible");
-					}
-					else {
-						System.out.println("  1.Mas poder | 2.Dinero ilimitado | 3.Ser invencible");
-					}
+					
+					
 					decision = sc.nextLine();
 				}
 				
-				if (prota.getNombre().equals("Steve")) {
+//				if (prota.getNombre().equals("Steve")) {
 				switch(decision) {
 				
 				case "1": {
@@ -691,61 +693,7 @@ public class Eventos {
 					break;
 				}
 			}
-				} else {
-					switch(decision) {
-				case "1": { 
-					
-					randomGenio = random.nextInt(0,11); // niebla siempre es verdadero, y las otras 3 opciones son random
-					
-					numerin = random.nextInt(nombresGonzalo.length);
-					
-					if(randomGenio >= 6) {
-						System.out.println("\"¡Felicidades! Has obtenido 3 puntos de fuerza. ¡Sigue así, tu progreso es impresionante!\"-dijo entusiasmado");
-						System.out.println("Gracias a " + Color.GREEN_BOLD_BRIGHT + "Gonzalo " + nombresGonzalo[numerin] + Color.RESET +  "ahora te sientes mas poderoso aunque tambien la gran pena de no poder ver mas a Niebla");
-						
-						prota.setFuerza(prota.getFuerza()+3);
-//						finalArray[0][0] = "Fuerza";
-//						finalArray[0][1] = "3";
-						
-					} else System.out.println("\"Lamentablemente, no puedo conceder ese deseo en este momento. Sin embargo, siempre estaré aquí para ayudarte en lo que necesites. ¡Sigue adelante!\"-dijo alegre");
-					break;
-				}
 				
-				case "2": { 
-					
-					randomGenio = random.nextInt(0,11);
-					
-					numerin = random.nextInt(nombresGonzalo.length);
-					
-					if(randomGenio >= 7) {
-						prota.setMonedas(prota.getMonedas()+30);
-//						finalArray[0][0] = "Monedas";
-//						finalArray[0][1] = "30";
-						System.out.println("\"¡Enhorabuena! Has obtenido " + Juego.monedas(prota.getNombre(), 30) + Color.YELLOW + (prota.getNombre().equals("Chicken Little") ? " semillas" : " esmeraldas") + Color.RESET + ". ¡Tu tesoro crece y tu aventura continúa!\"-dijo entusiasmado");
-						System.out.println("Gracias a " + Color.GREEN_BOLD_BRIGHT + "Gonzalo " + nombresGonzalo[numerin] + Color.RESET +  "ahora te sientes mas rico aunque tambien la gran pena de no poder ver mas a Niebla");
-						
-					} else System.out.println("\"Lamentablemente, no puedo conceder ese deseo en este momento. Sin embargo, siempre estaré aquí para ayudarte en lo que necesites. ¡Sigue adelante!\"-dijo alegre");
-					break;
-				}
-				
-				case "3": { 
-					
-					randomGenio = random.nextInt(0,11);
-					
-					numerin = random.nextInt(nombresGonzalo.length);
-					
-					if(randomGenio >= 8) {
-						prota.setVidaMax(prota.getVidaMax()+10);
-//						finalArray[0][0] = "VidaMax";
-//						finalArray[0][1] = "10";
-						System.out.println("\"¡Excelente! Has obtenido 10 puntos de vida máxima. ¡Tu fuerza y resistencia aumentan! ¡Sigue avanzando con más energía!\"-dijo entusiasmado");
-						System.out.println("Gracias a " + Color.GREEN_BOLD_BRIGHT + "Gonzalo " + nombresGonzalo[numerin] + Color.RESET +  "ahora te sientes mas resisitente, aunque tambien la gran pena de no poder ver mas a Niebla");
-						
-					} else System.out.println("\"Lamentablemente, no puedo conceder ese deseo en este momento. Sin embargo, siempre estaré aquí para ayudarte en lo que necesites. ¡Sigue adelante!\"-dijo alegre");
-					break;
-				}
-					
-				}
 				
 				numerin = random.nextInt(nombresGonzalo.length);
 				
@@ -757,7 +705,6 @@ public class Eventos {
 				
 				System.out.println(Color.GREEN_BOLD_BRIGHT + "Gonzalo " + nombresGonzalo[numerin] + Color.RESET + " se esfuma ante ti");
 				
-			}
 			}
 			
 			else
