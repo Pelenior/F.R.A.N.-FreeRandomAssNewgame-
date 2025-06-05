@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-
+import java.sql.*;
 public class Eventos {
 	
 	private String [] evento = {"Bruja", "Maldición", "Trampa", "Juan", "Puzzle"};
@@ -11,7 +11,7 @@ public class Eventos {
 	
 	//función selecionar eventos
 	//poner metodo público, que escoje un evento aleatorio y llama la función de ese evento
-	 public void elegirEvento (Protagonista prota) {
+	 public void elegirEvento (Protagonista prota) throws SQLException {
 		for (String eventoString : evento) {
 			eventosLista.add(eventoString);
 		}
@@ -34,6 +34,7 @@ public class Eventos {
 		
 		int eventoAleatorio = random.nextInt(0, evento.length);
 		String eventoSeleccionado = eventosLista.get(eventoAleatorio);
+		eventoSeleccionado = "Pelea Steve";
 		
 		//switch del evento
 		switch (eventoSeleccionado) {
@@ -68,6 +69,19 @@ public class Eventos {
 		case "Puzzle":
 			eventoPuzzle(random, sc, prota);
 			break;
+		case "Pelea Steve":
+		{
+			Combate combate = new Combate();
+			if(combate.combate(sc, random, prota, "Steve", random.nextBoolean()))
+			{
+				calculoFinCombate(random, prota);
+			}
+			else
+			{
+				Juego.gameOver = true;
+			}
+			break;
+		}
 	
 		default:
 			System.out.println("ERROR EN LA SELECCIÓN EVENTO");
@@ -1939,4 +1953,48 @@ public class Eventos {
 			}
 }
 		
+		private void calculoFinCombate(Random random, Protagonista prota)
+		{
+			if(!prota.getHaHuido() && prota.getVida() > 0)
+			{
+				prota.setHaMatado(true);
+				int randomVidaAtaque = random.nextInt(1, 11);
+				if(randomVidaAtaque <= 4)
+				{
+					prota.setVidaMax(prota.getVidaMax() + prota.getNumEnemigos());
+					prota.setVida(prota.getVida() + prota.getNumEnemigos());
+					System.out.println(prota.getNombre() + " consigue " + prota.getNumEnemigos() + " puntos de vida máxima tras el combate!\r\n");
+				}
+				else if(randomVidaAtaque > 4 && randomVidaAtaque <= 8)
+				{
+					prota.setFuerza(prota.getFuerza() + (double) (prota.getNumEnemigos()) / 2);
+					System.out.println(prota.getNombre() + " consigue " + (double) (prota.getNumEnemigos()) / 2 + " puntos de fuerza tras el combate!\r\n");
+				}
+				else
+				{
+					prota.setVidaMax(prota.getVidaMax() + prota.getNumEnemigos() / 2);
+					prota.setVida(prota.getVida() + prota.getNumEnemigos() / 2);
+					prota.setFuerza(prota.getFuerza() + (double) (prota.getNumEnemigos()) / 4);
+					System.out.println(prota.getNombre() + " consigue " + (double) (prota.getNumEnemigos()) / 2 + " puntos de vida máxima y " + (double) (prota.getNumEnemigos()) / 4 + " puntos de fuerza tras el combate! Qué suerte!\r\n");
+				}
+				
+				int randomMonedas = random.nextInt(1, 11);
+				randomMonedas += prota.getSuerte() /2;
+				if(randomMonedas <= 2)
+				{
+					System.out.println(prota.getNombre() + Color.RED_BRIGHT + " no ha encontrado" + Color.RESET + " ninguna " + Color.YELLOW + (prota.getNombre().equals("Chicken Little") ? " semilla " : " esmeralda ") + Color.RESET + "tras el combate\r\n");
+				}
+				else if(randomMonedas > 2 && randomMonedas <= 8)
+				{
+					prota.setMonedas(prota.getMonedas() + prota.getNumEnemigos());
+					System.out.println(prota.getNombre() + " consigue " + Juego.monedas(prota.getNombre(), prota.getNumEnemigos()) + (prota.getNombre().equals("Chicken Little") ? " semillas " : " esmeraldas ") + "tras el combate\r\n");
+				}
+				else
+				{
+					System.out.println("¡" + Color.RED_BRIGHT + "S" + Color.YELLOW_BRIGHT + "U" + Color.GREEN_BRIGHT + "E" + Color.BLUE_BRIGHT + "R" + Color.PURPLE_BRIGHT + "T" + Color.CYAN_BRIGHT + "E" + Color.RESET + "!");
+					prota.setMonedas(prota.getMonedas() + prota.getNumEnemigos() * 3);
+					System.out.println(prota.getNombre() + " consigue " + Juego.monedas(prota.getNombre(), prota.getNumEnemigos() * 3) + (prota.getNombre().equals("Chicken Little") ? " semillas " : " esmeraldas ") + "tras el combate\r\n");
+				}
+			}
+		}
 }

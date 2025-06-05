@@ -218,7 +218,7 @@ public class Combate {
 				}
 			}
 		}
-		else if(tipoCombate.equals("EvilSteve"))
+		else if(tipoCombate.equals("Steve"))
 		{
 			for(ArrayList<Object> i : listaNombresEnemigosSteve)
 			{
@@ -649,6 +649,8 @@ public class Combate {
 			}
 			numeroEnemigos--;
 		}
+		prota.setPenalizacionAtaque(0);
+		prota.setPenalizacionDefensa(0);
 		if(prota.getVida() > 0)
 		{
 			return true;
