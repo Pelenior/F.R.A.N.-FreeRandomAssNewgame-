@@ -28,25 +28,35 @@ public class AtaqueController {
 	{
 		Scanner sc = new Scanner(System.in);
 		String seleccion = "";
+		prota.setRepetirAtaque(true);
 		do
 		{
-			System.out.println("¿Qué ataque usa " + prota.getNombre() + "?");
-			String ataques = "";
-			for(int i = 0 ; i < listaAtaques.size(); i++)
+			do
 			{
-				ataques += (i + 1) + ". " + listaAtaques.get(i).getNombre() + " | ";
+				System.out.println("¿Qué ataque usa " + prota.getNombre() + "?");
+				String ataques = "";
+				for(int i = 0 ; i < listaAtaques.size(); i++)
+				{
+					ataques += (i + 1) + ". " + listaAtaques.get(i).getNombre() + " | ";
+				}
+				System.out.println(ataques + "\n\r");
+				seleccion = sc.nextLine();
+				if(!seleccion.equals("1") && !seleccion.equals("2") && !seleccion.equals("3") && !seleccion.equals("4") && !seleccion.equals("5"))
+				{
+					System.out.println("Escribe en números un ataque\n");
+					seleccion = "";
+				}
+				else if(!(Integer.valueOf(seleccion) <= listaAtaques.size()))
+				{
+					System.out.println("Escribe en números un ataque\n");
+					seleccion = "";
+				}
 			}
-			System.out.println(ataques + "\n\r");
-			seleccion = sc.nextLine();
-			if(!(Integer.valueOf(seleccion) <= listaAtaques.size()))
-			{
-				System.out.println("Escribe en números un ataque\n");
-				seleccion = "";
-			}
+			while(seleccion.equals(""));
+			listaAtaques.get(Integer.valueOf(seleccion) - 1).atacar(prota, target);
 		}
-		while(seleccion.equals(""));
+		while(prota.getRepetirAtaque());
 		
-		listaAtaques.get(Integer.valueOf(seleccion) - 1).atacar(prota, target);
 	}
 	
 	public void seleccionarAtaqueEnemigo(Enemigo enemigo, Personaje target)

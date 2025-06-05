@@ -17,7 +17,8 @@ import java.util.ArrayList;
 	protected int idAscii;
 
 	AtaqueController ataqueController = new AtaqueController();
-	
+	private boolean repetirAtaque = true;
+
 	// COMBATE
 	private boolean flechaRecargada = false;
 	private boolean cargaPreparada = false;
@@ -141,7 +142,7 @@ import java.util.ArrayList;
 	{
 		this.pollos = pollos;
 	}
-	public boolean isEscudoPollo()
+	public boolean getEscudoPollo()
 	{
 		return escudoPollo;
 	}
@@ -312,6 +313,14 @@ import java.util.ArrayList;
 	public AtaqueController getAtaqueController()
 	{
 		return ataqueController;
+	}
+	public boolean getRepetirAtaque()
+	{
+		return repetirAtaque;
+	}
+	public void setRepetirAtaque(boolean repetirAtaque)
+	{
+		this.repetirAtaque = repetirAtaque;
 	}
 	
 	public void selectALLPersonajes() throws SQLException{

@@ -19,6 +19,7 @@ public class Ataque {
 	
 	public void atacar(Personaje user, Personaje target)
 	{
+		user.setRepetirAtaque(false);
 		double danoFinal = 0;
 		boolean haceDano = false;
 		double randomGolpe = 0;
@@ -27,10 +28,13 @@ public class Ataque {
 		DecimalFormat dfZeroDecimal = new DecimalFormat("0");
 		switch(nombre)
 		{
-			case "Cura":
+			case "Curar":
 			{
 				System.out.println(user.getNombre() + " trata de curarse...");
 				//TODO cura
+				//if no potions:
+				System.out.println(user.getNombre() + " no tiene pociones!");
+				user.setRepetirAtaque(true);
 				break;
 			}
 			case "Huir":
@@ -166,10 +170,18 @@ public class Ataque {
 			
 			case "Maldición de Wither":
 			{
-				danoFinal = (int) (target.getVida() * 0.3) + user.getFuerza();
-				System.out.println(user.getNombre() + " maldice al enemigo con una " + Color.BLACK + "flor de wither" + Color.RESET);
-				haceDano = true;
-				user.setCooldownMaldicionWither(3);// turnos de espera para usar el ataque
+				if(user.getCooldownMaldicionWither() > 0)
+				{
+					System.out.println("Ese ataque sigue en Cooldown!");
+					user.setRepetirAtaque(true);
+				}
+				else
+				{
+					danoFinal = (int) (target.getVida() * 0.3) + user.getFuerza();
+					System.out.println(user.getNombre() + " maldice al enemigo con una " + Color.BLACK + "flor de wither" + Color.RESET);
+					haceDano = true;
+					user.setCooldownMaldicionWither(3);// turnos de espera para usar el ataque
+				}
 				break;
 			}
 				
@@ -204,8 +216,16 @@ public class Ataque {
 			
 			case "Llamada de pollos":
 			{
-				System.out.println(user.getNombre() + Color.CYAN + " prepara a sus pollitos" + Color.RESET + " para el siguiente ataque...");
-				user.setEscudoPollo(true);
+				if(user.getEscudoPollo())
+				{
+					System.out.println("Los pollitos ya están preparados...");
+					user.setRepetirAtaque(true);
+				}
+				else
+				{
+					System.out.println(user.getNombre() + Color.CYAN + " prepara a sus pollitos" + Color.RESET + " para el siguiente ataque...");
+					user.setEscudoPollo(true);
+				}
 				break;
 			}
 			
