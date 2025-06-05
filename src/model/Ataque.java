@@ -36,7 +36,26 @@ public class Ataque {
 			case "Huir":
 			{
 				System.out.println(user.getNombre() + " trata de huir!");
-				//TODO huir
+				int randomHuir = random.nextInt(1, 11);
+				randomHuir += user.getVelocidad()/2;
+				//TODO ender pearl
+				
+//				if((int) objetosTienda.get(4) > 0)
+//				{
+//					System.out.println(nombrePersonaje + " usa una " + PURPLE_BRIGHT + "ender pearl" + RESET + " para huir!");
+//					objetosTienda.set(4, (int) objetosTienda.get(4) - 1);
+//					System.out.println(nombrePersonaje + " ahora tiene " + (int) objetosTienda.get(4) + PURPLE_BRIGHT + " ender pearls" + RESET);
+//					randomHuir = 10;
+//				}
+				if(randomHuir >= 8)
+				{
+					System.out.println(user.getNombre() + Color.GREEN_BRIGHT + " consigue huir de los enemigos" + Color.RESET + "\r\n" + "!");
+					user.setHaHuido(true);
+				}
+				else
+				{
+					System.out.println("Los enemigos " + Color.RED_BRIGHT + "no dejan que " + Color.RESET +  user.getNombre() +  Color.RED_BRIGHT + " huya" + Color.RESET + "!");
+				}
 				break;
 			}
 			case "Por si Espada":
@@ -606,8 +625,8 @@ public class Ataque {
 				else
 				{
 					System.out.println("El ataque de " + user.getNombre() + Color.YELLOW + " impacta parcialmente contra el " + Color.RESET + target.getNombre());
-					danoFinal -= danoFinal/2;//impactar parcialmente
 				}
+				danoFinal -= danoFinal/2;//impactar parcialmente
 			}
 			else
 			{
@@ -618,8 +637,8 @@ public class Ataque {
 				else
 				{
 					System.out.println("El ataque de " + user.getNombre() + Color.CYAN + " es esquivado por el " + Color.RESET + target.getNombre() + "!");
-					danoFinal = 0;//esquivar ataque
 				}
+				danoFinal = 0;//esquivar ataque
 			}
 			if(danoFinal > 0 && target.getTurnosPectoralesCoronel() > 0)
 			{

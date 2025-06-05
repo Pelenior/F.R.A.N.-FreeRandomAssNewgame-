@@ -145,4 +145,20 @@ public class AtaqueController {
 		listaAtaques.get(ataqueRandom).atacar(enemigo, target);
 		
 	}
+	
+	public void eliminarAtaque(String nombre)
+	{
+		for(int i = 0; i < listaAtaques.size(); i++)
+		{
+			if(listaAtaques.get(i).getNombre().equals(nombre))
+			{
+				listaAtaques.remove(i);
+			}
+		}
+	}
+	
+	public void anadirAtaque(String nombre)
+	{
+		listaAtaques.add(new Ataque(nombre));
+	}
 }

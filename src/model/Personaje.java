@@ -284,14 +284,14 @@ import java.util.ArrayList;
 	public void setHaHuido(boolean haHuido)
 	{
 		this.haHuido = haHuido;
+		if(haHuido = true)
+		{
+			haHuidoAlgunaVez = true;
+		}
 	}
 	public boolean getHaHuidoAlgunaVez()
 	{
 		return haHuidoAlgunaVez;
-	}
-	public void setHaHuidoAlgunaVez(boolean haHuidoAlgunaVez)
-	{
-		this.haHuidoAlgunaVez = haHuidoAlgunaVez;
 	}
 	public int getNumEnemigos()
 	{
@@ -308,6 +308,10 @@ import java.util.ArrayList;
 	public void setHaMatado(boolean haMatado)
 	{
 		this.haMatado = haMatado;
+	}
+	public AtaqueController getAtaqueController()
+	{
+		return ataqueController;
 	}
 	
 	public void selectALLPersonajes() throws SQLException{
@@ -340,6 +344,10 @@ import java.util.ArrayList;
 	    daoPersonajes.deletePersonaje(nombre);
 	}
 	
+	public void anadirAtaque(String nombre)
+	{
+		ataqueController.anadirAtaque(nombre);
+	}
 	
 	public abstract void atacar(Personaje target);
 	

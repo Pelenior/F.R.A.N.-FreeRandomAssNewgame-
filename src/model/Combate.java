@@ -169,6 +169,7 @@ public class Combate {
 		
 		if(tipoCombate.equals("Boss"))
 		{
+			prota.getAtaqueController().eliminarAtaque("Huir");
 			for(ArrayList<Object> i : listaNombresEnemigosBoss)
 			{
 				nombreEnemigos.add((String) i.get(0));
@@ -203,6 +204,7 @@ public class Combate {
 				case "Alex":
 				{
 					seleccionRandom = 2;
+					prota.anadirAtaque("Cura");
 					break;
 				}
 				case "Chicken Little":
