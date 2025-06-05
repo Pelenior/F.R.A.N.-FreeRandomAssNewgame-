@@ -20,6 +20,8 @@ import java.util.ArrayList;
 	private boolean repetirAtaque = true;
 
 	// COMBATE
+	private int penalizacionAtaque = 0;
+	private int penalizacionDefensa = 0;
 	private boolean flechaRecargada = false;
 	private boolean cargaPreparada = false;
 	private boolean cargaRecargada = false;
@@ -339,6 +341,22 @@ import java.util.ArrayList;
 	public void setEndermanActivo(boolean endermanActivo)
 	{
 		this.endermanActivo = endermanActivo;
+	}
+	public int getPenalizacionAtaque()
+	{
+		return penalizacionAtaque;
+	}
+	public void setPenalizacionAtaque(int penalizacionAtaque)
+	{
+		this.penalizacionAtaque = penalizacionAtaque;
+	}
+	public int getPenalizacionDefensa()
+	{
+		return penalizacionDefensa;
+	}
+	public void setPenalizacionDefensa(int penalizacionDefensa)
+	{
+		this.penalizacionDefensa = penalizacionDefensa;
 	}
 	
 	public void selectALLPersonajes() throws SQLException{

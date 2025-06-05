@@ -10,7 +10,8 @@ import dao.*;
 public class Combate {
 	
 	String bioma = "";
-	String weather = "";
+	String clima = "";
+	String terreno = "";
 	
 	private Enemigo enemigo;
 	
@@ -339,9 +340,130 @@ public class Combate {
 							  (double) fuerzaEnemigos.get(seleccionRandom), 0);
 	}
 	
-	private void penalizaciones()
+	private void penalizaciones(Protagonista prota, Random random, String tipoCombate)
 	{
+		switch(random.nextInt(0, 10))
+		{
+			case 0, 1, 2, 3, 4, 5, 6, 7:
+			{
+				bioma = "Overworld";
+				break;
+			}
+			case 8:
+			{
+				bioma = "Nether";
+				break;
+			}
+			case 9:
+			{
+				bioma = "End";
+				break;
+			}
+		}
+		switch(random.nextInt(0, 4))
+		{
+			case 0:
+			{
+				clima = "Despejado";
+				break;
+			}
+			case 1:
+			{
+				clima = "Nublado";
+				break;
+			}
+			case 2:
+			{
+				clima = "Lluvioso";
+				break;
+			}
+			case 3:
+			{
+				clima = "Tormentoso";
+				break;
+			}
+		}
+		switch(random.nextInt(0, 3))
+		{
+			case 0:
+			{
+				terreno = "Llano";
+				break;
+			}
+			case 1:
+			{
+				terreno = "Rocoso";
+				break;
+			}
+			case 2:
+			{
+				terreno = "Montañoso";
+				break;
+			}
+		}
 		
+		if(tipoCombate.equals("Boss"))
+		{
+			if(prota.getNombre().equals("Steve"))
+			{
+				bioma = "End";
+			}
+		}
+		
+		
+		switch(bioma)
+		{
+			case "Nether":
+			{
+				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 1);
+				clima = "Despejado";
+				break;
+			}
+			case "End":
+			{
+				clima = "Despejado";
+				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 2);
+				break;
+			}
+		}
+		switch(clima)
+		{
+			case "Lluvioso":
+			{
+				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 1);
+				break;
+			}
+			case "Tormentoso":
+			{
+				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 2);
+				break;
+			}
+		}
+		switch(terreno)
+		{
+			case "Rocoso":
+			{
+				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 1);
+				prota.setPenalizacionDefensa(prota.getPenalizacionDefensa() + 1);
+				break;
+			}
+			case "Montañoso":
+			{
+				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 2);
+				prota.setPenalizacionDefensa(prota.getPenalizacionDefensa() + 1);
+				break;
+			}
+		}
+		
+		System.out.println("La batalla tendrá lugar en el " + bioma + ", es un lugar " + terreno + " y el clima es " + clima);
+		if(prota.getPenalizacionAtaque() > 0)
+		{
+			System.out.println("El escenario hace que " + prota.getNombre() + " pierda " + prota.getPenalizacionAtaque() + " puntos de fuerza!");
+		}
+		if(prota.getPenalizacionDefensa() > 0)
+		{
+			System.out.println("El escenario hace que " + prota.getNombre() + " pierda " + prota.getPenalizacionDefensa() + " puntos de defensa!");
+		}
 	}
 	
 	//devuelve false si el protagonista pierde
@@ -349,7 +471,7 @@ public class Combate {
 	{
 		//Variables que permanecen entre encuentros con enemigos
 		
-		
+		penalizaciones(prota, random, tipoCombate);
 		
 		DecimalFormat dfOneDecimal = new DecimalFormat("0.0");
 		DecimalFormat dfZeroDecimal = new DecimalFormat("0");

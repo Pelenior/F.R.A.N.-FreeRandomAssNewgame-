@@ -673,6 +673,10 @@ public class Ataque {
 			{
 				if(danoFinal > 0 && randomGolpe != 1)
 				{
+					if(user.getPenalizacionAtaque() > 0)
+					{
+						danoFinal -= user.getPenalizacionAtaque();
+					}
 					if(user.getDanoExtra() > 0)
 					{
 						danoFinal += user.getDanoExtra();
@@ -680,7 +684,7 @@ public class Ataque {
 					}
 					if(target.getDefensa() > 0)
 					{
-						danoFinal -= (danoFinal * (target.getDefensa() / 2)) / 10; // cálculo de defensa
+						danoFinal -= (danoFinal * ((target.getDefensa() - target.getPenalizacionDefensa()) / 2)) / 10; // cálculo de defensa
 					}
 					target.setVida(target.getVida() - danoFinal);
 					if(target.getNombre().equals("Sans") || target.getNombre().equals("Steve Corrupto") || target.getNombre().equals("Steve") || target.getNombre().equals("Alex") || target.getNombre().equals("Chicken Little"))
