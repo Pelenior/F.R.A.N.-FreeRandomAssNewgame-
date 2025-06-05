@@ -24,22 +24,24 @@ public class DaoPersonajes {
 		return instance;
 	}
 	
+	// Inserta un protagonista en la tabla 'personajes'
 	public void insertProta(String nombre, Double vidaMax, Double defensa, Double fuerza, Double velocidad, Integer idAscii, Boolean karma) throws SQLException {
 	    String insertSql = "INSERT INTO personajes (nombre, tipo, vidaMax, defensa, fuerza, velocidad, idAscii, karma, isRaid, isBoss, isSteve) "
 	                     + "VALUES (?, 'protagonista', ?, ?, ?, ?, ?, ?, NULL, NULL, NULL)";
 
 	    PreparedStatement statement = conn.prepareStatement(insertSql);
 	    statement.setString(1, nombre);
-
+	    
+	    // Verifica si los valores no son nulos antes de insertarlos
 	    if (vidaMax != null) statement.setDouble(2, vidaMax); else statement.setNull(2, java.sql.Types.DOUBLE);
 	    if (defensa != null) statement.setDouble(3, defensa); else statement.setNull(3, java.sql.Types.DOUBLE);
 	    if (fuerza != null) statement.setDouble(4, fuerza); else statement.setNull(4, java.sql.Types.DOUBLE);
 	    if (velocidad != null) statement.setDouble(5, velocidad); else statement.setNull(5, java.sql.Types.DOUBLE);
 	    if (idAscii != null) statement.setInt(6, idAscii); else statement.setNull(6, java.sql.Types.INTEGER);
 	    if (karma != null) statement.setBoolean(7, karma); else statement.setNull(7, java.sql.Types.BOOLEAN);
-
+	    // Ejecuta la inserción
 	    int rowsInserted = statement.executeUpdate();
-
+	    // Muestra resultado
 	    if (rowsInserted > 0) {
 	        System.out.println("Protagonista insertado correctamente");
 	    } else {
@@ -77,7 +79,8 @@ public class DaoPersonajes {
 		
 		statement.close();
 	}
-
+	
+	// Selecciona todos los enemigos y los devuelve como lista de listas de objetos
 	public ArrayList<ArrayList<Object>> selectALLEnemigo() throws SQLException {
 	    String selectAllData = "SELECT * FROM enemigos";
 
@@ -85,7 +88,8 @@ public class DaoPersonajes {
 	    
 	    Statement statementSelect = conn.createStatement();
 	    ResultSet resultData = statementSelect.executeQuery(selectAllData);
-
+	    
+	    // repite los resultados y los agrega a la lista
 	    while (resultData.next()) {
 	        String nombre = resultData.getString("nombre");
 	        double vidaMax = resultData.getDouble("vidaMax");
@@ -117,7 +121,6 @@ public class DaoPersonajes {
 	    return listaFinal;
 	}
 	
-	
 	public void selectALLPersonajes() throws SQLException {
 	    String selectAllData = "SELECT * FROM protagonistas";
 
@@ -126,7 +129,7 @@ public class DaoPersonajes {
 	    ResultSet resultData = statementSelect.executeQuery(selectAllData);
 
 	    int countData = 0;
-
+	    
 	    while (resultData.next()) {
 	        String nombre = resultData.getString("nombre");
 	        double vidaMax = resultData.getDouble("vidaMax");
@@ -152,6 +155,7 @@ public class DaoPersonajes {
 	    statementSelect.close();
 	}
 	
+	// Imprime todos los protagonistas desde la tabla 'protagonistas'
 	public void selectALLProta() throws SQLException {
 	    String selectAllData = "SELECT * FROM protagonistas";
 
@@ -160,7 +164,7 @@ public class DaoPersonajes {
 	    ResultSet resultData = statementSelect.executeQuery(selectAllData);
 
 	    int countData = 0;
-
+	    // Imprime cada protagonista
 	    while (resultData.next()) {
 	        String nombre = resultData.getString("nombre");
 	        double vidaMax = resultData.getDouble("vidaMax");
@@ -185,7 +189,8 @@ public class DaoPersonajes {
 
 	    statementSelect.close();
 	}
-
+	
+	// Muestra un personaje específico por nombre
 	public void selectThis(String nombre) throws SQLException {
     String sql = "SELECT * FROM personajes WHERE nombre = ?";
 
@@ -195,6 +200,7 @@ public class DaoPersonajes {
     ResultSet result = statement.executeQuery();
 
     if (result.next()) {
+    	// Muestra todos los campos posibles
         System.out.println("Nombre: " + result.getString("nombre"));
         System.out.println("Tipo: " + result.getString("tipo"));
         System.out.println("Vida Max: " + result.getDouble("vidaMax"));
@@ -212,7 +218,7 @@ public class DaoPersonajes {
 
     statement.close();
 }
-
+	// Actualiza los datos del protagonista existente
 	public void updateProta(String nombre, Double vidaMax, Double defensa, Double fuerza, Double velocidad, Integer idAscii, Boolean karma) throws SQLException {
 	    String updateSql = "UPDATE personajes SET vidaMax=?, defensa=?, fuerza=?, velocidad=?, idAscii=?, karma=?, isRaid=NULL, isBoss=NULL, isSteve=NULL WHERE nombre=? AND tipo='protagonista'";
 
@@ -237,7 +243,8 @@ public class DaoPersonajes {
 
 	    statement.close();
 	}
-
+	
+	// Actualiza los datos de un enemigo existente
 	public void updateEnemigo(String nombre, Double vidaMax, Double defensa, Double fuerza, Double velocidad, Integer idAscii, Boolean isRaid, Boolean isBoss, Boolean isSteve) throws SQLException {
 		String updateSql = "UPDATE personajes SET vidaMax=?, defensa=?, fuerza=?, velocidad=?, idAscii=?, karma=NULL, isRaid=?, isBoss=?, isSteve=? WHERE nombre=? AND tipo='enemigo'";
 		
@@ -266,7 +273,7 @@ public class DaoPersonajes {
 		
 		statement.close();
 	}
-
+	// Elimina un personaje por nombre
 	public void deletePersonaje(String nombre) throws SQLException {
 	    String sql = "DELETE FROM personajes WHERE nombre=?";
 
@@ -284,6 +291,7 @@ public class DaoPersonajes {
 	    statement.close();
 	}
 	
+	// Obtiene los datos del protagonista como objeto
 	public Protagonista getDataProta(String nombre) throws SQLException {
 	    String query = "SELECT * FROM personajes WHERE nombre = ? AND tipo = 'protagonista'";
 
@@ -309,6 +317,8 @@ public class DaoPersonajes {
 	    statement.close();
 	    return dataProta;
 	}
+	
+	// Obtiene los datos del enemigo como objeto
 	public Enemigo getDataEnemigo(String nombre) throws SQLException {
 	    String query = "SELECT * FROM personajes WHERE nombre = ? AND tipo = 'enemigo'";
 

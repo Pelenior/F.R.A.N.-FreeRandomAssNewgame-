@@ -21,6 +21,12 @@ public class DaoAtaques {
 		return instance;
 	}
 	
+	/**
+	 * Recupera todos los nombres de ataques asociados a un personaje,
+	 * incluyendo los ataques por defecto según su tipo y nombre.
+	 * @param nombrePersonaje nombre del personaje a consultar
+	 * @return lista con los nombres de los ataques
+	 */
 	public ArrayList<String> selectAllAtaques(String nombrePersonaje) throws SQLException {
 	    ArrayList<String> listaNombresAtaques = new ArrayList<>();
 
@@ -38,7 +44,8 @@ public class DaoAtaques {
 
 	    ArrayList<Integer> ataqueIds = new ArrayList<>();
 	    String tipo = null;
-
+	    
+	    // Guardar los ID de ataques y el tipo del personaje
 	    while (rs.next()) {
 	        ataqueIds.add(rs.getInt("ataque_id"));
 	        tipo = rs.getString("tipo");
@@ -48,6 +55,7 @@ public class DaoAtaques {
 	    stmt.close();
 
 	    // Lógica según el nombre y tipo
+	    // Agrega ataques especiales dependiendo del tipo de personaje
 	    if ("protagonista".equalsIgnoreCase(tipo)) {
 	        if ("Alex".equalsIgnoreCase(nombrePersonaje)) {
 	            ataqueIds.add(2); // Huir
@@ -57,7 +65,7 @@ public class DaoAtaques {
 	        }
 	    }
 
-	    // Consulta para obtener el nombre del ataque
+	    // Consulta para obtener el nombre del ataque a partir de sus ID
 	    String queryAtaque = "SELECT nombre FROM ataques WHERE id = ?";
 	    PreparedStatement stmtAtaque = conn.prepareStatement(queryAtaque);
 
@@ -75,7 +83,12 @@ public class DaoAtaques {
 	    return listaNombresAtaques;
 	}
 
-
+	/**
+	 * Inserta un nuevo ataque en la tabla 'ataques'
+	 * @param id ID del ataque
+	 * @param nombre Nombre del ataque
+	 * @param desc Descripción del ataque
+	 */
 	public void insertAtaque(int id, String nombre, String desc) throws SQLException {
 	    String sql = "INSERT INTO ataques (id, nombre, descripcion) VALUES (?, ?, ?)";
 	    PreparedStatement ps = conn.prepareStatement(sql);
@@ -94,6 +107,12 @@ public class DaoAtaques {
 	    ps.close();
 	}
 
+	/**
+	 * Actualiza un ataque existente por su ID
+	 * @param id ID del ataque a actualizar
+	 * @param nombre Nuevo nombre
+	 * @param desc Nueva descripción
+	 */
 	public void updateAtaque(int id, String nombre, String desc) throws SQLException {
 	    String sql = "UPDATE ataques SET nombre = ?, descripcion = ? WHERE id = ?";
 	    PreparedStatement ps = conn.prepareStatement(sql);
@@ -112,6 +131,10 @@ public class DaoAtaques {
 	    ps.close();
 	}
 
+	/**
+	 * Elimina un ataque de la base de datos por su ID
+	 * @param idAtaque ID del ataque a eliminar
+	 */
 	public void deleteAtaque(int idAtaque) throws SQLException {
 	    String sql = "DELETE FROM ataques WHERE id = ?";
 	    PreparedStatement ps = conn.prepareStatement(sql);
