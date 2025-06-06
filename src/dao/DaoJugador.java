@@ -39,10 +39,10 @@ public class DaoJugador {
 	    return accesoPermitido;
 	}
 
-	public void guardarJugador(String nombre, String contraseña, int idAscii, int puntuacion) throws SQLException {
+	public boolean guardarJugador(String nombre, String contraseña, int idAscii, int puntuacion) throws SQLException {
 		
 	    boolean comprobacionNombre = comprobarNombre(nombre);
-	    System.out.println("Nombre válido: " + comprobacionNombre);
+//	    System.out.println("Nombre válido: " + comprobacionNombre);
 
 	    if (comprobacionNombre) {
 	        String sql = "INSERT INTO jugador (nombre, contraseña, idAscii, puntuacion) VALUES (?, ?, ?, ?)";
@@ -54,7 +54,7 @@ public class DaoJugador {
 
 	        int result = ps.executeUpdate();
 	        if (result > 0) {
-	            System.out.println("Jugador insertado correctamente.");
+	            System.out.println("Jugador insertado correctamente.\n");
 	        } else {
 	            System.out.println("No se pudo insertar el jugador.");
 	        }
@@ -62,7 +62,9 @@ public class DaoJugador {
 	        ps.close();
 	    } else {
 	        System.out.println("El nombre está cogido.");
+	        
 	    }
+	    return comprobacionNombre;
 	}
 
 	public boolean comprobarNombre(String nombreJugador) throws SQLException {
@@ -95,7 +97,41 @@ public class DaoJugador {
 	    return comprobar;
 	}
 	
-	public int getAscii() {
-		
+	public int getAscii(String nombreJugador) throws SQLException {
+		String sql = "SELECT idAscii FROM jugador WHERE nombre = ?";
+	    PreparedStatement ps = conn.prepareStatement(sql);
+	    ps.setString(1, nombreJugador);
+
+	    ResultSet rs = ps.executeQuery();
+
+	    
+	    int id = 99;
+	    if (rs.next()) {
+	        id = rs.getInt("idAscii");
+	    }
+
+	    rs.close();
+	    ps.close();
+
+	    return id;
+	}
+	
+	public int getPuntuacion(String nombreJugador) throws SQLException {
+		String sql = "SELECT puntuacion FROM jugador WHERE nombre = ?";
+	    PreparedStatement ps = conn.prepareStatement(sql);
+	    ps.setString(1, nombreJugador);
+
+	    ResultSet rs = ps.executeQuery();
+
+	    
+	    int id = 99;
+	    if (rs.next()) {
+	        id = rs.getInt("puntuacion");
+	    }
+
+	    rs.close();
+	    ps.close();
+
+	    return id;
 	}
 }

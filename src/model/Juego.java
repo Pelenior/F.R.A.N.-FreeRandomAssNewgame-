@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -73,9 +74,7 @@ public class Juego {
 		int idAscii = 99;
 		boolean AsciiBien = false;
 		
-		ASCII.printAscii(0);
-		
-		System.out.println("Un juego creado por: Pelayo Santos, Aitana Herranz y Diego Baudot");
+//		principios();
 		
 		do {
 			System.out.println("Bienvenido desconocido usuario, elija su forma de inicio: \n  1.Nuevo Perfil | 2.Perfil existente");
@@ -85,27 +84,41 @@ public class Juego {
 		
 		do {
 			if(decision.equals("1")) {
-				System.out.println("De acuerdo desconocido cree un Nuevo Perfil:\n\nNombre:");
-				nombreJugador = sc.nextLine();
+				System.out.println("De acuerdo desconocido cree un Nuevo Perfil:");
 				
-				System.out.println("Contraseña:");
-				contrasena = sc.nextLine();
-						
 				do {
-					try {
-						System.out.println("Elija un valor del 1-100:");
-						idAscii = sc.nextInt();
-						AsciiBien = true;
-					}catch(Exception e) {
-						System.out.println("El valor debe ser un numero");
-						AsciiBien = false;
+					
+					System.out.println("\nNombre:");
+					nombreJugador = sc.nextLine();
+					if (perfil.comprobarNombre(nombreJugador) == false) {
+						System.out.println("Ese perfil ya existe\nIniciar sesion: 1.No 2.Si");
+						decision = sc.nextLine();
 					}
-				}while(AsciiBien == false);
-						
-				perfil.guardarJugador(nombreJugador, contrasena, idAscii, 0);
-				System.out.println("De acuerdo " + nombreJugador + " su perfil se ha guardado correctamente\nPor seguridad inicie sesion para saber que todo esta correcto");
-			}else {
-				System.out.println("Bienvenido de nuvo pues, rellene sus datos para saber que es usted:");
+					
+				}while(perfil.comprobarNombre(nombreJugador) == false && !decision.equals("2"));
+					
+				if (!decision.equals("2")) {
+					System.out.println("Contraseña:");
+					contrasena = sc.nextLine();
+							
+					do {
+						try {
+							System.out.println("Elija un valor del 1-100:");
+							idAscii = sc.nextInt();
+							AsciiBien = true;
+						}catch(Exception e) {
+							System.out.println("El valor debe ser un numero");
+							AsciiBien = false;
+						}
+					}while(AsciiBien == false);
+							
+					perfil.guardarJugador(nombreJugador, contrasena, idAscii, 0);
+					System.out.println("De acuerdo " + nombreJugador + " su perfil se ha guardado correctamente\nPor seguridad inicie sesion para saber que todo esta correcto");
+				
+				}		
+			}
+			if(decision.equals("2")) {
+				System.out.println("\nBienvenido de nuevo pues, rellene sus datos para saber que es usted:\n");
 			}
 			
 			System.out.println("Repita su Nombre:");
@@ -114,17 +127,18 @@ public class Juego {
 			System.out.println("Repita su Contraseña:");
 			contrasena = sc.nextLine();
 			
-		}while(perfil.inicioSesion(nombreJugador, contrasena));
+			if (perfil.inicioSesion(nombreJugador, contrasena) == false) {
+				System.out.println(Color.RED_BOLD_BRIGHT + "El nombre o contraseña son incorrectos" + Color.RESET);
+			}
+			
+		}while(perfil.inicioSesion(nombreJugador, contrasena) == false);
 		
-		System.out.println("Genial, este eres tu" + nombreJugador + ", te doy la bienvenida final al mundo de Minecraft");
-		ASCII.printAscii(idAscii);
+		System.out.println("\nGenial, este eres tu\n                      " + Color.YELLOW_BOLD_BRIGHT + nombreJugador.toUpperCase() + Color.RESET);
+		ASCII.printAscii(perfil.getAscii(nombreJugador));
 		
-		System.out.println("De ahora en adelante, ELIJA SU PROPIA AVENTURA\n" + Color.WHITE_BOLD_BRIGHT + "[PULSE ENTER PARA CONTINUAR]");
+		System.out.println("Te doy la bienvenida final al mundo de Minecraft,\nde ahora en adelante, ELIJA SU PROPIA AVENTURA\n\n" + Color.WHITE_BOLD_BRIGHT + "[PULSE ENTER PARA CONTINUAR]");
+		sc.nextLine();
 		
-		
-		
-		
-				
 	}
 	
 	private void elegirPersonaje(Scanner sc, Random random) throws SQLException {
@@ -577,8 +591,59 @@ public class Juego {
 		return monedas;
 	}
 	
+	public void esperar(int milisegundos) {
+		try {
+		    Thread.sleep(milisegundos);
+		} catch (InterruptedException e) {
+		    e.printStackTrace();
+		}
+	}
+	
+	//¿Principios?
+	public void principios() {
+		String[] carga = {"Presentando...","Presentando....","Presentando.....","Presentando con mas energia...","Ostia que estaba apagado..","Ya esta :)"};
+		String[] grupo = {"Pelayo Santos", "Aitana Herranz", "Diego Baudot"};
+		
+		System.out.println("\n\nEL grupo 13:\n");
+		for (int i = 0; i < grupo.length; i++) {
+			System.out.print(grupo[i] + "   "); 
+	        esperar(500);
+		}
+		
+		esperar(1000);
+		
+		System.out.println("\n\n                                                                                              PRESENTAN:\n");
+		
+		esperar(2000);
+		
+		for (int i = 0; i < carga.length; i++) {
+			System.out.print(carga[i] + "   "); 
+			esperar(1000);
+		}
+		
+		System.out.println(Color.YELLOW_BOLD_BRIGHT + "\n\n                                                                                        =================\n\n                                                                                       PRESENTAN FINALMENTE\n\n                                                                                        =================\n" +Color.RESET);
+	    
+		esperar(1000);
+		
+		for (int i = 0; i < 10; i++) {
+	        System.out.println(Color.BLUE_BOLD_BRIGHT + "█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████" + Color.WHITE_BOLD_BRIGHT);
+	        System.out.println(Color.BLUE_BOLD_BRIGHT + "█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████" + Color.WHITE_BOLD_BRIGHT);
+	 	   
+		
+		}
+		    
+		ASCII.printAscii(0);
+		System.out.println("Por: Pelayo Santos, Aitana Herranz y Diego Baudot\n");
+		System.out.println("=============================================================================================================================================================================================================");
+		
+		for (int i = 0;  i < 2; i++) {
+			System.out.println();
+			
+		}
+		
+	}
 	//¿finales?
-	public void finales() {
+ 	public void finales() {
 		if(prota.getVida() <= 0 && !finalMascotaAlex)
 		{
 			switch(prota.getNombre())
