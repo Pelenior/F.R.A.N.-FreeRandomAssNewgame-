@@ -10,7 +10,7 @@ public class Protagonista extends Personaje {
 	private int suerte=0;
 	private boolean badOmen = false;
 	private boolean haHuido = false;
-	private ArrayList<Objeto> listaObjetos;
+	private ArrayList<Objeto> listaObjetos = new ArrayList<Objeto>();
 	
 	//constructor
 	public Protagonista(String nombre, double vidaMax, double defensa, double fuerza, double velocidad, int idAscii, int suerte) throws SQLException {

@@ -970,16 +970,16 @@ public class Eventos {
 			}
 			boolean generoAldeano = random.nextBoolean(); // false == chico, true == chica
 			
-	        System.out.println("*Entras a la tienda.*");
+	        System.out.println("Entras a la tienda.");
 	        System.out.println("*suena DELTARUNE OST - Rouxls Kaard Shop Hip Shop*");
 
 	        if(generoAldeano)
 	        {
-	        	System.out.println("*Una aldeana te recibe.*\r\n");
+	        	System.out.println("Una aldeana te recibe.\r\n");
 	        }
 	        else
 	        {
-	        	System.out.println("*Un aldeano te recibe.*\r\n");
+	        	System.out.println("Un aldeano te recibe.\r\n");
 	        }
 	        
 	        // Mensaje de bienvenida.
