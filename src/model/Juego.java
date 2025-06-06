@@ -17,6 +17,10 @@ public class Juego {
 	private Eventos evento;//clase eventos, que recibe el nombre de evento
 	
 	private String nombreJugador;
+	private String pasiva;
+	
+	private DaoPersonajes daoPersonajes = new DaoPersonajes();
+	private DaoAtaques daoAtaques = new DaoAtaques();
 	
 	private Random random;
 	private int numeroSalas = 0;
@@ -43,14 +47,14 @@ public class Juego {
 	private static boolean finalLamboChickenLittle = false;
 	private static boolean finalKillCoronel = false;
 	
-	public Juego() {//permite que se pueda usar en esta clase
+	public Juego() throws SQLException {//permite que se pueda usar en esta clase
 		combate = new Combate();
 		evento = new Eventos();
 		sc = new Scanner(System.in);
 		random = new Random();
 	}
 	
-	public static Juego getInstanciaJuego() {
+	public static Juego getInstanciaJuego() throws SQLException {
         if (instanciaJuego == null) {//si no se ha creado el juego, se crea
         	instanciaJuego = new Juego();
         }
@@ -74,7 +78,7 @@ public class Juego {
 		int idAscii = 99;
 		boolean AsciiBien = false;
 		
-//		principios();
+		principios();
 		
 		do {
 			System.out.println("Bienvenido desconocido usuario, elija su forma de inicio: \n  1.Nuevo Perfil | 2.Perfil existente");
@@ -172,7 +176,8 @@ public class Juego {
 					{
 					case "1":
 						{
-							prota = new Protagonista("Steve", 20, 0, 1, 3, 2, 0);//protagonista elegido- CAMBIARLO CUANDO HAYA DB
+							prota = daoPersonajes.getDataProta("Steve");//protagonista elegido- CAMBIARLO CUANDO HAYA DB
+							pasiva = "Guerrera maldita por su tribu. Su maldicion la obliga a seguir enfrentando enemigos y la impide usar objetos de cura";
 							//ESTO METERLO DENTRO DE UNA DB
 //							nombrePersonaje = "Steve";
 //							vidaMaxPersonaje = 20;
@@ -188,7 +193,8 @@ public class Juego {
 						}
 					case "2":
 						{
-							prota = new Protagonista("Alex", 30, 0, 0, 1, 3, 0);//protagonista elegido- CAMBIARLO CUANDO HAYA DB
+							prota = daoPersonajes.getDataProta("Alex");//protagonista elegido- CAMBIARLO CUANDO HAYA DB
+							pasiva = "Aumenta la probabilidad de evitar trampas y mayor conocimiento en puzzles";
 							//ESTO METERLO DENTRO DE UNA DB
 //							nombrePersonaje =  "Alex";
 //							vidaMaxPersonaje = 30;
@@ -203,7 +209,8 @@ public class Juego {
 						}
 					case "3":
 						{
-							prota = new Protagonista("Chicken Little", 15, 0, 0, 3.5, 4, 0);//protagonista elegido- CAMBIARLO CUANDO HAYA DB			
+							prota = daoPersonajes.getDataProta("Chicken Little");//protagonista elegido- CAMBIARLO CUANDO HAYA DB	
+							pasiva = "Un pollo fugitivo, buscado por el KFC desde pequeño";
 							//ESTO METERLO DENTRO DE UNA DB
 //							nombrePersonaje = "Chicken Little";
 //							vidaMaxPersonaje = 15;
@@ -227,13 +234,15 @@ public class Juego {
 				
 				ASCII.printAscii(prota.getIdAscii());
 				
+				String ataque1 = prota.selectAllAtaques().get(0);
+				
 				System.out.println("Informacion del personaje:\n");
 		//		System.out.println(lorePersonaje); ESTO VA CON LA DB
 				System.out.println(Color.WHITE_UNDERLINED + "Stats:" + Color.RESET + "           " + Color.WHITE_UNDERLINED +  "Ataques:\r\n" + Color.RESET);
-				System.out.println("Vida: " + prota.getVida()); //+ "     | " + infoPersonajes[0]); ESTO VA CON LA DB
-				System.out.println("Defensa: " + prota.getDefensa()); //+ "   | " + infoPersonajes[1]); ESTO VA CON LA DB
-				System.out.println("Fuerza: " + prota.getFuerza()); //+ "    | " + infoPersonajes[2]); ESTO VA CON LA DB
-				System.out.println("Veolcidad: " + prota.getVelocidad()); // + " | Pasiva:" + infoPersonajes[3] + "\n"); ESTO VA CON LA DB
+				System.out.println("Vida: " + prota.getVidaMax() + " | " + "1" + prota.selectAllAtaques().get(0) + ": " + daoPersonajes);
+				System.out.println("Defensa: " + prota.getDefensa() + " | " + "2" + prota.selectAllAtaques().get(1));
+				System.out.println("Fuerza: " + prota.getFuerza() + " | " + "3" + prota.selectAllAtaques().get(2));
+				System.out.println("Veolcidad: " + prota.getVelocidad() + " | " + "4" + pasiva);
 				
 				System.out.println(Color.WHITE_BOLD_BRIGHT + "¡¡BUENA SUERTE!!\n" + Color.RESET);
 				
@@ -334,7 +343,7 @@ public class Juego {
 			}
 			case "Alex":
 			{
-				System.out.println("¡SANS!");
+				System.out.println("¡SANS!        ¿!¿!EL DEL FORTNITE?!?!");
 				break;
 			}
 			case "Chicken Little":

@@ -383,6 +383,11 @@ import java.util.ArrayList;
 		DaoPersonajes daoPersonajes = new DaoPersonajes();
 		daoPersonajes.selectThis(this.getNombre());
 	}
+	
+	public void getDescAtaques(String nombreAtaques) throws SQLException{
+		DaoAtaques daoAtaques = new DaoAtaques();
+		daoAtaques.getDesc(nombreAtaques);
+	}
 
 	public void deletePersonaje(String nombre) throws SQLException {
 	    DaoPersonajes daoPersonajes = new DaoPersonajes();

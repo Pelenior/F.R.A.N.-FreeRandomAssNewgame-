@@ -1,16 +1,9 @@
-DROP TABLE IF EXISTS `relacion_ataques`;
-DROP TABLE IF EXISTS `protagonistas`;
-DROP TABLE IF EXISTS `personajes`;
-DROP TABLE IF EXISTS `jugador`;
-DROP TABLE IF EXISTS `enemigos`;
-DROP TABLE IF EXISTS `ataques`;
-
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2025 a las 12:27:37
+-- Tiempo de generación: 06-06-2025 a las 13:27:42
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -34,7 +27,6 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `ataques`
 --
 
-DROP TABLE IF EXISTS `ataques`;
 CREATE TABLE `ataques` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
@@ -49,14 +41,14 @@ INSERT INTO `ataques` (`id`, `nombre`, `descripcion`) VALUES
 (1, 'Curar', 'Ataque de sanación exclusivo para protagonistas'),
 (2, 'Huir', 'Ataque para escapar exclusivo para protagonistas'),
 (3, 'Por si Espada', 'Ataque básico con espada'),
-(4, 'Arco', 'Ataque a distancia con arco'),
-(5, 'Ataque Crítico', 'Golpe crítico de alto daño'),
-(8, 'Hacha', 'Golpe poderoso con hacha'),
-(9, 'Poción de Fuerza', 'Incrementa fuerza temporalmente'),
-(10, 'Maldición de Wither', 'Aplica efecto wither al enemigo'),
-(12, 'Tricotada', 'Ataque rápido con pico'),
-(13, 'Ataque huevo', 'Lanza huevo como proyectil'),
-(14, 'Llamada de pollos', 'Llama aliados pollos'),
+(4, 'Arco', '7 de daño, pero tienes que recargar para usar otra vez'),
+(5, 'Ataque Crítico', '0-15 de daño'),
+(8, 'Hacha', '5 de daño'),
+(9, 'Poción de Fuerza', 'Incrementa el daño del siguiente ataque en +4 de daño'),
+(10, 'Maldición de Wither', 'Reduce la vida del enemigo en un 20% de su vida actual. Solo se puede usar una vez cada 3 turnos'),
+(12, 'Tricotada', '2 de daño x 3 veces'),
+(13, 'Ataque huevo', '4 de daño y +1 pollo'),
+(14, 'Llamada de pollos', 'Te cubres de pollos y la siguiente vez que te ataquen, harás 4x el nº de pollos que tengas'),
 (32, 'Puñetazo', 'Golpe básico con el puño'),
 (33, 'Mordisco', 'Mordisco que puede causar infección'),
 (34, 'Infección', 'Causa daño progresivo'),
@@ -66,7 +58,7 @@ INSERT INTO `ataques` (`id`, `nombre`, `descripcion`) VALUES
 (38, 'Tss', 'Siseo del creeper antes de explotar'),
 (39, 'Tss Tss', 'Siseo intensificado del creeper'),
 (40, 'Explosión', 'Explosión que causa daño en área'),
-(41, 'Espada', 'Golpe con espada'),
+(41, 'Espada', '3 de daño'),
 (42, 'Ballesta', 'Disparo a distancia con ballesta'),
 (43, 'Saqueo', 'Ataque de saqueo del pillager'),
 (44, 'Hachazo', 'Golpe fuerte con hacha'),
@@ -97,7 +89,6 @@ INSERT INTO `ataques` (`id`, `nombre`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `enemigos`
 --
 
-DROP TABLE IF EXISTS `enemigos`;
 CREATE TABLE `enemigos` (
   `nombre` varchar(50) NOT NULL,
   `vidaMax` double DEFAULT NULL,
@@ -117,12 +108,12 @@ CREATE TABLE `enemigos` (
 INSERT INTO `enemigos` (`nombre`, `vidaMax`, `defensa`, `fuerza`, `velocidad`, `idAscii`, `isRaid`, `isBoss`, `isSteve`) VALUES
 ('Coronel Sanders', 50, 5, 0, 5, 0, 0, 1, 0),
 ('Creeper', 15, 0, 0, 5, 0, 0, 0, 0),
-('Devastator', 30, 4, 0, 2, 0, 1, 0, 0),
 ('Dragon', 50, 5, 0, 5, 0, 0, 1, 0),
 ('Esqueleto', 15, 0, 0, 2, 0, 0, 0, 0),
 ('EvilSteve', 30, 5, 0, 5, 0, 0, 0, 1),
 ('Evoker', 15, 0, 0, 4, 0, 1, 0, 0),
 ('Pillager', 20, 1, 0, 3, 0, 1, 0, 0),
+('Ravager', 30, 4, 0, 2, 0, 1, 1, 0),
 ('Sans', 1, 0, 0, 10, 0, 0, 1, 0),
 ('Vindicator', 20, 2, 0, 3, 0, 1, 0, 0),
 ('Zombie', 20, 1, 0, 1, 0, 0, 0, 0);
@@ -133,23 +124,26 @@ INSERT INTO `enemigos` (`nombre`, `vidaMax`, `defensa`, `fuerza`, `velocidad`, `
 -- Estructura de tabla para la tabla `jugador`
 --
 
-DROP TABLE IF EXISTS `jugador`;
 CREATE TABLE `jugador` (
   `nombre` varchar(50) NOT NULL,
   `contraseña` varchar(24) NOT NULL,
-  `idAscii` int(11) DEFAULT NULL
+  `idAscii` int(11) DEFAULT NULL,
+  `Puntuacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `jugador`
 --
 
-INSERT INTO `jugador` (`nombre`, `contraseña`, `idAscii`) VALUES
-('Aitana', '1234', NULL),
-('Bombardeen a Diego', 'BombardeenADiego', NULL),
-('fran', 'flan', 99),
-('Luna', '1234', NULL),
-('Pelayo', '1234', NULL);
+INSERT INTO `jugador` (`nombre`, `contraseña`, `idAscii`, `Puntuacion`) VALUES
+('', '', 99, 0),
+('Aitana', '1234', NULL, 0),
+('Bombardeen a Diego', 'BombardeenADiego', NULL, 0),
+('fran', 'flan', 99, 0),
+('lol', 'lol', 3, 0),
+('Luna', '1234', NULL, 0),
+('Null', 'null', 3, 0),
+('Pelayo', '1234', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -157,7 +151,6 @@ INSERT INTO `jugador` (`nombre`, `contraseña`, `idAscii`) VALUES
 -- Estructura de tabla para la tabla `personajes`
 --
 
-DROP TABLE IF EXISTS `personajes`;
 CREATE TABLE `personajes` (
   `nombre` varchar(50) NOT NULL,
   `tipo` enum('protagonista','enemigo') NOT NULL,
@@ -198,7 +191,6 @@ INSERT INTO `personajes` (`nombre`, `tipo`, `vidaMax`, `defensa`, `fuerza`, `vel
 -- Estructura de tabla para la tabla `protagonistas`
 --
 
-DROP TABLE IF EXISTS `protagonistas`;
 CREATE TABLE `protagonistas` (
   `nombre` varchar(50) NOT NULL,
   `vidaMax` double DEFAULT NULL,
@@ -224,7 +216,6 @@ INSERT INTO `protagonistas` (`nombre`, `vidaMax`, `defensa`, `fuerza`, `velocida
 -- Estructura de tabla para la tabla `relacion_ataques`
 --
 
-DROP TABLE IF EXISTS `relacion_ataques`;
 CREATE TABLE `relacion_ataques` (
   `personaje_nombre` varchar(50) NOT NULL,
   `ataque_id` int(11) NOT NULL,

@@ -124,14 +124,14 @@ public class DaoJugador {
 	    ResultSet rs = ps.executeQuery();
 
 	    
-	    int id = 99;
+	    int puntuacion = 0;
 	    if (rs.next()) {
-	        id = rs.getInt("puntuacion");
+	    	puntuacion = rs.getInt("puntuacion");
 	    }
 
 	    rs.close();
 	    ps.close();
 
-	    return id;
+	    return puntuacion;
 	}
 }

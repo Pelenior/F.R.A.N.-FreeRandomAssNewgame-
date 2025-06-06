@@ -151,4 +151,22 @@ public class DaoAtaques {
 	    ps.close();
 	}
 
+	public String getDesc(String nombreJugador) throws SQLException {
+		String sql = "SELECT descripcion FROM ataques WHERE nombre = ?";
+	    PreparedStatement ps = conn.prepareStatement(sql);
+	    ps.setString(1, nombreJugador);
+
+	    ResultSet rs = ps.executeQuery();
+
+	    
+	    String descripcion = "";
+	    if (rs.next()) {
+	    	descripcion = rs.getString("descripcion");
+	    }
+
+	    rs.close();
+	    ps.close();
+
+	    return descripcion;
+	}
 }
