@@ -78,7 +78,7 @@ public class Juego {
 		int idAscii = 99;
 		boolean AsciiBien = false;
 		
-		principios();
+//		principios();
 		
 		do {
 			System.out.println("Bienvenido desconocido usuario, elija su forma de inicio: \n  1.Nuevo Perfil | 2.Perfil existente");
@@ -234,17 +234,16 @@ public class Juego {
 				
 				ASCII.printAscii(prota.getIdAscii());
 				
-				String ataque1 = prota.selectAllAtaques().get(0);
 				
 				System.out.println("Informacion del personaje:\n");
-		//		System.out.println(lorePersonaje); ESTO VA CON LA DB
-				System.out.println(Color.WHITE_UNDERLINED + "Stats:" + Color.RESET + "           " + Color.WHITE_UNDERLINED +  "Ataques:\r\n" + Color.RESET);
-				System.out.println("Vida: " + prota.getVidaMax() + " | " + "1" + prota.selectAllAtaques().get(0) + ": " + daoPersonajes);
-				System.out.println("Defensa: " + prota.getDefensa() + " | " + "2" + prota.selectAllAtaques().get(1));
-				System.out.println("Fuerza: " + prota.getFuerza() + " | " + "3" + prota.selectAllAtaques().get(2));
-				System.out.println("Veolcidad: " + prota.getVelocidad() + " | " + "4" + pasiva);
+				lore();
+				System.out.println("  " + Color.WHITE_UNDERLINED + "Stats:" + Color.RESET + "           " + Color.WHITE_UNDERLINED +  "Ataques:\r\n" + Color.RESET);
+				System.out.println("  Vida: " + prota.getVidaMax() + "     | " + "1: " + prota.selectAllAtaques().get(0) + ": " + daoAtaques.getDesc(prota.selectAllAtaques().get(0)));
+				System.out.println("  Defensa: " + prota.getDefensa() + "   | " + "2: " + prota.selectAllAtaques().get(1)+ ": " + daoAtaques.getDesc(prota.selectAllAtaques().get(1)));
+				System.out.println("  Fuerza: " + prota.getFuerza() + "    | " + "3: " + prota.selectAllAtaques().get(2)+ ": " + daoAtaques.getDesc(prota.selectAllAtaques().get(2)));
+				System.out.println("  Veolcidad: " + prota.getVelocidad() + " | " + "4: " + pasiva);
 				
-				System.out.println(Color.WHITE_BOLD_BRIGHT + "¡¡BUENA SUERTE!!\n" + Color.RESET);
+				System.out.println(Color.WHITE_BOLD_BRIGHT + "\n¡¡BUENA SUERTE!!\n" + Color.RESET);
 				
 				System.out.println("[PRESIONA CUALQUIER CARACTER PARA INICIAR TU AVENTURA]");
 				sc.nextLine();
@@ -327,6 +326,23 @@ public class Juego {
 					break;
 				}
 			}
+		}
+		else {
+			switch(prota.getNombre()) {
+			
+				case "Steve":
+					System.out.println("Lore: Guerrero movido por la venganza, obsesionado con derrotar al dragón por venganza.\n");
+					break;
+					
+				case "Alex":
+					System.out.println("Lore: Guerrera maldita por su tribu. Su maldicion la obliga a seguir enfrentando enemigos y la impide usar objetos de cura.\n");
+					break;
+					
+				case "Chsicken Little":
+					System.out.println("Lore: Un pollo fugitivo, buscado por el KFC desde pequeño.\n");
+					break;
+			}
+			
 		}
 	}
 
