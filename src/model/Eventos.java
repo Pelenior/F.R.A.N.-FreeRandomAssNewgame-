@@ -34,7 +34,6 @@ public class Eventos {
 		
 		int eventoAleatorio = random.nextInt(0, evento.length);
 		String eventoSeleccionado = eventosLista.get(eventoAleatorio);
-		eventoSeleccionado = "Pelea Steve";
 		
 		//switch del evento
 		switch (eventoSeleccionado) {
