@@ -39,17 +39,18 @@ public class DaoJugador {
 	    return accesoPermitido;
 	}
 
-	public void guardarJugador(String nombre, String contraseña, int idAscii) throws SQLException {
+	public void guardarJugador(String nombre, String contraseña, int idAscii, int puntuacion) throws SQLException {
 		
 	    boolean comprobacionNombre = comprobarNombre(nombre);
 	    System.out.println("Nombre válido: " + comprobacionNombre);
 
 	    if (comprobacionNombre) {
-	        String sql = "INSERT INTO jugador (nombre, contraseña, idAscii) VALUES (?, ?, ?)";
+	        String sql = "INSERT INTO jugador (nombre, contraseña, idAscii, puntuacion) VALUES (?, ?, ?, ?)";
 	        PreparedStatement ps = conn.prepareStatement(sql);
 	        ps.setString(1, nombre);
 	        ps.setString(2, contraseña);
 	        ps.setInt(3, idAscii);
+	        ps.setInt(4, puntuacion);
 
 	        int result = ps.executeUpdate();
 	        if (result > 0) {
@@ -92,5 +93,9 @@ public class DaoJugador {
 	    rs.close();
 	    
 	    return comprobar;
+	}
+	
+	public int getAscii() {
+		
 	}
 }

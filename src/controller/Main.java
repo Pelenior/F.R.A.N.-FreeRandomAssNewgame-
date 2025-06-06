@@ -9,11 +9,8 @@ public class Main {
 
 	public static void main(String[] args) throws SQLException {
 		    
-//		Juego juego = new Juego();
-//		juego.comenzar();
-		
-		DaoJugador daojugador = new DaoJugador();
-		daojugador.inicioSesion("Null", "null");
+		Juego juego = new Juego();
+		juego.comenzar();
 		
 		
 	}

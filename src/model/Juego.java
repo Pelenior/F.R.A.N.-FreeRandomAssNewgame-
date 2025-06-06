@@ -15,6 +15,8 @@ public class Juego {
 	private Combate combate;//clase combate, que recibe el nombre de combate
 	private Eventos evento;//clase eventos, que recibe el nombre de evento
 	
+	private String nombreJugador;
+	
 	private Random random;
 	private int numeroSalas = 0;
 	private Scanner sc;
@@ -64,27 +66,69 @@ public class Juego {
 	}
 	
 	//inicio juego
-	public void contrasena(Scanner sc) {
-		String password = "jugones";
+	public void contrasena(Scanner sc) throws SQLException{
+		String decision;
 		String contrasena = "";
+		DaoJugador perfil = new DaoJugador();
+		int idAscii = 99;
+		boolean AsciiBien = false;
 		
 		ASCII.printAscii(0);
 		
 		System.out.println("Un juego creado por: Pelayo Santos, Aitana Herranz y Diego Baudot");
 		
-		// mientras la contraseña no sea la correcta, seguirá preguntando
-		do
-		{
-			System.out.println(Color.RESET + "Contraseña: " + Color.RED_BRIGHT);
+		do {
+			System.out.println("Bienvenido desconocido usuario, elija su forma de inicio: \n  1.Nuevo Perfil | 2.Perfil existente");
+			decision = sc.nextLine();
+			
+		}while(!decision.equals("1") && !decision.equals("2"));
+		
+		do {
+			if(decision.equals("1")) {
+				System.out.println("De acuerdo desconocido cree un Nuevo Perfil:\n\nNombre:");
+				nombreJugador = sc.nextLine();
+				
+				System.out.println("Contraseña:");
+				contrasena = sc.nextLine();
+						
+				do {
+					try {
+						System.out.println("Elija un valor del 1-100:");
+						idAscii = sc.nextInt();
+						AsciiBien = true;
+					}catch(Exception e) {
+						System.out.println("El valor debe ser un numero");
+						AsciiBien = false;
+					}
+				}while(AsciiBien == false);
+						
+				perfil.guardarJugador(nombreJugador, contrasena, idAscii, 0);
+				System.out.println("De acuerdo " + nombreJugador + " su perfil se ha guardado correctamente\nPor seguridad inicie sesion para saber que todo esta correcto");
+			}else {
+				System.out.println("Bienvenido de nuvo pues, rellene sus datos para saber que es usted:");
+			}
+			
+			System.out.println("Repita su Nombre:");
+			nombreJugador = sc.nextLine();
+			
+			System.out.println("Repita su Contraseña:");
 			contrasena = sc.nextLine();
-		}
-		while(!contrasena.equals(password));
-		System.out.println(Color.GREEN_BRIGHT + "CONTRASEÑA ACEPTADA \n" + Color.RESET);
+			
+		}while(perfil.inicioSesion(nombreJugador, contrasena));
+		
+		System.out.println("Genial, este eres tu" + nombreJugador + ", te doy la bienvenida final al mundo de Minecraft");
+		ASCII.printAscii(idAscii);
+		
+		System.out.println("De ahora en adelante, ELIJA SU PROPIA AVENTURA\n" + Color.WHITE_BOLD_BRIGHT + "[PULSE ENTER PARA CONTINUAR]");
+		
+		
+		
+		
+				
 	}
 	
 	private void elegirPersonaje(Scanner sc, Random random) throws SQLException {
 				
-				System.out.println(Color.WHITE_BOLD_BRIGHT + "¡BIENVENIDO AL MUNDO DE MINECRAFT!\n");	
 				System.out.println("¡PARA EMPEZAR ELIJE EL PERSONAJE QUE MAS TE GUSTE!\n");
 		        ASCII.printAscii(1);
 		        
