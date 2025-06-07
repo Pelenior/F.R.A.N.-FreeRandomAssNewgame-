@@ -189,7 +189,7 @@ public class Juego {
 						{
 							prota = daoPersonajes.getDataProta("Steve");//protagonista elegido- CAMBIARLO CUANDO HAYA DB
 							prota.setVida(prota.getVidaMax());
-							pasiva = "Guerrera maldita por su tribu. Su maldicion la obliga a seguir enfrentando enemigos y la impide usar objetos de cura";
+							pasiva = "Aumenta la probabilidad de evitar trampas y mayor conocimiento en puzzles";
 							//ESTO METERLO DENTRO DE UNA DB
 //							nombrePersonaje = "Steve";
 //							vidaMaxPersonaje = 20;
@@ -207,7 +207,7 @@ public class Juego {
 						{
 							prota = daoPersonajes.getDataProta("Alex");//protagonista elegido- CAMBIARLO CUANDO HAYA DB
 							prota.setVida(prota.getVidaMax());
-							pasiva = "Aumenta la probabilidad de evitar trampas y mayor conocimiento en puzzles";
+							pasiva = "Guerrera maldita por su tribu. Su maldicion la obliga a seguir enfrentando enemigos y la impide usar objetos de cura";
 							//ESTO METERLO DENTRO DE UNA DB
 //							nombrePersonaje =  "Alex";
 //							vidaMaxPersonaje = 30;

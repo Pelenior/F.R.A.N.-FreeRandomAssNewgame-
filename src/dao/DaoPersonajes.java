@@ -307,6 +307,7 @@ public class DaoPersonajes {
 	        dataProta.setFuerza(rs.getDouble("fuerza"));
 	        dataProta.setVelocidad(rs.getDouble("velocidad"));
 	        dataProta.setIdAscii(rs.getInt("idAscii"));
+	        dataProta.getAtaqueController().rellenarAtaques(dataProta);
 	        
 	    } else {
 	        System.out.println("No se encontró el protagonista: " + nombre);
@@ -334,6 +335,7 @@ public class DaoPersonajes {
 	        dataEnemigo.setFuerza(rs.getDouble("fuerza"));
 	        dataEnemigo.setVelocidad(rs.getDouble("velocidad"));
 	        dataEnemigo.setIdAscii(rs.getInt("idAscii"));
+	        dataEnemigo.getAtaqueController().rellenarAtaques(dataEnemigo);
 	        
 	    } else {
 	        System.out.println("No se encontró el enemigo: " + nombre);
