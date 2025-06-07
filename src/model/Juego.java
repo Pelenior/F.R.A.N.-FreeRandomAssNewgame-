@@ -31,13 +31,13 @@ public class Juego {
 	
 	public static boolean gameOver = false;
 	
-	private static boolean hasLambo = false;
+	public static boolean hasLambo = false;
 	private boolean haHuidoAlgunaVez = false;
 	
 	// FINALES
 	private static boolean finalKillDragonSteve = false;
 	private static boolean finalKillDragonPerroSteve = false;
-	private static boolean finalHuirPerroSteve = false;
+	public static boolean finalHuirPerroSteve = false;
 	private static boolean finalHuirSteve = false;
 	
 	private static boolean finalKillSansNoGenocideAlex = false;
@@ -45,7 +45,7 @@ public class Juego {
 	private static boolean finalLigarAlex = false;
 	private static boolean finalMascotaAlex = false;
 	
-	private static boolean finalDrogasChickenLittle = false;
+	public static boolean finalDrogasChickenLittle = false;
 	private static boolean finalBitcoinChickenLittle = false;
 	private static boolean finalLamboChickenLittle = false;
 	private static boolean finalKillCoronel = false;

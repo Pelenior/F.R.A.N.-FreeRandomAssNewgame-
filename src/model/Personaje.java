@@ -28,6 +28,7 @@ import java.util.ArrayList;
 	private boolean cargaCriticaPreparada = false;
 	private boolean cargaCriticaRecargada = false;
 	private boolean recargaRapida = false;
+	private double espinas = 0;
 	private int cooldownMaldicionWither = 0;
 	private int danoExtra = 0;
 	private int pollos = 0;
@@ -66,18 +67,30 @@ import java.util.ArrayList;
 	}
 	public void setVidaMax(double vidaMax) {
 		this.vidaMax = vidaMax;
+		if(this.vida > this.vidaMax)
+		{
+			this.vida = this.vidaMax;
+		}
 	}
 	public double getVida() {
 		return vida;
 	}
 	public void setVida(double vida) {
 		this.vida = vida;
+		if(this.vida > this.vidaMax)
+		{
+			this.vida = this.vidaMax;
+		}
 	}
 	public double getDefensa() {
 		return defensa;
 	}
 	public void setDefensa(double defensa) {
 		this.defensa = defensa;
+		if(this.defensa > 9)
+		{
+			this.defensa = 9;
+		}
 	}
 	public double getFuerza() {
 		return fuerza;
@@ -358,6 +371,14 @@ import java.util.ArrayList;
 	{
 		this.penalizacionDefensa = penalizacionDefensa;
 	}
+	public double getEspinas()
+	{
+		return espinas;
+	}
+	public void setEspinas(double espinas)
+	{
+		this.espinas = espinas;
+	}//TODO espinas
 	
 	public void selectALLPersonajes() throws SQLException{
 		DaoPersonajes daoPersonajes = new DaoPersonajes();
