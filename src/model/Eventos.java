@@ -243,12 +243,12 @@ public class Eventos {
 				if(suerteEvento < 8) 
 				{
 					totalMonedasConseguidas = random.nextInt(1, 15);
-					prota.setMonedas(totalMonedasConseguidas);
+					prota.setMonedas(prota.getMonedas() + totalMonedasConseguidas);
 				}
 				else
 				{
 					totalMonedasConseguidas = random.nextInt(20, 35);
-					prota.setMonedas(totalMonedasConseguidas);
+					prota.setMonedas(prota.getMonedas() + totalMonedasConseguidas);
 				}
 				
 				if(totalMonedasConseguidas > 25)

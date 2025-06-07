@@ -13,7 +13,7 @@ import java.util.ArrayList;
 	protected double defensa;
 	protected double fuerza;
 	protected double velocidad;
-	private int monedas = 100;
+	private int monedas = 0;
 	protected int idAscii;
 
 	AtaqueController ataqueController = new AtaqueController();

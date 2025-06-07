@@ -625,7 +625,25 @@ public class Juego {
 			}
 			case "Mercader":
 			{
-				evento.eventoMercader(prota, scanner, random);
+				if(prota.getBadOmen())
+				{
+					System.out.println(prota.getNombre() + " se acerca a una aldea cercana para comprar cosas con un mercader");
+					System.out.println("Pero...");
+					System.out.println(prota.getNombre() + " se olvida de que tenía " + Color.BLACK_BOLD_BRIGHT + "Mal Presagio" + Color.BLACK_BOLD_BRIGHT + "...");
+					System.out.println("Una raid va a comenzar pronto!\r\n");
+					if(combate.combate(sc, random, prota, "Raid", random.nextBoolean()))
+					{
+						calculoFinCombate();
+					}
+					else
+					{
+						gameOver = true;
+					}
+				}
+				else
+				{
+					evento.eventoMercader(prota, scanner, random);
+				}
 				break;
 			}
 		}

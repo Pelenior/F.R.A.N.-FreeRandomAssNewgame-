@@ -394,13 +394,13 @@ public class Ataque {
 			{
 				if(!user.getCargaCriticaRecargada())
 				{
-					System.out.println("El " + user.getNombre() + Color.CYAN + "se prepara para cargar fuertemente" + Color.RESET + " contra " + user.getNombre() + "...");
+					System.out.println("El " + user.getNombre() + Color.CYAN + " se prepara para cargar fuertemente" + Color.RESET + " contra " + user.getNombre() + "...");
 					user.setCargaCriticaRecargada(true);
 				}
 				else
 				{
 					danoFinal = 14 + user.getFuerza();
-					System.out.println("El " + user.getNombre() + Color.RED_BRIGHT + "carga con toda su fuerza" + Color.RESET + " contra " + target.getNombre() + "!");
+					System.out.println("El " + user.getNombre() + Color.RED_BRIGHT + " carga con toda su fuerza" + Color.RESET + " contra " + target.getNombre() + "!");
 					user.setCargaCriticaRecargada(false);
 					haceDano = true;
 				}
@@ -408,7 +408,7 @@ public class Ataque {
 			}
 			case "Invocación":
 			{
-				System.out.println("El " + user.getNombre() + Color.CYAN + "invoca a un pequeño aliado" + Color.RESET + "...");
+				System.out.println("El " + user.getNombre() + Color.CYAN + " invoca a un pequeño aliado" + Color.RESET + "...");
 				user.setNumVex(user.getNumVex() + 1);
 				break;
 			}
@@ -437,7 +437,7 @@ public class Ataque {
 			{
 				if(!user.getCargaRecargada())
 				{
-					System.out.println("El " + user.getNombre() + Color.CYAN + "se prepara para cargar" + Color.RESET + " contra " + target.getNombre() + "...");
+					System.out.println("El " + user.getNombre() + Color.CYAN + " se prepara para cargar" + Color.RESET + " contra " + target.getNombre() + "...");
 					user.setCargaRecargada(true);
 				}
 				else
@@ -451,7 +451,7 @@ public class Ataque {
 			}
 			case "Desesperación":
 			{
-				System.out.println("El " + user.getNombre() + Color.RED_BRIGHT + "entra en desesperación" + Color.RESET + " y se come al Pillager que estaba montado encima!");
+				System.out.println("El " + user.getNombre() + Color.RED_BRIGHT + " entra en desesperación" + Color.RESET + " y se come al Pillager que estaba montado encima!");
 				user.setHaUsadoDesesperation(true);
 				user.setPillagerActivo(false);
 				user.setVida(user.getVida() + 15);

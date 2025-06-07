@@ -2,8 +2,6 @@ package controller;
 import model.*;
 
 import java.sql.*;
-import java.util.ArrayList;
-import dao.*;
 
 public class Main {
 
