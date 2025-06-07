@@ -355,17 +355,14 @@ public class Eventos {
 				}
 				else if(prota.getVelocidad() + velocidadExtra >= 5) {
 					monedasPerdidas = random.nextInt(3,6);
-					if(prota.getMonedas() < monedasPerdidas) monedasPerdidas = prota.getMonedas();
 					System.out.println("Bloqueas gran parte de sus ataques pero consiguen robarte " + Color.RED_BRIGHT + prota.getMonedas() + Color.RESET + (prota.getNombre().equals("Chicken Little") ? " semillas" : " esmeraldas"));
 					}
 				else if(prota.getVelocidad() + velocidadExtra < 5 && prota.getVelocidad() + velocidadExtra >= 2) {
 					monedasPerdidas = random.nextInt(5,9);
-					if(prota.getMonedas() < monedasPerdidas) monedasPerdidas = prota.getMonedas();
 					System.out.println("Esquivas parte de sus ataques pero consiguen robarte " + Color.RED_BRIGHT + prota.getMonedas() + Color.RESET + (prota.getNombre().equals("Chicken Little") ? " semillas" : " esmeraldas"));
 					}
 				else {
 					monedasPerdidas = random.nextInt(8,11);
-					if(prota.getMonedas() < monedasPerdidas) monedasPerdidas = prota.getMonedas();
 					System.out.println("Los asaltantes te pillan desprevenido llevandose una gran parte de tu tesoro, pierdes " + Color.RED_BRIGHT + prota.getMonedas() + Color.RESET + (prota.getNombre().equals("Chicken Little") ? " semillas" : " esmeraldas"));
 				}
 				
@@ -1072,8 +1069,10 @@ public class Eventos {
 	                			+ "ni tampoco el Tótem de inmortalidad, aunque te recomiendo comprar todo *giño**giño*\r\n");
 		}
 
+		
 		public void eventoMercader(Protagonista prota, Scanner sc, Random random){
 			boolean puedeLigar = false;
+			boolean haLigado = false;
 			
 			if(prota.getFuerza()>=5)
 			{
@@ -1125,25 +1124,25 @@ public class Eventos {
 	            {
 	            	case "":
 	            	{
-	            		nombreArmadura = "Armadura de Cuero";
+	            		nombreArmadura = "Armadura de cuero";
 	            		costeArmadura = 2;
 	            		break;
 	            	}
-	            	case "Armadura de Cuero":
+	            	case "Armadura de cuero":
 	            	{
-	            		nombreArmadura = "Armadura de Hierro";
+	            		nombreArmadura = "Armadura de hierro";
 	            		costeArmadura = 4;
 	            		break;
 	            	}
-	            	case "Armadura de Hierro":
+	            	case "Armadura de hierro":
 	            	{
-	            		nombreArmadura = "Armadura de Diamante";
+	            		nombreArmadura = "Armadura de diamante";
 	            		costeArmadura = 8;
 	            		break;
 	            	}
-	            	case "Armadura de Diamante":
+	            	case "Armadura de diamante":
 	            	{
-	            		nombreArmadura = "Armadura de Netherite";
+	            		nombreArmadura = "Armadura de netherite";
 	            		costeArmadura = 16;
 	            		break;
 	            	}
@@ -1223,7 +1222,7 @@ public class Eventos {
 	            			else
 	            			{
 	            				System.out.println("La aldeana liga con " + prota.getNombre() + " también!");
-//	            				objetosTienda.set(5, true);
+	            				haLigado = true;
 	            			}
 	            		}
 	            		else
@@ -1250,15 +1249,13 @@ public class Eventos {
 	        			{
 	        				case "Pocion de vida":
 	        				{
-	        					Objeto objeto = new Objeto("Pocion de vida");
-	        					prota.addListaObjetos(objeto);
+	        					prota.anadirObjeto("Pocion de vida");
 	        					System.out.println(prota.getNombre() + " ahora tiene " + prota.recorrerListaObjetos("Pocion de vida") + " pociones de vida.");
 	        					break;
 	        				}
 	        				case "Pocion de fuerza":
 	        				{
-	        					Objeto objeto = new Objeto("Pocion de fuerza");
-	        					prota.addListaObjetos(objeto);
+	        					prota.anadirObjeto("Pocion de fuerza");
 	        					System.out.println(prota.getNombre() + " ahora tiene " + prota.recorrerListaObjetos("Pocion de fuerza") + " pociones de fuerza.");
 	        					break;
 	        				}
@@ -1268,33 +1265,33 @@ public class Eventos {
 	        					{
 	        						case "":
 	        						{
-	        							Objeto objeto = new Objeto("Armadura de cuero");
-	    	        					prota.addListaObjetos(objeto);
+	        							prota.anadirArmadura("Armadura de cuero");
 	        							System.out.println(prota.getNombre() + " ahora tiene una armadura de cuero.");
+	        							prota.setDefensa(prota.getDefensa() + 1);
 	        							break;
 	        						}
 	        						case "Armadura de cuero":
 	        						{
-	        							Objeto objeto = new Objeto("Armadura de hierro");
-	    	        					prota.addListaObjetos(objeto);
+	        							prota.anadirArmadura("Armadura de hierro");
 	    	        					prota.eliminarObjeto("Armadura de cuero");
 	        							System.out.println(prota.getNombre() + " ahora tiene una armadura de hierro.");
+	        							prota.setDefensa(prota.getDefensa() + 1);
 	        							break;
 	        						}
 	        						case "Armadura de hierro":
 	        						{
-	        							Objeto objeto = new Objeto("Armadura de diamante");
-	    	        					prota.addListaObjetos(objeto);
+	        							prota.anadirArmadura("Armadura de diamante");
 	    	        					prota.eliminarObjeto("Armadura de hierro");
 	        							System.out.println(prota.getNombre() + " ahora tiene una armadura de diamante.");
+	        							prota.setDefensa(prota.getDefensa() + 1);
 	        							break;
 	        						}
 	        						case "Armadura de diamante":
 	        						{
-	        							Objeto objeto = new Objeto("Armadura de netherite");
-	    	        					prota.addListaObjetos(objeto);
+	        							prota.anadirArmadura("Armadura de netherite");
 	    	        					prota.eliminarObjeto("Armadura de diamante");
 	        							System.out.println(prota.getNombre() + " ahora tiene una armadura de netherite.");
+	        							prota.setDefensa(prota.getDefensa() + 1);
 	        							break;
 	        						}
 	        						default:
@@ -1302,21 +1299,50 @@ public class Eventos {
 	        							System.out.println("Error en la selección de armadura");
 	        						}
 	        					}
+	        					switch(prota.comprobarArmadura())
+	        		            {
+	        		            	case "":
+	        		            	{
+	        		            		nombreArmadura = "Armadura de cuero";
+	        		            		costeArmadura = 2;
+	        		            		break;
+	        		            	}
+	        		            	case "Armadura de cuero":
+	        		            	{
+	        		            		nombreArmadura = "Armadura de hierro";
+	        		            		costeArmadura = 4;
+	        		            		break;
+	        		            	}
+	        		            	case "Armadura de hierro":
+	        		            	{
+	        		            		nombreArmadura = "Armadura de diamante";
+	        		            		costeArmadura = 8;
+	        		            		break;
+	        		            	}
+	        		            	case "Armadura de diamante":
+	        		            	{
+	        		            		nombreArmadura = "Armadura de netherite";
+	        		            		costeArmadura = 16;
+	        		            		break;
+	        		            	}
+	        		            	default:
+	        		            	{
+	        		            		nombreArmadura = prota.getNombre() + " ya posee todas las armaduras";
+	        		            		costeArmadura = 9999;
+	        		            		break;
+	        		            	}
+	        		            }
 	        					break;
 	        				}
 	        				case "Totem de inmortalidad":
 	        				{
-	        					Objeto objeto = new Objeto("Totem de inmortalidad");
-	        					prota.addListaObjetos(objeto);
-//	        					objetosTienda.set(3, (int) objetosTienda.get(3) + 1);
+	        					prota.anadirObjeto("Totem de inmortalidad");
 	        					System.out.println(prota.getNombre() + " ahora tiene " + prota.recorrerListaObjetos("Totem de inmortalidad") + " totemes de inmortalidad.");
 	        					break;
 	        				}
 	        				case "Ender pearl":
 	        				{
-	        					Objeto objeto = new Objeto("Ender pearl");
-	        					prota.addListaObjetos(objeto);
-//	        					objetosTienda.set(4, (int) objetosTienda.get(4) + 1);
+	        					prota.anadirObjeto("Ender pearl");
 	        					System.out.println(prota.getNombre() + " ahora tiene " + prota.recorrerListaObjetos("Ender pearl") + " ender pearls.");
 	        					break;
 	        				}
@@ -1344,16 +1370,18 @@ public class Eventos {
 	        	System.out.println("\"Has completado tu cupo de compras diario, vuelve otro dia por mas\"-dijo amablemante " + (generoAldeano ? "la aldeana" : "el aldeano"));
 	        	
 	        	}
-//	        if((boolean) objetosTienda.get(5))
-//	        {
-//	        	System.out.println("Espera un momento! -Dice la aldeana");
-//	        	System.out.println(prota.getNombre() + " se da la vuelta...");
-//	        }
-//	        else
-//	        {
-//	        	System.out.println("Hasta pronto!\r\n");
-//	        	System.out.println("Con esto te marchas con ganas de volver para poder probar los otros objetos de la tienda");
-//	        }
+	        if(haLigado)
+	        {
+	        	System.out.println("Espera un momento! -Dice la aldeana");
+	        	System.out.println(prota.getNombre() + " se da la vuelta...");
+	        	Juego.gameOver = true;
+	        	Juego.finalLigarAlex = true;
+	        }
+	        else
+	        {
+	        	System.out.println("Hasta pronto!\r\n");
+	        	System.out.println("Con esto te marchas con ganas de volver para poder probar los otros objetos de la tienda");
+	        }
 		}
 		
 		private void eventoPuzzle(Random random, Scanner sc, Protagonista prota) {
@@ -1394,7 +1422,6 @@ public class Eventos {
 
 		//Puzzle
 		public void puzzlePiedraPapelTijera(Protagonista prota, Random random, Scanner sc){
-			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 			int victoria = 0;
 			int derrota = 0;
 
@@ -1408,8 +1435,6 @@ public class Eventos {
 			{
 				String decisionPlayer = "";
 				int decisionEnemigo = 1;
-				int intg;//intg es una varibale que combierte las String en int
-				
 				
 				System.out.println("    1.Piedra | 2.Papel | 3.Tijera ");
 				
@@ -1422,7 +1447,7 @@ public class Eventos {
 				}
 				
 				String[] ppt = {"¡Piedra!", "¡Papel!", "¡Tijera!"}; 
-				int decisionPlayerI = (intg = Integer.valueOf(decisionPlayer));
+				int decisionPlayerI = Integer.valueOf(decisionPlayer);
 				
 				decisionEnemigo = random.nextInt(1,4);
 				
@@ -1468,8 +1493,6 @@ public class Eventos {
 					System.out.println("\"Te agradezco este agradable momento, puedes continuar\"-dice complacido");
 					System.out.println("");
 					prota.setSuerte(prota.getSuerte()+3);
-//					finalArray[0][0] = "Suerte";
-//					finalArray[0][1] = "3";
 					System.out.println("Te sientes afortunado... +3 de " + Color.YELLOW + "suerte" + Color.RESET + "!");
 				}
 				if(derrota == 3) {
@@ -1593,16 +1616,13 @@ public class Eventos {
 				System.out.println("Las luces se apagan repetinamente al acabarse tus turnos restantes.");
 				System.out.println("Entristecido te marchas con las manos vacias.");
 			}
-			
-			System.out.println("");
-			System.out.println("Guardas tu botin y continuas tu aventura felizmente");
 		}
+		System.out.println("");
+		System.out.println("Guardas tu botin y continuas tu aventura felizmente");
 			
 		}
 		
 		public void puzzleAdivinanza(Random random, Scanner sc, Protagonista prota){
-			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
-			
 			String decision = "";
 			
 			boolean acierto = false;
@@ -1662,7 +1682,6 @@ public class Eventos {
 		        }
 				
 				double numeroGracioso = random.nextDouble(0, 1);
-//				System.out.println(numeroGracioso);
 				if(decisionDouble == numeroGracioso)
 				{
 					acierto = true;
@@ -1670,8 +1689,6 @@ public class Eventos {
 					System.out.println("La caja emite una pequeña musica");
 					System.out.println(Color.CYAN_BRIGHT + "¡FELICIDADES HAS ADIVINADO EL NUMERO DE LA SUERTE SUPREMA!-dice la voz" + Color.RESET);
 					System.out.println("A partir de ahora tendras todo lo que necesites");
-					
-					////// TODO Y esto te hace ganar basicamente y te saca del bucle del juego System.out.println("Vendo cocaína en la Calle Inventada numero 123"); /////////////////
 				}
 				
 				int resultadoReal = random.nextInt(0,2);/*También puede ganar si su número es exactamente 0 o 1, porque 
@@ -1686,8 +1703,6 @@ public class Eventos {
 					System.out.println("Esta experiencia expande tus conocimientos ganando " + Color.YELLOW_BRIGHT + "2 de velocidad" + Color.RESET);
 					
 					prota.setVelocidad(prota.getVelocidad()+2);
-//					finalArray[0][0] = "Velocidad";
-//					finalArray[0][1] = "2";
 				}
 				if(turnos == 0 && acierto != true) {
 					
@@ -1696,8 +1711,6 @@ public class Eventos {
 					System.out.println("");
 					
 					prota.setMonedas(prota.getMonedas()-10);
-//					finalArray[0][0] = "Monedas";
-//					finalArray[0][1] = "-10";
 				}
 			}
 			
@@ -1709,8 +1722,6 @@ public class Eventos {
 		}
 		
 		public void puzzleTrivia(Random random, Scanner sc, Protagonista prota){
-			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
-			
 			//// VARIABLES ////
 			String decision;
 			int aciertos = 0;
@@ -1814,32 +1825,25 @@ public class Eventos {
 					
 						case 1:
 							System.out.println("Recibes " + Color.GREEN_BOLD + Juego.monedas(prota.getNombre(), 10) + (prota.getNombre().equals("Chicken Little") ? " semillas " : " esmeraldas ") + Color.RESET + "del ajolote");
-							
 							prota.setMonedas(prota.getMonedas()+10);
-//							finalArray[i][0] = "Monedas";
-//							finalArray[i][1] = "10";
 						break;
 						
 						case 2:
 							System.out.println("Recibes una" + Color.YELLOW_BOLD + " pocion de Vida " + Color.RESET + "del ajolote");
 							
-							finalArray[i][0] = "Pocion Vida";
-							finalArray[i][1] = "1";
+							prota.anadirObjeto("Pocion de vida");
 						break;
 						
 						case 3:
 							System.out.println("Recibes una" + Color.YELLOW_BOLD + " pocion de Fuerza " + Color.RESET + "del ajolote");
 							
-							finalArray[i][0] = "Pocion Fuerza";
-							finalArray[i][1] = "5";
+							prota.anadirObjeto("Pocion de fuerza");
 						break;
 						
 						case 4:
 							System.out.println("Recibes" + Color.BLUE_BOLD +" armadura" + Color.RESET);
 							
 							prota.setDefensa(prota.getDefensa()+1);
-//							finalArray[i][0] = "Defensa";
-//							finalArray[i][1] = "1";
 					}
 				}
 				
@@ -1858,32 +1862,24 @@ public class Eventos {
 							System.out.println("El ajolote te golpea quitandote" + Color.RED_BOLD + " 10 de daño " + Color.RESET);
 								
 							prota.setVida(prota.getVida()-10);
-//							finalArray[i][0] = "Vida";
-//							finalArray[i][1] = "-5";
 						break;
 							
 						case 2:
 							System.out.println("El ajolote te roba " + Color.RED_BOLD + Juego.monedas(prota.getNombre(), 10) + (prota.getNombre().equals("Chicken Little") ? " semillas" : " esmeraldas") + Color.RESET);
 								
 							prota.setMonedas(prota.getMonedas()-10);
-//							finalArray[i][0] = "Monedas";
-//							finalArray[i][1] = "-10";
 						break;
 						
 						case 3:
 							System.out.println("Recibes la maldicion del" + Color.BLACK_BOLD + " mal presagio " + Color.RESET);
 							
 							prota.setBadOmen(true);
-//							finalArray[i][0] = "Bad Omen";
-//							finalArray[i][1] = "10";
 						break;
 							
 						case 4:
 							System.out.println("Tu armadura" + Color.RED_BOLD + " pierde porder " + Color.RESET);
 							
 							prota.setDefensa(prota.getDefensa()-1);
-//							finalArray[i][0] = "Defensa";
-//							finalArray[i][1] = "-1";
 						}
 					}
 				
@@ -1901,8 +1897,6 @@ public class Eventos {
 					System.out.println("Te sientes mas fuerte, tu vida maxima aumenta 10 puntos");
 					
 					prota.setVidaMax(prota.getVidaMax()+10);
-//					finalArray[nextIndex][0] = "VidaMax";
-//					finalArray[nextIndex][1] = "10";
 				}
 			}
 			
@@ -1913,24 +1907,18 @@ public class Eventos {
 					System.out.println("Te sientes mas debil, pierdes 5 de vida maxima");
 					
 					prota.setVidaMax(prota.getVidaMax()-5);
-//					finalArray[nextIndex][0] = "VidaMax";
-//					finalArray[nextIndex][1] = "-5";
 				}
 				if(aciertos == 0) {
 					System.out.println("\"Por lo que veo ni siquiera lo has intentado, vaya perdida de tiempo, continua con tu aventura desgraciado\"-dijo el ajolote completamente decepcionado \r\n");
 					System.out.println("Humillado sientes como parte de tu fuerza escapa de tu cuerpo, pierdes 10 de vida maxima");
 					
 					prota.setVidaMax(prota.getVidaMax()-10);
-//					finalArray[nextIndex][0] = "VidaMax";
-//					finalArray[nextIndex][1] = "-10";
 				}
 			}	
 			
 		}
 		
 		public void puzzleOpinion(Random random, Scanner sc, Protagonista prota){
-			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
-			
 			String decision;
 			boolean opinionValida = false;
 			String[] opinion = {"0","1","2","3","4","5","6","7","8","9","10"};
@@ -2027,8 +2015,6 @@ public class Eventos {
 						System.out.println("Te sientes complacido por estas palabras, tu suerte aumenta en 2 \r\n");
 						
 						prota.setSuerte(prota.getSuerte()+2);
-//						finalArray[0][0] = "Suerte";
-//						finalArray[0][1] = "2";
 						fin = true;
 						break;
 					}
@@ -2040,10 +2026,6 @@ public class Eventos {
 						
 						prota.setSuerte(prota.getSuerte()+2);
 						prota.setVidaMax(prota.getVidaMax()+5);
-//						finalArray[0][0] = "Suerte";
-//						finalArray[0][1] = "2";
-//						finalArray[1][0] = "VidaMax";
-//						finalArray[1][1] = "5";
 						fin = true;
 					}
 				}

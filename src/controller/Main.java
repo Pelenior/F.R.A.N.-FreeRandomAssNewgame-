@@ -11,8 +11,5 @@ public class Main {
 		    
 		Juego juego = new Juego();
 		juego.comenzar();
-		
-		
 	}
-
 }

@@ -42,7 +42,7 @@ public class Juego {
 	
 	private static boolean finalKillSansNoGenocideAlex = false;
 	private static boolean finalKillSansGenocideAlex = false;
-	private static boolean finalLigarAlex = false;
+	public static boolean finalLigarAlex = false;
 	private static boolean finalMascotaAlex = false;
 	
 	public static boolean finalDrogasChickenLittle = false;

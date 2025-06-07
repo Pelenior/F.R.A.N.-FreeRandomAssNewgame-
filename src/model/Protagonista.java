@@ -60,9 +60,6 @@ public class Protagonista extends Personaje {
 		return listaObjetos;
 	}
 
-	public void addListaObjetos(Objeto objeto){
-		listaObjetos.add(objeto);
-	}
 	
 	public void insertProta(String nombre, Double vidaMax, Double defensa, Double fuerza, Double velocidad, Integer idAscii, Boolean karma) throws SQLException{
 		DaoPersonajes daoPersonajes = new DaoPersonajes();
@@ -131,5 +128,15 @@ public class Protagonista extends Personaje {
 			}
 		}
 		
+	}
+	
+	public void anadirObjeto(String nombreObjeto)
+	{
+		listaObjetos.add(new Objeto(nombreObjeto));
+	}
+	
+	public void anadirArmadura(String nombreObjeto)
+	{
+		listaObjetos.add(new Objeto(nombreObjeto, true));
 	}
 }
