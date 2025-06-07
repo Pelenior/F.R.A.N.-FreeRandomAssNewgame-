@@ -22,6 +22,8 @@ public class Juego {
 	private DaoPersonajes daoPersonajes = new DaoPersonajes();
 	private DaoAtaques daoAtaques = new DaoAtaques();
 	
+	int puntuacion;
+
 	private Random random;
 	private int numeroSalas = 0;
 	private Scanner sc;
@@ -60,6 +62,14 @@ public class Juego {
         }
         return instanciaJuego;//si ya está creado
     }
+	
+	public int getPuntuacion() {
+		return puntuacion;
+	}
+
+	public void setPuntuacion(int puntuacion) {
+		this.puntuacion = puntuacion;
+	}
 	
 	public void comenzar() throws SQLException
 	{
