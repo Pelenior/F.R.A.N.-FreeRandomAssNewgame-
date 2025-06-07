@@ -23,6 +23,7 @@ public class Juego {
 	private DaoAtaques daoAtaques = new DaoAtaques();
 	
 	int puntuacion;
+	int totalPuntuacion;
 
 	private Random random;
 	private int numeroSalas = 0;
@@ -187,6 +188,7 @@ public class Juego {
 					case "1":
 						{
 							prota = daoPersonajes.getDataProta("Steve");//protagonista elegido- CAMBIARLO CUANDO HAYA DB
+							prota.setVida(prota.getVidaMax());
 							pasiva = "Guerrera maldita por su tribu. Su maldicion la obliga a seguir enfrentando enemigos y la impide usar objetos de cura";
 							//ESTO METERLO DENTRO DE UNA DB
 //							nombrePersonaje = "Steve";
@@ -204,6 +206,7 @@ public class Juego {
 					case "2":
 						{
 							prota = daoPersonajes.getDataProta("Alex");//protagonista elegido- CAMBIARLO CUANDO HAYA DB
+							prota.setVida(prota.getVidaMax());
 							pasiva = "Aumenta la probabilidad de evitar trampas y mayor conocimiento en puzzles";
 							//ESTO METERLO DENTRO DE UNA DB
 //							nombrePersonaje =  "Alex";
@@ -220,6 +223,7 @@ public class Juego {
 					case "3":
 						{
 							prota = daoPersonajes.getDataProta("Chicken Little");//protagonista elegido- CAMBIARLO CUANDO HAYA DB	
+							prota.setVida(prota.getVidaMax());
 							pasiva = "Un pollo fugitivo, buscado por el KFC desde pequeño";
 							//ESTO METERLO DENTRO DE UNA DB
 //							nombrePersonaje = "Chicken Little";
@@ -458,6 +462,12 @@ public class Juego {
 		}
 	}
 	
+	public void calculoPuntuacion(int randomVidaAtaque) {
+	
+		 puntuacion = (int) (((prota.getNumEnemigos() * prota.getVida()) + (prota.getSuerte() * prota.getMonedas())) - (combate.getTurnos() * 10));
+		 totalPuntuacion = totalPuntuacion + puntuacion;
+	}
+	
 	private void calculoFinCombate()
 	{
 		if(!prota.getHaHuido() && prota.getVida() > 0)
@@ -466,22 +476,27 @@ public class Juego {
 			int randomVidaAtaque = random.nextInt(1, 11);
 			if(randomVidaAtaque <= 4)
 			{
+				calculoPuntuacion(randomVidaAtaque);
 				prota.setVidaMax(prota.getVidaMax() + prota.getNumEnemigos());
 				prota.setVida(prota.getVida() + prota.getNumEnemigos());
 				System.out.println(prota.getNombre() + " consigue " + prota.getNumEnemigos() + " puntos de vida máxima tras el combate!\r\n");
 			}
 			else if(randomVidaAtaque > 4 && randomVidaAtaque <= 8)
 			{
+				calculoPuntuacion(randomVidaAtaque);
 				prota.setFuerza(prota.getFuerza() + (double) (prota.getNumEnemigos()) / 2);
 				System.out.println(prota.getNombre() + " consigue " + (double) (prota.getNumEnemigos()) / 2 + " puntos de fuerza tras el combate!\r\n");
 			}
 			else
 			{
+				calculoPuntuacion(randomVidaAtaque);
 				prota.setVidaMax(prota.getVidaMax() + prota.getNumEnemigos() / 2);
 				prota.setVida(prota.getVida() + prota.getNumEnemigos() / 2);
-				prota.setFuerza(prota.getFuerza() + (double) (prota.getNumEnemigos()) / 4);
+				prota.setFuerza(prota.getFuerza() + (double) (prota.getNumEnemigos()) / 4);				
 				System.out.println(prota.getNombre() + " consigue " + (double) (prota.getNumEnemigos()) / 2 + " puntos de vida máxima y " + (double) (prota.getNumEnemigos()) / 4 + " puntos de fuerza tras el combate! Qué suerte!\r\n");
 			}
+			
+			System.out.println(nombreJugador + " ha conseguido " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " puntos en combate usando a " + prota.getNombre());
 			
 			int randomMonedas = random.nextInt(1, 11);
 			randomMonedas += prota.getSuerte() /2;

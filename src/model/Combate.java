@@ -13,6 +13,12 @@ public class Combate {
 	String clima = "";
 	String terreno = "";
 	
+	private int turnos = 0;
+	
+	public int getTurnos() {
+		return turnos;
+	}
+
 	private Enemigo enemigo;
 	
 	public static void imprimirStats(Protagonista prota, Enemigo enemigo)
@@ -477,8 +483,8 @@ public class Combate {
 		DecimalFormat dfZeroDecimal = new DecimalFormat("0");
 		
 		int numeroEnemigos = 0;
-		int turnos = 0;
 		int danoVex = 0;
+		turnos = 0;
 		int danoAliento = 0;
 		int danoEnderman = 0;
 		int danoNiebla = 0;

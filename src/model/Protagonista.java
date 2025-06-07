@@ -7,7 +7,7 @@ import dao.DaoPersonajes;
 
 public class Protagonista extends Personaje {
 	
-	private int suerte=0;
+	private int suerte = 0;
 	private boolean badOmen = false;
 	private boolean haHuido = false;
 	private ArrayList<Objeto> listaObjetos = new ArrayList<Objeto>();
