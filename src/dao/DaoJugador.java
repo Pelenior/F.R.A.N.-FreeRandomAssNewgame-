@@ -204,11 +204,11 @@ public class DaoJugador {
 	        	rank = "SS-RANK";
 	        	rankEstetico = Color.RED_BOLD_BRIGHT + "SS-RANK" + Color.RESET;
 	        }
-	        else if(puntuacion > 1500 && puntuacion <= 17050) {
+	        else if(puntuacion > 1500 && puntuacion <= 1750) {
 	        	rank = "SSS-RANK";
 	        	rankEstetico = Color.RED_UNDERLINED + Color.RED_BOLD_BRIGHT + "SSS-RANK" + Color.RESET;
 	        }
-	        else if(puntuacion > 17050 && puntuacion <= 2000) {
+	        else if(puntuacion > 1750 && puntuacion <= 2000) {
 	        	rank = "X-RANK";
 	        	rankEstetico = Color.CYAN_UNDERLINED  + Color.BLACK_BACKGROUND + Color.CYAN_BOLD_BRIGHT + "X-RANK" + Color.RESET;
 	        }
