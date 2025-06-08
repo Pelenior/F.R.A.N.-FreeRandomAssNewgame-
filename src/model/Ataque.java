@@ -37,26 +37,44 @@ public class Ataque {
 			case "Curar":
 			{
 				System.out.println(user.getNombre() + " trata de curarse...");
-				//TODO cura
-				//if no potions:
-				System.out.println(user.getNombre() + " no tiene pociones!");
-				user.setRepetirAtaque(true);
+				if(user instanceof Protagonista)
+				{
+					Protagonista prota = (Protagonista) user;
+					if(prota.recorrerListaObjetos("Pocion de vida") > 0)
+					{
+						user.setVida(user.getVida() + 5);
+						prota.eliminarUnObjeto("Pocion de vida");
+						System.out.println(user.getNombre() + " usa una " + Color.GREEN_BRIGHT + "poción!" + Color.RESET);
+						System.out.println(user.getNombre() + " ahora tiene " + prota.recorrerListaObjetos("Pocion de vida") + Color.GREEN_BRIGHT + " pociones de vida" + Color.RESET);
+						System.out.println(user.getNombre() + " ahora tiene " + (user.getVida() > user.getVidaMax() / 2 ? Color.GREEN_BRIGHT : (user.getVida() > user.getVidaMax() / 4 ? Color.YELLOW : Color.RED_BRIGHT)) +  dfOneDecimal.format(user.getVida()) + Color.RESET + "/" + Color.GREEN_BRIGHT + dfZeroDecimal.format(user.getVidaMax()) + Color.RESET + " puntos de vida\r\n");
+					}
+					else
+					{
+						System.out.println(user.getNombre() + " no tiene pociones!");
+						user.setRepetirAtaque(true);
+					}
+				}
 				break;
 			}
 			case "Huir":
 			{
 				System.out.println(user.getNombre() + " trata de huir!");
-				int randomHuir = random.nextInt(1, 11);
-				randomHuir += user.getVelocidad()/2;
-				//TODO ender pearl
-				
-//				if((int) objetosTienda.get(4) > 0)
-//				{
-//					System.out.println(nombrePersonaje + " usa una " + PURPLE_BRIGHT + "ender pearl" + RESET + " para huir!");
-//					objetosTienda.set(4, (int) objetosTienda.get(4) - 1);
-//					System.out.println(nombrePersonaje + " ahora tiene " + (int) objetosTienda.get(4) + PURPLE_BRIGHT + " ender pearls" + RESET);
-//					randomHuir = 10;
-//				}
+				int randomHuir = 0;
+				if(user instanceof Protagonista)
+				{
+					Protagonista prota = (Protagonista) user;
+					if(prota.recorrerListaObjetos("Ender pearl") > 0)
+					{
+						System.out.println(user.getNombre() + " usa una " + Color.PURPLE_BRIGHT + "ender pearl" + Color.RESET + " para huir!");
+						System.out.println(user.getNombre() + " ahora tiene " + prota.recorrerListaObjetos("Ender pearl") + Color.PURPLE_BRIGHT + " ender pearls" + Color.RESET);
+						randomHuir = 10;
+					}
+					else
+					{
+						randomHuir = random.nextInt(1, 11);
+						randomHuir += user.getVelocidad()/2;
+					}
+				}
 				if(randomHuir >= 8)
 				{
 					System.out.println(user.getNombre() + Color.GREEN_BRIGHT + " consigue huir de los enemigos" + Color.RESET + "!\r\n");

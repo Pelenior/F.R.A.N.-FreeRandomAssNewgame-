@@ -656,11 +656,14 @@ public class Combate {
 				{
 					enemigo.setVida(enemigo.getVidaMax() / 2);
 					enemigo.setHasTotem(false);
+					System.out.println("El " + Color.PURPLE_BRIGHT + "tótem de inmortalidad" + Color.RESET + " salva a " + enemigo.getNombre() + "!");
 				}
-				if(prota.getVida() < 0 && prota.getHasTotem())
+				if(prota.getVida() < 0 && prota.recorrerListaObjetos("Totem de inmortalidad") > 0)
 				{
 					prota.setVida(prota.getVidaMax() / 2);
-					prota.setHasTotem(false);
+					prota.eliminarObjeto("Totem de inmortalidad");
+					System.out.println("El " + Color.PURPLE_BRIGHT + "tótem de inmortalidad" + Color.RESET + " salva a " + prota.getNombre() + "!");
+					System.out.println(prota.getNombre() + " ahora tiene " + prota.recorrerListaObjetos("Totem de inmortalidad") + Color.PURPLE_BRIGHT + " tótems de inmortalidad" + Color.RESET);
 				}
 			}
 			numeroEnemigos--;
