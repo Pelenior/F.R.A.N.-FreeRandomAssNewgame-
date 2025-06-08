@@ -218,6 +218,7 @@ public class DaoPersonajes {
 
     statement.close();
 }
+	
 	// Actualiza los datos del protagonista existente
 	public void updateProta(String nombre, Double vidaMax, Double defensa, Double fuerza, Double velocidad, Integer idAscii, Boolean karma) throws SQLException {
 	    String updateSql = "UPDATE personajes SET vidaMax=?, defensa=?, fuerza=?, velocidad=?, idAscii=?, karma=?, isRaid=NULL, isBoss=NULL, isSteve=NULL WHERE nombre=? AND tipo='protagonista'";
@@ -273,6 +274,7 @@ public class DaoPersonajes {
 		
 		statement.close();
 	}
+	
 	// Elimina un personaje por nombre
 	public void deletePersonaje(String nombre) throws SQLException {
 	    String sql = "DELETE FROM personajes WHERE nombre=?";
