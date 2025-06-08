@@ -7,6 +7,9 @@
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
+CREATE DATABASE IF NOT EXISTS `mincra`;
+USE `mincra`;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -137,14 +140,9 @@ CREATE TABLE `jugador` (
 --
 
 INSERT INTO `jugador` (`nombre`, `contraseña`, `idAscii`, `Puntuacion`, `Rank`) VALUES
-('', '', 99, -188, 'ZZZ-RANK'),
 ('Aitana', '1234', NULL, 158, 'C-RANK'),
-('Bombardeen a Diego', 'BombardeenADiego', NULL, 1393, 'SS-RANK'),
 ('fran', 'flan', 99, 978, 'A-RANK'),
-('John', '', 5, 1017, 'S-RANK'),
-('lol', 'lol', 3, -300, 'ZZZ-RANK'),
 ('Luna', '1234', NULL, 1616, 'SSS-RANK'),
-('Null', 'null', 3, 0, 'ZZZ-RANK'),
 ('Pelayo', '1234', 11, 1113, 'S-RANK');
 
 -- --------------------------------------------------------
