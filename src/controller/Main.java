@@ -2,8 +2,6 @@ package controller;
 import model.*;
 
 import java.sql.*;
-import java.util.ArrayList;
-import dao.*;
 
 public class Main {
 
@@ -11,8 +9,5 @@ public class Main {
 		    
 		Juego juego = new Juego();
 		juego.comenzar();
-		
-		
 	}
-
 }

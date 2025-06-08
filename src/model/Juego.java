@@ -1,11 +1,11 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.sql.*;
+import java.text.DecimalFormat;
 
 import dao.*;
 
@@ -42,7 +42,7 @@ public class Juego {
 	
 	private static boolean finalKillSansNoGenocideAlex = false;
 	private static boolean finalKillSansGenocideAlex = false;
-	private static boolean finalLigarAlex = false;
+	public static boolean finalLigarAlex = false;
 	private static boolean finalMascotaAlex = false;
 	
 	public static boolean finalDrogasChickenLittle = false;
@@ -162,7 +162,6 @@ public class Juego {
 		        ASCII.printAscii(1);
 		        
 				String eleccionPersonajeString = "";
-				int asciiProta;
 		//		String nombrePersonaje = "";
 		//		String lorePersonaje = "";
 		//		String[] infoPersonajes = new String[4];
@@ -521,9 +520,15 @@ public class Juego {
 
 	private void bucleJuego() throws SQLException
 	{
+		DecimalFormat dfOneDecimal = new DecimalFormat("0.0");
+		DecimalFormat dfZeroDecimal = new DecimalFormat("0");
 		while(!gameOver)
 		{
 			lore();
+			System.out.println(prota.getNombre());
+			System.out.println("Vida: " + (prota.getVida() > prota.getVidaMax()/2 ? Color.GREEN_BRIGHT : (prota.getVida() > prota.getVidaMax() / 4 ? Color.YELLOW : Color.RED_BRIGHT)) + dfOneDecimal.format(prota.getVida()) + Color.RESET + "/" + Color.GREEN_BRIGHT + dfZeroDecimal.format(prota.getVidaMax()) + Color.RESET + " puntos de vida");
+			System.out.println("Dinero: " + monedas(prota.getNombre(), prota.getMonedas()) + Color.YELLOW + (prota.getNombre().equals("Chicken Little") ? " semillas" : " esmeraldas") + Color.RESET);
+			if(numeroSalas > 0) System.out.println(prota.getNombre() + " ha completado " + numeroSalas + " salas\r\n"); else System.out.println("");
 			if(numeroSalas == 14)
 			{
 				bossBattle();
@@ -625,7 +630,25 @@ public class Juego {
 			}
 			case "Mercader":
 			{
-				evento.eventoMercader(prota, scanner, random);
+				if(prota.getBadOmen())
+				{
+					System.out.println(prota.getNombre() + " se acerca a una aldea cercana para comprar cosas con un mercader");
+					System.out.println("Pero...");
+					System.out.println(prota.getNombre() + " se olvida de que tenía " + Color.BLACK_BOLD_BRIGHT + "Mal Presagio" + Color.BLACK_BOLD_BRIGHT + "...");
+					System.out.println("Una raid va a comenzar pronto!\r\n");
+					if(combate.combate(sc, random, prota, "Raid", random.nextBoolean()))
+					{
+						calculoFinCombate();
+					}
+					else
+					{
+						gameOver = true;
+					}
+				}
+				else
+				{
+					evento.eventoMercader(prota, scanner, random);
+				}
 				break;
 			}
 		}

@@ -421,14 +421,14 @@ public class Combate {
 		{
 			case "Nether":
 			{
-				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 1);
+				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 0.5);
 				clima = "Despejado";
 				break;
 			}
 			case "End":
 			{
 				clima = "Despejado";
-				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 2);
+				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 1);
 				break;
 			}
 		}
@@ -436,12 +436,12 @@ public class Combate {
 		{
 			case "Lluvioso":
 			{
-				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 1);
+				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 0.5);
 				break;
 			}
 			case "Tormentoso":
 			{
-				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 2);
+				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 1);
 				break;
 			}
 		}
@@ -449,14 +449,14 @@ public class Combate {
 		{
 			case "Rocoso":
 			{
-				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 1);
+				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 0.5);
 				prota.setPenalizacionDefensa(prota.getPenalizacionDefensa() + 1);
 				break;
 			}
 			case "Montañoso":
 			{
-				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 2);
-				prota.setPenalizacionDefensa(prota.getPenalizacionDefensa() + 1);
+				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 1);
+				prota.setPenalizacionDefensa(prota.getPenalizacionDefensa() + 1.5);
 				break;
 			}
 		}
@@ -576,7 +576,7 @@ public class Combate {
 				{
 					System.out.println("==============================================================================================");
 					//ataque del protagonista
-					prota.atacar(enemigo);
+					prota.atacar(sc, enemigo);
 					if(prota.getNiebla())
 					{
 						System.out.println("Niebla ataca al enemigo contigo!");
@@ -596,7 +596,7 @@ public class Combate {
 				System.out.println("==============================================================================================");
 				if(enemigo.getVida() > 0 && prota.getVida() > 0 && !prota.getHaHuido())
 				{
-					enemigo.atacar(prota);
+					enemigo.atacar(sc, prota);
 				}
 				if(prota.getCooldownMaldicionWither() > 0)
 				{
@@ -651,6 +651,19 @@ public class Combate {
 				if(enemigo.getStamina() > 0)
 				{
 					enemigo.setStamina(enemigo.getStamina() - 1);
+				}
+				if(enemigo.getVida() < 0 && enemigo.getHasTotem())
+				{
+					enemigo.setVida(enemigo.getVidaMax() / 2);
+					enemigo.setHasTotem(false);
+					System.out.println("El " + Color.PURPLE_BRIGHT + "tótem de inmortalidad" + Color.RESET + " salva a " + enemigo.getNombre() + "!");
+				}
+				if(prota.getVida() < 0 && prota.recorrerListaObjetos("Totem de inmortalidad") > 0)
+				{
+					prota.setVida(prota.getVidaMax() / 2);
+					prota.eliminarObjeto("Totem de inmortalidad");
+					System.out.println("El " + Color.PURPLE_BRIGHT + "tótem de inmortalidad" + Color.RESET + " salva a " + prota.getNombre() + "!");
+					System.out.println(prota.getNombre() + " ahora tiene " + prota.recorrerListaObjetos("Totem de inmortalidad") + Color.PURPLE_BRIGHT + " tótems de inmortalidad" + Color.RESET);
 				}
 			}
 			numeroEnemigos--;

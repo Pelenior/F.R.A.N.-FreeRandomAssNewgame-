@@ -2,7 +2,7 @@ package model;
 
 import java.sql.*;
 import java.util.ArrayList;
-
+import java.util.Scanner;
 import dao.DaoPersonajes;
 
 public class Protagonista extends Personaje {
@@ -11,7 +11,7 @@ public class Protagonista extends Personaje {
 	private boolean badOmen = false;
 	private boolean haHuido = false;
 	private ArrayList<Objeto> listaObjetos = new ArrayList<Objeto>();
-	
+
 	//constructor
 	public Protagonista(String nombre, double vidaMax, double defensa, double fuerza, double velocidad, int idAscii, int suerte) throws SQLException {
 		this.nombre = nombre;
@@ -60,9 +60,6 @@ public class Protagonista extends Personaje {
 		return listaObjetos;
 	}
 
-	public void addListaObjetos(Objeto objeto){
-		listaObjetos.add(objeto);
-	}
 	
 	public void insertProta(String nombre, Double vidaMax, Double defensa, Double fuerza, Double velocidad, Integer idAscii, Boolean karma) throws SQLException{
 		DaoPersonajes daoPersonajes = new DaoPersonajes();
@@ -80,23 +77,10 @@ public class Protagonista extends Personaje {
 	}
 
 	@Override
-	public void atacar(Personaje target)
+	public void atacar(Scanner sc, Personaje target)
 	{
-		ataqueController.seleccionarAtaqueProta(this, target);
+		ataqueController.seleccionarAtaqueProta(sc, this, target);
 		
-	}
-	
-	//GAME OVER
-	public void gameOver() 
-	{
-		if(getVida()<0) {
-			vida=0;
-		}
-		
-		if(getVida()==0) {
-			boolean gameOver = true;
-		}
-	
 	}
 	
 	public int recorrerListaObjetos(String nombreObjeto) {
@@ -131,5 +115,30 @@ public class Protagonista extends Personaje {
 			}
 		}
 		
+	}
+	
+	public void eliminarUnObjeto(String nombreObjeto)
+	{
+		boolean objetoEliminado = false;
+		for (int i=0; i<listaObjetos.size(); i++) {
+			if(!objetoEliminado)
+			{
+				if(listaObjetos.get(i).getNombre().equals(nombreObjeto)) {
+					listaObjetos.remove(i);
+					objetoEliminado = true;
+				}
+			}
+			
+		}
+	}
+	
+	public void anadirObjeto(String nombreObjeto)
+	{
+		listaObjetos.add(new Objeto(nombreObjeto));
+	}
+	
+	public void anadirArmadura(String nombreObjeto)
+	{
+		listaObjetos.add(new Objeto(nombreObjeto, true));
 	}
 }
