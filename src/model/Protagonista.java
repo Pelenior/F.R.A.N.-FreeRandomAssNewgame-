@@ -8,10 +8,10 @@ import dao.DaoPersonajes;
 public class Protagonista extends Personaje {
 	
 	private int suerte = 0;
-	private boolean badOmen = true;
+	private boolean badOmen = false;
 	private boolean haHuido = false;
 	private ArrayList<Objeto> listaObjetos = new ArrayList<Objeto>();
-	
+
 	//constructor
 	public Protagonista(String nombre, double vidaMax, double defensa, double fuerza, double velocidad, int idAscii, int suerte) throws SQLException {
 		this.nombre = nombre;
@@ -128,6 +128,21 @@ public class Protagonista extends Personaje {
 			}
 		}
 		
+	}
+	
+	public void eliminarUnObjeto(String nombreObjeto)
+	{
+		boolean objetoEliminado = false;
+		for (int i=0; i<listaObjetos.size(); i++) {
+			if(!objetoEliminado)
+			{
+				if(listaObjetos.get(i).getNombre().equals(nombreObjeto)) {
+					listaObjetos.remove(i);
+					objetoEliminado = true;
+				}
+			}
+			
+		}
 	}
 	
 	public void anadirObjeto(String nombreObjeto)

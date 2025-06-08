@@ -1170,7 +1170,7 @@ public class Eventos {
 	        	}
 	        	System.out.println("");
 	        	
-	        	System.out.println("Tienes " + Color.YELLOW_BRIGHT + prota.getMonedas() + (prota.getNombre().equals("Chicken Little") ? " semillas " :  " esmeraldas ") + Color.RESET +  "y puedes comprar " + comprasRestantes +" objetos más\r\n");
+	        	System.out.println("Tienes " + Color.YELLOW_BRIGHT + Juego.monedas(prota.getNombre(), prota.getMonedas()) + (prota.getNombre().equals("Chicken Little") ? " semillas " :  " esmeraldas ") + Color.RESET +  "y puedes comprar " + comprasRestantes +" objetos más\r\n");
 	        	
 	        	opcionesTienda = sc.nextLine(); // Leer la opción seleccionada por el jugador.
 
@@ -1255,6 +1255,7 @@ public class Eventos {
 	        				}
 	        				case "Pocion de fuerza":
 	        				{
+	        					prota.setTurnosPocionFuerza(5);
 	        					prota.anadirObjeto("Pocion de fuerza");
 	        					System.out.println(prota.getNombre() + " ahora tiene " + prota.recorrerListaObjetos("Pocion de fuerza") + " pociones de fuerza.");
 	        					break;

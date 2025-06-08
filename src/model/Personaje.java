@@ -13,15 +13,15 @@ import java.util.ArrayList;
 	protected double defensa;
 	protected double fuerza;
 	protected double velocidad;
-	private int monedas = 0;
+	private int monedas = 100;
 	protected int idAscii;
 
 	AtaqueController ataqueController = new AtaqueController();
 	private boolean repetirAtaque = true;
 
 	// COMBATE
-	private int penalizacionAtaque = 0;
-	private int penalizacionDefensa = 0;
+	private double penalizacionAtaque = 0;
+	private double penalizacionDefensa = 0;
 	private boolean flechaRecargada = false;
 	private boolean cargaPreparada = false;
 	private boolean cargaRecargada = false;
@@ -47,6 +47,7 @@ import java.util.ArrayList;
 	private int cargasCreeper = 0;
 	private int stamina = 0;
 	private boolean niebla = false;
+	private int turnosPocionFuerza = 0;
 	
 	//FINAL DE COMBATE
 	private boolean haHuido = false;
@@ -359,19 +360,19 @@ import java.util.ArrayList;
 	{
 		this.endermanActivo = endermanActivo;
 	}
-	public int getPenalizacionAtaque()
+	public double getPenalizacionAtaque()
 	{
 		return penalizacionAtaque;
 	}
-	public void setPenalizacionAtaque(int penalizacionAtaque)
+	public void setPenalizacionAtaque(double penalizacionAtaque)
 	{
 		this.penalizacionAtaque = penalizacionAtaque;
 	}
-	public int getPenalizacionDefensa()
+	public double getPenalizacionDefensa()
 	{
 		return penalizacionDefensa;
 	}
-	public void setPenalizacionDefensa(int penalizacionDefensa)
+	public void setPenalizacionDefensa(double penalizacionDefensa)
 	{
 		this.penalizacionDefensa = penalizacionDefensa;
 	}
@@ -383,6 +384,15 @@ import java.util.ArrayList;
 	{
 		this.espinas = espinas;
 	}//TODO espinas
+	public int getTurnosPocionFuerza()
+	{
+		return turnosPocionFuerza;
+	}
+
+	public void setTurnosPocionFuerza(int turnosPocionFuerza)
+	{
+		this.turnosPocionFuerza = turnosPocionFuerza;
+	}
 	
 	public void selectALLPersonajes() throws SQLException{
 		DaoPersonajes daoPersonajes = new DaoPersonajes();

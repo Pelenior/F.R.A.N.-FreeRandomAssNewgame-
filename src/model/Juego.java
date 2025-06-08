@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.sql.*;
+import java.text.DecimalFormat;
 
 import dao.*;
 
@@ -521,9 +522,15 @@ public class Juego {
 
 	private void bucleJuego() throws SQLException
 	{
+		DecimalFormat dfOneDecimal = new DecimalFormat("0.0");
+		DecimalFormat dfZeroDecimal = new DecimalFormat("0");
 		while(!gameOver)
 		{
 			lore();
+			System.out.println(prota.getNombre());
+			System.out.println("Vida: " + (prota.getVida() > prota.getVidaMax()/2 ? Color.GREEN_BRIGHT : (prota.getVida() > prota.getVidaMax() / 4 ? Color.YELLOW : Color.RED_BRIGHT)) + dfOneDecimal.format(prota.getVida()) + Color.RESET + "/" + Color.GREEN_BRIGHT + dfZeroDecimal.format(prota.getVidaMax()) + Color.RESET + " puntos de vida");
+			System.out.println("Dinero: " + monedas(prota.getNombre(), prota.getMonedas()) + Color.YELLOW + (prota.getNombre().equals("Chicken Little") ? " semillas" : " esmeraldas") + Color.RESET);
+			if(numeroSalas > 0) System.out.println(prota.getNombre() + " ha completado " + numeroSalas + " salas\r\n"); else System.out.println("");
 			if(numeroSalas == 14)
 			{
 				bossBattle();

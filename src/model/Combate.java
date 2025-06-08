@@ -421,14 +421,14 @@ public class Combate {
 		{
 			case "Nether":
 			{
-				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 1);
+				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 0.5);
 				clima = "Despejado";
 				break;
 			}
 			case "End":
 			{
 				clima = "Despejado";
-				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 2);
+				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 1);
 				break;
 			}
 		}
@@ -436,12 +436,12 @@ public class Combate {
 		{
 			case "Lluvioso":
 			{
-				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 1);
+				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 0.5);
 				break;
 			}
 			case "Tormentoso":
 			{
-				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 2);
+				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 1);
 				break;
 			}
 		}
@@ -449,14 +449,14 @@ public class Combate {
 		{
 			case "Rocoso":
 			{
-				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 1);
+				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 0.5);
 				prota.setPenalizacionDefensa(prota.getPenalizacionDefensa() + 1);
 				break;
 			}
 			case "Montañoso":
 			{
-				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 2);
-				prota.setPenalizacionDefensa(prota.getPenalizacionDefensa() + 1);
+				prota.setPenalizacionAtaque(prota.getPenalizacionAtaque() + 1);
+				prota.setPenalizacionDefensa(prota.getPenalizacionDefensa() + 1.5);
 				break;
 			}
 		}
@@ -651,6 +651,16 @@ public class Combate {
 				if(enemigo.getStamina() > 0)
 				{
 					enemigo.setStamina(enemigo.getStamina() - 1);
+				}
+				if(enemigo.getVida() < 0 && enemigo.getHasTotem())
+				{
+					enemigo.setVida(enemigo.getVidaMax() / 2);
+					enemigo.setHasTotem(false);
+				}
+				if(prota.getVida() < 0 && prota.getHasTotem())
+				{
+					prota.setVida(prota.getVidaMax() / 2);
+					prota.setHasTotem(false);
 				}
 			}
 			numeroEnemigos--;
