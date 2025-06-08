@@ -23,6 +23,14 @@ public class DaoJugador {
 		return instance;
 	}
 	
+	public static String getRankEstetico() {
+		return rankEstetico;
+	}
+
+	public static void setRankEstetico(String rankEstetico) {
+		DaoJugador.rankEstetico = rankEstetico;
+	}
+	
 	public boolean inicioSesion(String nombre, String contraseña) throws SQLException {
 	    String sql = "SELECT * FROM jugador WHERE nombre = ? AND contraseña = ?";
 	    
@@ -124,7 +132,6 @@ public class DaoJugador {
 
 	    ResultSet rs = ps.executeQuery();
 
-	    ArrayList listPuntuacion = new ArrayList();
 	    int puntuacion = 0;
 	    if (rs.next()) {
 	    	puntuacion = rs.getInt("puntuacion");
@@ -157,15 +164,13 @@ public class DaoJugador {
 	    	}
 	    }
 	    
-	    listPuntuacion.add(puntuacion);
-	    listPuntuacion.add(rankEstetico);
-
 	    rs.close();
 	    ps.close();
 
 	    return puntuacion;
 	}
 	
+
 	public void setPuntuacion(String nombre, int puntuacion) throws SQLException {
 	    String sql = "UPDATE jugador SET puntuacion = ? WHERE nombre = ?";
 	    
@@ -178,11 +183,11 @@ public class DaoJugador {
 	    int update = statement.executeUpdate();
 	    
 	    if (update > 0) {
-	        System.out.println("La puntuacion de " + nombre + " es ahora " + Color.YELLOW_BOLD_BRIGHT + puntuacion + "pts" + Color.RESET);
+	        System.out.println("\nLa puntuacion de " + nombre + " es ahora " + Color.YELLOW_BOLD_BRIGHT + puntuacion + "pts" + Color.RESET);
 	        
 	        if(puntuacion <= 0) {
-	        	
-	        	rankEstetico = Color.BLACK_BOLD_BRIGHT + "ZZZ" + Color.RESET;
+	        	rank = "ZZZ-RANK";
+	        	rankEstetico = Color.BLACK_BOLD_BRIGHT + "ZZZ-RANK" + Color.RESET;
 	        }
 	        else if(puntuacion > 0 && puntuacion <= 250) {
 	        	rank = "C-RANK";
@@ -221,7 +226,7 @@ public class DaoJugador {
 	}
 	
 	public void setRank(String nombre, String rank, String rankEstetico) throws SQLException {
-	    String updateSql = "UPDATE jugadores SET rank = ? WHERE nombre = ?";
+	    String updateSql = "UPDATE jugador SET rank = ? WHERE nombre = ?";
 
 	    PreparedStatement statement = conn.prepareStatement(updateSql);
 	    statement.setString(1, rank);
@@ -230,7 +235,7 @@ public class DaoJugador {
 	    int rowsUpdated = statement.executeUpdate();
 
 	    if (rowsUpdated > 0) {
-	    	System.out.println("Has obtenido el " + rankEstetico);
+	    	System.out.println(Color.WHITE_BOLD_BRIGHT + "HAS OBTENIDO EL " + Color.RESET + rankEstetico + "\n");
 	    } else {
 	        System.out.println("No se encontró el jugador con nombre: " + nombre);
 	    }
@@ -238,5 +243,30 @@ public class DaoJugador {
 	    statement.close();
 	}
 
+	public void leaderboard(String nombreJugador) throws SQLException {
+	    String query = "SELECT nombre, puntuacion, rank FROM jugador ORDER BY puntuacion DESC";
+	    PreparedStatement statement = conn.prepareStatement(query);
+	    ResultSet rs = statement.executeQuery();
+
+	    System.out.println("--------------------------------------------------------");
+	    System.out.printf(Color.WHITE_BOLD_BRIGHT + "%-20s %-15s %-15s%n", "Nombre", "Puntuación", "Rango" + Color.RESET);
+	    System.out.println("--------------------------------------------------------");
+
+	    while (rs.next()) {
+	        String nombre = rs.getString("nombre");
+	        int puntuacion = rs.getInt("puntuacion");
+	        String rank = rs.getString("rank");
+
+	        if (nombre.equalsIgnoreCase(nombreJugador)) {
+	            // Resaltar con asteriscos
+	            System.out.printf(Color.WHITE_BOLD_BRIGHT + "%-20s %-15d %-15s%n", nombre, puntuacion, rank + Color.RESET);
+	        } else {
+	            System.out.printf("%-20s %-15d %-15s%n", nombre, puntuacion, rank);
+	        }
+	    }
+
+	    rs.close();
+	    statement.close();
+	}
 
 }

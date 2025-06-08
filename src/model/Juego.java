@@ -159,7 +159,17 @@ public class Juego {
 		System.out.println("\nGenial, este eres tu\n                      " + Color.YELLOW_BOLD_BRIGHT + nombreJugador.toUpperCase() + Color.RESET);
 		ASCII.printAscii(perfil.getAscii(nombreJugador));
 		
-		System.out.println("Te doy la bienvenida final al mundo de Minecraft,\nde ahora en adelante, ELIJA SU PROPIA AVENTURA\n\n" + Color.WHITE_BOLD_BRIGHT + "[PULSE ENTER PARA CONTINUAR]");
+		do {
+			decision = "";
+			System.out.println("Antes de comenzar " + nombreJugador + Color.WHITE_BOLD_BRIGHT + " ¿Le gustaria ver como van la puntuaciones hasta ahora?\n   1.Si |2.No" + Color.RESET);
+			decision = sc.nextLine();
+			
+			if(decision.equalsIgnoreCase("1")) perfil.leaderboard(nombreJugador);
+			
+		}while(!decision.equals("1") && !decision.equals("2"));
+		
+		
+		System.out.println("\nDe acuerdo,\nLe doy la bienvenida final al mundo de Minecraft,\nde ahora en adelante,"  + Color.WHITE_BOLD_BRIGHT + "ELIJA SU PROPIA AVENTURA\n\n" + "[PULSE ENTER PARA CONTINUAR]");
 		sc.nextLine();
 		
 	}
@@ -214,7 +224,7 @@ public class Juego {
 						{
 							prota = daoPersonajes.getDataProta("Alex");//protagonista elegido- CAMBIARLO CUANDO HAYA DB
 							prota.setVida(prota.getVidaMax());
-							pasiva = "Guerrera maldita por su tribu. Su maldicion la obliga a seguir enfrentando enemigos y la impide usar objetos de cura";
+							pasiva = "Solo puede regenerar vida matando enemigos. Cada vez que derrota a un enemigo, recupera el 10% de su HP";
 							//ESTO METERLO DENTRO DE UNA DB
 //							nombrePersonaje =  "Alex";
 //							vidaMaxPersonaje = 30;
@@ -231,7 +241,7 @@ public class Juego {
 						{
 							prota = daoPersonajes.getDataProta("Chicken Little");//protagonista elegido- CAMBIARLO CUANDO HAYA DB	
 							prota.setVida(prota.getVidaMax());
-							pasiva = "Un pollo fugitivo, buscado por el KFC desde pequeño";
+							pasiva = "Aumenta la probabilidad de huir cuando su HP es menor del 50%. (60% de probabilidad de escape en estas condiciones)";
 							//ESTO METERLO DENTRO DE UNA DB
 //							nombrePersonaje = "Chicken Little";
 //							vidaMaxPersonaje = 15;
@@ -730,6 +740,9 @@ public class Juego {
  	public void finales() throws SQLException {
 		if(prota.getVida() <= 0 && !finalMascotaAlex)
 		{
+			//Linea vacia para que no este tan pegado el texto
+			System.out.println();
+			
 			switch(prota.getNombre())
 			{
 				case "Steve":
@@ -878,8 +891,23 @@ public class Juego {
 			}
 		}
 		
-		perfil.setPuntuacion(nombreJugador, totalPuntuacion);
-		System.out.println("FIN DEL JUEGO");
+		
+		//Comapara la puntacion actual con la anterior para ver si es mayor
+		if(perfil.getPuntuacion(nombreJugador) > totalPuntuacion && perfil.getPuntuacion(nombreJugador) != 0) {
+			System.out.println("Parece que esta partida solo has obtenido " + Color.YELLOW_BOLD_BRIGHT + totalPuntuacion + Color.RESET + " puntos");
+			System.out.println("Esfuerzate mas en la proxima partida para superar tu record de " + Color.YELLOW_BOLD_BRIGHT + perfil.getPuntuacion(nombreJugador) + Color.RESET + " puntos");
+		}else if(perfil.getPuntuacion(nombreJugador) != 0) {
+			perfil.setPuntuacion(nombreJugador, totalPuntuacion);
+		}else {
+			System.out.println(Color.GREEN_BOLD_BRIGHT + "¡¡Felicidades has obtenido tu primera puntuaccion de " + Color.YELLOW_BOLD_BRIGHT + totalPuntuacion + Color.RESET + " puntos no es mucho pero podras mejorarlo!!");
+			perfil.setPuntuacion(nombreJugador, totalPuntuacion);
+		}
+		
+		System.out.println(Color.CYAN_BOLD_BRIGHT + "Asi es como has quedado en el podio:\n" + Color.RESET + Color.BLACK_BACKGROUND + Color.WHITE);
+		perfil.leaderboard(nombreJugador);
+		
+		System.out.println(Color.BLACK_BACKGROUND + Color.WHITE_BOLD_BRIGHT + Color.WHITE_UNDERLINED + "\n\n\nFIN DEL JUEGO" + Color.RESET);
 	}
 			
+ 	
 }

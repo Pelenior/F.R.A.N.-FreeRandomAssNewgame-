@@ -327,7 +327,7 @@ public class Ataque {
 				break;
 			}
 		
-			case "Esquele-Ton":
+			case "Skele-Ton":
 			{
 				danoFinal = 3;
 				System.out.println("El " + user.getNombre() + " comienza a bailar spooky scary skeletons");

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-06-2025 a las 13:02:23
+-- Tiempo de generación: 08-06-2025 a las 20:32:32
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -137,14 +137,14 @@ CREATE TABLE `jugador` (
 --
 
 INSERT INTO `jugador` (`nombre`, `contraseña`, `idAscii`, `Puntuacion`, `Rank`) VALUES
-('', '', 99, 849, 'A-RANK'),
-('Aitana', '1234', NULL, 0, ''),
-('Bombardeen a Diego', 'BombardeenADiego', NULL, 0, ''),
-('fran', 'flan', 99, 0, ''),
-('John', '', 5, 0, ''),
-('lol', 'lol', 3, 0, ''),
-('Luna', '1234', NULL, 0, ''),
-('Null', 'null', 3, 0, ''),
+('', '', 99, -188, 'ZZZ-RANK'),
+('Aitana', '1234', NULL, 158, 'C-RANK'),
+('Bombardeen a Diego', 'BombardeenADiego', NULL, 1393, 'SS-RANK'),
+('fran', 'flan', 99, 978, 'A-RANK'),
+('John', '', 5, 1017, 'S-RANK'),
+('lol', 'lol', 3, -300, 'ZZZ-RANK'),
+('Luna', '1234', NULL, 1616, 'SSS-RANK'),
+('Null', 'null', 3, 0, 'ZZZ-RANK'),
 ('Pelayo', '1234', 11, 1113, 'S-RANK');
 
 -- --------------------------------------------------------
