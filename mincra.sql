@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-06-2025 a las 13:27:42
+-- Tiempo de generación: 08-06-2025 a las 13:02:23
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -128,22 +128,24 @@ CREATE TABLE `jugador` (
   `nombre` varchar(50) NOT NULL,
   `contraseña` varchar(24) NOT NULL,
   `idAscii` int(11) DEFAULT NULL,
-  `Puntuacion` int(11) NOT NULL
+  `Puntuacion` int(11) NOT NULL,
+  `Rank` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `jugador`
 --
 
-INSERT INTO `jugador` (`nombre`, `contraseña`, `idAscii`, `Puntuacion`) VALUES
-('', '', 99, 0),
-('Aitana', '1234', NULL, 0),
-('Bombardeen a Diego', 'BombardeenADiego', NULL, 0),
-('fran', 'flan', 99, 0),
-('lol', 'lol', 3, 0),
-('Luna', '1234', NULL, 0),
-('Null', 'null', 3, 0),
-('Pelayo', '1234', NULL, 0);
+INSERT INTO `jugador` (`nombre`, `contraseña`, `idAscii`, `Puntuacion`, `Rank`) VALUES
+('', '', 99, 849, 'A-RANK'),
+('Aitana', '1234', NULL, 0, ''),
+('Bombardeen a Diego', 'BombardeenADiego', NULL, 0, ''),
+('fran', 'flan', 99, 0, ''),
+('John', '', 5, 0, ''),
+('lol', 'lol', 3, 0, ''),
+('Luna', '1234', NULL, 0, ''),
+('Null', 'null', 3, 0, ''),
+('Pelayo', '1234', 11, 1113, 'S-RANK');
 
 -- --------------------------------------------------------
 

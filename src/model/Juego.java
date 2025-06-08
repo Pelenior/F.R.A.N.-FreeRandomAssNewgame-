@@ -21,9 +21,10 @@ public class Juego {
 	
 	private DaoPersonajes daoPersonajes = new DaoPersonajes();
 	private DaoAtaques daoAtaques = new DaoAtaques();
+	private DaoJugador perfil = new DaoJugador();
 	
-	int puntuacion;
-	int totalPuntuacion;
+	static int puntuacion;
+	static int totalPuntuacion;
 
 	private Random random;
 	private int numeroSalas = 0;
@@ -72,6 +73,14 @@ public class Juego {
 		this.puntuacion = puntuacion;
 	}
 	
+	public int getTotalPuntuacion() {
+		return totalPuntuacion;
+	}
+
+	public void setTotalPuntuacion(int totalPuntuacion) {
+		this.totalPuntuacion = totalPuntuacion;
+	}
+	
 	public void comenzar() throws SQLException
 	{
 		contrasena(sc);
@@ -85,7 +94,6 @@ public class Juego {
 	public void contrasena(Scanner sc) throws SQLException{
 		String decision;
 		String contrasena = "";
-		DaoJugador perfil = new DaoJugador();
 		int idAscii = 99;
 		boolean AsciiBien = false;
 		
@@ -127,7 +135,7 @@ public class Juego {
 						}
 					}while(AsciiBien == false);
 							
-					perfil.guardarJugador(nombreJugador, contrasena, idAscii, 0);
+					perfil.guardarJugador(nombreJugador, contrasena, idAscii, 0, "");
 					System.out.println("De acuerdo " + nombreJugador + " su perfil se ha guardado correctamente\nPor seguridad inicie sesion para saber que todo esta correcto");
 				
 				}		
@@ -463,7 +471,7 @@ public class Juego {
 	
 	public void calculoPuntuacion(int randomVidaAtaque) {
 	
-		 puntuacion = (int) (((prota.getNumEnemigos() * prota.getVida()) + (prota.getSuerte() * prota.getMonedas())) - (combate.getTurnos() * 10));
+		 puntuacion = (int) (((prota.getNumEnemigos() * prota.getVida()) + (randomVidaAtaque * 2) + (prota.getSuerte() * prota.getMonedas())) - (combate.getTurnos() * 2));
 		 totalPuntuacion = totalPuntuacion + puntuacion;
 	}
 	
@@ -496,6 +504,9 @@ public class Juego {
 			}
 			
 			System.out.println(nombreJugador + " ha conseguido " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " puntos en combate usando a " + prota.getNombre());
+			if (puntuacion <= 0) {
+				System.out.println(nombreJugador + " ha perdido " + Color.BLACK_BOLD_BRIGHT + puntuacion + Color.RESET + " puntos en combate por su " + Color.BLACK_BOLD_BRIGHT +  "terrible" + Color.RESET + " actuacion usando a " + prota.getNombre());
+			}
 			
 			int randomMonedas = random.nextInt(1, 11);
 			randomMonedas += prota.getSuerte() /2;
@@ -716,7 +727,7 @@ public class Juego {
 		
 	}
 	//¿finales?
- 	public void finales() {
+ 	public void finales() throws SQLException {
 		if(prota.getVida() <= 0 && !finalMascotaAlex)
 		{
 			switch(prota.getNombre())
@@ -727,10 +738,14 @@ public class Juego {
 					if(!prota.getNiebla())
 					{
 						System.out.println("Nunca consiguió vengar a Niebla...");
+						
+						totalPuntuacion -= 300;
 					}
 					else
 					{
 						System.out.println("Nunca consiguió derrotar el dragón...");
+						
+						totalPuntuacion -= 300;
 					}
 					
 					break;
@@ -739,12 +754,16 @@ public class Juego {
 				{
 					System.out.println("Aquí acaba la historia de " + prota.getNombre() + "...");
 					System.out.println("Nunca consiguió curar su maldición...");
+					
+					totalPuntuacion -= 300;
 					break;
 				}
 				case "Chicken Little":
 				{
 					System.out.println("Aquí acaba la historia de " + prota.getNombre() + "...");
 					System.out.println("El KFC lo convertirá en pollo frito...");
+					
+					totalPuntuacion -= 300;
 				}
 			}
 		}
@@ -757,25 +776,33 @@ public class Juego {
 					if(finalKillDragonSteve)
 					{
 						System.out.println(prota.getNombre() + " asesta el golpe de gracia contra el Dragón...");
-						System.out.println("El Dragón case debilitado...");
+						System.out.println("El Dragón cae debilitado...");
 						System.out.println(prota.getNombre() + " piensa si todo esto mereció la pena...");
+						
+						totalPuntuacion += 300;
 					}
 					else if(finalKillDragonPerroSteve)
 					{
 						System.out.println("Niebla y " + prota.getNombre() + " asestan el golpe de gracia juntos contra el Dragón...");
 						System.out.println("El Dragón cae debilitado...");
 						System.out.println("Niebla y " + prota.getNombre() + " dan un salto en el aire celebrando su victoria");
+						
+						totalPuntuacion += 600;
 					}
 					else if(finalHuirPerroSteve)
 					{
 						System.out.println("Tras un rato pensando, " + prota.getNombre() + " decide que es mejor quedarse con Niebla que pelear al Dragón");
 						System.out.println("Niebla y " + prota.getNombre() + " caminan hacia una aldea cercana donde reharán su vida");
+						
+						totalPuntuacion += 300;
 					}
 					else if(finalHuirSteve)
 					{
 						System.out.println(prota.getNombre() + " está cara a cara contra el Dragón...");
 						System.out.println("Pero " + prota.getNombre() + " no quiere pelear, y el Dragón es consciente de esto");
 						System.out.println("El Dragón le perdona la vida a " + prota.getNombre() + " y vuelve a su cueva para descansar mil años más");
+						
+						totalPuntuacion += 100;
 					}
 					break;
 				}
@@ -786,6 +813,8 @@ public class Juego {
 						System.out.println("Sans no es rival contra la sed de sangre de " + prota.getNombre());
 						System.out.println(prota.getNombre() + " asesina a Sans sin ningún problema");
 						System.out.println("Tras toda la muerte provocada por " + prota.getNombre() + ", su maldición se va desvaneciendo, quedando liberada");
+						
+						totalPuntuacion += 300;
 					}
 					else if(finalKillSansNoGenocideAlex)
 					{
@@ -794,11 +823,15 @@ public class Juego {
 						System.out.println(prota.getNombre() + " no se siente diferente, su sed de sangre sigue existiendo...");
 						System.out.println("Sabes perfectamente lo que está pensando; \"Debí haber matado a esos enemigos en vez de huir\"...");
 						System.out.println(prota.getNombre() + " seguirá trayendo la muerte a este mundo");
+						
+						totalPuntuacion += 100;
 					}
 					else if(finalLigarAlex)
 					{
 						System.out.println(prota.getNombre() + " decide quedarse con la aldeana y se da cuenta de que su maldición se está disipando...");
 						System.out.println("Vivan las novias!");
+						
+						totalPuntuacion += 600;
 					}
 					else if(finalMascotaAlex)
 					{
@@ -807,6 +840,8 @@ public class Juego {
 						System.out.println("Tras este evento, " + prota.getNombre() + " se da cuenta de que Steve la ha dejado una manzana dorada");
 						System.out.println(prota.getNombre() + " se come la manzana y... ¡su maldición deja de surtir efecto!");
 						System.out.println(prota.getNombre() + " es libre de la maldición!");
+						
+						totalPuntuacion += 600;
 					}
 					break;
 				}
@@ -815,26 +850,35 @@ public class Juego {
 					if(finalDrogasChickenLittle)
 					{
 						System.out.println("No hagan drogas!");
+						
+						totalPuntuacion += (((((999999999/999999999 * 999999999/999999999) + (666666666/666666666 * 666666666/666666666))/2) - 2) + 600);
 					}
 					else if(finalBitcoinChickenLittle)
 					{
 						System.out.println(prota.getNombre() + " se da cuentas de todas las semillas que tiene...");
 						System.out.println("Con esta información, " + prota.getNombre() + " decide crear su propia moneda: \"Chicoin Little\"");
 						System.out.println(prota.getNombre() + " se retira de su aventura y se vuelve millonario");
+						
+						totalPuntuacion += 600;
 					}
 					else if(finalLamboChickenLittle)
 					{
 						System.out.println(prota.getNombre() + " se sube a su " + Color.PURPLE + "Lambo" + Color.RESET + " y sale pitando!");
+						
+						totalPuntuacion += 600;
 					}
 					else if(finalKillCoronel)
 					{
 						System.out.println(prota.getNombre() + " consigue derrotar al Coronel Sanders y es libre!");
 						System.out.println("Todos los trabajadores del KFC hacen a " + prota.getNombre() + " el CEO");
+						
+						totalPuntuacion += 300;
 					}
 				}
 			}
 		}
 		
+		perfil.setPuntuacion(nombreJugador, totalPuntuacion);
 		System.out.println("FIN DEL JUEGO");
 	}
 			

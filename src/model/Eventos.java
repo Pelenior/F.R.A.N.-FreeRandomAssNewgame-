@@ -9,10 +9,15 @@ public class Eventos {
 	private String [] evento = {"Bruja", "Maldición", "Trampa", "Juan", "Puzzle"};
 	private ArrayList<String> eventosLista = new ArrayList<String>();
 	
+	private int puntuacion;
+	
 	//función selecionar eventos
 	//poner metodo público, que escoje un evento aleatorio y llama la función de ese evento
 	 public void elegirEvento (Protagonista prota) throws SQLException {
-		for (String eventoString : evento) {
+		
+		 puntuacion = 0;
+		 
+		 for (String eventoString : evento) {
 			eventosLista.add(eventoString);
 		}
 		
@@ -139,6 +144,7 @@ public class Eventos {
 //						efecto = "Vida";
 //						cantidad = "5";
 						prota.setVida(prota.getVida()+5);
+						puntuacion = 30;
 					break;
 					}
 					case 1: {
@@ -146,6 +152,7 @@ public class Eventos {
 //						efecto = "Suerte";
 //						cantidad = "3";
 						prota.setSuerte(prota.getSuerte()+3);
+						puntuacion = 30;
 					break;
 					}
 					case 2: {
@@ -153,6 +160,7 @@ public class Eventos {
 //						efecto = "Fuerza";
 //						cantidad = "3";
 						prota.setFuerza(prota.getFuerza()+3);
+						puntuacion = 30;
 					break;
 					}
 					case 3: {
@@ -160,6 +168,7 @@ public class Eventos {
 //						efecto = "VidaMax";
 //						cantidad = "-3";
 						prota.setVidaMax(prota.getVidaMax()-3);
+						puntuacion = -30;
 					break;
 					}
 					case 4: {
@@ -167,6 +176,7 @@ public class Eventos {
 //						efecto = "Velocidad";
 //						cantidad = "-3";
 						prota.setVelocidad(prota.getVelocidad()-3);
+						puntuacion = -30;
 					break;
 					}
 					case 5: {
@@ -174,14 +184,19 @@ public class Eventos {
 //						efecto = "Fuerza";
 //						cantidad = "-2";
 						prota.setFuerza(prota.getFuerza()-2);
+						puntuacion = -30;
 					break;
 					}
 				}
 				
 				System.out.println("");
 				System.out.println("La bruja se rie al verte tomar la pocion y se marcha lentamente");
-				System.out.println("Confundido por la situacion decides continuar tu aventura.");
+				if (puntuacion <= 0) {
+					System.out.println("Confundido por la situacion decides continuar tu aventura, perdiendo " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
+				}else System.out.println("Confundido por la situacion decides continuar tu aventura, ganando " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
 				
+				System.out.println("Funciona? " + Juego.totalPuntuacion);
+				Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
 				//// FIN DEL EVENTO ////
 			}
 			if(decision.equalsIgnoreCase("No") || decision.equalsIgnoreCase("2")) {
@@ -254,6 +269,7 @@ public class Eventos {
 				if(totalMonedasConseguidas > 25)
 				{
 					System.out.println("¡Vaya suerte!");
+					puntuacion = 50;
 				}
 				
 				System.out.println("Dentro del cofre había un total de " + Juego.monedas(prota.getNombre(), totalMonedasConseguidas) + Color.YELLOW +
@@ -262,6 +278,7 @@ public class Eventos {
 				if(totalMonedasConseguidas <= 5)
 				{
 					System.out.println("Un desperdicio de tiempo.");
+					puntuacion = -20;
 				}
 				
 				
@@ -279,6 +296,13 @@ public class Eventos {
 				prota.setBadOmen(true);
 				
 				System.out.println("Asustado te marchas dejando la masacre atras");
+				
+				if (puntuacion <= 0) {
+					System.out.println("Asustado te marchas dejando la masacre atras, perdiendo " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
+				}else System.out.println("Asustado te marchas dejando la masacre atras, ganando " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
+				
+//				System.out.println("Funciona? " + Juego.totalPuntuacion);
+				Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
 				//// FIN DEL PUZZLE ////
 			}
 			else
@@ -313,20 +337,24 @@ public class Eventos {
 				
 				if(prota.getVelocidad() + velocidadExtra >= 8) {
 					System.out.println("Rapidamente reaccionas al sonido del mecanismo y te apartas sin recibir daño");
+					puntuacion = 50;
 				}
 				else if(prota.getVelocidad() + velocidadExtra >= 5 && prota.getVelocidad() < 8) {
 					dano = random.nextInt(3,6);
 					System.out.println("Consigues esquivar la mayoria de las flechas recibiendo " + Color.RED_BRIGHT + dano + 
 							Color.RESET + " de daño");
+					puntuacion = -10;
 					}
 				else if(prota.getVelocidad() + velocidadExtra < 5 && prota.getVelocidad() >= 2) {
 					dano = random.nextInt(5,9);
 					System.out.println("Consigues esquivar las flechas parcialmente recibiendo recibiendo " + Color.RED_BRIGHT + dano +
 							Color.RESET + " de daño");
+					puntuacion = -20;
 					}
 				else {
 					dano = random.nextInt(8,11);
 					System.out.println("Recibes las flechas de lleno " + Color.RED_BRIGHT + dano + Color.RESET + " de daño");
+					puntuacion = -30;
 				}
 				
 				if(prota.getVelocidad() + velocidadExtra >= 8)
@@ -352,18 +380,22 @@ public class Eventos {
 				
 				if(prota.getVelocidad() + velocidadExtra >= 8) {
 					System.out.println("Rapidamente reaccionas al sonido de los atacantes y sales corriendo");
+					puntuacion = 50;
 				}
 				else if(prota.getVelocidad() + velocidadExtra >= 5) {
 					monedasPerdidas = random.nextInt(3,6);
 					System.out.println("Bloqueas gran parte de sus ataques pero consiguen robarte " + Color.RED_BRIGHT + prota.getMonedas() + Color.RESET + (prota.getNombre().equals("Chicken Little") ? " semillas" : " esmeraldas"));
-					}
+					puntuacion = -10;
+				}
 				else if(prota.getVelocidad() + velocidadExtra < 5 && prota.getVelocidad() + velocidadExtra >= 2) {
 					monedasPerdidas = random.nextInt(5,9);
 					System.out.println("Esquivas parte de sus ataques pero consiguen robarte " + Color.RED_BRIGHT + prota.getMonedas() + Color.RESET + (prota.getNombre().equals("Chicken Little") ? " semillas" : " esmeraldas"));
-					}
+					puntuacion = -20;
+				}
 				else {
 					monedasPerdidas = random.nextInt(8,11);
 					System.out.println("Los asaltantes te pillan desprevenido llevandose una gran parte de tu tesoro, pierdes " + Color.RED_BRIGHT + prota.getMonedas() + Color.RESET + (prota.getNombre().equals("Chicken Little") ? " semillas" : " esmeraldas"));
+					puntuacion = -30;
 				}
 				
 				if(prota.getVelocidad() + velocidadExtra >= 8)
@@ -387,6 +419,13 @@ public class Eventos {
 					}
 				}
 			}
+			
+//			System.out.println("Funciona? " + Juego.totalPuntuacion);
+			Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
+			
+			if (puntuacion <= 0) {
+				System.out.println("Pierdes " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " puntos por la experiencia");
+			}else System.out.println("Ganas " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " puntos por la experiencia");
 			
 			return;
 		}
@@ -688,19 +727,29 @@ public class Eventos {
 				
 				System.out.println(Color.WHITE_BOLD_BRIGHT +"\"Perfecto ahora mismo realizo el encatamiento de " + Color.CYAN_UNDERLINED + Color.CYAN_BOLD_BRIGHT + finalEncantamiento + " " + finalEncantamientoNivel + Color.RESET + " espero que difrutes de tu eleccion\"-dijo alegremente" + Color.RESET);
 				System.out.println("");
-				System.out.println(Color.WHITE_BOLD_BRIGHT +"\"Espero que disfrutes de tu aventura buen viaje\"-dijo mintras te despedia levantando una pezuña" + Color.RESET);
+				System.out.println(Color.WHITE_BOLD_BRIGHT +"\"Espero que disfrutes de tu aventura buen viaje\"-dijo mientras te despedia levantando una pezuña" + Color.RESET);
 				
+				puntuacion = 100;
+//				System.out.println("Funciona? " + Juego.totalPuntuacion);
+				Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
+				System.out.println("\nReconfortado por la experiencia obtienes " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " puntos");
 			}
 			else {
 				System.out.println("Decides no darle mas importancia y pasas de largo.");
 				System.out.println("");
 				System.out.println("En poco tiempo ya has dejado atras el campamento aunque jurarias poder escucha sonidos de caballo en la distancia.");
 				
+				puntuacion = -100;
+//				System.out.println("Funciona? " + Juego.totalPuntuacion);
+				Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
+				System.out.println("\nLa sensacion de arrepentimiento te hace perder " + Color.BLACK_BOLD_BRIGHT + puntuacion + Color.RESET + " puntos");
+				
 				//// LA LISTA ESTA VACIA ASI QUE DEVUELVE UNA VACIA ////
 			}
 			
 			return;
 		}
+		
 
 		private void eventoPerro(Protagonista prota, Random random, Scanner sc) {
 			String decision;
@@ -807,6 +856,7 @@ public class Eventos {
 						System.out.println("Gracias a " + Color.GREEN_BOLD_BRIGHT + "Gonzalo " + nombresGonzalo[numerin] + Color.RESET +  "ahora te sientes mas poderoso aunque tambien la gran pena de no poder ver mas a Niebla");
 						
 						prota.setFuerza(prota.getFuerza()+3);
+						puntuacion = 200;
 						
 					} else System.out.println("\"Lamentablemente, no puedo conceder ese deseo en este momento. Sin embargo, siempre estaré aquí para ayudarte en lo que necesites. ¡Sigue adelante!\"-dijo alegre");
 					break;
@@ -822,6 +872,7 @@ public class Eventos {
 						System.out.println("\"¡Enhorabuena! Has obtenido " + Juego.monedas(prota.getNombre(), 30) + Color.YELLOW + (prota.getNombre().equals("Chicken Little") ? " semillas" : " esmeraldas") + Color.RESET + ". ¡Tu tesoro crece y tu aventura continúa!\"-dijo entusiasmado");
 						System.out.println("Gracias a " + Color.GREEN_BOLD_BRIGHT + "Gonzalo " + nombresGonzalo[numerin] + Color.RESET +  "ahora te sientes mas rico aunque tambien la gran pena de no poder ver mas a Niebla");
 						
+						puntuacion = 200;
 					} else System.out.println("\"Lamentablemente, no puedo conceder ese deseo en este momento. Sin embargo, siempre estaré aquí para ayudarte en lo que necesites. ¡Sigue adelante!\"-dijo alegre");
 					break;
 				}
@@ -836,6 +887,7 @@ public class Eventos {
 						System.out.println("\"¡Excelente! Has obtenido 10 puntos de vida máxima. ¡Tu fuerza y resistencia aumentan! ¡Sigue avanzando con más energía!\"-dijo entusiasmado");
 						System.out.println("Gracias a " + Color.GREEN_BOLD_BRIGHT + "Gonzalo " + nombresGonzalo[numerin] + Color.RESET +  "ahora te sientes mas resisitente, aunque tambien la gran pena de no poder ver mas a Niebla");
 						
+						puntuacion = 200;
 					} else System.out.println("\"Lamentablemente, no puedo conceder ese deseo en este momento. Sin embargo, siempre estaré aquí para ayudarte en lo que necesites. ¡Sigue adelante!\"-dijo alegre");
 					break;
 				}
@@ -851,6 +903,10 @@ public class Eventos {
 				numerin = random.nextInt(nombresGonzalo.length);
 				
 				System.out.println(Color.GREEN_BOLD_BRIGHT + "Gonzalo " + nombresGonzalo[numerin] + Color.RESET + " se esfuma ante ti");
+				
+				if (puntuacion >= 0) {
+					System.out.println("\nAlegre decides continuar tu aventura, ganando " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
+				}
 				
 			}
 			
@@ -907,6 +963,7 @@ public class Eventos {
 					System.out.println("Te comes la Comida sospechosa");
 					System.out.println("Parece que te cuesta digerirlo \r\n" + "  -5 de vida \r\n" 
 									   +  "   +5 de vida \r\n" + "Aunque te da una indigestion y pierdes -5 de vida");
+					puntuacion = -69;
 					}
 					else
 					{
@@ -930,6 +987,7 @@ public class Eventos {
 					System.out.println("Te pones la armadura encima y de alguna forma esta parece hacerte mas debil");
 					System.out.println("   -2 de armadura");
 					
+					puntuacion = -69;
 					}else
 					{
 						if(objetosAComprar <= 0)
@@ -953,6 +1011,7 @@ public class Eventos {
 					System.out.println("Sin dudarlo te subes al lamborgini, sintiendote mas rapido que nadie");
 					System.out.println("   +4 de velocidad");
 					
+					puntuacion = 200;
 					}else
 					{
 						if(objetosAComprar <= 0)
@@ -975,6 +1034,7 @@ public class Eventos {
 					System.out.println("   +99 de fuerza \r\n" + "   -100 de fuerza");
 					System.out.println("");
 					
+					puntuacion = -69;
 					}else 
 					{
 						if(objetosAComprar <= 0)
@@ -991,9 +1051,17 @@ public class Eventos {
 				case "5","Marcharte":{
 					System.out.println("Te marchas sin mirar atrás");
 					salir = true;
+					
 					break;
 				}
 			}
+				System.out.println("Funciona? " + Juego.totalPuntuacion);
+				Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
+				
+				if (puntuacion <= 0) {
+					System.out.println("Confundido por la situacion decides continuar tu aventura, perdiendo " + Color.BLACK_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
+				}else System.out.println("Con tu MOTHERFUCKING LAMBORGINI te sientes imparable ganando" + Color.YELLOW_BOLD_BRIGHT + "∞" + Color.RESET + " puntos (O tal vez " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + ") por la experiencia");
+				
 			}
 				
 			return;
@@ -1036,10 +1104,16 @@ public class Eventos {
 				System.out.println(Color.YELLOW + "Defensa: "  + Color.GREEN_BRIGHT +  prota.getDefensa()/0.69);
 				System.out.println(Color.CYAN + "Fuerza: " + Color.PURPLE + prota.getFuerza()/0.69);
 				System.out.println(Color.RED_BRIGHT + "Velocidad: " + Color.BLUE + prota.getVelocidad()/0.69);
+				System.out.println("!PUNTUACION HA AUMENTADO A " + Color.YELLOW_BOLD_BRIGHT + "9999999999" + Color.RED_BOLD + "9" + Color.YELLOW_BOLD_BRIGHT + "99999999999999999999¡");
 				System.out.println(prota.getNombre() + " se encuentra a Barbie Playera y a Buzz Lightyear, los cuales estaban tomandose un martini juntos en la playa");
 				System.out.println("Pronto después llega Freddy Fazbear y se une a la fiesta");
 				System.out.println("Sin embargo, " + prota.getNombre() + " no se encuentra muy bien...");
-				System.out.println(prota.getNombre() + " se desmaya en frente de Buzz Lightyear Barbie Playera y Freddy Fazbear!");
+				System.out.println(prota.getNombre() + " se desmaya en frente de" + Color.GREEN_BOLD_BRIGHT + "Buzz Lightyear, " + Color.PURPLE_BOLD_BRIGHT + "Barbie Playera " + Color.RESET + "y" + Color.YELLOW_BOLD + "Freddy Fazbear!" + Color.RESET);
+				
+				puntuacion = 1000;
+				System.out.println("Funciona? " + Juego.totalPuntuacion);
+				Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
+				
 				Juego.gameOver = true;
 				Juego.finalDrogasChickenLittle = true;
 			}			
@@ -1495,10 +1569,21 @@ public class Eventos {
 					System.out.println("");
 					prota.setSuerte(prota.getSuerte()+3);
 					System.out.println("Te sientes afortunado... +3 de " + Color.YELLOW + "suerte" + Color.RESET + "!");
+					
+					puntuacion = 200;
+					System.out.println("Funciona? " + Juego.totalPuntuacion);
+					Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
+					System.out.println("Complacido con el resultado, ganas " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
+					
 				}
 				if(derrota == 3) {
 					System.out.println("\"Desaparece de mi vista, aburrido infeliz\"-dice claramente decepcionado");
 					System.out.println("");
+					
+					puntuacion = -50;
+					System.out.println("Funciona? " + Juego.totalPuntuacion);
+					Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
+					System.out.println("Avergonzado con el resultado, pierdes " + Color.BLACK_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
 				}
 				
 			}
@@ -1608,12 +1693,22 @@ public class Eventos {
 				prota.setMonedas(prota.getMonedas()+15);
 //				finalArray[0][0] = "Monedas";
 //				finalArray[0][1] = "15";
+				
+				puntuacion = 200;
+//				System.out.println("Funciona? " + Juego.totalPuntuacion);
+				Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
+				System.out.println("Complacido con el resultado, ganas " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
 			
 			}
 			
 			if(turnos == 0 && aciertos != 4) {
 				System.out.println("Las luces se apagan repetinamente al acabarse tus turnos restantes.");
 				System.out.println("Entristecido te marchas con las manos vacias.");
+				
+				puntuacion = -50;
+//				System.out.println("Funciona? " + Juego.totalPuntuacion);
+				Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
+				System.out.println("Frustrado con el resultado, pierdes " + Color.BLACK_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
 			}
 		}
 		System.out.println("");
@@ -1702,6 +1797,11 @@ public class Eventos {
 					System.out.println("Esta experiencia expande tus conocimientos ganando " + Color.YELLOW_BRIGHT + "2 de velocidad" + Color.RESET);
 					
 					prota.setVelocidad(prota.getVelocidad()+2);
+					
+					puntuacion = 200;
+//					System.out.println("Funciona? " + Juego.totalPuntuacion);
+					Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
+					System.out.println("Complacido con el resultado, ganas " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
 				}
 				if(turnos == 0 && acierto != true) {
 					
@@ -1710,6 +1810,11 @@ public class Eventos {
 					System.out.println("");
 					
 					prota.setMonedas(prota.getMonedas()-10);
+					
+					puntuacion = -50;
+//					System.out.println("Funciona? " + Juego.totalPuntuacion);
+					Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
+					System.out.println("Confundido con el resultado, pierdes " + Color.BLACK_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
 				}
 			}
 			
@@ -1765,25 +1870,7 @@ public class Eventos {
 			//// BUCLE DEL PUZZLE ////
 			for (int i = 0; i < 5; i++)
 			{
-				System.out.println(Color.PURPLE_BRIGHT + "                                                                                                    \r\n"
-						+ "                              ▓▓▓▓▓▓                             ▓▓▓▓▓                              \r\n"
-						+ "                              ▓▓▓▓▓▓                             ▓▓▓▓▓                              \r\n"
-						+ "               ▓▓▓▓▓          ▓▓▓▓▓▓▓▓▓▓▓                   ▓▓▓▓▓▓▓▓▓▓          ▓▓▓▓▓▓              \r\n"
-						+ "               ▓▓▓▓▓          ▓▓▓▓▓▓▓▓▓▓▓                   ▓▓▓▓▓▓▓▓▓▓          ▓▓▓▓▓▓              \r\n"
-						+ "               ▓▓▓▓▓▓▓▓▓▓          ▓▓▓▓▓▓▓▓▓▓▓         ▓▓▓▓▓▓▓▓▓▓          ▓▓▓▓▓▓▓▓▓▓▓              \r\n"
-						+ "               ▓▓▓▓▓▓▓▓▓▓          ▓▓▓▓▓▓▓▓▓▓▓         ▓▓▓▓▓▓▓▓▓▓          ▓▓▓▓▓▓▓▓▓▓▓              \r\n"
-						+ "                    ▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓▓▓▓▓▓▓▓▓                    \r\n"
-						+ "                    ▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓▓▓▓▓▓▓▓▓                    \r\n"
-						+ "                         ▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓▓▓▓                         \r\n"
-						+ "                         ▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓▓▓▓                         \r\n"
-						+ "                         ▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓▓▓▓                         \r\n"
-						+ "               ▓▓▓▓▓          " + Color.BLACK + "█████▒" + Color.PURPLE_BRIGHT + "░░░░░░░░░" + Color.BLACK + "▒▓▓▓▓▓▓▓▓▓" + Color.PURPLE_BRIGHT + "░░░░░░░░░░" + Color.BLACK + "▓████" + Color.PURPLE_BRIGHT + "          ▓▓▓▓▓▓              \r\n"
-						+ "               ▓▓▓▓▓          " + Color.BLACK + "█████▒" + Color.PURPLE_BRIGHT + "░░░░░░░░░" + Color.BLACK + "▒▓▓▓▓▓▓▓▓▓" + Color.PURPLE_BRIGHT + "░░░░░░░░░░" + Color.BLACK + "▓████" + Color.PURPLE_BRIGHT + "          ▓▓▓▓▓▓              \r\n"
-						+ "               ▓▓▓▓▓▓▓▓▓▓     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░     ▓▓▓▓▓▓▓▓▓▓▓              \r\n"
-						+ "               ▓▓▓▓▓▓▓▓▓▓     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░     ▓▓▓▓▓▓▓▓▓▓▓              \r\n"
-						+ "                    ▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓                   \r\n"
-						+ "                    ▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓                   \r\n"
-						+ "                                                                                                    \r\n" + Color.RESET);
+				ASCII.printAscii(11);
 				
 				//// SELECCION DE PREGUNTAS ////
 				String[][] PreguntasRespuestas = { {"               ¿Cuantos turnos tardara un creeper en explotar, en una situacion normal?", "3"}, 
@@ -1887,12 +1974,24 @@ public class Eventos {
 			}
 			//// VICTORIA ////
 			if(aciertos >= 3) {
-				if(errores > 0) {System.out.println("\"Felicidades viajero has logrado pasar la prueba con " + errores + " errores\"-dijo alegre");}
+				if(errores > 0) {
+					System.out.println("\"Felicidades viajero has logrado pasar la prueba con " + errores + " errores\"-dijo alegre");
+					
+					puntuacion = 100;
+//					System.out.println("Funciona? " + Juego.totalPuntuacion);
+					Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
+					System.out.println("Complacido con el resultado, ganas " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
+				}
 				if(errores == 0) {
 					System.out.println("\"Felicidades viajero has logrado pasar la prueba sin cometer ningun error como recompensa te dare parte de mi poder\"-dijo el ajolote entusiasmado \r\n");
 					System.out.println("Te sientes mas fuerte, tu vida maxima aumenta 10 puntos");
 					
 					prota.setVidaMax(prota.getVidaMax()+10);
+					
+					puntuacion = 300;
+//					System.out.println("Funciona? " + Juego.totalPuntuacion);
+					Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
+					System.out.println("Extremadamente complacido con el resultado, ganas " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
 				}
 			}
 			
@@ -1903,12 +2002,22 @@ public class Eventos {
 					System.out.println("Te sientes mas debil, pierdes 5 de vida maxima");
 					
 					prota.setVidaMax(prota.getVidaMax()-5);
+					
+					puntuacion = -50;
+//					System.out.println("Funciona? " + Juego.totalPuntuacion);
+					Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
+					System.out.println("Avergonzado con el resultado, ganas " + Color.BLACK_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
 				}
 				if(aciertos == 0) {
 					System.out.println("\"Por lo que veo ni siquiera lo has intentado, vaya perdida de tiempo, continua con tu aventura desgraciado\"-dijo el ajolote completamente decepcionado \r\n");
 					System.out.println("Humillado sientes como parte de tu fuerza escapa de tu cuerpo, pierdes 10 de vida maxima");
 					
 					prota.setVidaMax(prota.getVidaMax()-10);
+					
+					puntuacion = -150;
+//					System.out.println("Funciona? " + Juego.totalPuntuacion);
+					Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
+					System.out.println("Pierdes " + Color.BLACK_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
 				}
 			}	
 			
@@ -2003,6 +2112,12 @@ public class Eventos {
 						System.out.println("\"Suerte con tu aventura joven\"-dijo aburrido");
 						fin = true;
 						
+						puntuacion = 50;
+//						System.out.println("Funciona? " + Juego.totalPuntuacion);
+						Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
+						System.out.println("Ganas " + Color.YELLOW_BOLD + puntuacion + Color.RESET + " por la experiencia");
+						
+						break;	
 					}
 					case 6,7: {
 						System.out.println("\"Bueno no es un 10 pero me hace feliz que lo disfrutes\"-dijo sonriente \r\n");
@@ -2011,6 +2126,12 @@ public class Eventos {
 						System.out.println("Te sientes complacido por estas palabras, tu suerte aumenta en 2 \r\n");
 						
 						prota.setSuerte(prota.getSuerte()+2);
+						
+						puntuacion = 100;
+//						System.out.println("Funciona? " + Juego.totalPuntuacion);
+						Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
+						System.out.println("Ganas " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
+						
 						fin = true;
 						break;
 					}
@@ -2022,12 +2143,17 @@ public class Eventos {
 						
 						prota.setSuerte(prota.getSuerte()+2);
 						prota.setVidaMax(prota.getVidaMax()+5);
+						
+						puntuacion = 500;
+//						System.out.println("Funciona? " + Juego.totalPuntuacion);
+						Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
+						System.out.println("Ganas " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
 						fin = true;
 					}
 				}
 				
-				if(opinionElegida > 5) { System.out.println("Continuas con tu aventura despues de este gratificante evento, dejando atras la roca del anciano"); }
-				if(opinionElegida == 5) { System.out.println("Continuas con tu aventura despues de este extraño evento, dejando atras la roca del anciano"); }
+				if(opinionElegida > 5) { System.out.println("\nContinuas con tu aventura despues de este gratificante evento, dejando atras la roca del anciano"); }
+				if(opinionElegida == 5) { System.out.println("\nContinuas con tu aventura despues de este extraño evento, dejando atras la roca del anciano"); }
 					
 				}
 			}
