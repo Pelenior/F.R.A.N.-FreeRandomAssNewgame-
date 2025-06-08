@@ -1,0 +1,76 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="27.0.8">
+  <diagram name="Página-1" id="jvC6yrzVurQszkyvej4h">
+    <mxGraphModel dx="1042" dy="535" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Me7bGf9GO4sqT7h7glh1-3" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="340" y="40" width="160" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="Me7bGf9GO4sqT7h7glh1-4" value="" style="group" parent="Me7bGf9GO4sqT7h7glh1-3" vertex="1" connectable="0">
+          <mxGeometry width="160" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="Me7bGf9GO4sqT7h7glh1-1" value="&lt;div&gt;String nombre&lt;/div&gt;&lt;div&gt;int vidaMax&lt;/div&gt;&lt;div&gt;int vida&lt;/div&gt;&lt;div&gt;int defensa&lt;/div&gt;&lt;div&gt;int fuerza&lt;/div&gt;&lt;div&gt;int velocidad&lt;/div&gt;&lt;div&gt;ListaAtaques ataques&lt;/div&gt;&lt;div&gt;atacar() (abstracto)&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="Me7bGf9GO4sqT7h7glh1-4" vertex="1">
+          <mxGeometry y="30" width="159.16" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="Me7bGf9GO4sqT7h7glh1-2" value="Personaje (abstract)" style="rounded=0;whiteSpace=wrap;html=1;" parent="Me7bGf9GO4sqT7h7glh1-4" vertex="1">
+          <mxGeometry x="0.837696335078534" width="159.16230366492147" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Me7bGf9GO4sqT7h7glh1-5" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="170" y="260" width="230" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="Me7bGf9GO4sqT7h7glh1-6" value="" style="group" parent="Me7bGf9GO4sqT7h7glh1-5" vertex="1" connectable="0">
+          <mxGeometry width="230" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="Me7bGf9GO4sqT7h7glh1-7" value="&lt;div&gt;ArrayList objetos&lt;/div&gt;&lt;div&gt;atacar() (hereda de Personaje)&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="Me7bGf9GO4sqT7h7glh1-6" vertex="1">
+          <mxGeometry y="30" width="228.79" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Me7bGf9GO4sqT7h7glh1-8" value="Protagonista (hereda de Personaje)" style="rounded=0;whiteSpace=wrap;html=1;" parent="Me7bGf9GO4sqT7h7glh1-6" vertex="1">
+          <mxGeometry x="1.2041884816753927" width="228.7958115183246" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Me7bGf9GO4sqT7h7glh1-9" value="&lt;div&gt;boolean isBoss&lt;/div&gt;&lt;div&gt;boolean isRaid&lt;/div&gt;&lt;div&gt;atacar() (hereda de Personaje)&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="440" y="290" width="228.79" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Me7bGf9GO4sqT7h7glh1-10" value="Enemigo (hereda de Personaje)" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="441.2041884816754" y="260" width="228.7958115183246" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Me7bGf9GO4sqT7h7glh1-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="Me7bGf9GO4sqT7h7glh1-1" target="Me7bGf9GO4sqT7h7glh1-8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Me7bGf9GO4sqT7h7glh1-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="Me7bGf9GO4sqT7h7glh1-1" target="Me7bGf9GO4sqT7h7glh1-10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Me7bGf9GO4sqT7h7glh1-13" value="ArrayList &amp;lt;Ataque&amp;gt;&lt;div&gt;seleccionarAtaque()&lt;/div&gt;&lt;div&gt;seleccionarAtaqueRandom()&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="90" y="460" width="228.79" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Me7bGf9GO4sqT7h7glh1-14" value="ListaAtaques" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="91.2041884816754" y="430" width="228.7958115183246" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sDt2oz3F23L0EEsTBcVJ-1" value="String[] nombreEventos&lt;div&gt;seleccionarEvento()&lt;/div&gt;&lt;div&gt;evento1()&lt;/div&gt;&lt;div&gt;evento2()&lt;/div&gt;&lt;div&gt;...&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="610" y="70" width="159.16" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="sDt2oz3F23L0EEsTBcVJ-2" value="Evento" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="610.8376963350786" y="40" width="159.16230366492147" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sDt2oz3F23L0EEsTBcVJ-3" value="atacar(nombre_ataque)" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="340" y="460" width="228.79" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sDt2oz3F23L0EEsTBcVJ-4" value="Ataque" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="341.2041884816754" y="430" width="228.7958115183246" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sDt2oz3F23L0EEsTBcVJ-5" value="seleccionarCaminos()&lt;div&gt;elegirPersonaje()&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="30" y="70" width="159.16" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sDt2oz3F23L0EEsTBcVJ-6" value="Juego" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="30.837696335078533" y="40" width="159.16230366492147" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sDt2oz3F23L0EEsTBcVJ-7" value="&lt;div&gt;Personaje prota&lt;/div&gt;&lt;div&gt;Personaje enemigo&lt;/div&gt;combate()&lt;div&gt;Combate (Perosnaje prota, int tipoCombate)&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="630" y="395" width="159.16" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="sDt2oz3F23L0EEsTBcVJ-8" value="Combate" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="630.8376963350786" y="365" width="159.16230366492147" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
