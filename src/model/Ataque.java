@@ -700,10 +700,33 @@ public class Ataque {
 			}
 			if(danoFinal > 0 && target.getTurnosPectoralesCoronel() > 0)
 			{
+				if(target.getDefensa() > 0)
+				{
+					danoFinal -= (danoFinal * ((target.getDefensa() - target.getPenalizacionDefensa()) / 2)) / 10; // cálculo de defensa
+				}
 				System.out.println("\r\nEl " + target.getNombre() + " se protege con sus pectorales!");
 				System.out.println("El " + target.getNombre() + " reflecta todo el daño!");
 				user.setVida(user.getVida() - danoFinal);
 				System.out.println(user.getNombre() + " ahora tiene " + (user.getVida() > user.getVidaMax() / 2 ? Color.GREEN_BRIGHT : (user.getVida() > user.getVidaMax() / 4 ? Color.YELLOW : Color.RED_BRIGHT)) + dfOneDecimal.format(user.getVida()) + Color.RESET + "/" + Color.GREEN_BRIGHT + dfZeroDecimal.format(user.getVidaMax()) + Color.RESET + " puntos de vida.");
+			}
+			if(danoFinal > 0 && target.getEspinas() > 0)
+			{
+				if(user.getNombre().equals("Sans"))
+				{
+					System.out.println("Las " + Color.PURPLE_BRIGHT + "espinas" + Color.RESET + " no afectan a " + user.getNombre() + "!");
+				}
+				else
+				{
+					System.out.println("Las " + Color.PURPLE_BRIGHT + "espinas" + Color.RESET + " afectan a " + user.getNombre() + "!");
+					double danoEspinas = 0;
+					danoEspinas = danoFinal * (target.getEspinas() / 10);
+					if(user.getDefensa() > 0)
+					{
+						danoEspinas -= (danoEspinas * ((user.getDefensa() - user.getPenalizacionDefensa()) / 2)) / 10; // cálculo de defensa
+					}
+					user.setVida(user.getVida() - danoEspinas);
+					System.out.println(user.getNombre() + " ahora tiene " + (user.getVida() > user.getVidaMax() / 2 ? Color.GREEN_BRIGHT : (user.getVida() > user.getVidaMax() / 4 ? Color.YELLOW : Color.RED_BRIGHT)) + dfOneDecimal.format(user.getVida()) + Color.RESET + "/" + Color.GREEN_BRIGHT + dfZeroDecimal.format(user.getVidaMax()) + Color.RESET + " puntos de vida");
+				}
 			}
 			else
 			{

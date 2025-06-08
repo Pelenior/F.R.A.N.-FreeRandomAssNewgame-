@@ -2,7 +2,7 @@ package model;
 
 import java.sql.*;
 import java.util.ArrayList;
-
+import java.util.Scanner;
 import dao.DaoPersonajes;
 
 public class Protagonista extends Personaje {
@@ -77,23 +77,10 @@ public class Protagonista extends Personaje {
 	}
 
 	@Override
-	public void atacar(Personaje target)
+	public void atacar(Scanner sc, Personaje target)
 	{
-		ataqueController.seleccionarAtaqueProta(this, target);
+		ataqueController.seleccionarAtaqueProta(sc, this, target);
 		
-	}
-	
-	//GAME OVER
-	public void gameOver() 
-	{
-		if(getVida()<0) {
-			vida=0;
-		}
-		
-		if(getVida()==0) {
-			boolean gameOver = true;
-		}
-	
 	}
 	
 	public int recorrerListaObjetos(String nombreObjeto) {

@@ -3,6 +3,7 @@ package model;
 import java.sql.*;
 import dao.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
  	abstract class Personaje {
@@ -434,7 +435,7 @@ import java.util.ArrayList;
 		ataqueController.anadirAtaque(nombre);
 	}
 	
-	public abstract void atacar(Personaje target);
+	public abstract void atacar(Scanner sc, Personaje target);
 	
 	
 }

@@ -1,7 +1,7 @@
 package model;
 
 import java.sql.*;
-
+import java.util.Scanner;
 import dao.DaoPersonajes;
 
 public class Enemigo extends Personaje {
@@ -39,7 +39,7 @@ public class Enemigo extends Personaje {
 	}
 	
 	@Override
-	public void atacar(Personaje target)
+	public void atacar(Scanner sc, Personaje target)
 	{
 		ataqueController.seleccionarAtaqueEnemigo(this, target);
 	}

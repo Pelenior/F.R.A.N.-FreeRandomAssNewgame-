@@ -2,7 +2,6 @@ package dao;
 
 import java.sql.*;
 import java.util.ArrayList;
-import model.*;
 
 public class DaoAtaques {
 	private Connection conn = null;

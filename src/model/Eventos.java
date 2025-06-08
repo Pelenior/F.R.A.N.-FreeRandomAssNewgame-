@@ -1505,8 +1505,6 @@ public class Eventos {
 		}
 		
 		public void puzzleLamparas(Random random, Scanner sc, Protagonista prota){
-			String[][] finalArray = {{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
-			
 			int intg = 0;
 			int aciertos = 0;
 			int turnos= 10;
@@ -1727,7 +1725,6 @@ public class Eventos {
 			String decision;
 			int aciertos = 0;
 			int errores = 0;
-			int nextIndex = 0;
 					
 			//// INTRODUCCIÓN AL PUZZLE ////
 			System.out.println("En medio de tu camino una enorme criatura se planta ante ti.");
@@ -1883,8 +1880,6 @@ public class Eventos {
 							prota.setDefensa(prota.getDefensa()-1);
 						}
 					}
-				
-				nextIndex = i;
 				System.out.println("");
 				
 				

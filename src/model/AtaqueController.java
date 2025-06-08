@@ -24,9 +24,8 @@ public class AtaqueController {
 		}
 	}
 	
-	public void seleccionarAtaqueProta(Protagonista prota, Personaje target)
+	public void seleccionarAtaqueProta(Scanner sc, Protagonista prota, Personaje target)
 	{
-		Scanner sc = new Scanner(System.in);
 		String seleccion = "";
 		prota.setRepetirAtaque(true);
 		do

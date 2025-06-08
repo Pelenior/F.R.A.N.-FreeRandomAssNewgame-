@@ -576,7 +576,7 @@ public class Combate {
 				{
 					System.out.println("==============================================================================================");
 					//ataque del protagonista
-					prota.atacar(enemigo);
+					prota.atacar(sc, enemigo);
 					if(prota.getNiebla())
 					{
 						System.out.println("Niebla ataca al enemigo contigo!");
@@ -596,7 +596,7 @@ public class Combate {
 				System.out.println("==============================================================================================");
 				if(enemigo.getVida() > 0 && prota.getVida() > 0 && !prota.getHaHuido())
 				{
-					enemigo.atacar(prota);
+					enemigo.atacar(sc, prota);
 				}
 				if(prota.getCooldownMaldicionWither() > 0)
 				{

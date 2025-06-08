@@ -1,8 +1,6 @@
 package dao;
 
 import java.sql.*;
-import java.util.ArrayList;
-import model.*;
 
 public class DaoJugador {
 	private Connection conn = null;
