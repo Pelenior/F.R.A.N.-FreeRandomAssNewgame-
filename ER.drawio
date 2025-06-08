@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0" version="27.1.4">
   <diagram name="ERD - Mincra Game" id="1">
-    <mxGraphModel dx="998" dy="1711" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1426" dy="1943" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -64,7 +64,7 @@
             <mxPoint x="1067" y="-128" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Pz-iReKoTr8WRBAwrSr6-20" value="jugadores" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="Pz-iReKoTr8WRBAwrSr6-20" value="personaje" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1035" y="150" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="Pz-iReKoTr8WRBAwrSr6-21" value="&lt;u&gt;nombre&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
