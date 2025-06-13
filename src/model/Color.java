@@ -4,6 +4,11 @@ public class Color {
 	
 	public static final String RESET = "\033[0m"; // Text Reset
 
+	//Colores ASCII
+	public static final String RED_FAINT = "\u001B[31;2m";
+	public static final String RED_MEDIUM = "\u001B[31;1m";
+	public static final String RED_BRIGHT_ASCII = "\u001B[91m";
+	
 	// Regular Colors
 	public static final String BLACK = "\033[0;30m"; // BLACK
 	public static final String RED = "\033[0;31m"; // RED

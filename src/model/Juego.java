@@ -136,7 +136,7 @@ public class Juego {
 					}while(AsciiBien == false);
 							
 					perfil.guardarJugador(nombreJugador, contrasena, idAscii, 0, "");
-					System.out.println("De acuerdo " + nombreJugador + " su perfil se ha guardado correctamente\nPor seguridad inicie sesion para saber que todo esta correcto");
+					System.out.println("\nDe acuerdo " + Color.YELLOW_BOLD_BRIGHT + nombreJugador + Color.RESET +" su perfil se ha guardado correctamente\nPor seguridad inicie sesion para saber que todo esta correcto\n");
 				
 				}		
 			}
@@ -738,6 +738,7 @@ public class Juego {
 	}
 	//¿finales?
  	public void finales() throws SQLException {
+ 		System.out.println(Color.WHITE_BOLD_BRIGHT);
 		if(prota.getVida() <= 0 && !finalMascotaAlex)
 		{
 			//Linea vacia para que no este tan pegado el texto
@@ -890,7 +891,7 @@ public class Juego {
 				}
 			}
 		}
-		
+		System.out.println(Color.RESET);
 		
 		//Comapara la puntacion actual con la anterior para ver si es mayor
 		if(perfil.getPuntuacion(nombreJugador) > totalPuntuacion && perfil.getPuntuacion(nombreJugador) != 0) {

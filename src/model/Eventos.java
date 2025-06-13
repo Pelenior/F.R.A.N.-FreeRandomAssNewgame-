@@ -195,7 +195,7 @@ public class Eventos {
 					System.out.println("Confundido por la situacion decides continuar tu aventura, perdiendo " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
 				}else System.out.println("Confundido por la situacion decides continuar tu aventura, ganando " + Color.YELLOW_BOLD_BRIGHT + puntuacion + Color.RESET + " por la experiencia");
 				
-				System.out.println("Funciona? " + Juego.totalPuntuacion);
+//				System.out.println("Funciona? " + Juego.totalPuntuacion);
 				Juego.totalPuntuacion = Juego.totalPuntuacion + puntuacion;
 				//// FIN DEL EVENTO ////
 			}
@@ -1870,7 +1870,7 @@ public class Eventos {
 			//// BUCLE DEL PUZZLE ////
 			for (int i = 0; i < 5; i++)
 			{
-				ASCII.printAscii(11);
+				ASCII.printAscii(30);
 				
 				//// SELECCION DE PREGUNTAS ////
 				String[][] PreguntasRespuestas = { {"               ¿Cuantos turnos tardara un creeper en explotar, en una situacion normal?", "3"}, 

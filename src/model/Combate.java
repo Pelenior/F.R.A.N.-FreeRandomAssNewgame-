@@ -21,93 +21,134 @@ public class Combate {
 
 	private Enemigo enemigo;
 	
-	public static void imprimirStats(Protagonista prota, Enemigo enemigo)
+	public static void imprimirStats(Protagonista prota, Enemigo enemigo, String tipoCombate) throws SQLException
 	{
-		switch(prota.getNombre())
-		{
-			case "Steve":
-			{
-				System.out.println("Las estadísticas de " + prota.getNombre() + " son:              Las estadísticas de " + enemigo.getNombre() + " son:");
-				break;
-			}
-			case "Alex":
-			{
-				System.out.println("Las estadísticas de " + prota.getNombre() + " son:               Las estadísticas de " + enemigo.getNombre() + " son:");
-				break;
-			}
-			case "Chicken Little":
-			{
-				System.out.println("Las estadísticas de " + prota.getNombre() + " son:     Las estadísticas de " + enemigo.getNombre() + " son:");
-			}
-		}
+		String nombre =  Color.RED_BOLD_BRIGHT + enemigo.getNombre().toUpperCase() + Color.RESET;
 		
+		if(tipoCombate.equals("Boss")) System.out.printf("%50s", nombre);
+		else System.out.printf("%40s", nombre);
+		
+		String color = ""; // por defecto
+		
+		if(enemigo.getVida() >0) {
+			float percentage = (float) (enemigo.getVida() / enemigo.getVidaMax());
+	
+	        // Según el % de vida, aplicar color
+	        if (percentage > 0.90) {
+	            color = ""; // sin color
+	        } else if (percentage > 0.8) {
+	            color = Color.RED_BRIGHT_ASCII;
+	        } else if (percentage > 0.5) {
+	            color = Color.RED_BOLD;
+	        } else if (percentage > 0.20) {
+	            color =  Color.RED_FAINT;
+	        } else {
+	            color = Color.RED_BOLD;
+	        }
+		}
+		System.out.println(color);
+		ASCII.printAscii(enemigo.getDataEnemigo().getIdAscii());
+		System.out.println(Color.RESET);
+
+		int espacios = Math.max(27 - prota.getNombre().length(), 0);
+		String padding = " ".repeat(espacios);
+
+		String output = "Stats de " + prota.getNombre() + " son:" + padding + "Stats de " + enemigo.getNombre() + " son:";
+		System.out.println(output);
+
 		//Para truncar el valor (ej. Si DecimalFormat es "0.00", 1.0987 = 1.09)
-		DecimalFormat dfVidaPersonaje;
-		DecimalFormat dfVidaMaxPersonaje = new DecimalFormat("0");
-		DecimalFormat dfDefensaPersonaje;
-		DecimalFormat dfFuerzaPersonaje;
-		DecimalFormat dfVelocidadPersonaje;
+//		DecimalFormat dfVidaPersonaje;
+//		DecimalFormat dfVidaMaxPersonaje = new DecimalFormat("0");
+//		DecimalFormat dfDefensaPersonaje;
+//		DecimalFormat dfFuerzaPersonaje;
+//		DecimalFormat dfVelocidadPersonaje;
+//		
+//		DecimalFormat dfVidaEnemigo;
+//		DecimalFormat dfVidaMaxEnemigo = new DecimalFormat("0");
+//		DecimalFormat dfDefensaEnemigo = new DecimalFormat("0");
+//		DecimalFormat dfFuerzaEnemigo = new DecimalFormat("0");
+//		DecimalFormat dfVelocidadEnemigo = new DecimalFormat("0");
 		
-		DecimalFormat dfVidaEnemigo;
-		DecimalFormat dfVidaMaxEnemigo = new DecimalFormat("0");
-		DecimalFormat dfDefensaEnemigo = new DecimalFormat("0");
-		DecimalFormat dfFuerzaEnemigo = new DecimalFormat("0");
-		DecimalFormat dfVelocidadEnemigo = new DecimalFormat("0");
 		
+//		if(prota.getVida() < 10)
+//		{
+//			dfVidaPersonaje = new DecimalFormat("0.00");
+//		}
+//		else
+//		{
+//			dfVidaPersonaje = new DecimalFormat("0.0");
+//		}
+//		
+//		if(enemigo.getVida() < 10)
+//		{
+//			dfVidaEnemigo = new DecimalFormat("0.00");
+//		}
+//		else
+//		{
+//			dfVidaEnemigo = new DecimalFormat("0.0");
+//		}
+//		
+//		if(prota.getDefensa() >= 10 || prota.getDefensa() < 0)
+//		{
+//			dfDefensaPersonaje = new DecimalFormat("0,00");
+//		}
+//		else
+//		{
+//			dfDefensaPersonaje = new DecimalFormat("0.0");
+//		}
+//		
+//		if(prota.getFuerza() >= 10 || prota.getFuerza() < 0)
+//		{
+//			dfFuerzaPersonaje = new DecimalFormat("0");
+//		}
+//		else
+//		{
+//			dfFuerzaPersonaje = new DecimalFormat("0.0");
+//		}
+//		
+//		if(prota.getVelocidad() >= 10)
+//		{
+//			dfVelocidadPersonaje = new DecimalFormat("0");
+//		}
+//		else if(prota.getVelocidad() < 0)
+//		{
+//			dfVelocidadPersonaje = new DecimalFormat("00");
+//		}
+//		else
+//		{
+//			dfVelocidadPersonaje = new DecimalFormat("0.0");
+//		}
 		
-		if(prota.getVida() < 10)
-		{
-			dfVidaPersonaje = new DecimalFormat("0.00");
-		}
-		else
-		{
-			dfVidaPersonaje = new DecimalFormat("0.0");
-		}
-		
-		if(enemigo.getVida() < 10)
-		{
-			dfVidaEnemigo = new DecimalFormat("0.00");
-		}
-		else
-		{
-			dfVidaEnemigo = new DecimalFormat("0.0");
-		}
-		
-		if(prota.getDefensa() >= 10 || prota.getDefensa() < 0)
-		{
-			dfDefensaPersonaje = new DecimalFormat("0,00");
-		}
-		else
-		{
-			dfDefensaPersonaje = new DecimalFormat("0.0");
-		}
-		
-		if(prota.getFuerza() >= 10 || prota.getFuerza() < 0)
-		{
-			dfFuerzaPersonaje = new DecimalFormat("0");
-		}
-		else
-		{
-			dfFuerzaPersonaje = new DecimalFormat("0.0");
-		}
-		
-		if(prota.getVelocidad() >= 10)
-		{
-			dfVelocidadPersonaje = new DecimalFormat("0");
-		}
-		else if(prota.getVelocidad() < 0)
-		{
-			dfVelocidadPersonaje = new DecimalFormat("00");
-		}
-		else
-		{
-			dfVelocidadPersonaje = new DecimalFormat("0.0");
-		}
-		System.out.println("Vida actual: " + (prota.getVida() > prota.getVidaMax() / 2 ? Color.GREEN_BRIGHT : (prota.getVida() > prota.getVidaMax() / 4 ?Color.YELLOW : Color.RED_BRIGHT)) + dfVidaPersonaje.format(prota.getVida()) + Color.RESET + "/" + Color.GREEN_BRIGHT + dfVidaMaxPersonaje.format(prota.getVidaMax()) + Color.RESET + "                        Vida actual: " + (enemigo.getVida() > enemigo.getVidaMax() / 2 ? Color.GREEN_BRIGHT : (enemigo.getVida() > enemigo.getVidaMax() / 4 ? Color.YELLOW : Color.RED_BRIGHT)) + dfVidaEnemigo.format(enemigo.getVida()) + Color.RESET + "/" + Color.GREEN_BRIGHT + dfVidaMaxEnemigo.format(enemigo.getVidaMax()) + Color.RESET);
-		System.out.println("Defensa:     " + dfDefensaPersonaje.format(prota.getDefensa() - prota.getPenalizacionDefensa()) + "                            Defensa:     " + dfDefensaEnemigo.format(enemigo.getDefensa()));
-		System.out.println("Fuerza:      " + Color.RED_BRIGHT + dfFuerzaPersonaje.format(prota.getFuerza() - prota.getPenalizacionAtaque()) + Color.RESET + "                            Fuerza:      " + Color.RED_BRIGHT + dfFuerzaEnemigo.format(enemigo.getFuerza()) + Color.RESET);
-		System.out.println("Velocidad:   " + Color.CYAN + dfVelocidadPersonaje.format(prota.getVelocidad()) + Color.RESET + "                            Velocidad:   " + Color.CYAN + dfVelocidadEnemigo.format(enemigo.getVelocidad()) + Color.RESET);
 		System.out.println("==============================================================================================");
+
+		// Vida
+		String vidaProtaColor = prota.getVida() > prota.getVidaMax() / 2 ? Color.GREEN_BRIGHT :
+		                        (prota.getVida() > prota.getVidaMax() / 4 ? Color.YELLOW : Color.RED_BRIGHT);
+		String vidaEnemigoColor = enemigo.getVida() > enemigo.getVidaMax() / 2 ? Color.GREEN_BRIGHT :
+		                          (enemigo.getVida() > enemigo.getVidaMax() / 4 ? Color.YELLOW : Color.RED_BRIGHT);
+		System.out.printf("Vida:        %s%-5.0f%s/%s%-5.0f%s                 Vida:        %s%-5.0f%s/%s%-5.0f%s%n",
+		    vidaProtaColor, prota.getVida(), Color.RESET,
+		    Color.GREEN_BRIGHT, prota.getVidaMax(), Color.RESET,
+		    vidaEnemigoColor, enemigo.getVida(), Color.RESET,
+		    Color.GREEN_BRIGHT, enemigo.getVidaMax(), Color.RESET);
+
+		// Defensa
+		System.out.printf("Defensa:     %-5.0f                       Defensa:     %-5.0f%n",
+		    (prota.getDefensa() - prota.getPenalizacionDefensa()),
+		    enemigo.getDefensa());
+
+		// Fuerza
+		System.out.printf("Fuerza:      %s%-5.0f%s                       Fuerza:      %s%-5.0f%s%n",
+		    Color.RED_BRIGHT, (prota.getFuerza() - prota.getPenalizacionAtaque()), Color.RESET,
+		    Color.RED_BRIGHT, enemigo.getFuerza(), Color.RESET);
+
+		// Velocidad
+		System.out.printf("Velocidad:   %s%-5.0f%s                       Velocidad:   %s%-5.0f%s%n",
+		    Color.CYAN, prota.getVelocidad(), Color.RESET,
+		    Color.CYAN, enemigo.getVelocidad(), Color.RESET);
+
+		System.out.println("==============================================================================================");
+
 	}
 	
 	public Combate()
@@ -348,21 +389,28 @@ public class Combate {
 	
 	private void penalizaciones(Protagonista prota, Random random, String tipoCombate)
 	{
+		String colorBioma = "";
+		String colorTerreno = "";
+		String colorClima = "";
+		
 		switch(random.nextInt(0, 10))
 		{
 			case 0, 1, 2, 3, 4, 5, 6, 7:
 			{
 				bioma = "Overworld";
+				colorBioma = Color.GREEN_BOLD_BRIGHT;
 				break;
 			}
 			case 8:
 			{
 				bioma = "Nether";
+				colorBioma = Color.BLACK_BOLD_BRIGHT;
 				break;
 			}
 			case 9:
 			{
 				bioma = "End";
+				colorBioma = Color.PURPLE_BOLD_BRIGHT;
 				break;
 			}
 		}
@@ -371,21 +419,25 @@ public class Combate {
 			case 0:
 			{
 				clima = "Despejado";
+				colorClima = Color.CYAN_BOLD;
 				break;
 			}
 			case 1:
 			{
 				clima = "Nublado";
+				colorClima = Color.BLACK_BOLD_BRIGHT;
 				break;
 			}
 			case 2:
 			{
 				clima = "Lluvioso";
+				colorClima = Color.BLUE_BOLD_BRIGHT;
 				break;
 			}
 			case 3:
 			{
 				clima = "Tormentoso";
+				colorClima = Color.BLACK_BOLD;
 				break;
 			}
 		}
@@ -394,16 +446,19 @@ public class Combate {
 			case 0:
 			{
 				terreno = "Llano";
+				colorTerreno = Color.GREEN_BOLD;
 				break;
 			}
 			case 1:
 			{
 				terreno = "Rocoso";
+				colorTerreno = Color.BLACK_BOLD_BRIGHT;
 				break;
 			}
 			case 2:
 			{
 				terreno = "Montañoso";
+				colorTerreno = Color.YELLOW_BOLD;
 				break;
 			}
 		}
@@ -461,14 +516,14 @@ public class Combate {
 			}
 		}
 		
-		System.out.println("La batalla tendrá lugar en el " + bioma + ", es un lugar " + terreno + " y el clima es " + clima);
+		System.out.println("La batalla tendrá lugar en el " + colorBioma + bioma + Color.RESET + ", es un lugar " + colorTerreno + terreno + Color.RESET + " y el clima es " + colorClima + clima + Color.RESET);
 		if(prota.getPenalizacionAtaque() > 0)
 		{
-			System.out.println("El escenario hace que " + prota.getNombre() + " pierda " + prota.getPenalizacionAtaque() + " puntos de fuerza!");
+			System.out.println("El escenario hace que " + prota.getNombre() + " pierda " + Color.RED_BOLD_BRIGHT + prota.getPenalizacionAtaque() + Color.RED_BOLD + " puntos de fuerza!" + Color.RESET);
 		}
 		if(prota.getPenalizacionDefensa() > 0)
 		{
-			System.out.println("El escenario hace que " + prota.getNombre() + " pierda " + prota.getPenalizacionDefensa() + " puntos de defensa!");
+			System.out.println("El escenario hace que " + prota.getNombre() + " pierda " + Color.RED_BOLD_BRIGHT + prota.getPenalizacionDefensa() + Color.BLUE_BOLD + " puntos de defensa!" + Color.RESET);
 		}
 	}
 	
@@ -518,7 +573,7 @@ public class Combate {
 				else
 				{
 					if(turnos > 1)
-						System.out.println("El siguiente enemigo al que se enfrenta " + prota.getNombre() + " es un " + Color.RED_BRIGHT + enemigo.getNombre() + Color.RESET + "\r\n");
+						System.out.println("El " + Color.YELLOW_BOLD_BRIGHT + "siguiente enemigo " + Color.RESET + "al que se enfrenta " + prota.getNombre() + " es un " + Color.RED_BRIGHT + enemigo.getNombre() + Color.RESET + "\r\n");
 					else
 						System.out.println("El primer enemigo al que se enfrenta " + prota.getNombre() + " es un " + Color.RED_BRIGHT + enemigo.getNombre() + Color.RESET + "\r\n");
 				}
@@ -543,7 +598,7 @@ public class Combate {
 			while(prota.getVida() > 0 && enemigo.getVida() > 0 && !prota.getHaHuido())
 			{
 				turnos++;
-				System.out.println("Turno " + turnos);
+				System.out.println(Color.YELLOW_BOLD_BRIGHT + Color.YELLOW_UNDERLINED + "\nTURNO " + turnos + Color.RESET);
 				if(prota.getKarma() > 0)
 				{
 					prota.setVida(prota.getVida() - (prota.getKarma() / 2));
@@ -555,7 +610,7 @@ public class Combate {
 					prota.setKarma(prota.getKarma() / 2);
 					System.out.println(prota.getNombre() + " ahora tiene " + Color.RED_BRIGHT +  prota.getKarma() + Color.CYAN + " karma" + Color.RESET);
 				}
-				imprimirStats(prota, enemigo);
+				imprimirStats(prota, enemigo, tipoCombate);
 				
 				System.out.println(prota.getNombre() + " tiene " + (prota.getVida() > prota.getVidaMax() / 2 ? Color.GREEN_BRIGHT : (prota.getVida() > prota.getVidaMax() / 4 ? Color.YELLOW : Color.RED_BRIGHT)) + dfOneDecimal.format(prota.getVida()) + Color.RESET + "/" + Color.GREEN_BRIGHT + dfZeroDecimal.format(prota.getVidaMax()) + Color.RESET + " puntos de vida\r\n");
 				
